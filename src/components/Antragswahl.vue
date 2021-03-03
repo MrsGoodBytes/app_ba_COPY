@@ -2,13 +2,13 @@
   <div id="antrag_auswahl" class="hello">
     <h1>{{ msg }}</h1>
       <label class="checkbox">
-        <input type="checkbox">Entgeltermäßigung
+        <input type="checkbox" class="rounded text-purple-500" />Entgeltermäßigung
       </label>
       <label class="checkbox">
-        <input type="checkbox">Geschwisterermäßigung
+        <input type="checkbox" class="rounded text-purple-500" />Geschwisterermäßigung
       </label>
       <label class="checkbox">
-        <input type="checkbox">Bildungsfond
+        <input type="checkbox" class="rounded text-purple-500" />Bildungsfond
       </label>
     </div>
 </template>
