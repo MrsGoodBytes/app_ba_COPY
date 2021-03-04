@@ -9,5 +9,18 @@
         <button class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200" v-on:click="oneAddYes">Ja</button>
         <button class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200" v-on:click="oneAddNo">No</button>
       </span>
+      <Antragswahl msg="Diese Anträge haben Aussicht auf Erfolg:"/>
   </div>
 </template>
+
+<script>
+// @ is an alias to /src
+import Antragswahl from '@/components/Antragswahl.vue'
+
+export default {
+  name: 'Check',
+  components: {
+    Antragswahl
+  }
+}
+</script>
