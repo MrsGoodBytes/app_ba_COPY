@@ -1,111 +1,34 @@
 <template>
   <div id="antrag_auswahl" class="hello">
     <h1 class="text-base font-semibold">{{ msg }}</h1>
-    <div id="input_checkbox_apply">
-      <label class="checkbox"
-        ><input
-          v-checkbox
-          class="rounded text-purple-500"
-          type="checkbox"
-        />Entgeltermäßigung
-      </label>
-      <label class="checkbox"
-        ><input
-          v-checkbox
-          class="rounded outline text-purple-500"
-          type="checkbox"
-        />Geschwisterermäßigung
-      </label>
-      <label class="checkbox"
-        ><input
-          v-checkbox
-          class="rounded text-purple-500"
-          type="checkbox"
-        />Bildungsfond
-      </label>
-
-      <v-btn text small color="primary" @click="setCheckbox" v-if="showSelect1"
-        >Select</v-btn
-      >
-      <v-btn text small color="primary" @click="setCheckbox" v-if="showSelect1"
-        >Deselect</v-btn
-      >
-
-      <v-btn
-        text
-        small
-        color="primary"
-        @click="checkbox = true"
-        v-if="showSelect2"
-        >Select2</v-btn
-      >
-      <v-btn
-        text
-        small
-        color="primary"
-        @click="checkbox = false"
-        v-if="showSelect2"
-        >Deselect2</v-btn
-      >
-      <v-container>
-        <v-row>
-          <v-col>
-            <v-text-field
-              outlined="true"
-              v-model="firstname"
-              :rules="nameRules"
-              :counter="10"
-              label="Vorname"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              outlined="true"
-              v-model="lastname"
-              :rules="nameRules"
-              :counter="10"
-              label="Nachname"
-              required
-            ></v-text-field>
-          </v-col>
-          
-        </v-row>
-        <v-row>
-          <v-col>
-            <v-btn text small color="primary" outlined @click="updateData"
-              >weiter</v-btn
-            >
-          </v-col>
-        </v-row>
-      </v-container>
-
-      <v-text-field
-        outlined="true"
-        v-model="storeData"
-        label="Output"
-        required
-      ></v-text-field>
-
-      <v-checkbox
-        v-model="checkbox"
-        :label="`Checky: ${checkbox.toString()}`"
-      ></v-checkbox>
-
-      <v-checkbox
-        v-model="checkbox"
-        :label="`Checky: ${checkbox2.toString()}`"
-      ></v-checkbox>
-
-      <router-link
-        :to="{ name: 'Apply' }"
-        href="#"
-        v-if="$route.name !== 'Apply'"
-        v-on:click="addTodo"
-        class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-        >Ausgewählte Anträge stellen</router-link
-      >
-    </div>
+    <v-row>
+      <v-col>
+        <v-checkbox
+          v-model="ge_checkbox"
+          :label="`Geschwisterermäßigung: ${ge_checkbox.toString()}`"
+        ></v-checkbox>
+      </v-col>
+      <v-col>
+        <v-checkbox
+          v-model="ent_checkbox"
+          :label="`Entgeltermäßigung: ${ent_checkbox.toString()}`"
+        ></v-checkbox>
+      </v-col>
+      <v-col>
+        <v-checkbox
+          v-model="bifo_checkbox"
+          :label="`Bildungsfond: ${bifo_checkbox.toString()}`"
+        ></v-checkbox>
+      </v-col>
+    </v-row>
+    <router-link
+      :to="{ name: 'Apply' }"
+      href="#"
+      v-if="$route.name !== 'Apply'"
+      v-on:click="updateData"
+      class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+      >Ausgewählte Anträge stellen</router-link
+    >
   </div>
 </template>
 
@@ -118,8 +41,9 @@ export default {
 
   data() {
     return {
-      checkbox: false,
-      checkbox2: false,
+      ge_checkbox: false,
+      ent_checkbox: false,
+      bifo_checkbox: false,
       showSelect1: true,
       showSelect2: false,
       firstname: "",
@@ -139,13 +63,13 @@ export default {
 
   methods: {
     setCheckbox() {
-      this.checkbox = !this.checkbox;
+      this.ge_checkbox = !this.ge_checkbox;
       this.showSelect1 = false;
       this.showSelect2 = true;
     },
 
     updateData() {
-      this.storeData = this.$store.state.firstname;
+      this.storeData = this.$store.state.ge_checkbox;
     },
   },
 };
