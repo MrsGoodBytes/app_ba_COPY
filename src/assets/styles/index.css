@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.v-application--wrap {
+    min-height: 0vh;
+}
