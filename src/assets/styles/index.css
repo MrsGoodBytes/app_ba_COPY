@@ -5,3 +5,7 @@
 .v-application--wrap {
     min-height: 0vh;
 }
+
+.v-select.v-text-field input{
+    visibility: collapse;
+}

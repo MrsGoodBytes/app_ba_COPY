@@ -47,7 +47,7 @@
           ></v-text-field>
         </v-col>
         <v-col v-if="ge_checkbox">
-          <v-app id="inspire">
+          <v-app id="datepicker">
             <v-menu
               ref="menu"
               v-model="menu"
@@ -80,78 +80,91 @@
         </v-col>
         <p v-else></p>
       </v-row>
+      <v-divider></v-divider>
       <h3>Anschrift</h3>
-      <v-row>
-        <v-col cols="12" sm="4">
-          <v-text-field
-            outlined="true"
-            v-model="street"
-            :rules="nameRules"
-            label="Straße"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="2">
-          <v-text-field
-            outlined="true"
-            v-model="number"
-            :rules="numberRules"
-            label="Hausnummer"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="2">
-          <v-text-field
-            outlined="true"
-            v-model="postcode"
-            :rules="numberRules"
-            label="PLZ"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="4">
-          <v-text-field
-            outlined="true"
-            v-model="town"
-            :rules="nameRules"
-            label="Ort"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
+      <v-app id="anschrift">
+        <v-container>
+          <v-row>
+            <v-col cols="12" sm="4">
+              <v-text-field
+                outlined="true"
+                v-model="street"
+                :rules="nameRules"
+                label="Straße"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="2">
+              <v-text-field
+                outlined="true"
+                v-model="number"
+                :rules="numberRules"
+                label="Hausnummer"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="2">
+              <v-text-field
+                outlined="true"
+                v-model="postcode"
+                :rules="numberRules"
+                label="PLZ"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col cols="12" sm="4">
+              <v-text-field
+                outlined="true"
+                v-model="town"
+                :rules="nameRules"
+                label="Ort"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-app>
+      <v-divider></v-divider>
       <h3>Kontakt</h3>
-      <v-row>
-        <v-col>
-          <v-text-field
-            outlined="true"
-            v-model="mail"
-            :rules="emailRules"
-            label="E-Mail"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            outlined="true"
-            v-model="telephone"
-            :rules="numberRules"
-            label="Telefonnummer"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <h3 v-if="bifo_checkbox">Antragsgrundlage</h3>
-      <v-row v-if="bifo_checkbox">
-        <v-col class="d-flex" cols="12" sm="6">
-          <v-select
-          v-model="select"
-          :items="items"
-          :rules="[v => !!v || 'Item is required']"
-          label="Item"
-          required
-        ></v-select>
-        </v-col>
-      </v-row>
+      <v-app id="kontak">
+        <v-container>
+          <v-row>
+            <v-col>
+              <v-text-field
+                outlined="true"
+                v-model="mail"
+                :rules="emailRules"
+                label="E-Mail"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+                outlined="true"
+                v-model="telephone"
+                :rules="numberRules"
+                label="Telefonnummer"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-app>
+      <v-divider></v-divider>
+      <v-app v-if="bifo_checkbox" id="dropdown">
+      <h3>Antragsgrundlage</h3>
+        <v-container>
+          <v-row>
+            <v-col class="d-flex" cols="12" sm="6">
+              <v-select
+                :items="items"
+                label="Antragsgundlage"
+                outlined
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-app>
       <p v-else></p>
       <v-row>
         <v-col>
@@ -238,7 +251,6 @@ export default {
   props: {
     msg: String,
   },
-
   data() {
     return {
       ge_checkbox: false,
@@ -251,7 +263,13 @@ export default {
       betreuungsbeginn: "",
       date: null,
       menu: false,
+      
       items: ["Privatinsolvenz", "Keine Sozialleistungen"],
+      
+      nameRules: [
+      value => !!value || 'Required.',
+      value => (value && value.length >= 3) || 'Min 3 characters',
+    ],
     };
   },
 
