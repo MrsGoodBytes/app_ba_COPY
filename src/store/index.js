@@ -17,7 +17,31 @@ export default new Vuex.Store({
     setLastname(state,value)
     {
       state.lastname = value;
-    },   
+    },
+    setStreet(state,value)
+    {
+      state.street = value;
+    },
+    setNumber(state,value)
+    {
+      state.street = value;
+    },
+    setPostcode(state,value)
+    {
+      state.street = value;
+    },
+    setTown(state,value)
+    {
+      state.street = value;
+    },
+    setMail(state,value)
+    {
+      state.street = value;
+    }, 
+    setTel(state,value)
+    {
+      state.street = value;
+    },  
   },
   actions: {
   },

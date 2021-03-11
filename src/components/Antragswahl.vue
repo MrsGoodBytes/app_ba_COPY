@@ -285,6 +285,12 @@ export default {
       bifo_checkbox: false,
       firstname: "",
       lastname: "",
+      street: "",
+      number: "",
+      postcode: "",
+      town: "",
+      email: "",
+      tel: "",
       storeData: "",
       elternbeitrag: "",
       betreuungsbeginn: "",
@@ -326,6 +332,18 @@ export default {
     },
     lastname: function (val) {
       this.$store.commit("setLastname", val);
+    },
+    street: function (val) {
+      this.$store.commit("setStreet", val);
+    },
+    number: function (val) {
+      this.$store.commit("setNumber", val);
+    },
+    postcode: function (val) {
+      this.$store.commit("setPostcode", val);
+    },
+    town: function (val) {
+      this.$store.commit("setTown", val);
     },
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
