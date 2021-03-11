@@ -100,14 +100,15 @@
                 v-model="number"
                 :rules="numberRules"
                 label="Hausnummer"
+                min="0"
                 required
               ></v-text-field>
             </v-col>
             <v-col cols="12" sm="2">
               <v-text-field
                 outlined="true"
-                v-model="postcode"
-                :rules="numberRules"
+                v-model.number="postcode"
+                :rules="plzRules"
                 label="PLZ"
                 required
               ></v-text-field>
@@ -141,8 +142,8 @@
             <v-col>
               <v-text-field
                 outlined="true"
-                v-model="telephone"
-                :rules="numberRules"
+                v-model.number="tel"
+                :rules="telRules"
                 label="Telefonnummer"
                 required
               ></v-text-field>
@@ -152,7 +153,7 @@
       </v-app>
       <v-divider></v-divider>
       <v-app v-if="bifo_checkbox" id="dropdown">
-      <h3>Antragsgrundlage</h3>
+        <h3>Antragsgrundlage</h3>
         <v-container>
           <v-row>
             <v-col class="d-flex" cols="12" sm="6">
@@ -188,6 +189,7 @@
             outlined="true"
             v-model="child_firstname"
             label="Vorname des Kindes"
+            :rules="nameRules"
             required
           ></v-text-field>
         </v-col>
@@ -196,16 +198,41 @@
             outlined="true"
             v-model="child_lastname"
             label="Nachname des Kindes"
+            :rules="nameRules"
             required
           ></v-text-field>
         </v-col>
         <v-col>
-          <v-text-field
-            outlined="true"
-            v-model="child_birthdate"
-            label="Geburtsdatum des Kindes"
-            required
-          ></v-text-field>
+          <v-app id="datepicker_child">
+            <v-menu
+              ref="menu"
+              v-model="menu"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date"
+                  label="Geburtsdatum des Kindes"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-card
+                v-picker--date
+                ref="picker"
+                v-model="date"
+                :max="new Date().toISOString().substr(0, 10)"
+                min="1960-01-01"
+                @change="save"
+              ></v-date-picker>
+            </v-menu>
+          </v-app>
         </v-col>
       </v-row>
       <v-row>
@@ -263,13 +290,33 @@ export default {
       betreuungsbeginn: "",
       date: null,
       menu: false,
-      
+
       items: ["Privatinsolvenz", "Keine Sozialleistungen"],
-      
-      nameRules: [
-      value => !!value || 'Required.',
-      value => (value && value.length >= 3) || 'Min 3 characters',
-    ],
+
+      nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      numberRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (/(?=.*\d)/.test(value)) ||
+          "Pflichtfeld. Hausnummer muss mindestens eine Zahl enthalten!",
+      ],
+      plzRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (value && value.length == 5 && /^\d+$/.test(value)) ||
+          "Pflichtfeld! Postleitzahl sollte ein fünfstelliger Wert sein und nur aus Ziffern bestehen.",
+      ],
+      emailRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          /.+@.+\..+/.test(value) || "Bitte geben Sie eine gülitge E-mail an!",
+      ],
+      telRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (value && value.length >= 9 && /^\d+$/.test(value)) ||
+          "Pflichtfeld. Bitte gültige Telefonnummer eingeben! Darf keine Buchstaben enthalten.",
+      ],
     };
   },
 
