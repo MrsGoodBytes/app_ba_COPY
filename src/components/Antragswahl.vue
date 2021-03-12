@@ -167,19 +167,19 @@
         </v-container>
       </v-app>
       <p v-else></p>
-      <v-row>
+      <!-- <v-row>
         <v-col>
           <v-btn text small color="primary" outlined @click="updateData"
             >DATEN ÜBERNEHMEN</v-btn
           >
         </v-col>
-      </v-row>
-      <v-text-field
+      </v-row> -->
+      <!-- <v-text-field
         outlined="true"
         v-model="storeData"
         label="Output"
         required
-      ></v-text-field>
+      ></v-text-field> -->
 
       <h2>Kind/er</h2>
 
@@ -252,20 +252,41 @@
             outlined="true"
             v-model="elternbeitrag"
             :rules="nameRules"
-            :counter="10"
             label="Elternbeitrag"
             required
           ></v-text-field>
         </v-col>
         <v-col>
-          <v-text-field
-            outlined="true"
-            v-model="betreuungsbeginn"
-            :rules="nameRules"
-            :counter="10"
-            label="Betreuungsbeginn"
-            required
-          ></v-text-field>
+          <v-app id="datepicker_bb">
+            <v-menu
+              ref="menu_bb"
+              v-model="menu_bb"
+              :close-on-content-click="false"
+              transition="scale-transition"
+              offset-y
+              min-width="auto"
+            >
+              <template v-slot:activator="{ on, attrs }">
+                <v-text-field
+                  v-model="date_bb"
+                  label="Betreuungsbeginn"
+                  prepend-icon="mdi-calendar"
+                  readonly
+                  v-bind="attrs"
+                  v-on="on"
+                ></v-text-field>
+              </template>
+              <v-date-picker
+                v-card
+                v-picker--date
+                ref="picker_bb"
+                v-model="date_bb"
+                :max="new Date().toISOString().substr(0, 10)"
+                min="2000-01-01"
+                @change="save_bb"
+              ></v-date-picker>
+            </v-menu>
+          </v-app>
         </v-col>
       </v-row>
       <v-row v-else></v-row>
@@ -293,13 +314,15 @@ export default {
       town: "",
       email: "",
       tel: "",
-      storeData: "",
+      //storeData: "",
       elternbeitrag: "",
       betreuungsbeginn: "",
       date: null,
       date_child: null,
+      date_bb: null,
       menu: false,
       menu_child: false,
+      menu_bb: false,
 
       items: ["Privatinsolvenz", "Keine Sozialleistungen"],
 
@@ -355,11 +378,17 @@ export default {
     date_child: function (val) {
       this.$store.commit("setDate_child", val);
     },
+    date_bb: function (val) {
+      this.$store.commit("setDate_bb", val);
+    },
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     },
     menu_child(val) {
       val && setTimeout(() => (this.$refs.picker_child.activePicker = "YEAR"));
+    },
+    menu_bb(val) {
+      val && setTimeout(() => (this.$refs.picker_bb.activePicker = "YEAR"));
     },
   },
 
@@ -368,14 +397,17 @@ export default {
       this.ge_checkbox = !this.ge_checkbox;
     },
 
-    updateData() {
+    /*updateData() {
       this.storeData = this.$store.state.firstname;
-    },
+    },*/
     save(date) {
       this.$refs.menu.save(date);
     },
     save_child(date_child) {
-      this.$refs.menu_child.save_child(date_child);
+      this.$refs.menu_child.save(date_child);
+    },
+    save_bb(date_bb) {
+      this.$refs.menu_bb.save(date_bb);
     },
   },
 };

@@ -15,6 +15,7 @@ export default new Vuex.Store({
     tel: "",
     date: "",
     date_child: "",
+    date_bb: "",
   },
   mutations: {
   //write value of textfield into variable firstname
@@ -57,6 +58,10 @@ export default new Vuex.Store({
     setDate_child(state, value)
     {
       state.date_child = value;
+    },
+    setDate_bb(state, value)
+    {
+      state.date_bb = value;
     },
   },
   actions: {
