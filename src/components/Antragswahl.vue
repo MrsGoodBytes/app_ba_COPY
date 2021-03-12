@@ -158,8 +158,8 @@
           <v-row>
             <v-col class="d-flex" cols="12" sm="6">
               <v-select
-                :items="items"
-                label="Antragsgundlage"
+                :items="antragsgrundlage"
+                label="Antragsgundlage wählen"
                 outlined
               ></v-select>
             </v-col>
@@ -246,8 +246,23 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <v-row v-if="ge_checkbox">
-        <v-col>
+      <v-row>
+        <v-col
+          v-if="ge_checkbox || ent_checkbox"
+          class="d-flex"
+          cols="12"
+          sm="3"
+        >
+          <v-text-field
+            outlined="true"
+            v-model="betreuungsentgelt"
+            :rules="plzRules"
+            label="Betreuungsentgelt"
+            required
+          ></v-text-field>
+        </v-col>
+        <p v-else></p>
+        <v-col v-if="ge_checkbox" class="d-flex" cols="12" sm="3">
           <v-text-field
             outlined="true"
             v-model="elternbeitrag"
@@ -256,7 +271,13 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col>
+        <p v-else></p>
+        <v-col
+          v-if="ge_checkbox || ent_checkbox"
+          class="d-flex"
+          cols="12"
+          sm="3"
+        >
           <v-app id="datepicker_bb">
             <v-menu
               ref="menu_bb"
@@ -288,8 +309,17 @@
             </v-menu>
           </v-app>
         </v-col>
+        <p v-else></p>
+        <v-col v-if="ge_checkbox" class="d-flex" cols="12" sm="3">
+          <v-select
+            :items="betreuungsform"
+            label="Betreuungsform wäheln"
+            outlined
+          ></v-select>
+        </v-col>
+        <p v-else></p>
       </v-row>
-      <v-row v-else></v-row>
+      <v-btn>Kind hinzufügen</v-btn>
     </v-container>
   </div>
 </template>
@@ -324,7 +354,8 @@ export default {
       menu_child: false,
       menu_bb: false,
 
-      items: ["Privatinsolvenz", "Keine Sozialleistungen"],
+      antragsgrundlage: ["Privatinsolvenz", "Keine Sozialleistungen"],
+      betreuungsform: ["Krippe", "Elementar", "Hort"],
 
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       numberRules: [
