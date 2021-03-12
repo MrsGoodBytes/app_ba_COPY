@@ -202,11 +202,11 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col v-if="ge_checkbox">
           <v-app id="datepicker_child">
             <v-menu
-              ref="menu"
-              v-model="menu"
+              ref="menu_child"
+              v-model="menu_child"
               :close-on-content-click="false"
               transition="scale-transition"
               offset-y
@@ -214,7 +214,7 @@
             >
               <template v-slot:activator="{ on, attrs }">
                 <v-text-field
-                  v-model="date"
+                  v-model="date_child"
                   label="Geburtsdatum des Kindes"
                   prepend-icon="mdi-calendar"
                   readonly
@@ -225,15 +225,16 @@
               <v-date-picker
                 v-card
                 v-picker--date
-                ref="picker"
-                v-model="date"
+                ref="picker_child"
+                v-model="date_child"
                 :max="new Date().toISOString().substr(0, 10)"
-                min="1960-01-01"
-                @change="save"
+                min="2000-01-01"
+                @change="save_child"
               ></v-date-picker>
             </v-menu>
           </v-app>
         </v-col>
+        <p v-else></p>
       </v-row>
       <v-row>
         <v-col>
@@ -283,6 +284,7 @@ export default {
       ge_checkbox: false,
       ent_checkbox: false,
       bifo_checkbox: false,
+
       firstname: "",
       lastname: "",
       street: "",
@@ -295,7 +297,9 @@ export default {
       elternbeitrag: "",
       betreuungsbeginn: "",
       date: null,
+      date_child: null,
       menu: false,
+      menu_child: false,
 
       items: ["Privatinsolvenz", "Keine Sozialleistungen"],
 
@@ -303,7 +307,7 @@ export default {
       numberRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>
-          (/(?=.*\d)/.test(value)) ||
+          /(?=.*\d)/.test(value) ||
           "Pflichtfeld. Hausnummer muss mindestens eine Zahl enthalten!",
       ],
       plzRules: [
@@ -345,8 +349,17 @@ export default {
     town: function (val) {
       this.$store.commit("setTown", val);
     },
+    date: function (val) {
+      this.$store.commit("setDate", val);
+    },
+    date_child: function (val) {
+      this.$store.commit("setDate_child", val);
+    },
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
+    },
+    menu_child(val) {
+      val && setTimeout(() => (this.$refs.picker_child.activePicker = "YEAR"));
     },
   },
 
@@ -360,6 +373,9 @@ export default {
     },
     save(date) {
       this.$refs.menu.save(date);
+    },
+    save_child(date_child) {
+      this.$refs.menu_child.save_child(date_child);
     },
   },
 };

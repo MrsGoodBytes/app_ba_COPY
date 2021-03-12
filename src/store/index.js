@@ -7,6 +7,14 @@ export default new Vuex.Store({
   state: {
     firstname: "",
     lastname: "",
+    street: "",
+    number: "",
+    plz: "",
+    town: "",
+    email: "",
+    tel: "",
+    date: "",
+    date_child: "",
   },
   mutations: {
   //write value of textfield into variable firstname
@@ -24,24 +32,32 @@ export default new Vuex.Store({
     },
     setNumber(state,value)
     {
-      state.street = value;
+      state.number = value;
     },
     setPostcode(state,value)
     {
-      state.street = value;
+      state.plz = value;
     },
     setTown(state,value)
     {
-      state.street = value;
+      state.town = value;
     },
     setMail(state,value)
     {
-      state.street = value;
+      state.email = value;
     }, 
     setTel(state,value)
     {
-      state.street = value;
-    },  
+      state.tel = value;
+    },
+    setDate(state,value)
+    {
+      state.date = value;
+    },
+    setDate_child(state, value)
+    {
+      state.date_child = value;
+    },
   },
   actions: {
   },
