@@ -16,6 +16,9 @@ export default new Vuex.Store({
     date: "",
     date_child: "",
     date_bb: "",
+    geCheck: false,
+    entCheck: false,
+    bifoCheck: false,
   },
   mutations: {
   //write value of textfield into variable firstname
@@ -62,6 +65,18 @@ export default new Vuex.Store({
     setDate_bb(state, value)
     {
       state.date_bb = value;
+    },
+    setGeCheck(state, value)
+    {
+      state.geCheck = value;
+    },
+    setEntCheck(state, value)
+    {
+      state.entCheck = value;
+    },
+    setBifoCheck(state, value)
+    {
+      state.bifoCheck = value;
     },
   },
   actions: {
