@@ -31,40 +31,12 @@ export default {
   },
   data() {
     return {
-      /* newItemsResult: {
-        itemID: null,
-        answer: null,
-        finalDifficulty: null
-      },
-      newItemsArray: [newItemsResult,newItemsResult,newItemsResult],
-      showChilds: [false,false,false,false,false,false,false,false], */
       test: true,
       test2: false,
       AntragstellerDaten: true,
       KindDaten: false,
       Nachweise: false,
       Abschicken: false,
-
-      /* firstname: "",
-      lastname: "",
-      street: "",
-      number: "",
-      postcode: "",
-      town: "",
-      email: "",
-      tel: "", */
-      //storeData: "",
-      /* elternbeitrag: "",
-      betreuungsbeginn: "",
-      date: null,
-      date_child: null,
-      date_bb: null,
-      menu: false,
-      menu_child: false,
-      menu_bb: false, */
-/* 
-      antragsgrundlage: ["Privatinsolvenz", "Keine Sozialleistungen"], *//* 
-      betreuungsform: ["Krippe", "Elementar", "Hort"], */
 
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       numberRules: [
@@ -93,43 +65,7 @@ export default {
     };
   },
 
-  watch: {/* 
-    firstname: function (val) {
-      this.$store.commit("setFirstname", val);
-    },
-    lastname: function (val) {
-      this.$store.commit("setLastname", val);
-    },
-    street: function (val) {
-      this.$store.commit("setStreet", val);
-    },
-    number: function (val) {
-      this.$store.commit("setNumber", val);
-    },
-    postcode: function (val) {
-      this.$store.commit("setPostcode", val);
-    },
-    town: function (val) {
-      this.$store.commit("setTown", val);
-    }, *//* 
-    date: function (val) {
-      this.$store.commit("setDate", val);
-    },
-    date_child: function (val) {
-      this.$store.commit("setDate_child", val);
-    },
-    date_bb: function (val) {
-      this.$store.commit("setDate_bb", val);
-    },
-    menu(val) {
-      val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
-    },
-    menu_child(val) {
-      val && setTimeout(() => (this.$refs.picker_child.activePicker = "YEAR"));
-    },
-    menu_bb(val) {
-      val && setTimeout(() => (this.$refs.picker_bb.activePicker = "YEAR"));
-    }, */
+  watch: {
   },
 
   methods: {
@@ -168,20 +104,7 @@ export default {
 
     setCheckbox() {
       this.ge_checkbox = !this.ge_checkbox;
-    } /* 
-    save(date) {
-      this.$refs.menu.save(date);
-    },
-    save_child(date_child) {
-      this.$refs.menu_child.save(date_child);
-    },
-    save_bb(date_bb) {
-      this.$refs.menu_bb.save(date_bb);
-    }, */,
-
-    /*updateData() {
-      this.storeData = this.$store.state.firstname;
-    },*/
+    } 
   },
 };
 </script>
