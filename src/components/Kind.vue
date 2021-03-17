@@ -60,6 +60,7 @@
           outlined="true"
           v-model="institutionname"
           label="Name der Betreuungseinrichtung"
+          :rules="nameRules"
           required
         ></v-text-field>
       </v-col>
@@ -82,7 +83,7 @@
         <v-text-field
           outlined="true"
           v-model="betreuungsentgelt"
-          :rules="plzRules"
+          :rules="moneyRules"
           label="Betreuungsentgelt"
           required
         ></v-text-field>
@@ -92,7 +93,7 @@
         <v-text-field
           outlined="true"
           v-model="elternbeitrag"
-          :rules="nameRules"
+          :rules="moneyRules"
           label="Elternbeitrag"
           required
         ></v-text-field>
@@ -188,6 +189,16 @@ export default {
       menu_bb: false,
 
       betreuungsform: ["Krippe", "Elementar", "Hort"],
+      
+      //RULES
+      nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      moneyRules: [],
+      telRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (value && value.length >= 9 && /^\d+$/.test(value)) ||
+          "Pflichtfeld. Bitte gültige Telefonnummer eingeben! Darf keine Buchstaben enthalten.",
+      ],
     };
   },
 

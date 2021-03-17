@@ -1,10 +1,9 @@
 <template>
-  <div id="antrag_auswahl" class="hello">
-    <h1 class="text-base font-semibold">{{ msg }}</h1>
+  <div id="antrag_auswahl">
     <v-container>
       <Antragswahl msg="Welche Anträge möchtest du stellen?" />
       <v-row>
-        <v-btn color="purple" tile @click="funcShowAntragstellerDaten"
+        <v-btn class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200" color="primary" tile @click="funcShowAntragstellerDaten"
           >Antragsteller/in</v-btn
         >
         <v-btn tile @click="funcShowKindDaten">Kind/er</v-btn>
@@ -31,37 +30,10 @@ export default {
   },
   data() {
     return {
-      test: true,
-      test2: false,
       AntragstellerDaten: true,
       KindDaten: false,
       Nachweise: false,
       Abschicken: false,
-
-      nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
-      numberRules: [
-        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
-        (value) =>
-          /(?=.*\d)/.test(value) ||
-          "Pflichtfeld. Hausnummer muss mindestens eine Zahl enthalten!",
-      ],
-      plzRules: [
-        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
-        (value) =>
-          (value && value.length == 5 && /^\d+$/.test(value)) ||
-          "Pflichtfeld! Postleitzahl sollte ein fünfstelliger Wert sein und nur aus Ziffern bestehen.",
-      ],
-      emailRules: [
-        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
-        (value) =>
-          /.+@.+\..+/.test(value) || "Bitte geben Sie eine gülitge E-mail an!",
-      ],
-      telRules: [
-        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
-        (value) =>
-          (value && value.length >= 9 && /^\d+$/.test(value)) ||
-          "Pflichtfeld. Bitte gültige Telefonnummer eingeben! Darf keine Buchstaben enthalten.",
-      ],
     };
   },
 
@@ -110,19 +82,4 @@ export default {
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>
+

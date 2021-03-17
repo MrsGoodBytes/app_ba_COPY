@@ -118,6 +118,32 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
+      <h3 v-if="this.$store.state.entCheck">Zum Haushalt gehörende Personen</h3>
+    <v-row v-if="this.$store.state.entCheck">
+      <v-col>
+        <v-text-field
+          outlined="true"
+          v-model="name_person"
+          :rules="nameRules"
+          label="Nachname"
+          required
+        ></v-text-field>
+      </v-col>
+      <v-col>
+        <v-text-field
+          outlined="true"
+          v-model="vorname_person"
+          :rules="nameRules"
+          label="Vorname"
+          required
+        ></v-text-field>
+      </v-col>
+      <v-col>
+        <p>datepicker einbauen</p>
+      </v-col>
+    </v-row>
+    <v-btn>weitere Person hinzufügen</v-btn>
+    <v-divider></v-divider>
     <h3 v-if="this.$store.state.geCheck">Antragsgrundlage</h3>
     <v-row v-if="this.$store.state.geCheck">
       <v-col class="d-flex" cols="12" sm="6">
@@ -128,6 +154,43 @@
         ></v-select>
       </v-col>
     </v-row>
+    <v-row v-if="this.$store.state.entCheck">
+      <v-col>
+        <v-radio-group v-model="radioGroup">
+        <v-radio
+          v-model="bankverbindung_checkbox"
+          ref="bank_check"
+          v-for="n in radioList"
+          :key="n"
+          :label="`Ermäßigung überweisen an ${n}`"
+          :value="n"
+        ></v-radio>
+      </v-radio-group>
+      </v-col>
+      <v-col v-if="radioGroup">
+        <v-text-field
+          outlined="true"
+          v-model="kontoinhaber"
+          :rules="nameRules"
+          label="Kontoinhaber/in"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined="true"
+          v-model="iban"
+          :rules="ibanRules"
+          label="IBAN"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined="true"
+          v-model="bic"
+          :rules="nameRules"
+          label="BIC"
+          required
+        ></v-text-field>
+      </v-col>
+    </v-row>
     <p v-else></p>
   </div>
 </template>
@@ -135,8 +198,7 @@
 <script>
 export default {
   name: "Antragsteller",
-  props: {
-  },
+  props: {},
   data() {
     return {
       firstname: "",
@@ -148,11 +210,60 @@ export default {
       email: "",
       tel: "",
 
+      firstname_person: "",
+      lastname_person: "",
+      birthdate_person: "",
+
       menu: false,
       date: null,
-      
+
       antragsgrundlage: ["Privatinsolvenz", "Keine Sozialleistungen"],
+      radioGroup: 0, //wählt aus welcher Radiobutton default gewählt ist
+      radioList: ["Kita", "Antragsteller/in"],
+
+      //RULES
+      nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      numberRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          /(?=.*\d)/.test(value) ||
+          "Pflichtfeld. Hausnummer muss mindestens eine Zahl enthalten!",
+      ],
+      plzRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (value && value.length == 5 && /^\d+$/.test(value)) ||
+          "Pflichtfeld! Postleitzahl sollte ein fünfstelliger Wert sein und nur aus Ziffern bestehen.",
+      ],
+      emailRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          /.+@.+\..+/.test(value) || "Bitte geben Sie eine gülitge E-mail an!",
+      ],
+      telRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (value && value.length >= 9 && /^\d+$/.test(value)) ||
+          "Pflichtfeld. Bitte gültige Telefonnummer eingeben! Darf keine Buchstaben enthalten.",
+      ],
+      ibanRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (value && value.length >= 22 && /^\d+$/.test(value)) ||
+          "Pflichtfeld. Bitte gültige IBAN eingeben!",
+      ],
     };
+  },
+
+  created() {
+    this.firstname = this.$store.state.firstname;
+    this.lastname = this.$store.state.lastname;
+    this.lastname = this.$store.state.lastname;
+    this.lastname = this.$store.state.lastname;
+    this.lastname = this.$store.state.lastname;
+    this.lastname = this.$store.state.lastname;
+    this.lastname = this.$store.state.lastname;
+    this.lastname = this.$store.state.lastname;
   },
 
   watch: {
