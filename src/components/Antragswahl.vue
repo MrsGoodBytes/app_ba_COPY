@@ -25,6 +25,8 @@
           ></v-checkbox>
         </v-col>
       </v-row>
+      <v-alert v-if="!(this.$store.state.geCheck || this.$store.state.entCheck || this.$store.state.bifoCheck)" type="warning">Um fortzufahren bitte mindestens einen Antrag auswählen.</v-alert>
+      <p v-else></p>
       <p>
         Es ist möglich die Auswahl jederzeit durch Auswahl der Checkboxen zu
         ändern.
