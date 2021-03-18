@@ -137,7 +137,7 @@
         </v-app>
       </v-col>
       <p v-else></p>
-      <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
+      <v-col v-if="this.$store.state.geCheck || this.$store.state.entCheck" class="d-flex" cols="12" sm="3">
         <v-select
           :items="betreuungsform"
           label="Betreuungsform wäheln"
@@ -146,7 +146,12 @@
       </v-col>
       <p v-else></p>
     </v-row>
-    <v-btn class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200">Kind hinzufügen</v-btn>
+    <v-btn class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200">
+      weiteres Kind erfassen
+      <v-icon>
+          mdi-plus
+      </v-icon>
+    </v-btn>
     <!-- 
         <v-row
             v-for="(n, index) in displayAccounts"

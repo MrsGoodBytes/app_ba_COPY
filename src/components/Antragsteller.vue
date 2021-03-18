@@ -118,7 +118,7 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-      <h3 v-if="this.$store.state.entCheck">Zum Haushalt gehörende Personen</h3>
+    <h3 v-if="this.$store.state.entCheck">Zum Haushalt gehörende Personen</h3>
     <v-row v-if="this.$store.state.entCheck">
       <v-col>
         <v-text-field
@@ -139,7 +139,36 @@
         ></v-text-field>
       </v-col>
       <v-col>
-        <p>datepicker einbauen</p>
+        <v-app id="datepicker_p">
+          <v-menu
+            ref="menu_p"
+            v-model="menu_p"
+            :close-on-content-click="false"
+            transition="scale-transition"
+            offset-y
+            min-width="auto"
+          >
+            <template v-slot:activator="{ on, attrs }">
+              <v-text-field
+                v-model="date_p"
+                label="Geburtsdatum"
+                prepend-icon="mdi-calendar"
+                readonly
+                v-bind="attrs"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              v-card
+              v-picker--date
+              ref="picker_p"
+              v-model="date_p"
+              :max="new Date().toISOString().substr(0, 10)"
+              min="1960-01-01"
+              @change="save_p"
+            ></v-date-picker>
+          </v-menu>
+        </v-app>
       </v-col>
     </v-row>
     <v-btn>weitere Person hinzufügen</v-btn>
@@ -147,25 +176,48 @@
     <h3 v-if="this.$store.state.geCheck">Antragsgrundlage</h3>
     <v-row v-if="this.$store.state.geCheck">
       <v-col class="d-flex" cols="12" sm="6">
-        <v-select
-          :items="antragsgrundlage"
+        <!-- <select
+          v-model="antragsgrundlage"
           label="Antragsgundlage wählen"
+          outlined
+        >
+          <option
+            v-for="meineAuswahl in auswahlMoeglichkeiten"
+            :value="meineAuswahl"
+            :key="meineAuswahl"
+          >
+            {{ meineAuswahl.text }}
+          </option>
+        </select>
+        <v-col v-if="antragsgrundlage.value == 1">
+          <p>Zeige nötigen zusätzlichen Textfelder hier an.</p>
+        </v-col>
+        <p v-else></p> -->
+      
+        <v-select
+          v-model="antragsgrundlage"
+          label="Antragsgundlage wählen"
+          :items="auswahlMoeglichkeiten"
           outlined
         ></v-select>
       </v-col>
+      <v-col v-if="antragsgrundlage === 'Privatinsolvenz'">
+        <p>Zeige nötigen zusätzlichen Textfelder hier an.</p>
+      </v-col>
+      <p v-else></p>
     </v-row>
     <v-row v-if="this.$store.state.entCheck">
       <v-col>
         <v-radio-group v-model="radioGroup">
-        <v-radio
-          v-model="bankverbindung_checkbox"
-          ref="bank_check"
-          v-for="n in radioList"
-          :key="n"
-          :label="`Ermäßigung überweisen an ${n}`"
-          :value="n"
-        ></v-radio>
-      </v-radio-group>
+          <v-radio
+            v-model="bankverbindung_checkbox"
+            ref="bank_check"
+            v-for="n in radioList"
+            :key="n"
+            :label="`Ermäßigung überweisen an ${n}`"
+            :value="n"
+          ></v-radio>
+        </v-radio-group>
       </v-col>
       <v-col v-if="radioGroup">
         <v-text-field
@@ -209,7 +261,9 @@ export default {
       town: "",
       email: "",
       tel: "",
-
+      antragsgrundlage: "",
+      auswahlMoeglichkeiten: ["Privatinsolvenz", "Keine Sozialleistungen", "Bezug von Sozialleistungen"],
+      
       firstname_person: "",
       lastname_person: "",
       birthdate_person: "",
@@ -217,7 +271,6 @@ export default {
       menu: false,
       date: null,
 
-      antragsgrundlage: ["Privatinsolvenz", "Keine Sozialleistungen"],
       radioGroup: 0, //wählt aus welcher Radiobutton default gewählt ist
       radioList: ["Kita", "Antragsteller/in"],
 
