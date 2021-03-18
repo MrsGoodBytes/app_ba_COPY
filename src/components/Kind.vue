@@ -55,7 +55,63 @@
       <p v-else></p>
     </v-row>
     <v-row>
-      <v-col>
+      <v-col
+        v-if="this.$store.state.geCheck || this.$store.state.entCheck"
+        class="d-flex"
+        cols="12"
+        sm="3"
+      >
+        <h4>Betreuung</h4>
+        <v-radio-group v-model="radioGroupBetreuungsform">
+          <v-radio
+            v-model="betreuungsform"
+            ref="betreuungsform"
+            v-for="n in radioListBetreuungsform"
+            :key="n"
+            :label="`${n}`"
+            :value="n"
+          ></v-radio>
+        </v-radio-group>
+      </v-col>
+      <p v-else></p>
+      <v-col v-if="radioGroupBetreuungsform === 3">
+        <v-text-field
+          outlined="true"
+          v-model="institutionstraße"
+          label="Name der Tagespflegeperson"
+          :rules="nameRules"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined="true"
+          v-model="institutionstraße"
+          label="Straße der Tagespflege"
+          :rules="nameRules"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined="true"
+          v-model="institutionnumber"
+          label="Hausnummer der Tagespflege"
+          :rules="numberRules"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined="true"
+          v-model="institutionplz"
+          label="PLZ der Tagespflege"
+          :rules="nameRules"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined="true"
+          v-model="institutionort"
+          label="Ort der Tagespflege"
+          :rules="nameRules"
+          required
+        ></v-text-field>
+      </v-col>
+      <v-col v-else>
         <v-text-field
           outlined="true"
           v-model="institutionname"
@@ -64,7 +120,7 @@
           required
         ></v-text-field>
       </v-col>
-      <v-col v-if="this.$store.state.entCheck">
+      <v-col v-if="this.$store.state.entCheck" class="d-flex" cols="12" sm="12">
         <v-checkbox
           v-model="vorjahr_checkbox"
           ref="vorjahr_check"
@@ -137,20 +193,12 @@
         </v-app>
       </v-col>
       <p v-else></p>
-      <v-col v-if="this.$store.state.geCheck || this.$store.state.entCheck" class="d-flex" cols="12" sm="3">
-        <v-select
-          :items="betreuungsform"
-          label="Betreuungsform wäheln"
-          outlined
-        ></v-select>
-      </v-col>
-      <p v-else></p>
     </v-row>
-    <v-btn class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200">
+    <v-btn
+      class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+    >
       weiteres Kind erfassen
-      <v-icon>
-          mdi-plus
-      </v-icon>
+      <v-icon> mdi-plus </v-icon>
     </v-btn>
     <!-- 
         <v-row
@@ -193,8 +241,16 @@ export default {
       menu_child: false,
       menu_bb: false,
 
-      betreuungsform: ["Krippe", "Elementar", "Hort"],
-      
+      betreuungsform: "",
+      radioGroupBetreuungsform: 0,
+      radioListBetreuungsform: [
+        "Krippe",
+        "Elementar",
+        "Hort",
+        "Tagespflege",
+        "Ganztags an Schule",
+      ],
+
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       moneyRules: [],

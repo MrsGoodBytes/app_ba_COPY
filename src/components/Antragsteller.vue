@@ -171,37 +171,32 @@
         </v-app>
       </v-col>
     </v-row>
-    <v-btn>weitere Person hinzufügen</v-btn>
+    <v-btn v-if="this.$store.state.entCheck" class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200">
+      weitere Person erfassen <v-icon>mdi-plus</v-icon></v-btn>
     <v-divider></v-divider>
-    <h3 v-if="this.$store.state.geCheck">Antragsgrundlage</h3>
+    <h3 class="font-weiht-black" v-if="this.$store.state.geCheck">Antragsgrundlage</h3>
     <v-row v-if="this.$store.state.geCheck">
-      <v-col class="d-flex" cols="12" sm="6">
-        <!-- <select
-          v-model="antragsgrundlage"
-          label="Antragsgundlage wählen"
-          outlined
-        >
-          <option
-            v-for="meineAuswahl in auswahlMoeglichkeiten"
-            :value="meineAuswahl"
-            :key="meineAuswahl"
-          >
-            {{ meineAuswahl.text }}
-          </option>
-        </select>
-        <v-col v-if="antragsgrundlage.value == 1">
-          <p>Zeige nötigen zusätzlichen Textfelder hier an.</p>
-        </v-col>
-        <p v-else></p> -->
-      
+      <v-col>
+        <v-radio-group v-model="radioGroupAntragsgrundlage">
+          <v-radio
+            v-model="antragsgrundlage"
+            ref="antragsgrundlage"
+            v-for="n in radioListAntragsgrundlage"
+            :key="n"
+            :label="`${n}`"
+            :value="n"
+          ></v-radio>
+        </v-radio-group>
+      </v-col>
+      <!-- <v-col class="d-flex" cols="12" sm="6">
         <v-select
           v-model="antragsgrundlage"
           label="Antragsgundlage wählen"
           :items="auswahlMoeglichkeiten"
           outlined
         ></v-select>
-      </v-col>
-      <v-col v-if="antragsgrundlage === 'Privatinsolvenz'">
+      </v-col> -->
+      <v-col v-if="radioGroupAntragsgrundlage === 1">
         <p>Zeige nötigen zusätzlichen Textfelder hier an.</p>
       </v-col>
       <p v-else></p>
@@ -261,18 +256,20 @@ export default {
       town: "",
       email: "",
       tel: "",
+
       antragsgrundlage: "",
-      auswahlMoeglichkeiten: ["Privatinsolvenz", "Keine Sozialleistungen", "Bezug von Sozialleistungen"],
+      radioGroupAntragsgrundlage: 0,
+      radioListAntragsgrundlage: ["Privatinsolvenz", "kein Bezug von Sozialleistungen", "der Bezug von Sozialleistungen"],
       
+      radioGroup: 0, //wählt aus welcher Radiobutton default gewählt ist
+      radioList: ["Kita", "Antragsteller/in"],
+
       firstname_person: "",
       lastname_person: "",
       birthdate_person: "",
 
       menu: false,
       date: null,
-
-      radioGroup: 0, //wählt aus welcher Radiobutton default gewählt ist
-      radioList: ["Kita", "Antragsteller/in"],
 
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
