@@ -34,6 +34,7 @@
       </div>
       <Antragsteller v-if="AntragstellerDaten" />
       <Kind v-if="KindDaten" />
+      <Nachweise v-if="Nachweise" />
     </v-container>
   </div>
 </template>
@@ -42,6 +43,7 @@
 import Antragswahl from "@/components/Antragswahl.vue";
 import Antragsteller from "@/components/Antragsteller.vue";
 import Kind from "@/components/Kind.vue";
+import Nachweise from "@/components/Nachweise.vue";
 
 export default {
   name: "Apply",
@@ -49,6 +51,7 @@ export default {
     Antragswahl,
     Antragsteller,
     Kind,
+    Nachweise,
   },
   data() {
     return {

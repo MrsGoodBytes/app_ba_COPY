@@ -19,6 +19,7 @@ export default new Vuex.Store({
     geCheck: false,
     entCheck: false,
     bifoCheck: false,
+    radioGroupAntragsgrundlage: 0,
   },
   mutations: {
   //write value of textfield into variable firstname
@@ -78,6 +79,10 @@ export default new Vuex.Store({
     {
       state.bifoCheck = value;
     },
+    setAntragsgrundlageCheck(state, value)
+    {
+      state.radioGroupAntragsgrundlage = value;
+    }
   },
   actions: {
   },

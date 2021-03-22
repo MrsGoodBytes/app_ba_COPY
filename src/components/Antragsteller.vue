@@ -171,11 +171,20 @@
         </v-app>
       </v-col>
     </v-row>
-    <v-btn v-if="this.$store.state.entCheck" class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200">
-      weitere Person erfassen <v-icon>mdi-plus</v-icon></v-btn>
+    <v-btn
+      v-if="this.$store.state.entCheck"
+      class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+    >
+      weitere Person erfassen <v-icon>mdi-plus</v-icon></v-btn
+    >
     <v-divider></v-divider>
-    <h3 class="font-weiht-black" v-if="this.$store.state.geCheck">Antragsgrundlage</h3>
-    <v-row v-if="this.$store.state.geCheck">
+    <h3
+      class="font-weiht-black"
+      v-if="this.$store.state.geCheck || this.$store.state.bifoCheck"
+    >
+      Antragsgrundlage
+    </h3>
+    <v-row v-if="this.$store.state.geCheck || this.$store.state.bifoCheck">
       <v-col>
         <v-radio-group v-model="radioGroupAntragsgrundlage">
           <v-radio
@@ -197,9 +206,55 @@
         ></v-select>
       </v-col> -->
       <v-col v-if="radioGroupAntragsgrundlage === 1">
-        <p>Zeige nötigen zusätzlichen Textfelder hier an.</p>
+        <h4>Familieneinkommen, Belastungen, Einkommensgrenze</h4>
+        <p>Die im Haushalt lebenden Personen erzielen folgendes Einkommen:</p>
+      </v-col>
+      <v-col v-else-if="radioGroupAntragsgrundlage === 0">
+        <p>
+          Im Falle der Privatinsolvenz muss die Entscheidung durch das
+          Amtsgericht unter der Rubrik "Nachweise" angefügt werden.
+        </p>
+      </v-col>
+      <v-col v-else-if="radioGroupAntragsgrundlage === 2">
+        <p>
+          Wenn Sie Sozialleistungen beziehen, sind Sie für die Entgeltermäßigung
+          berechtigt. Die entsprechenden Bescheide sollten unter der Rubrik
+          "Nachweise" angefügt werden.
+        </p>
       </v-col>
       <p v-else></p>
+    </v-row>
+    <h5 v-if="radioGroupAntragsgrundlage === 1">
+      Angaben zur Ermittlung des durchschnittlichen monatlichen
+      Familieneinkommens in €
+    </h5>
+    <v-row v-if="radioGroupAntragsgrundlage === 1">
+      <v-col
+        ><v-text-field
+          outlined="true"
+          v-model="nettoeinkommen"
+          :rules="nameRules"
+          label="Nettoarbeitseinkommen aus nichtselbstständiger Arbeit der letzten 12
+        Monate (inkl. Weihnachts- und Urlaubsgeld)"
+          required
+        ></v-text-field>
+      </v-col>
+      <v-col
+        ><v-text-field
+          outlined="true"
+          v-model="selbstständigkeiteinkommen"
+          :rules="nameRules"
+          label="Einkommen aus Selbstständigkeit"
+          required
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row v-if="radioGroupAntragsgrundlage === 1">
+      <p>
+        Um eine zügige Bearbeitung zu gewährleisten, sind die erforderlichen
+        Nachweise unt derm dem Punkt "Nachweise" anzufügen. Kontoauszüge können
+        NICHT als Nachweis berücksichtigt werden.
+      </p>
     </v-row>
     <v-row v-if="this.$store.state.entCheck">
       <v-col>
@@ -259,8 +314,12 @@ export default {
 
       antragsgrundlage: "",
       radioGroupAntragsgrundlage: 0,
-      radioListAntragsgrundlage: ["Privatinsolvenz", "kein Bezug von Sozialleistungen", "der Bezug von Sozialleistungen"],
-      
+      radioListAntragsgrundlage: [
+        "Privatinsolvenz",
+        "kein Bezug von Sozialleistungen",
+        "der Bezug von Sozialleistungen",
+      ],
+
       radioGroup: 0, //wählt aus welcher Radiobutton default gewählt ist
       radioList: ["Kita", "Antragsteller/in"],
 
@@ -308,12 +367,13 @@ export default {
   created() {
     this.firstname = this.$store.state.firstname;
     this.lastname = this.$store.state.lastname;
-    this.lastname = this.$store.state.lastname;
-    this.lastname = this.$store.state.lastname;
-    this.lastname = this.$store.state.lastname;
-    this.lastname = this.$store.state.lastname;
-    this.lastname = this.$store.state.lastname;
-    this.lastname = this.$store.state.lastname;
+    this.street = this.$store.state.street;
+    this.number = this.$store.state.number;
+    this.postcode = this.$store.state.postcode;
+    this.town = this.$store.state.town;
+    this.email = this.$store.state.email;
+    this.tel = this.$store.state.tel;
+    this.radioGroupAntragsgrundlage = this.$store.state.radioGroupAntragsgrundlage;
   },
 
   watch: {
@@ -340,6 +400,9 @@ export default {
     },
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
+    },
+    radioGroupAntragsgrundlage: function (val) {
+      this.$store.commit("setAntragsgrundlageCheck", val);
     },
   },
 
