@@ -101,7 +101,7 @@
       <v-col>
         <v-text-field
           outlined="true"
-          v-model="mail"
+          v-model="email"
           :rules="emailRules"
           label="E-Mail"
           required
@@ -123,18 +123,18 @@
       <v-col>
         <v-text-field
           outlined="true"
-          v-model="name_person"
+          v-model="vorname_person"
           :rules="nameRules"
-          label="Nachname"
+          label="Vorname"
           required
         ></v-text-field>
       </v-col>
       <v-col>
         <v-text-field
           outlined="true"
-          v-model="vorname_person"
+          v-model="name_person"
           :rules="nameRules"
-          label="Vorname"
+          label="Nachname"
           required
         ></v-text-field>
       </v-col>
@@ -163,6 +163,8 @@
               v-picker--date
               ref="picker_p"
               v-model="date_p"
+              locale="de"
+              locale-first-day-of-year="1"
               :max="new Date().toISOString().substr(0, 10)"
               min="1960-01-01"
               @change="save_p"
@@ -258,7 +260,7 @@
     </v-row>
     <v-row v-if="this.$store.state.entCheck">
       <v-col>
-        <v-radio-group v-model="radioGroup">
+        <v-radio-group v-model="radioGroupErmaeßigung">
           <v-radio
             v-model="bankverbindung_checkbox"
             ref="bank_check"
@@ -269,7 +271,7 @@
           ></v-radio>
         </v-radio-group>
       </v-col>
-      <v-col v-if="radioGroup">
+      <v-col v-if="radioGroupErmaeßigung">
         <v-text-field
           outlined="true"
           v-model="kontoinhaber"
@@ -320,12 +322,20 @@ export default {
         "der Bezug von Sozialleistungen",
       ],
 
-      radioGroup: 0, //wählt aus welcher Radiobutton default gewählt ist
+      radioGroupErmaeßigung: 0, //wählt aus welcher Radiobutton default gewählt ist
       radioList: ["Kita", "Antragsteller/in"],
 
       firstname_person: "",
       lastname_person: "",
-      birthdate_person: "",
+      date_p: null,
+      menu_p: false,
+
+      nettoeinkommen: "",
+      selbstständigkeiteinkommen: "",
+
+      kontoinhaber: "",
+      iban: "",
+      bic: "",
 
       menu: false,
       date: null,
@@ -341,7 +351,7 @@ export default {
       plzRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>
-          (value && value.length == 5 && /^\d+$/.test(value)) ||
+          (value && value.length === 5 && /^\d+$/.test(value)) ||
           "Pflichtfeld! Postleitzahl sollte ein fünfstelliger Wert sein und nur aus Ziffern bestehen.",
       ],
       emailRules: [
@@ -367,6 +377,7 @@ export default {
   created() {
     this.firstname = this.$store.state.firstname;
     this.lastname = this.$store.state.lastname;
+    this.date = this.$store.state.date;
     this.street = this.$store.state.street;
     this.number = this.$store.state.number;
     this.postcode = this.$store.state.postcode;
@@ -374,14 +385,27 @@ export default {
     this.email = this.$store.state.email;
     this.tel = this.$store.state.tel;
     this.radioGroupAntragsgrundlage = this.$store.state.radioGroupAntragsgrundlage;
+    this.radioGroupErmaeßigung = this.$store.state.radioGroupErmaeßigung;
+    this.nettoeinkommen = this.$store.state.nettoeinkommen;
+    this.selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen;
+    this.kontoinhaber = this.$store.state.kontoinhaber;
+    this.iban = this.$store.state.iban;
+    this.bic = this.$store.state.bic;
+    this.lastname_person = this.$store.state.lastname_person;
+    this.firstname_person = this.$store.state.firstname_person;
+    this.date_p = this.$store.state.date_p;
   },
 
   watch: {
+    //input executes function which is defiened index.js
     firstname: function (val) {
       this.$store.commit("setFirstname", val);
     },
     lastname: function (val) {
       this.$store.commit("setLastname", val);
+    },
+    date: function (val) {
+      this.$store.commit("setDate", val);
     },
     street: function (val) {
       this.$store.commit("setStreet", val);
@@ -395,20 +419,50 @@ export default {
     town: function (val) {
       this.$store.commit("setTown", val);
     },
-    date: function (val) {
-      this.$store.commit("setDate", val);
+    email: function (val) {
+      this.$store.commit("setMail", val);
+    },
+    tel: function (val) {
+      this.$store.commit("setTel", val);
     },
     menu(val) {
       val && setTimeout(() => (this.$refs.picker.activePicker = "YEAR"));
     },
+    date_p: function (val) {
+      this.$store.commit("setDate_p", val);
+    },
+    menu_p(val) {
+      val && setTimeout(() => (this.$refs.picker_p.activePicker = "YEAR"));
+    },
     radioGroupAntragsgrundlage: function (val) {
       this.$store.commit("setAntragsgrundlageCheck", val);
+    },
+    radioGroupErmaeßigung: function (val) {
+      this.$store.commit("setErmaeßigungCheck", val);
+    },
+    nettoeinkommen: function (val) {
+      this.$store.commit("setNettoeinkommen", val);
+    },
+    selbstständigkeiteinkommen: function (val) {
+      this.$store.commit("setSelbstständigkeitEinkommen", val);
+    },
+    kontoinhaber: function (val) {
+      this.$store.commit("setKontoinhaber", val);
+    },
+    iban: function (val) {
+      this.$store.commit("setIban", val);
+    },
+    bic: function (val) {
+      this.$store.commit("setBic", val);
     },
   },
 
   methods: {
     save(date) {
       this.$refs.menu.save(date);
+    },
+    save_p(date_p) {
+      this.$refs.menu_p.save(date_p);
     },
   },
 };

@@ -136,31 +136,6 @@
         cols="12"
         sm="3"
       >
-        <v-text-field
-          outlined="true"
-          v-model="betreuungsentgelt"
-          :rules="moneyRules"
-          label="Betreuungsentgelt"
-          required
-        ></v-text-field>
-      </v-col>
-      <p v-else></p>
-      <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
-        <v-text-field
-          outlined="true"
-          v-model="elternbeitrag"
-          :rules="moneyRules"
-          label="Elternbeitrag"
-          required
-        ></v-text-field>
-      </v-col>
-      <p v-else></p>
-      <v-col
-        v-if="this.$store.state.geCheck || this.$store.state.entCheck"
-        class="d-flex"
-        cols="12"
-        sm="3"
-      >
         <v-app id="datepicker_bb">
           <v-menu
             ref="menu_bb"
@@ -193,6 +168,58 @@
         </v-app>
       </v-col>
       <p v-else></p>
+      <v-col
+        v-if="this.$store.state.geCheck || this.$store.state.entCheck"
+        class="d-flex"
+        cols="12"
+        sm="3"
+      >
+        <v-text-field
+          outlined="true"
+          v-model="betreuungsentgelt"
+          :rules="moneyRules"
+          label="Betreuungsentgelt"
+          required
+        ></v-text-field>
+      </v-col>
+      <p v-else></p>
+      <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
+        <v-text-field
+          outlined="true"
+          v-model="elternbeitrag"
+          :rules="moneyRules"
+          label="Elternbeitrag"
+          required
+        ></v-text-field>
+        <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <span v-bind="attrs" v-on="on">This text has a tooltip</span>
+        </template>
+        <span>Tooltip</span>
+      </v-tooltip>
+      </v-col>
+      <p v-else></p>
+      <v-col v-if="this.$store.state.bifoCheck && radioGroupBetreuungsform === 3" class="d-flex" cols="12" sm="3">
+        <v-text-field
+          outlined="true"
+          v-model="essensgeld"
+          :rules="moneyRules"
+          label="Essensgeld"
+          required
+        ></v-text-field>
+        <v-tooltip bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon
+            color="primary"
+            dark
+            v-bind="attrs"
+            v-on="on"
+          >mdi-home</v-icon>
+        </template>
+        <span>Tooltip</span>
+      </v-tooltip>
+      </v-col>
+      <p v-else></p>      
     </v-row>
     <v-btn
       class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"

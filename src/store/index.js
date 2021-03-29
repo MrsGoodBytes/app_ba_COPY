@@ -9,79 +9,92 @@ export default new Vuex.Store({
     lastname: "",
     street: "",
     number: "",
-    plz: "",
+    postcode: "",
     town: "",
     email: "",
     tel: "",
     date: "",
+    date_p: "",
     date_child: "",
     date_bb: "",
     geCheck: false,
     entCheck: false,
     bifoCheck: false,
     radioGroupAntragsgrundlage: 0,
+    radioGroupErmaeßigung: 0,
+    nettoeinkommen: "",
+    selbstständigkeiteinkommen: "",
+    kontoinhaber: "",
+    iban: "",
+    bic: "",
   },
   mutations: {
-  //write value of textfield into variable firstname
-    setFirstname(state,value)
-    {
+    //write value of textfield into variable firstname
+    setFirstname(state, value) {
       state.firstname = value;
     },
-    setLastname(state,value)
-    {
+    setLastname(state, value) {
       state.lastname = value;
     },
-    setStreet(state,value)
-    {
+    setStreet(state, value) {
       state.street = value;
     },
-    setNumber(state,value)
-    {
+    setNumber(state, value) {
       state.number = value;
     },
-    setPostcode(state,value)
-    {
-      state.plz = value;
+    setPostcode(state, value) {
+      state.postcode = value;
     },
-    setTown(state,value)
-    {
+    setTown(state, value) {
       state.town = value;
     },
-    setMail(state,value)
-    {
+    setMail(state, value) {
       state.email = value;
-    }, 
-    setTel(state,value)
-    {
+    },
+    setTel(state, value) {
       state.tel = value;
     },
-    setDate(state,value)
-    {
+    setDate(state, value) {
       state.date = value;
     },
-    setDate_child(state, value)
-    {
+    setDate_p(state, value) {
+      state.date_p = value;
+    },
+    setDate_child(state, value) {
       state.date_child = value;
     },
-    setDate_bb(state, value)
-    {
+    setDate_bb(state, value) {
       state.date_bb = value;
     },
-    setGeCheck(state, value)
-    {
+    setGeCheck(state, value) {
       state.geCheck = value;
     },
-    setEntCheck(state, value)
-    {
+    setEntCheck(state, value) {
       state.entCheck = value;
     },
-    setBifoCheck(state, value)
-    {
+    setBifoCheck(state, value) {
       state.bifoCheck = value;
     },
-    setAntragsgrundlageCheck(state, value)
-    {
+    setAntragsgrundlageCheck(state, value) {
       state.radioGroupAntragsgrundlage = value;
+    },
+    setErmaeßigungCheck(state, value) {
+      state.radioGroupErmaeßigung = value;
+    },
+    setNettoeinkommen(state, value) {
+      state.nettoeinkommen = value;
+    },
+    setSelbstständigkeitEinkommen(state, value) {
+      state.selbstständigkeiteinkommen = value;
+    },
+    setKontoinhaber(state, value) {
+      state.kontoinhaber = value;
+    },
+    setIban(state, value) {
+      state.iban = value;
+    },
+    setBic(state, value) {
+      state.bic = value;
     }
   },
   actions: {
