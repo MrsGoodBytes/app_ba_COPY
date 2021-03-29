@@ -177,6 +177,7 @@
         <v-text-field
           outlined="true"
           v-model="betreuungsentgelt"
+          prefix="€"
           :rules="moneyRules"
           label="Betreuungsentgelt"
           required
@@ -187,6 +188,7 @@
         <v-text-field
           outlined="true"
           v-model="elternbeitrag"
+          prefix="€"
           :rules="moneyRules"
           label="Elternbeitrag"
           required

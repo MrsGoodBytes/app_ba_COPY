@@ -1,5 +1,7 @@
 <template>
   <div id="Antragsteller">
+    <!-- Daten Antragsteller -->
+
     <h3>Zur Person</h3>
     <v-row>
       <v-col>
@@ -81,7 +83,8 @@
           outlined="true"
           v-model.number="postcode"
           :rules="plzRules"
-          label="PLZ"
+          v-validate="'digits:5'"
+          label="Postleitzahl"
           required
         ></v-text-field>
       </v-col>
@@ -117,6 +120,9 @@
         ></v-text-field>
       </v-col>
     </v-row>
+
+    <!-- Daten weiterer Personen -->
+
     <v-divider></v-divider>
     <h3 v-if="this.$store.state.entCheck">Zum Haushalt gehörende Personen</h3>
     <v-row v-if="this.$store.state.entCheck">
@@ -179,14 +185,16 @@
     >
       weitere Person erfassen <v-icon>mdi-plus</v-icon></v-btn
     >
+    <!-- Antragsgrundlate und Bankverbindung -->
+
     <v-divider></v-divider>
     <h3
       class="font-weiht-black"
-      v-if="this.$store.state.geCheck || this.$store.state.bifoCheck"
+      v-if="this.$store.state.entCheck || this.$store.state.bifoCheck"
     >
       Antragsgrundlage
     </h3>
-    <v-row v-if="this.$store.state.geCheck || this.$store.state.bifoCheck">
+    <v-row v-if="this.$store.state.entCheck || this.$store.state.bifoCheck">
       <v-col>
         <v-radio-group v-model="radioGroupAntragsgrundlage">
           <v-radio
@@ -207,6 +215,9 @@
           outlined
         ></v-select>
       </v-col> -->
+
+      <!-- Einkommensnachweise ohne Sozialleistungen -->
+
       <v-col v-if="radioGroupAntragsgrundlage === 1">
         <h4>Familieneinkommen, Belastungen, Einkommensgrenze</h4>
         <p>Die im Haushalt lebenden Personen erzielen folgendes Einkommen:</p>
@@ -350,9 +361,6 @@ export default {
       ],
       plzRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
-        (value) =>
-          (value && value.length === 5 && /^\d+$/.test(value)) ||
-          "Pflichtfeld! Postleitzahl sollte ein fünfstelliger Wert sein und nur aus Ziffern bestehen.",
       ],
       emailRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
@@ -368,7 +376,7 @@ export default {
       ibanRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>
-          (value && value.length >= 22 && /^\d+$/.test(value)) ||
+          (value && value.length >= 22) ||
           "Pflichtfeld. Bitte gültige IBAN eingeben!",
       ],
     };
