@@ -13,23 +13,44 @@ export default new Vuex.Store({
     town: "",
     email: "",
     tel: "",
+
     date: "",
     date_p: "",
     date_child: "",
     date_bb: "",
+
     geCheck: false,
     entCheck: false,
     bifoCheck: false,
+    vorjahr_checkbox: false,
+
     radioGroupAntragsgrundlage: 0,
     radioGroupErmaeßigung: 0,
+    radioGroupBetreuungsform: 0,
+
     nettoeinkommen: "",
     selbstständigkeiteinkommen: "",
     kontoinhaber: "",
     iban: "",
     bic: "",
+
+    child_firstname: "",
+    child_lastname: "",
+    institutionstreet: "",
+    institutionnumber: "",
+    institutionpostcode: "",
+    institutiontown: "",
+    tagespflegename: "",
+
+    essensgeld: "",
+    elternbeitrag: "",
+    betreuungsbeginn: "",
+    betreuungsentgelt: "",
   },
   mutations: {
     //write value of textfield into variable firstname
+
+    //Antragsteller
     setFirstname(state, value) {
       state.firstname = value;
     },
@@ -60,12 +81,6 @@ export default new Vuex.Store({
     setDate_p(state, value) {
       state.date_p = value;
     },
-    setDate_child(state, value) {
-      state.date_child = value;
-    },
-    setDate_bb(state, value) {
-      state.date_bb = value;
-    },
     setGeCheck(state, value) {
       state.geCheck = value;
     },
@@ -95,7 +110,56 @@ export default new Vuex.Store({
     },
     setBic(state, value) {
       state.bic = value;
-    }
+    },
+    //Kind
+    setChildFirstname(state, value) {
+      state.child_firstname = value;
+    },
+    setChildLastname(state, value) {
+      state.child_lastname = value;
+    },
+    setDate_child(state, value) {
+      state.date_child = value;
+    },
+
+    setElternbeitrag(state, value) {
+      state.elternbeitrag = value;
+    },
+    setBetreuungsentgelt(state, value) {
+      state.betreuungsentgelt = value;
+    },
+    setEssensgeld(state, value) {
+      state.essensgeld = value;
+    },
+
+    setInstitutionStreet(state, value) {
+      state.institutionstreet = value;
+    },
+    setInstitutionNumber(state, value) {
+      state.institutionnumber = value;
+    },
+    setInstitutionPostcode(state, value) {
+      state.institutionpostcode = value;
+    },
+    setInstitutionTown(state, value) {
+      state.institutiontown = value;
+    },
+    setTagespflegeName(state, value) {
+      state.tagespflegename = value;
+    },
+    setInstitutionName(state, value) {
+      state.institutionname = value;
+    },
+    setVorjahrCheck(state, value) {
+      state.vorjahr_checkbox = value;
+    },
+    setBetreuungsform(state, value) {
+      state.radioGroupBetreuungsform = value;
+    },
+
+    setDate_bb(state, value) {
+      state.date_bb = value;
+    },
   },
   actions: {
   },

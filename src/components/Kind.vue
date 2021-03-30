@@ -77,14 +77,14 @@
       <v-col v-if="radioGroupBetreuungsform === 3">
         <v-text-field
           outlined="true"
-          v-model="institutionstraße"
+          v-model="tagespflegename"
           label="Name der Tagespflegeperson"
           :rules="nameRules"
           required
         ></v-text-field>
         <v-text-field
           outlined="true"
-          v-model="institutionstraße"
+          v-model="institutionstreet"
           label="Straße der Tagespflege"
           :rules="nameRules"
           required
@@ -98,14 +98,14 @@
         ></v-text-field>
         <v-text-field
           outlined="true"
-          v-model="institutionplz"
+          v-model="institutionpostcode"
           label="PLZ der Tagespflege"
           :rules="nameRules"
           required
         ></v-text-field>
         <v-text-field
           outlined="true"
-          v-model="institutionort"
+          v-model="institutiontown"
           label="Ort der Tagespflege"
           :rules="nameRules"
           required
@@ -194,34 +194,37 @@
           required
         ></v-text-field>
         <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <span v-bind="attrs" v-on="on">This text has a tooltip</span>
-        </template>
-        <span>Tooltip</span>
-      </v-tooltip>
+          <template v-slot:activator="{ on, attrs }">
+            <span v-bind="attrs" v-on="on">This text has a tooltip</span>
+          </template>
+          <span>Tooltip</span>
+        </v-tooltip>
       </v-col>
       <p v-else></p>
-      <v-col v-if="this.$store.state.bifoCheck && radioGroupBetreuungsform === 3" class="d-flex" cols="12" sm="3">
+      <v-col
+        v-if="this.$store.state.bifoCheck && radioGroupBetreuungsform === 3"
+        class="d-flex"
+        cols="12"
+        sm="3"
+      >
         <v-text-field
           outlined="true"
           v-model="essensgeld"
           :rules="moneyRules"
           label="Essensgeld"
+          prefix="€"
           required
         ></v-text-field>
         <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-icon
-            color="primary"
-            dark
-            v-bind="attrs"
-            v-on="on"
-          >mdi-home</v-icon>
-        </template>
-        <span>Tooltip</span>
-      </v-tooltip>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" dark v-bind="attrs" v-on="on"
+              >mdi-home</v-icon
+            >
+          </template>
+          <span>Tooltip</span>
+        </v-tooltip>
       </v-col>
-      <p v-else></p>      
+      <p v-else></p>
     </v-row>
     <v-btn
       class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
@@ -262,13 +265,27 @@ export default {
   props: {},
   data() {
     return {
+      child_firstname: "",
+      child_lastname: "",
+
       elternbeitrag: "",
       betreuungsbeginn: "",
+      betreuungsentgelt: "",
+      essensgeld: "",
 
       date_child: null,
       date_bb: null,
       menu_child: false,
       menu_bb: false,
+
+      tagespflegename: "",
+      institutionstreet: "",
+      institutionnumber: "",
+      institutionpostcode: "",
+      institutiontown: "",
+      institutionname: "",
+
+      vorjahr_checkbox: false,
 
       betreuungsform: "",
       radioGroupBetreuungsform: 0,
@@ -293,21 +310,83 @@ export default {
   },
 
   watch: {
+    child_firstname: function (val) {
+      this.$store.commit("setChildFirstname", val);
+    },
+    child_lastname: function (val) {
+      this.$store.commit("setChildLastname", val);
+    },
     date_child: function (val) {
       this.$store.commit("setDate_child", val);
     },
-    date_bb: function (val) {
-      this.$store.commit("setDate_bb", val);
-    },
     menu_child(val) {
       val && setTimeout(() => (this.$refs.picker_child.activePicker = "YEAR"));
+    },
+
+    elternbeitrag: function (val) {
+      this.$store.commit("setElternbeitrag", val);
+    },
+    betreuungsentgelt: function (val) {
+      this.$store.commit("setBetreuungsentgelt", val);
+    },
+    essensgeld: function (val) {
+      this.$store.commit("setEssensgeld", val);
+    },
+
+    tagespflegename: function (val) {
+      this.$store.commit("setTagespflegeName", val);
+    },
+    institutionstreet: function (val) {
+      this.$store.commit("setInstitutionStreet", val);
+    },
+    institutionnumber: function (val) {
+      this.$store.commit("setInstitutionNumber", val);
+    },
+    institutionpostcode: function (val) {
+      this.$store.commit("setInstitutionPostcode", val);
+    },
+    institutiontown: function (val) {
+      this.$store.commit("setInstitutionTown", val);
+    },
+    institutionname: function (val) {
+      this.$store.commit("setInstitutionname", val);
+    },
+
+    vorjahr_checkbox: function (val) {
+      this.$store.commit("setVorjahrCheck", val);
+    },
+
+    radioGroupBetreuungsform: function (val) {
+      this.$store.commit("setBetreuungsform", val);
+    },
+    date_bb: function (val) {
+      this.$store.commit("setDate_bb", val);
     },
     menu_bb(val) {
       val && setTimeout(() => (this.$refs.picker_bb.activePicker = "YEAR"));
     },
   },
+//load previus values from store
+  created() {
+    this.child_firstname = this.$store.state.child_firstname;
+    this.child_lastname = this.$store.state.child_lastname;
+    this.date_child = this.$store.state.date_child;
 
-  created() {},
+    this.institutionstreet = this.$store.state.institutionstreet;
+    this.institutionnumber = this.$store.state.institutionnumber;
+    this.institutionpostcode = this.$store.state.institutionpostcode;
+    this.institutiontown = this.$store.state.institutiontown;
+    this.tagespflegename = this.$store.state.tagespflegename;
+
+    this.elternbeitrag = this.$store.state.elternbeitrag;
+    this.betreuungsentgelt = this.$store.state.betreuungsentgelt;
+    this.essensgeld = this.$store.state.essensgeld;
+    this.date_bb = this.$store.state.date_child;
+
+    this.vorjahr_checkbox = this.$store.state.vorjahr_checkbox;
+
+    this.radioGroupBetreuungsform = this.$store.state.radioGroupBetreuungsform;
+  },
 
   methods: {
     save_child(date_child) {
