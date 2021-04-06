@@ -1,11 +1,11 @@
 <template>
   <div id="Kind">
     <h2>Kind/er</h2>
-    <v-row>
+    <v-row v-for="n in childList" :key="n">
       <v-col>
         <v-text-field
-          outlined="true"
-          v-model="child_firstname"
+          outlined
+          v-model="n.firstname"
           label="Vorname des Kindes"
           :rules="nameRules"
           required
@@ -13,8 +13,8 @@
       </v-col>
       <v-col>
         <v-text-field
-          outlined="true"
-          v-model="child_lastname"
+          outlined
+          v-model="n.lastname"
           label="Nachname des Kindes"
           :rules="nameRules"
           required
@@ -32,7 +32,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date_child"
+                v-model="n.date_child"
                 label="Geburtsdatum des Kindes"
                 prepend-icon="mdi-calendar"
                 readonly
@@ -44,7 +44,7 @@
               v-card
               v-picker--date
               ref="picker_child"
-              v-model="date_child"
+              v-model="n.date_child"
               :max="new Date().toISOString().substr(0, 10)"
               min="2000-01-01"
               @change="save_child"
@@ -64,48 +64,48 @@
         <h4>Betreuung</h4>
         <v-radio-group v-model="radioGroupBetreuungsform">
           <v-radio
-            v-model="betreuungsform"
+            v-model="n.betreuungsform"
             ref="betreuungsform"
-            v-for="n in radioListBetreuungsform"
-            :key="n"
-            :label="`${n}`"
-            :value="n"
+            v-for="m in radioListBetreuungsform"
+            :key="m"
+            :label="`${m}`"
+            :value="m"
           ></v-radio>
         </v-radio-group>
       </v-col>
       <p v-else></p>
       <v-col v-if="radioGroupBetreuungsform === 3">
         <v-text-field
-          outlined="true"
-          v-model="tagespflegename"
+          outlined
+          v-model="n.tagespflegename"
           label="Name der Tagespflegeperson"
           :rules="nameRules"
           required
         ></v-text-field>
         <v-text-field
-          outlined="true"
-          v-model="institutionstreet"
+          outlined
+          v-model="n.institutionstreet"
           label="Straße der Tagespflege"
           :rules="nameRules"
           required
         ></v-text-field>
         <v-text-field
-          outlined="true"
-          v-model="institutionnumber"
+          outlined
+          v-model="n.institutionnumber"
           label="Hausnummer der Tagespflege"
           :rules="numberRules"
           required
         ></v-text-field>
         <v-text-field
-          outlined="true"
-          v-model="institutionpostcode"
+          outlined
+          v-model="n.institutionpostcode"
           label="PLZ der Tagespflege"
           :rules="nameRules"
           required
         ></v-text-field>
         <v-text-field
-          outlined="true"
-          v-model="institutiontown"
+          outlined
+          v-model="n.institutiontown"
           label="Ort der Tagespflege"
           :rules="nameRules"
           required
@@ -113,8 +113,8 @@
       </v-col>
       <v-col v-else>
         <v-text-field
-          outlined="true"
-          v-model="institutionname"
+          outlined
+          v-model="n.institutionname"
           label="Name der Betreuungseinrichtung"
           :rules="nameRules"
           required
@@ -122,7 +122,7 @@
       </v-col>
       <v-col v-if="this.$store.state.entCheck" class="d-flex" cols="12" sm="12">
         <v-checkbox
-          v-model="vorjahr_checkbox"
+          v-model="n.vorjahr_checkbox"
           ref="vorjahr_check"
           :label="'Für das Kind wurde im VORJAHR ein Ermäßigungsantrag gestellt:'"
         ></v-checkbox>
@@ -147,7 +147,7 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-text-field
-                v-model="date_bb"
+                v-model="n.date_bb"
                 label="Betreuungsbeginn"
                 prepend-icon="mdi-calendar"
                 readonly
@@ -159,7 +159,7 @@
               v-card
               v-picker--date
               ref="picker_bb"
-              v-model="date_bb"
+              v-model="n.date_bb"
               :max="new Date().toISOString().substr(0, 10)"
               min="2000-01-01"
               @change="save_bb"
@@ -175,8 +175,8 @@
         sm="3"
       >
         <v-text-field
-          outlined="true"
-          v-model="betreuungsentgelt"
+          outlined
+          v-model="n.betreuungsentgelt"
           prefix="€"
           :rules="moneyRules"
           label="Betreuungsentgelt"
@@ -186,8 +186,8 @@
       <p v-else></p>
       <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
         <v-text-field
-          outlined="true"
-          v-model="elternbeitrag"
+          outlined
+          v-model="n.elternbeitrag"
           prefix="€"
           :rules="moneyRules"
           label="Elternbeitrag"
@@ -208,7 +208,7 @@
         sm="3"
       >
         <v-text-field
-          outlined="true"
+          outlined
           v-model="essensgeld"
           :rules="moneyRules"
           label="Essensgeld"
@@ -224,10 +224,29 @@
           <span>Tooltip</span>
         </v-tooltip>
       </v-col>
+      <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
+        <v-text-field
+          outlined
+          v-model="betreuungsumgfang"
+          :rules="moneyRules"
+          label="Betreuungsumfang"
+          prefix="Stunden pro Woche"
+          required
+        ></v-text-field>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" dark v-bind="attrs" v-on="on"
+              >mdi-home</v-icon
+            >
+          </template>
+          <span>Tooltip</span>
+        </v-tooltip>
+      </v-col>
       <p v-else></p>
     </v-row>
     <v-btn
       class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+      @click="addChild"
     >
       weiteres Kind erfassen
       <v-icon> mdi-plus </v-icon>
@@ -265,7 +284,35 @@ export default {
   props: {},
   data() {
     return {
-      child_firstname: "",
+      /* child: {
+        firstname="",
+        lastname="",
+        elternbeitrag: "",
+        betreuungsbeginn: "",
+        betreuungsentgelt: "",
+        essensgeld: "",
+        date_child: null,
+        date_bb: null,
+        tagespflegename: "",
+        institutionstreet: "",
+        institutionnumber: "",
+        institutionpostcode: "",
+        institutiontown: "",
+        institutionname: "",
+        betreuungsform: "",
+        radioGroupBetreuungsform: 0,
+        radioListBetreuungsform: [
+          "Krippe",
+          "Elementar",
+          "Hort",
+          "Tagespflege",
+          "Ganztags an Schule",
+        ],
+        }, */
+
+      childList: [1],
+      
+      child_firstname: [""],
       child_lastname: "",
 
       elternbeitrag: "",
@@ -274,11 +321,11 @@ export default {
       essensgeld: "",
 
       date_child: null,
-      date_bb: null,
+      date_bb: null, 
       menu_child: false,
       menu_bb: false,
 
-      tagespflegename: "",
+       tagespflegename: "",
       institutionstreet: "",
       institutionnumber: "",
       institutionpostcode: "",
@@ -288,6 +335,7 @@ export default {
       vorjahr_checkbox: false,
 
       betreuungsform: "",
+      betreuungsumfang: "",
       radioGroupBetreuungsform: 0,
       radioListBetreuungsform: [
         "Krippe",
@@ -366,10 +414,10 @@ export default {
       val && setTimeout(() => (this.$refs.picker_bb.activePicker = "YEAR"));
     },
   },
-//load previus values from store
+  //load previus values from store
   created() {
-    this.child_firstname = this.$store.state.child_firstname;
-    this.child_lastname = this.$store.state.child_lastname;
+    this.firstname = this.$store.state.child_firstname;
+    this.lastname = this.$store.state.child_lastname;
     this.date_child = this.$store.state.date_child;
 
     this.institutionstreet = this.$store.state.institutionstreet;
@@ -380,12 +428,33 @@ export default {
 
     this.elternbeitrag = this.$store.state.elternbeitrag;
     this.betreuungsentgelt = this.$store.state.betreuungsentgelt;
-    this.essensgeld = this.$store.state.essensgeld;
     this.date_bb = this.$store.state.date_child;
 
+    this.radioGroupBetreuungsform = this.$store.state.radioGroupBetreuungsform;
+
+    this.essensgeld = this.$store.state.essensgeld;
     this.vorjahr_checkbox = this.$store.state.vorjahr_checkbox;
 
-    this.radioGroupBetreuungsform = this.$store.state.radioGroupBetreuungsform;
+    this.childList.add({
+      firstname: this.$store.state.child_firstname,
+      lastname: this.$store.state.child_lastname,
+      date_child: this.$store.state.date_child,
+
+      institutionstreet: this.$store.state.institutionstreet,
+      institutionnumber: this.$store.state.institutionnumber,
+      institutionname: this.$store.state.institutionname,
+      institutionpostcode: this.$store.state.institutionpostcode,
+      institutiontown: this.$store.state.institutiontown,
+      tagespflegename: this.$store.state.tagespflegename,
+
+      elternbeitrag: this.$store.state.elternbeitrag,
+      betreuungsentgelt: this.$store.state.betreuungsentgelt,
+      date_bb: this.$store.state.date_child,
+      radioGroupBetreuungsform: this.$store.state.radioGroupBetreuungsform,
+      essensgeld: this.$store.state.essensgeld,
+      vorjahr_checkbox: this.$store.state.vorjahr_checkbox,
+      betreuungsumfang: this.$store.state.betreuungsumfang,
+    });
   },
 
   methods: {
@@ -394,6 +463,54 @@ export default {
     },
     save_bb(date_bb) {
       this.$refs.menu_bb.save(date_bb);
+    },
+    addChild() {
+      this.childList.add({
+        firstname: "",
+        lastname: "",
+        date_child: "",
+
+        institutionstreet: "",
+        institutionnumber: "",
+        institutionpostcode: "",
+        institutiontown: "",
+        institutionname: "",
+        tagespflegename: "",
+
+        elternbeitrag: "",
+        betreuungsentgelt: "",
+        radioGroupBetreuungsform: "",
+        date_bb: "",
+        essensgeld: "",
+        betreuungsumfang: "",
+        vorjahr_checkbox: false,
+      });
+/* 
+      child: {
+        firstname="",
+        lastname="",
+        elternbeitrag: "",
+        betreuungsbeginn: "",
+        betreuungsentgelt: "",
+        essensgeld: "",
+        date_child: null,
+        date_bb: null,
+        tagespflegename: "",
+        institutionstreet: "",
+        institutionnumber: "",
+        institutionpostcode: "",
+        institutiontown: "",
+        institutionname: "",
+        betreuungsform: "",
+        radioGroupBetreuungsform: 0,
+        radioListBetreuungsform: [
+          "Krippe",
+          "Elementar",
+          "Hort",
+          "Tagespflege",
+          "Ganztags an Schule",
+        ],
+      }, */
     },
   },
 };

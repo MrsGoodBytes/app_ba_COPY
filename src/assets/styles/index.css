@@ -13,3 +13,5 @@
 .theme--dark.v-sheet{
     background-color: rgb(194, 47, 47);
 }
+
+.justify-space-around{justify-content:space-around!important}
