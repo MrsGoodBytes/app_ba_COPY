@@ -91,6 +91,10 @@ export default {
     },
   },
 
+  created() {
+    this.date_sibling = this.$store.state.date_sibling;
+  },
+
   methods: {
     updateStatus(index, newStatus) {
       this.$parent.updateStatus(index, newStatus);

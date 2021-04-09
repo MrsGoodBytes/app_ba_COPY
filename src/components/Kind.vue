@@ -1,6 +1,6 @@
 <template>
-  <div id="Kind">
-    <h2 class="pb-4">Kind/er</h2>
+  <div id="Kind" class="px-10">
+    <h2 class="py-3">Kind/er</h2>
     <v-row><!-- v-for="n in childList" :key="n" -->
       <v-col>
         <v-text-field

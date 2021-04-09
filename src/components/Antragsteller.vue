@@ -1,8 +1,8 @@
 <template>
-  <div id="Antragsteller">
+  <div id="Antragsteller" class="px-10">
     <!-- Daten Antragsteller -->
 
-    <h3>Zur Person</h3>
+    <h2 class="py-3">Zur Person</h2>
     <v-row>
       <v-col>
         <v-text-field
@@ -55,7 +55,7 @@
       <p v-else></p>
     </v-row>
     <v-divider></v-divider>
-    <h3>Anschrift</h3>
+    <h3 class="py-3">Anschrift</h3>
     <v-row>
       <v-col cols="12" sm="4">
         <v-text-field
@@ -96,7 +96,7 @@
       </v-col>
     </v-row>
     <v-divider></v-divider>
-    <h3>Kontakt</h3>
+    <h3 class="py-3">Kontakt</h3>
     <v-row>
       <v-col>
         <v-text-field
@@ -121,7 +121,7 @@
     <!-- Daten weiterer Personen -->
 
     <v-divider></v-divider>
-    <h3 v-if="this.$store.state.entCheck">Zum Haushalt gehörende Personen</h3>
+    <h3 class="py-3" v-if="this.$store.state.entCheck">Zum Haushalt gehörende Personen</h3>
     <v-row v-if="this.$store.state.entCheck">
       <v-col>
         <v-text-field
@@ -184,7 +184,7 @@
 
     <v-divider></v-divider>
     <h3
-      class="font-weiht-black"
+      class="font-weiht-black py-3"
       v-if="this.$store.state.entCheck || this.$store.state.bifoCheck"
     >
       Antragsgrundlage

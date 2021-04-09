@@ -2,36 +2,40 @@
     <div id="antrag_auswahl">
       <v-container>
         <Antragswahl msg="Welche Anträge möchtest du stellen?" />
-        <div class="pa-10">
-          <v-btn
-            class="bg-purple-600 text-white text-base font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+        <v-tabs
+      fixed-tabs
+      background-color="indigo"
+      dark
+    >
+      <v-tab
+            class="pa-4"
             color="primary"
             tile
             @click="funcShowAntragstellerDaten"
-            >Antragsteller/in</v-btn
-          >
-          <v-btn
-            class="bg-purple-600 text-white text-base font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+            >Antragsteller/in
+      </v-tab>
+      <v-tab
+            class="pa-4"
             color="primary"
             tile
             @click="funcShowKindDaten"
-            >Kind/er</v-btn
-          >
-          <v-btn
-            class="bg-purple-600 text-white text-base font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+            >Kind/er
+      </v-tab>
+      <v-tab
+            class="pa-4"
             color="primary"
             tile
             @click="funcShowNachweise"
-            >Nachweise</v-btn
-          >
-          <v-btn
-            class="bg-purple-600 text-white text-base font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+            >Nachweise
+      </v-tab>
+      <v-tab
+            class="pa-4"
             color="primary"
             tile
             @click="funcShowAbschicken"
-            >Abschicken</v-btn
-          >
-        </div>
+            >Abschicken
+      </v-tab>
+    </v-tabs>
         <Antragsteller v-if="AntragstellerDaten" />
         <Kind v-if="KindDaten" />
         <geschwisterkind
@@ -44,7 +48,7 @@
           class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
           v-on:click="addChild"
         >
-          weiteres Kind erfassen
+          Geschwisterkind hinzufügen
           <v-icon> mdi-plus </v-icon>
         </v-btn>
         <Nachweise v-if="Nachweise" />
