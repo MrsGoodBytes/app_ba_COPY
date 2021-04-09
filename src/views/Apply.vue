@@ -1,9 +1,8 @@
 <template>
-  <v-app>
     <div id="antrag_auswahl">
       <v-container>
         <Antragswahl msg="Welche Anträge möchtest du stellen?" />
-        <div class="pb-5">
+        <div class="pa-10">
           <v-btn
             class="bg-purple-600 text-white text-base font-semibold hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
             color="primary"
@@ -51,7 +50,6 @@
         <Nachweise v-if="Nachweise" />
       </v-container>
     </div>
-  </v-app>
 </template>
 
 <script>

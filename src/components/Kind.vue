@@ -1,6 +1,6 @@
 <template>
-<div id="Kind">
-    <h2 class="pa-5">Kind/er</h2>
+  <div id="Kind">
+    <h2 class="pb-4">Kind/er</h2>
     <v-row><!-- v-for="n in childList" :key="n" -->
       <v-col>
         <v-text-field
@@ -226,6 +226,7 @@
           v-model="betreuungsumgfang"
           :rules="moneyRules"
           label="Betreuungsumfang"
+          prefix="Stunden pro Woche"
           required
         ></v-text-field>
         <v-tooltip bottom>
@@ -271,7 +272,7 @@
             }}</v-btn>
             </v-col>
         </v-row> -->
-</div>
+  </div>
 </template>
 
 <script>

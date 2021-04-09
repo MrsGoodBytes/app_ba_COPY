@@ -18,7 +18,6 @@ export default new Vuex.Store({
         date_p: "",
         date_child: "",
         date_bb: "",
-        date_sibling: "",
 
         geCheck: false,
         entCheck: false,
@@ -47,9 +46,6 @@ export default new Vuex.Store({
         elternbeitrag: "",
         betreuungsbeginn: "",
         betreuungsentgelt: "",
-
-        sibling_firstname: "",
-        sibling_lastname: "",
     },
     mutations: {
         //write value of textfield into variable firstname
@@ -124,9 +120,6 @@ export default new Vuex.Store({
         },
         setDate_child(state, value) {
             state.date_child = value;
-        },
-        setDate_sibling(state, value) {
-            state.date_sibling = value;
         },
 
         setElternbeitrag(state, value) {
