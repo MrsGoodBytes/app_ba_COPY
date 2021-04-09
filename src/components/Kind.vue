@@ -1,6 +1,6 @@
 <template>
-  <div id="Kind">
-    <h2>Kind/er</h2>
+<div id="Kind">
+    <h2 class="pa-5">Kind/er</h2>
     <v-row><!-- v-for="n in childList" :key="n" -->
       <v-col>
         <v-text-field
@@ -21,7 +21,6 @@
         ></v-text-field>
       </v-col>
       <v-col v-if="this.$store.state.geCheck">
-        <v-app id="datepicker_child">
           <v-menu
             ref="menu_child"
             v-model="menu_child"
@@ -50,7 +49,6 @@
               @change="save_child"
             ></v-date-picker>
           </v-menu>
-        </v-app>
       </v-col>
       <p v-else></p>
     </v-row>
@@ -136,7 +134,6 @@
         cols="12"
         sm="3"
       >
-        <v-app id="datepicker_bb">
           <v-menu
             ref="menu_bb"
             v-model="menu_bb"
@@ -165,7 +162,6 @@
               @change="save_bb"
             ></v-date-picker>
           </v-menu>
-        </v-app>
       </v-col>
       <p v-else></p>
       <v-col
@@ -230,7 +226,6 @@
           v-model="betreuungsumgfang"
           :rules="moneyRules"
           label="Betreuungsumfang"
-          prefix="Stunden pro Woche"
           required
         ></v-text-field>
         <v-tooltip bottom>
@@ -276,7 +271,7 @@
             }}</v-btn>
             </v-col>
         </v-row> -->
-  </div>
+</div>
 </template>
 
 <script>

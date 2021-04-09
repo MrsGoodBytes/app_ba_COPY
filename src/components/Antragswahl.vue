@@ -1,7 +1,7 @@
 <template>
-  <div id="antrag_auswahl" class="hello">
+<v-container>
+  <div id="antrag_auswahl">
     <h1 class="text-base font-semibold">{{ msg }}</h1>
-    <v-container>
       <v-row>
         <v-col>
           <v-checkbox
@@ -31,8 +31,8 @@
         Es ist möglich die Auswahl jederzeit durch Auswahl der Checkboxen zu
         ändern.
       </p>
-    </v-container>
   </div>
+</v-container>
 </template>
 
 <script>
