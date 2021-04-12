@@ -297,8 +297,42 @@
         Angaben zur Ermittlung des durchschnittlichen monatlichen
         Familieneinkommens in €
       </h4>
-      <v-row class="pb-10">
-        <v-expansion-panels>
+      <v-row justify="space-around" no-gutters style="width: 100%" class="pb-10">
+        <v-col cols="4">
+          <h4>
+            Nettoarbeitseinkommen
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="primary" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >aus nichtselbstständiger Arbeit der letzten 12 Monate (inkl.
+                Weihnachts- und Urlaubsgeld)</span
+              >
+            </v-tooltip>
+          </h4>
+        </v-col>
+        <v-col cols="3">
+          <v-text-field
+            v-model="elternteil1.selbst"
+            label="Elternteil 1"
+            prefix="€"
+            v-bind="attrs"
+            v-on="on"
+          ></v-text-field>
+        </v-col>
+        <v-col cols="3">
+          <v-text-field
+            v-model="elternteil2.netto"
+            label="Netto Elternteil 2"
+            prefix="€"
+            v-bind="attrs"
+            v-on="on"
+          ></v-text-field>
+        </v-col>
+        <!--    <v-expansion-panels>
           <v-expansion-panel>
             <v-expansion-panel-header v-slot="{ open }">
               <v-row no-gutters>
@@ -373,12 +407,50 @@
                 <v-col cols="4">Einkommen aus Selbstständigkeit</v-col>
                 <v-col cols="8" class="text--secondary">
                   <v-fade-transition leave-absolute>
-                    <v-row no-gutters style="width: 100%">
-                      <v-col cols="6">
-                        Elternteil 1: {{ elternteil1.selbst + "€" || "0€" }}
+                    <v-row
+                      no-gutters
+                      justify="space-around"
+                      style="width: 100%"
+                    >
+                      <v-col cols="4">
+                        <v-menu
+                          v
+                          ref="selbstElternteil1"
+                          :close-on-content-click="false"
+                          :return-value.sync="elternteil1.selbst"
+                          offset-y
+                          min-width="290px"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="elternteil1.selbst"
+                              label="Elternteil 1"
+                              prefix="€"
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                        </v-menu>
                       </v-col>
-                      <v-col cols="6">
-                        Elternteil 2: {{ elternteil2.selbst + "€" || "0€" }}
+
+                      <v-col cols="4">
+                        <v-menu
+                          ref="selbstElternteil2"
+                          :close-on-content-click="false"
+                          :return-value.sync="elternteil2.selbst"
+                          offset-y
+                          min-width="290px"
+                        >
+                          <template v-slot:activator="{ on, attrs }">
+                            <v-text-field
+                              v-model="elternteil2.selbst"
+                              label="Elternteil 2"
+                              prefix="€"
+                              v-bind="attrs"
+                              v-on="on"
+                            ></v-text-field>
+                          </template>
+                        </v-menu>
                       </v-col>
                     </v-row>
                   </v-fade-transition>
@@ -386,48 +458,7 @@
               </v-row>
             </v-expansion-panel-header>
             <v-expansion-panel-content>
-              <v-row justify="space-around" no-gutters>
-                <v-col cols="3">
-                  <v-menu
-                    v
-                    ref="selbstElternteil1"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil1.selbst"
-                    offset-y
-                    min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil1.selbst"
-                        label="Elternteil 1"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-
-                <v-col cols="3">
-                  <v-menu
-                    ref="selbstElternteil2"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil2.selbst"
-                    offset-y
-                    min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil2.selbst"
-                        label="Elternteil 2"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-              </v-row>
+              <h5>Hier mehr infos zu Selbständigen</h5>
             </v-expansion-panel-content>
           </v-expansion-panel>
 
@@ -620,7 +651,7 @@
               </v-row>
             </v-expansion-panel-content>
           </v-expansion-panel>
-        </v-expansion-panels>
+        </v-expansion-panels> -->
       </v-row>
     </div>
   </div>
