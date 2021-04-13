@@ -1,35 +1,29 @@
 <template>
   <div id="antrag_auswahl">
     <h1 class="text-base font-semibold">{{ msg }}</h1>
-    <v-container>
-      <v-row>
-        <v-col>
+    <v-container class="pb-0">
+      <v-row justify="space-around">
           <v-checkbox
+            class="font-weight-medium"
             v-model="ge_checkbox"
             ref="ge_check"
-            :label="`Geschwisterermäßigung: ${ge_checkbox.toString()}`"
+            :label="`Geschwisterermäßigung`"
           ></v-checkbox>
-        </v-col>
-        <v-col>
           <v-checkbox
             v-model="ent_checkbox"
             ref="ent_check"
-            :label="`Entgeltermäßigung: ${ent_checkbox.toString()}`"
+            :label="`Entgeltermäßigung`"
           ></v-checkbox>
-        </v-col>
-        <v-col>
           <v-checkbox
             v-model="bifo_checkbox"
             ref="bifo_check"
-            :label="`Bildungsfond: ${bifo_checkbox.toString()}`"
+            :label="`Bildungsfond`"
           ></v-checkbox>
-        </v-col>
       </v-row>
-      <v-alert v-if="!(this.$store.state.geCheck || this.$store.state.entCheck || this.$store.state.bifoCheck)" type="warning">Um fortzufahren bitte mindestens einen Antrag auswählen.</v-alert>
+      <v-alert v-if="!(this.$store.state.geCheck || this.$store.state.entCheck || this.$store.state.bifoCheck)" type="warning" class="pa-2 text-button">Bitte mindestens einen Antrag auswählen um fortzufahren.</v-alert>
       <p v-else></p>
-      <p>
-        Es ist möglich die Auswahl jederzeit durch Auswahl der Checkboxen zu
-        ändern.
+      <p class="caption pt-0">
+        Es ist möglich die Antragswahl jederzeit zu ändern.
       </p>
     </v-container>
   </div>

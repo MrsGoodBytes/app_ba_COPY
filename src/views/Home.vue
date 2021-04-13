@@ -6,18 +6,25 @@
     <Antragswahl msg="Welche Anträge möchtest du stellen?" />
     <router-link :to="{ name: 'Apply' }" href="#" class=""
       ><v-btn
-        class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+        color="primary"
+        class="text-button"
         >Gewählte Anträge stellen</v-btn
       ></router-link
     >
-    <h3>Falls Sie unsicher sind</h3>
+    <v-card
+    outlined
+    class="mx-16 mt-10"
+    color="#E8EAF6">
+    <h3 class="pt-5">Falls Sie unsicher sind</h3>
     <p>hilft Ihnen unser Test auf Berechtigung weiter:</p>
     <router-link :to="{ name: 'Check' }" href="#" class=""
       ><v-btn
-        class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
+        color="accent"
+        class="mb-3 text-button"
         >Welche Anträge sollte ich stellen?</v-btn
       ></router-link
     >
+    </v-card>
   </div>
 </template>
 
