@@ -21,34 +21,14 @@
         ></v-text-field>
       </v-col>
       <v-col v-if="this.$store.state.geCheck">
-          <v-menu
-            ref="menu_child"
-            v-model="menu_child"
-            :close-on-content-click="false"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="date_child"
-                label="Geburtsdatum des Kindes"
-                prepend-icon="mdi-calendar"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker
-              v-card
-              v-picker--date
-              ref="picker_child"
-              v-model="date_child"
-              :max="new Date().toISOString().substr(0, 10)"
-              min="2000-01-01"
-              @change="save_child"
-            ></v-date-picker>
-          </v-menu>
+          <v-text-field
+          outlined
+          v-model="date_child"
+          label="Geburtsdatum"
+          prepend-icon="mdi-calendar"
+          :rules="dateRules"
+          required
+        ></v-text-field>
       </v-col>
       <p v-else></p>
     </v-row>
@@ -134,34 +114,14 @@
         cols="12"
         sm="3"
       >
-          <v-menu
-            ref="menu_bb"
-            v-model="menu_bb"
-            :close-on-content-click="false"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="date_bb"
-                label="Betreuungsbeginn"
-                prepend-icon="mdi-calendar"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker
-              v-card
-              v-picker--date
-              ref="picker_bb"
-              v-model="date_bb"
-              :max="new Date().toISOString().substr(0, 10)"
-              min="2000-01-01"
-              @change="save_bb"
-            ></v-date-picker>
-          </v-menu>
+          <v-text-field
+          outlined
+          v-model="date_bb"
+          label="Geburtsdatum"
+          prepend-icon="mdi-calendar"
+          :rules="dateRules"
+          required
+        ></v-text-field>
       </v-col>
       <p v-else></p>
       <v-col
@@ -190,11 +150,15 @@
           required
         ></v-text-field>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <span v-bind="attrs" v-on="on">This text has a tooltip</span>
-          </template>
-          <span>Tooltip</span>
-        </v-tooltip>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >der Elternhbeitrag ist das Betreuungsgeld abzüglich der Ermäßigung</span
+              >
+            </v-tooltip>
       </v-col>
       <p v-else></p>
       <v-col
@@ -212,13 +176,15 @@
           required
         ></v-text-field>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="primary" dark v-bind="attrs" v-on="on"
-              >mdi-home</v-icon
-            >
-          </template>
-          <span>Tooltip</span>
-        </v-tooltip>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >monatlicher Betrag</span
+              >
+            </v-tooltip>
       </v-col>
       <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
         <v-text-field
@@ -226,17 +192,18 @@
           v-model="betreuungsumgfang"
           :rules="moneyRules"
           label="Betreuungsumfang"
-          prefix="Stunden pro Woche"
           required
         ></v-text-field>
         <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="primary" dark v-bind="attrs" v-on="on"
-              >mdi-home</v-icon
-            >
-          </template>
-          <span>Tooltip</span>
-        </v-tooltip>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >Stunden in der Woche</span
+              >
+            </v-tooltip>
       </v-col>
       <p v-else></p>
     </v-row>

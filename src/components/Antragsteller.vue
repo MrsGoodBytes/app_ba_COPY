@@ -23,34 +23,14 @@
         ></v-text-field>
       </v-col>
       <v-col v-if="this.$store.state.geCheck">
-        <v-menu
-          ref="menu"
-          v-model="menu"
-          :close-on-content-click="false"
-          transition="scale-transition"
-          offset-y
-          min-width="auto"
-        >
-          <template v-slot:activator="{ on, attrs }">
-            <v-text-field
-              v-model="date"
-              label="Geburtsdatum"
-              prepend-icon="mdi-calendar"
-              readonly
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </template>
-          <v-date-picker
-            v-card
-            v-picker--date
-            ref="picker"
-            v-model="date"
-            :max="new Date().toISOString().substr(0, 10)"
-            min="1960-01-01"
-            @change="save"
-          ></v-date-picker>
-        </v-menu>
+        <v-text-field
+          outlined
+          v-model="date"
+          label="Geburtsdatum"
+          prepend-icon="mdi-calendar"
+          :rules="dateRules"
+          required
+        ></v-text-field>
       </v-col>
       <p v-else></p>
     </v-row>
@@ -142,50 +122,20 @@
           ></v-text-field>
         </v-col>
         <v-col>
-          <v-menu
-            ref="menu_p"
-            v-model="menu_p"
-            :close-on-content-click="false"
-            transition="scale-transition"
-            offset-y
-            min-width="auto"
-          >
-            <template v-slot:activator="{ on, attrs }">
-              <v-text-field
-                v-model="date_p"
-                label="Geburtsdatum"
-                prepend-icon="mdi-calendar"
-                readonly
-                v-bind="attrs"
-                v-on="on"
-              ></v-text-field>
-            </template>
-            <v-date-picker
-              v-card
-              v-picker--date
-              ref="picker_p"
-              v-model="date_p"
-              locale="de"
-              locale-first-day-of-year="1"
-              :max="new Date().toISOString().substr(0, 10)"
-              min="1960-01-01"
-              @change="save_p"
-            ></v-date-picker>
-          </v-menu>
+          <v-text-field
+            outlined
+            v-model="item.date_p"
+            label="Geburtsdatum"
+            prepend-icon="mdi-calendar"
+            :rules="dateRules"
+            required
+          ></v-text-field>
         </v-col>
         <v-col>
-          <button
-            class="button is-small is-danger has-text-centered"
-            v-on:click="deletePerson(item.id)"
-          >
-            x
-          </button>
+          <button class="" v-on:click="deletePerson(item.id)">x</button>
         </v-col>
       </v-row>
-      <v-btn
-        class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-        v-on:click="addPerson"
-      >
+      <v-btn class="mb-4" v-on:click="addPerson">
         im Haushalt lebende Person hinzufügen
         <v-icon> mdi-plus </v-icon>
       </v-btn>
@@ -292,367 +242,218 @@
       </v-col>
     </v-row>
     <p v-else></p>
-    <div id="einkommensnachweis">
-      <h4 class="pb-8">
+    <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage == 1">
+      <h4>
         Angaben zur Ermittlung des durchschnittlichen monatlichen
         Familieneinkommens in €
       </h4>
-      <v-row justify="space-around" no-gutters style="width: 100%" class="pb-10">
-        <v-col cols="4">
-          <h4>
-            Nettoarbeitseinkommen
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="primary" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Nettoeinkommen
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span
+                  >Nettoarbeitseinkommen aus nichtselbstständiger Arbeit der
+                  letzten 12 Monate (inkl. Weihnachts- und Urlaubsgeld)</span
                 >
-              </template>
-              <span
-                >aus nichtselbstständiger Arbeit der letzten 12 Monate (inkl.
-                Weihnachts- und Urlaubsgeld)</span
-              >
-            </v-tooltip>
-          </h4>
-        </v-col>
-        <v-col cols="3">
-          <v-text-field
-            v-model="elternteil1.selbst"
-            label="Elternteil 1"
-            prefix="€"
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </v-col>
-        <v-col cols="3">
-          <v-text-field
-            v-model="elternteil2.netto"
-            label="Netto Elternteil 2"
-            prefix="€"
-            v-bind="attrs"
-            v-on="on"
-          ></v-text-field>
-        </v-col>
-        <!--    <v-expansion-panels>
-          <v-expansion-panel>
-            <v-expansion-panel-header v-slot="{ open }">
-              <v-row no-gutters>
-                <v-col cols="4">Nettoeinkommen</v-col>
-                <v-col cols="8" class="text--secondary">
-                  <v-fade-transition leave-absolute>
-                    <h5 v-if="open">
-                      Nettoarbeitseinkommen aus nichtselbstständiger Arbeit der
-                      letzten 12 Monate (inkl. Weihnachts- und Urlaubsgeld)
-                    </h5>
-                    <v-row v-else no-gutters style="width: 100%">
-                      <v-col cols="6">
-                        Elternteil 1: {{ elternteil1.netto + "€" || "0€" }}
-                      </v-col>
-                      <v-col cols="6">
-                        Elternteil 2: {{ elternteil2.netto + "€" || "0€" }}
-                      </v-col>
-                    </v-row>
-                  </v-fade-transition>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <v-row d-flex justify="space-around" no-gutters>
-                <v-col cols="3">
-                  <v-menu
-                    v
-                    ref="nettoElternteil1"
-                    :close-on-content-click="false"
-                    :return-value.sync="trip.netto1"
-                    offset-y
-                    min-width="290px"
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.netto"
+              label="Netto Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.netto"
+              label="Netto Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Einkommen aus Selbstständigkeit
+              <!-- <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
                   >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil1.netto"
-                        label="Netto Elternteil 1"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-
-                <v-col cols="3">
-                  <v-menu
-                    ref="nettoElternteil2"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil2.netto"
-                    offset-y
-                    min-width="290px"
+                </template>
+                <span
+                  ></span
+                >
+              </v-tooltip> -->
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.selbst"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.selbst"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Kindergeld
+              <!-- <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
                   >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil2.netto"
-                        label="Netto Elternteil 2"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header>
-              <v-row no-gutters>
-                <v-col cols="4">Einkommen aus Selbstständigkeit</v-col>
-                <v-col cols="8" class="text--secondary">
-                  <v-fade-transition leave-absolute>
-                    <v-row
-                      no-gutters
-                      justify="space-around"
-                      style="width: 100%"
-                    >
-                      <v-col cols="4">
-                        <v-menu
-                          v
-                          ref="selbstElternteil1"
-                          :close-on-content-click="false"
-                          :return-value.sync="elternteil1.selbst"
-                          offset-y
-                          min-width="290px"
-                        >
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                              v-model="elternteil1.selbst"
-                              label="Elternteil 1"
-                              prefix="€"
-                              v-bind="attrs"
-                              v-on="on"
-                            ></v-text-field>
-                          </template>
-                        </v-menu>
-                      </v-col>
-
-                      <v-col cols="4">
-                        <v-menu
-                          ref="selbstElternteil2"
-                          :close-on-content-click="false"
-                          :return-value.sync="elternteil2.selbst"
-                          offset-y
-                          min-width="290px"
-                        >
-                          <template v-slot:activator="{ on, attrs }">
-                            <v-text-field
-                              v-model="elternteil2.selbst"
-                              label="Elternteil 2"
-                              prefix="€"
-                              v-bind="attrs"
-                              v-on="on"
-                            ></v-text-field>
-                          </template>
-                        </v-menu>
-                      </v-col>
-                    </v-row>
-                  </v-fade-transition>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <h5>Hier mehr infos zu Selbständigen</h5>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header>
-              <v-row no-gutters>
-                <v-col cols="4">Kindergeld</v-col>
-                <v-col cols="8" class="text--secondary">
-                  <v-fade-transition leave-absolute>
-                    <v-row no-gutters style="width: 100%">
-                      <v-col cols="6">
-                        Elternteil 1: {{ elternteil1.kindergeld + "€" || "0€" }}
-                      </v-col>
-                      <v-col cols="6">
-                        Elternteil 2: {{ elternteil2.kindergeld + "€" || "0€" }}
-                      </v-col>
-                    </v-row>
-                  </v-fade-transition>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <v-row justify="space-around" no-gutters>
-                <v-col cols="3">
-                  <v-menu
-                    ref="kindElternteil1"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil1.kindergeld"
-                    offset-y
-                    min-width="290px"
+                </template>
+                <span></span>
+              </v-tooltip> -->
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.kindergeld"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.kindergeld"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row> </v-card
+      ><v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Arbeitslosengeld 1
+              <!-- <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
                   >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil1.kindergeld"
-                        label="Elternteil 1"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-
-                <v-col cols="3">
-                  <v-menu
-                    ref="kindElternteil2"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil2.kindergeld"
-                    offset-y
-                    min-width="290px"
+                </template>
+                <span
+                  ></span
+                >
+              </v-tooltip> -->
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.alg1"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.alg1"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row> </v-card
+      ><v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Existenzgründerzuschuss
+              <!-- <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
                   >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil2.kindergeld"
-                        label="Elternteil 2"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header>
-              <v-row no-gutters>
-                <v-col cols="4">Arbeitslosengeld I</v-col>
-                <v-col cols="8" class="text--secondary">
-                  <v-fade-transition leave-absolute>
-                    <v-row no-gutters style="width: 100%">
-                      <v-col cols="6">
-                        Elternteil 1: {{ elternteil1.alg1 + "€" || "0€" }}
-                      </v-col>
-                      <v-col cols="6">
-                        Elternteil 2: {{ elternteil2.alg1 + "€" || "0€" }}
-                      </v-col>
-                    </v-row>
-                  </v-fade-transition>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <v-row justify="space-around" no-gutters>
-                <v-col cols="3">
-                  <v-menu
-                    ref="kindElternteil1"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil1.alg1"
-                    offset-y
-                    min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil1.alg1"
-                        label="Elternteil 1"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-
-                <v-col cols="3">
-                  <v-menu
-                    ref="alg1Elternteil2"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil2.alg1"
-                    offset-y
-                    min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil2.alg1"
-                        label="Elternteil 2"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-
-          <v-expansion-panel>
-            <v-expansion-panel-header>
-              <v-row no-gutters>
-                <v-col cols="4">Existenzgründerzuschuss</v-col>
-                <v-col cols="8" class="text--secondary">
-                  <v-fade-transition leave-absolute>
-                    <v-row no-gutters style="width: 100%">
-                      <v-col cols="6">
-                        Elternteil 1: {{ elternteil1.existenz + "€" || "0€" }}
-                      </v-col>
-                      <v-col cols="6">
-                        Elternteil 2: {{ elternteil2.existenz + "€" || "0€" }}
-                      </v-col>
-                    </v-row>
-                  </v-fade-transition>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-header>
-            <v-expansion-panel-content>
-              <v-row justify="space-around" no-gutters>
-                <v-col cols="3">
-                  <v-menu
-                    v
-                    ref="kindElternteil1"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil1.existenz"
-                    offset-y
-                    min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil1.existenz"
-                        label="Elternteil 1"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-
-                <v-col cols="3">
-                  <v-menu
-                    ref="kindElternteil2"
-                    :close-on-content-click="false"
-                    :return-value.sync="elternteil2.existenz"
-                    offset-y
-                    min-width="290px"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="elternteil2.existenz"
-                        label="Elternteil 2"
-                        prefix="€"
-                        v-bind="attrs"
-                        v-on="on"
-                      ></v-text-field>
-                    </template>
-                  </v-menu>
-                </v-col>
-              </v-row>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </v-expansion-panels> -->
-      </v-row>
+                </template>
+                <span
+                  ></span
+                >
+              </v-tooltip> -->
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.existenz"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.existenz"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
     </div>
   </div>
 </template>
@@ -660,6 +461,7 @@
 <script>
 export default {
   name: "Antragsteller",
+  components: {},
   props: {},
   data() {
     return {
