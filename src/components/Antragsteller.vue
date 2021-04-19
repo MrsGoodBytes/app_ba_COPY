@@ -132,10 +132,10 @@
           ></v-text-field>
         </v-col>
         <v-col>
-          <button class="" v-on:click="deletePerson(item.id)">x</button>
+          <button class="" @click="deletePerson(item.id)">x</button>
         </v-col>
       </v-row>
-      <v-btn class="mb-4" v-on:click="addPerson">
+      <v-btn class="mb-4" @click="addPerson">
         im Haushalt lebende Person hinzufügen
         <v-icon> mdi-plus </v-icon>
       </v-btn>
@@ -204,46 +204,9 @@
         NICHT als Nachweis berücksichtigt werden.
       </p>
     </v-row>
-    <v-row v-if="this.$store.state.entCheck">
-      <v-col>
-        <v-radio-group v-model="radioGroupErmaeßigung">
-          <v-radio
-            v-model="bankverbindung_checkbox"
-            ref="bank_check"
-            v-for="n in radioList"
-            :key="n"
-            :label="`Ermäßigung überweisen an ${n}`"
-            :value="n"
-          ></v-radio>
-        </v-radio-group>
-      </v-col>
-      <v-col v-if="radioGroupErmaeßigung == 1">
-        <v-text-field
-          outlined
-          v-model="kontoinhaber"
-          :rules="nameRules"
-          label="Kontoinhaber/in"
-          required
-        ></v-text-field>
-        <v-text-field
-          outlined
-          v-model="iban"
-          :rules="ibanRules"
-          label="IBAN"
-          required
-        ></v-text-field>
-        <v-text-field
-          outlined
-          v-model="bic"
-          :rules="nameRules"
-          label="BIC"
-          required
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <p v-else></p>
+    
     <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage == 1">
-      <h4>
+      <h4 class="my-4">
         Angaben zur Ermittlung des durchschnittlichen monatlichen
         Familieneinkommens in €
       </h4>
@@ -300,16 +263,6 @@
           <v-col cols="4">
             <h4 class="text-left">
               Einkommen aus Selbstständigkeit
-              <!-- <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="accent" v-bind="attrs" v-on="on"
-                    >mdi-information</v-icon
-                  >
-                </template>
-                <span
-                  ></span
-                >
-              </v-tooltip> -->
             </h4>
           </v-col>
           <v-col cols="3">
@@ -380,17 +333,7 @@
         >
           <v-col cols="4">
             <h4 class="text-left">
-              Arbeitslosengeld 1
-              <!-- <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="primary" v-bind="attrs" v-on="on"
-                    >mdi-information</v-icon
-                  >
-                </template>
-                <span
-                  ></span
-                >
-              </v-tooltip> -->
+              Arbeitslosengeld 1 / Existenzgründerzuschuss
             </h4>
           </v-col>
           <v-col cols="3">
@@ -421,22 +364,12 @@
         >
           <v-col cols="4">
             <h4 class="text-left">
-              Existenzgründerzuschuss
-              <!-- <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="primary" v-bind="attrs" v-on="on"
-                    >mdi-information</v-icon
-                  >
-                </template>
-                <span
-                  ></span
-                >
-              </v-tooltip> -->
+              Krankengeld
             </h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
-              v-model="elternteil1.existenz"
+              v-model="elternteil1.krankengeld"
               label="Elternteil 1"
               prefix="€"
               v-bind="attrs"
@@ -445,7 +378,7 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-              v-model="elternteil2.existenz"
+              v-model="elternteil2.krankengeld"
               label="Elternteil 2"
               prefix="€"
               v-bind="attrs"
@@ -454,6 +387,809 @@
           </v-col>
         </v-row>
       </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Renten
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.rente"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.rente"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Einkommen aus Unterhalt
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>auch Unterhaltsvorschuss</span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.unterhaltseinkunft"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.unterhaltseinkunft"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Ausbildungsvergütung
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.ausbildungsvergütung"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.ausbildungsvergütung"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Ausbildungsförderung nach BAföG/SGB III
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.bafög"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.bafög"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Elterngeld / Betreuungsgeld
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.elterngeld"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.elterngeld"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Kinderzuschlag
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.kinderzuschlag"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.kinderzuschlag"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              weitere Einnahmen
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>z.B. Miet- und Zinseinnahmen</span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.weitere"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.weitere"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Zweckgebundener Zuschuss zu den Kinderbetreuungskosten
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>z.B. vom Arbeitgeber</span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.zuschussKita"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.zuschussKita"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Einkommen von weiteren zum Haushalt gehörenden Personen
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.haushaltseinkommen"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.haushaltseinkommen"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-divider class="my-4"></v-divider>
+      <h4 class="my-4">
+        Angaben zur Ermittlung der auf das Einkommen anrechenbaren Belastungen
+        in €
+      </h4>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Arbeitsmittel
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span
+                  >z.B. Kosten für Berufsbekleidung. Kosten über 5,20€ bitte
+                  nachweisen.</span
+                >
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.arbeitsmittel"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.arbeitsmittel"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Fahrtkosten zur Arbeitsstätte
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span
+                  >Bei Notwendigkeit der Pkw-Nutzung bitte die km-Zahl einer
+                  einfachen Fahrt zwischen Wohnungs- und Arbeitsstätte
+                  angeben.</span
+                >
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.fahrtkosten"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.fahrtkosten"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <h4 class="my-4">
+        Versicherungsbeiträge
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span
+            >Bitte nur aktuelle Policen oder Beitragsrechnungen! KEINE
+            Kontoauszüge.</span
+          >
+        </v-tooltip>
+      </h4>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Haftpflichtversicherung
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.haftpflicht"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.haftpflicht"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Hausratsversicherung
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.hausrat"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.hausrat"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Freiwillige Kranken- und Pflegeversicherung
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>Wenn Sie nicht gesetzlich versichert sind.</span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.freiwilligekrankenundpflege"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.freiwilligekrankenundpflege"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Freiwillige Versicherung in der gesetzlichen Rentenversicherung
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>nur bei Selbstständigen</span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.freiwilligerente"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.freiwilligerente"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Riester-Rente
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.riester"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.riester"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Risikolebensversicherung / Sterbegeldversicherung
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.lebens"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.lebens"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Kfz-Haftpflichtversicherung
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.haftpflicht"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.haftpflicht"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Unfallversicherung
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.unfall"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.unfall"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Berufsunfähigkeitsversicherung
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.berufsunfähigkeits"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.berufsunfähigkeits"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Beiträge zu Berufsverbänden
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span
+                  >z.B. Gewerkschaft</span
+                >
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.gewerkschaft"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.gewerkschaft"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+
+      <v-row v-if="this.$store.state.entCheck">
+      <v-col>
+        <v-radio-group v-model="radioGroupErmaeßigung">
+          <v-radio
+            v-model="bankverbindung_checkbox"
+            ref="bank_check"
+            v-for="n in radioList"
+            :key="n"
+            :label="`Ermäßigung überweisen an ${n}`"
+            :value="n"
+          ></v-radio>
+        </v-radio-group>
+      </v-col>
+      <v-col v-if="radioGroupErmaeßigung == 1">
+        <v-text-field
+          outlined
+          v-model="kontoinhaber"
+          :rules="nameRules"
+          label="Kontoinhaber/in"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined
+          v-model="iban"
+          :rules="ibanRules"
+          label="IBAN"
+          required
+        ></v-text-field>
+        <v-text-field
+          outlined
+          v-model="bic"
+          :rules="nameRules"
+          label="BIC"
+          required
+        ></v-text-field>
+      </v-col>
+    </v-row>
+    <p v-else></p>
     </div>
   </div>
 </template>
@@ -509,8 +1245,9 @@ export default {
         kindergeld: 0,
         alg1: 0,
         existenz: 0,
+        krankengeld: 0,
         rente: 0,
-        unerhaltseinkunft: 0,
+        unterhaltseinkunft: 0,
         ausbildungsvergütung: 0,
         bafög: 0,
         elterngeld: 0,
@@ -539,8 +1276,9 @@ export default {
         kindergeld: 0,
         alg1: 0,
         existenz: 0,
+        krankengeld: 0,
         rente: 0,
-        unerhaltseinkunft: 0,
+        unterhaltseinkunft: 0,
         ausbildungsvergütung: 0,
         bafög: 0,
         elterngeld: 0,
@@ -594,6 +1332,7 @@ export default {
           (value && value.length >= 22) ||
           "Pflichtfeld. Bitte gültige IBAN eingeben!",
       ],
+      dateRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
     };
   },
 

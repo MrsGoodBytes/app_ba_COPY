@@ -5,7 +5,7 @@
       <v-col>
         <v-text-field
           outlined
-          v-model="item.firstname"
+          v-model="item.child_firstname"
           label="Vorname des Kindes"
           :rules="nameRules"
           required
@@ -14,7 +14,7 @@
       <v-col>
         <v-text-field
           outlined
-          v-model="item.lastname"
+          v-model="item.child_lastname"
           label="Nachname des Kindes"
           :rules="nameRules"
           required
@@ -23,8 +23,8 @@
       <v-col>
         <v-text-field
           outlined
-          v-model="item.date"
-          label="Geburtsdatum"
+          v-model="item.date_sibling"
+          label="Geburtsdatum" 
           prepend-icon="mdi-calendar"
           :rules="dateRules"
           required
@@ -54,26 +54,23 @@ export default {
       // Index des zu löschenden Eintrags übergeben
       deleteID: "",
 
-      child_firstname: "",
-      child_lastname: "",
-      date_sibling: null,
-      menu_sibling: false,
-      tmp: "",
+      firstname_sibling: "",
+      lastname_sibling: "",
+      date_sibling: "",
+//RULES
+      nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      dateRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
     };
   },
 
-  watch: {
+  watch: {/* 
     date_sibling: function (val) {
-      this.$store.commit("setDate_sibling", val);
-    },
-    menu_sibling: function (val) {
-      val &&
-        setTimeout(() => (this.$refs.picker_sibling.activePicker = "YEAR"));
-    },
+      this.$store.commit("setDateSibling", val);
+    }, */
   },
 
   created() {
-    this.date_sibling = this.$store.state.date_sibling;
+    /* this.date_sibling = this.$store.state.date_sibling; */
   },
 
   methods: {
@@ -82,9 +79,6 @@ export default {
     },
     deleteChild(deleteID) {
       this.$parent.deleteChild(deleteID);
-    },
-    save_sibling(item) {
-      this.$refs.menu_sibling.save(item.date);
     },
   },
 };

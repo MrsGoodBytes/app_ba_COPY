@@ -2,26 +2,35 @@
   <div id="antrag_auswahl">
     <v-container>
       <Antragswahl msg="Welche Anträge möchtest du stellen?" />
-      <v-tabs fixed-tabs background-color="indigo" dark>
+      <v-tabs fixed-tabs background-color="indigo" dark v-model="activeTab">
         <v-tab
           class="pa-4"
           color="primary"
           tile
           @click="funcShowAntragstellerDaten"
+          :key="tabs[0]"
           >Antragsteller/in
         </v-tab>
-        <v-tab class="pa-4" color="primary" tile @click="funcShowKindDaten"
+        <v-tab class="pa-4" color="primary" tile @click="funcShowKindDaten" :key="tabs[1]"
           >Kind/er
         </v-tab>
-        <v-tab class="pa-4" color="primary" tile @click="funcShowNachweise"
+        <v-tab class="pa-4" color="primary" tile @click="funcShowNachweise" :key="tabs[2]"
           >Nachweise
         </v-tab>
-        <v-tab class="pa-4" color="primary" tile @click="funcShowAbschicken"
+        <v-tab class="pa-4" color="primary" tile @click="funcShowAbschicken" :key="tabs[3]"
           >Abschicken
         </v-tab>
       </v-tabs>
 
       <Antragsteller v-if="AntragstellerDaten" />
+      <v-btn
+        v-if="AntragstellerDaten"
+        class=""
+        @click="funcShowKindDaten"
+      >
+        weiter
+        <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
+      </v-btn>
       <Kind v-if="KindDaten" />
       <geschwisterkind
         v-if="KindDaten && this.$store.state.geCheck"
@@ -66,6 +75,9 @@ export default {
       Abschicken: false,
 
       child_list: [],
+
+      tabs: [0,1,2,3],
+      activeTab: 0,
     };
   },
 
@@ -82,6 +94,7 @@ export default {
       this.KindDaten = false;
       this.Nachweise = false;
       this.Abschicken = false;
+      this.activeTab = 0;
     },
 
     funcShowKindDaten() {
@@ -89,6 +102,7 @@ export default {
       this.KindDaten = true;
       this.Nachweise = false;
       this.Abschicken = false;
+      this.activeTab = 1;
     },
 
     funcShowNachweise() {
@@ -96,6 +110,7 @@ export default {
       this.KindDaten = false;
       this.Nachweise = true;
       this.Abschicken = false;
+      this.activeTab = 2;
     },
 
     funcShowAbschicken() {
@@ -103,6 +118,7 @@ export default {
       this.KindDaten = false;
       this.Nachweise = false;
       this.Abschicken = true;
+      this.activeTab = 3;
     },
 
     setCheckbox() {

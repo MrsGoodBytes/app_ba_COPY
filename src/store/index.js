@@ -46,6 +46,11 @@ export default new Vuex.Store({
         elternbeitrag: "",
         betreuungsbeginn: "",
         betreuungsentgelt: "",
+
+        firstname_sibling: "",
+        lastname_sibling: "",
+        date_sibling: "",
+
     },
     mutations: {
         //write value of textfield into variable firstname
@@ -121,7 +126,16 @@ export default new Vuex.Store({
         setDate_child(state, value) {
             state.date_child = value;
         },
-
+        /* 
+                setFirstnameSibling(state, value) {
+                    state.firstname_sibling = value;
+                },
+                setLastnameSibling(state, value) {
+                    state.lastname_sibling = value;
+                },
+                setDateSibling(state, value) {
+                    state.date_sibling = value;
+                }, */
         setElternbeitrag(state, value) {
             state.elternbeitrag = value;
         },
@@ -131,7 +145,9 @@ export default new Vuex.Store({
         setEssensgeld(state, value) {
             state.essensgeld = value;
         },
-
+        setBetreuungsumfang(state, value) {
+            state.betreuungsumfang = value;
+        },
         setInstitutionStreet(state, value) {
             state.institutionstreet = value;
         },
@@ -156,7 +172,6 @@ export default new Vuex.Store({
         setBetreuungsform(state, value) {
             state.radioGroupBetreuungsform = value;
         },
-
         setDate_bb(state, value) {
             state.date_bb = value;
         },
