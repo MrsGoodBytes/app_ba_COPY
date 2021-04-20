@@ -132,6 +132,16 @@
           ></v-text-field>
         </v-col>
         <v-col>
+          <v-text-field
+            outlined
+            v-model="item.verwandtschaft_p"
+            label="Verwandtschaftsverhältnis zum Kind"
+            prepend-icon="mdi-calendar"
+            :rules="dateRules"
+            required
+          ></v-text-field>
+        </v-col>
+        <v-col>
           <button class="" @click="deletePerson(item.id)">x</button>
         </v-col>
       </v-row>
@@ -139,12 +149,6 @@
         im Haushalt lebende Person hinzufügen
         <v-icon> mdi-plus </v-icon>
       </v-btn>
-      <!-- <v-btn
-      v-if="this.$store.state.entCheck"
-      class="bg-purple-600 text-white text-base font-semibold py-2 px-4 rounded-lg shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-purple-200"
-    >
-      weitere Person erfassen <v-icon>mdi-plus</v-icon></v-btn
-    > -->
       <!-- Antragsgrundlate und Bankverbindung -->
     </div>
     <v-divider></v-divider>
@@ -167,14 +171,6 @@
           ></v-radio>
         </v-radio-group>
       </v-col>
-      <!-- <v-col class="d-flex" cols="12" sm="6">
-        <v-select
-          v-model="antragsgrundlage"
-          label="Antragsgundlage wählen"
-          :items="auswahlMoeglichkeiten"
-          outlined
-        ></v-select>
-      </v-col> -->
 
       <!-- Einkommensnachweise ohne Sozialleistungen -->
 
@@ -210,6 +206,14 @@
         Angaben zur Ermittlung des durchschnittlichen monatlichen
         Familieneinkommens in €
       </h4>
+      <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>hierbei sind nur leibliche Eltern bzw. Adoptiveltern zu Berpc</span>
+              </v-tooltip>
       <v-card>
         <v-row
           justify="space-around"
@@ -293,14 +297,6 @@
           <v-col cols="4">
             <h4 class="text-left">
               Kindergeld
-              <!-- <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="primary" v-bind="attrs" v-on="on"
-                    >mdi-information</v-icon
-                  >
-                </template>
-                <span></span>
-              </v-tooltip> -->
             </h4>
           </v-col>
           <v-col cols="3">
@@ -551,7 +547,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">Kinderzuschlag</h4>
+            <h4 class="text-left">Kinderzuschlag der Familienkasse</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -1314,6 +1310,28 @@
           </v-col>
         </v-row>
       </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">Sonstige Ergänzungen / Angaben</h4>
+          </v-col>
+          <v-col cols="5">
+            <v-textarea
+              v-model="elternteil1.sonstiges"
+              v-bind="attrs"
+              v-on="on"
+              outlined
+            ></v-textarea>
+          </v-col>
+          <v-col cols="1">
+          </v-col>
+        </v-row>
+      </v-card>
 
       <v-row v-if="this.$store.state.entCheck">
         <v-col>
@@ -1401,6 +1419,7 @@ export default {
 
       firstname_person: "",
       lastname_person: "",
+      verwandtschaft_p: "",
       date_p: null,
       menu_p: false,
       person_list: [],
