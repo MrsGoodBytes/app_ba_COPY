@@ -1222,18 +1222,21 @@
                     >mdi-information</v-icon
                   >
                 </template>
-                <span>Zinsen für Darlehen, Gebäudeversicherung, Grundsteuer, Erbbauzinsen, Jahresabrechnung über Wasser-, Abwasser-, Müll- und Schornsteinfegergebühren, Niederschlagswassergebühr</span>
+                <span
+                  >Zinsen für Darlehen, Gebäudeversicherung, Grundsteuer,
+                  Erbbauzinsen, Jahresabrechnung über Wasser-, Abwasser-, Müll-
+                  und Schornsteinfegergebühren, Niederschlagswassergebühr</span
+                >
               </v-tooltip>
             </h4>
           </v-col>
           <v-col cols="3">
             <v-checkbox
-          v-model="eigentum_checkbox"
-          ref="belastung_eigentum"
-        ></v-checkbox>
+              v-model="eigentum_checkbox"
+              ref="belastung_eigentum"
+            ></v-checkbox>
           </v-col>
-          <v-col cols="3">
-          </v-col>
+          <v-col cols="3"> </v-col>
         </v-row>
       </v-card>
       <v-card>
@@ -1252,7 +1255,12 @@
                     >mdi-information</v-icon
                   >
                 </template>
-                <span>z.B Kredite <span style="font-weight: bolder;">mit</span> Angabe des Verwendungszwecks, wobei die Zinsbelastung nachgewiesen werden <span style="font-weight: bolder;">muss</span> </span>
+                <span
+                  >z.B Kredite
+                  <span style="font-weight: bolder">mit</span> Angabe des
+                  Verwendungszwecks, wobei die Zinsbelastung nachgewiesen werden
+                  <span style="font-weight: bolder">muss</span>
+                </span>
               </v-tooltip>
             </h4>
           </v-col>
@@ -1284,9 +1292,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              zu leistender Unterhalt
-            </h4>
+            <h4 class="text-left">zu leistender Unterhalt</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -1328,7 +1334,7 @@
             v-model="kontoinhaber"
             :rules="nameRules"
             label="Kontoinhaber/in"
-            required
+            disabled
           ></v-text-field>
           <v-text-field
             outlined
@@ -1471,6 +1477,8 @@ export default {
         unterhaltszahlungen: 0,
       },
 
+      eigentum_checkbox: false,
+
       trip: {
         netto1: 0,
         netto2: 0,
@@ -1523,9 +1531,11 @@ export default {
     this.nettoeinkommen = this.$store.state.nettoeinkommen;
     this.selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen;
 
-    this.kontoinhaber = this.$store.state.kontoinhaber;
+    this.kontoinhaber = this.$store.state.firstname + this.$store.state.lastname;
     this.iban = this.$store.state.iban;
     this.bic = this.$store.state.bic;
+
+    this.eigentum_checkbox = this.$store.state.eigentum_checkbox;
   },
 
   watch: {
@@ -1571,6 +1581,7 @@ export default {
     },
     radioGroupErmaeßigung: function (val) {
       this.$store.commit("setErmaeßigungCheck", val);
+      this.kontoinhaber = this.$store.state.firstname + this.$store.state.lastname;
     },
     nettoeinkommen: function (val) {
       this.$store.commit("setNettoeinkommen", val);
@@ -1578,14 +1589,14 @@ export default {
     selbstständigkeiteinkommen: function (val) {
       this.$store.commit("setSelbstständigkeitEinkommen", val);
     },
-    kontoinhaber: function (val) {
-      this.$store.commit("setKontoinhaber", val);
-    },
     iban: function (val) {
       this.$store.commit("setIban", val);
     },
     bic: function (val) {
       this.$store.commit("setBic", val);
+    },
+     eigentum_checkbox: function (val) {
+      this.$store.commit("setEigentumCheck", val);
     },
   },
 

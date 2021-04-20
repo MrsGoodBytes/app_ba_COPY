@@ -169,6 +169,9 @@ export default new Vuex.Store({
         setVorjahrCheck(state, value) {
             state.vorjahr_checkbox = value;
         },
+        setEigentumCheck(state, value) {
+            state.eigentum_checkbox = value;
+        },
         setBetreuungsform(state, value) {
             state.radioGroupBetreuungsform = value;
         },
