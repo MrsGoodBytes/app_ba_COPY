@@ -32,8 +32,8 @@
         <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
       </v-btn>
       <Kind v-if="KindDaten" />
+      <!-- nur wenn KEIN Entgeltantrag aber Geschwisterermäßigung -->
       <geschwisterkind
-        v-if="KindDaten && this.$store.state.geCheck"
         msg="Geschwisterkind"
         :childlist="child_list"
       />
@@ -43,6 +43,20 @@
         v-on:click="addChild"
       >
         Geschwisterkind hinzufügen
+        <v-icon> mdi-plus </v-icon>
+      </v-btn>
+      
+      <!-- wenn nur oder auch Entgeltantrag -->
+      <entgeltkind
+        msg="Entgeltkind"
+        :entgeltkindlist="entgeltkind_list"
+      />
+      <v-btn
+        v-if="KindDaten && this.$store.state.entCheck"
+        class=""
+        v-on:click="addEntgeltkind"
+      >
+        Entgeltkind hinzufügen
         <v-icon> mdi-plus </v-icon>
       </v-btn>
       <Nachweise v-if="Nachweise" />
@@ -57,6 +71,7 @@ import Antragsteller from "@/components/Antragsteller.vue";
 import Kind from "@/components/Kind.vue";
 import Nachweise from "@/components/Nachweise.vue";
 import geschwisterkind from "@/components/geschwisterkind.vue";
+import entgeltkind from "@/components/entgeltkind.vue";
 
 export default {
   name: "Apply",
@@ -66,6 +81,7 @@ export default {
     Kind,
     Nachweise,
     geschwisterkind,
+    entgeltkind,
   },
   data() {
     return {
@@ -75,7 +91,7 @@ export default {
       Abschicken: false,
 
       child_list: [],
-
+      entgeltkind_list: [],
       tabs: [0,1,2,3],
       activeTab: 0,
     };
@@ -153,6 +169,37 @@ export default {
       // Am einfachsten geht das über array.filter()deleteTodo(id) {
       this.child_list = this.child_list.filter(
         (geschwisterkind) => geschwisterkind.id !== id
+      );
+    },
+
+    addEntgeltkind() {
+      // neues todo erzeugen
+      var entgeltkind = new Object();
+
+      //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
+      if (this.entgeltkind_list.length == 0) {
+        entgeltkind.id = 0;
+        entgeltkind.firstname =  "";
+        entgeltkind.lastname = "";
+        entgeltkind.date = "";
+      } else {
+        // vermeide Duplikate
+        entgeltkind.id = this.entgeltkind_list[this.entgeltkind_list.length - 1].id + 1;
+        entgeltkind.firstname =  "";
+        entgeltkind.lastname = "";
+        entgeltkind.date = "";
+      }
+
+      //eintragen des neuen Geschwisterkinds in das Array
+
+      this.entgeltkind_list.push(entgeltkind);
+    },
+    deleteEntgeltkind(id) {
+      // Suche nach ID im Todo-Array und entferne das Element
+      // https://love2dev.com/blog/javascript-remove-from-array/
+      // Am einfachsten geht das über array.filter()deleteTodo(id) {
+      this.entgeltkind_list = this.entgeltkind_list.filter(
+        (entgeltkind) => entgeltkind.id !== id
       );
     },
   },
