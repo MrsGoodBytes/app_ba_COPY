@@ -34,7 +34,7 @@
     </v-row>
     <v-row>
       <v-col
-        v-if="this.$store.state.geCheck || this.$store.state.entCheck"
+        v-if="this.$store.state.Check || this.$store.state.entCheck"
         class="d-flex"
         cols="12"
         sm="3"

@@ -38,7 +38,7 @@
         :childlist="child_list"
       />
       <v-btn
-        v-if="KindDaten && this.$store.state.geCheck"
+        v-if="KindDaten && this.$store.state.geCheck && !this.$store.state.entCheck"
         class=""
         v-on:click="addChild"
       >
