@@ -204,7 +204,7 @@
         NICHT als Nachweis berücksichtigt werden.
       </p>
     </v-row>
-    
+
     <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage == 1">
       <h4 class="my-4">
         Angaben zur Ermittlung des durchschnittlichen monatlichen
@@ -261,9 +261,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Einkommen aus Selbstständigkeit
-            </h4>
+            <h4 class="text-left">Einkommen aus Selbstständigkeit</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -363,9 +361,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Krankengeld
-            </h4>
+            <h4 class="text-left">Krankengeld</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -395,9 +391,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Renten
-            </h4>
+            <h4 class="text-left">Renten</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -467,9 +461,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Ausbildungsvergütung
-            </h4>
+            <h4 class="text-left">Ausbildungsvergütung</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -499,9 +491,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Ausbildungsförderung nach BAföG/SGB III
-            </h4>
+            <h4 class="text-left">Ausbildungsförderung nach BAföG/SGB III</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -531,9 +521,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Elterngeld / Betreuungsgeld
-            </h4>
+            <h4 class="text-left">Elterngeld / Betreuungsgeld</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -563,9 +551,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Kinderzuschlag
-            </h4>
+            <h4 class="text-left">Kinderzuschlag</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -813,9 +799,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Haftpflichtversicherung
-            </h4>
+            <h4 class="text-left">Haftpflichtversicherung</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -845,9 +829,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Hausratsversicherung
-            </h4>
+            <h4 class="text-left">Hausratsversicherung</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -957,9 +939,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Riester-Rente
-            </h4>
+            <h4 class="text-left">Riester-Rente</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -1021,9 +1001,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Kfz-Haftpflichtversicherung
-            </h4>
+            <h4 class="text-left">Kfz-Haftpflichtversicherung</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -1053,9 +1031,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Unfallversicherung
-            </h4>
+            <h4 class="text-left">Unfallversicherung</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -1085,9 +1061,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Berufsunfähigkeitsversicherung
-            </h4>
+            <h4 class="text-left">Berufsunfähigkeitsversicherung</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -1125,9 +1099,7 @@
                     >mdi-information</v-icon
                   >
                 </template>
-                <span
-                  >z.B. Gewerkschaft</span
-                >
+                <span>z.B. Gewerkschaft</span>
               </v-tooltip>
             </h4>
           </v-col>
@@ -1152,44 +1124,229 @@
         </v-row>
       </v-card>
 
+      <h4 class="my-4">Ermittlung der Einkommensgrenze in €</h4>
+
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Kaltmiete und Betriebskosten
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>(ohne Heizkosten und ohne Strom)</span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.kaltmiete"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.kaltmiete"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Kaltmiete und Betriebskosten
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>(ohne Heizkosten und ohne Strom)</span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.kaltmiete"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.kaltmiete"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              Belastungen bei Wohnungs- /Hauseigentum
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>Zinsen für Darlehen, Gebäudeversicherung, Grundsteuer, Erbbauzinsen, Jahresabrechnung über Wasser-, Abwasser-, Müll- und Schornsteinfegergebühren, Niederschlagswassergebühr</span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-checkbox
+          v-model="eigentum_checkbox"
+          ref="belastung_eigentum"
+        ></v-checkbox>
+          </v-col>
+          <v-col cols="3">
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              besondere Belastungen
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>z.B Kredite <span style="font-weight: bolder;">mit</span> Angabe des Verwendungszwecks, wobei die Zinsbelastung nachgewiesen werden <span style="font-weight: bolder;">muss</span> </span>
+              </v-tooltip>
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.besondere"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.besondere"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+      <v-card>
+        <v-row
+          justify="space-around"
+          no-gutters
+          style="width: 100%"
+          class="d-flex align-center mb-6"
+        >
+          <v-col cols="4">
+            <h4 class="text-left">
+              zu leistender Unterhalt
+            </h4>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil1.unterhaltszahlungen"
+              label="Elternteil 1"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <v-text-field
+              v-model="elternteil2.unterhaltszahlungen"
+              label="Elternteil 2"
+              prefix="€"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+        </v-row>
+      </v-card>
+
       <v-row v-if="this.$store.state.entCheck">
-      <v-col>
-        <v-radio-group v-model="radioGroupErmaeßigung">
-          <v-radio
-            v-model="bankverbindung_checkbox"
-            ref="bank_check"
-            v-for="n in radioList"
-            :key="n"
-            :label="`Ermäßigung überweisen an ${n}`"
-            :value="n"
-          ></v-radio>
-        </v-radio-group>
-      </v-col>
-      <v-col v-if="radioGroupErmaeßigung == 1">
-        <v-text-field
-          outlined
-          v-model="kontoinhaber"
-          :rules="nameRules"
-          label="Kontoinhaber/in"
-          required
-        ></v-text-field>
-        <v-text-field
-          outlined
-          v-model="iban"
-          :rules="ibanRules"
-          label="IBAN"
-          required
-        ></v-text-field>
-        <v-text-field
-          outlined
-          v-model="bic"
-          :rules="nameRules"
-          label="BIC"
-          required
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <p v-else></p>
+        <v-col>
+          <v-radio-group v-model="radioGroupErmaeßigung">
+            <v-radio
+              v-model="bankverbindung_checkbox"
+              ref="bank_check"
+              v-for="n in radioList"
+              :key="n"
+              :label="`Ermäßigung überweisen an ${n}`"
+              :value="n"
+            ></v-radio>
+          </v-radio-group>
+        </v-col>
+        <v-col v-if="radioGroupErmaeßigung == 1">
+          <v-text-field
+            outlined
+            v-model="kontoinhaber"
+            :rules="nameRules"
+            label="Kontoinhaber/in"
+            required
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="iban"
+            :rules="ibanRules"
+            label="IBAN"
+            required
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="bic"
+            :rules="nameRules"
+            label="BIC"
+            required
+          ></v-text-field>
+        </v-col>
+      </v-row>
+      <p v-else></p>
     </div>
   </div>
 </template>
@@ -1219,7 +1376,10 @@ export default {
       ],
 
       radioGroupErmaeßigung: 0, //wählt aus welcher Radiobutton default gewählt ist
-      radioList: ["Kita", "Antragsteller/in"],
+      radioList: [
+        "den Träger der Kindertagesstätte",
+        "den/die Antragsteller/in",
+      ],
 
       nettoeinkommen: "",
       selbstständigkeiteinkommen: "",
@@ -1268,6 +1428,11 @@ export default {
         unfall: 0,
         berufsunfähigkeits: 0,
         gewerkschaft: 0,
+
+        kaltmiete: 0,
+        eigentum: 0,
+        besondere: 0,
+        unterhaltszahlungen: 0,
       },
 
       elternteil2: {
@@ -1299,6 +1464,11 @@ export default {
         unfall: 0,
         berufsunfähigkeits: 0,
         gewerkschaft: 0,
+
+        kaltmiete: 0,
+        eigentum: 0,
+        besondere: 0,
+        unterhaltszahlungen: 0,
       },
 
       trip: {

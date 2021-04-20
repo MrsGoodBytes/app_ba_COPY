@@ -156,7 +156,7 @@
                 >
               </template>
               <span
-                >der Elternhbeitrag ist das Betreuungsgeld abzüglich der Ermäßigung</span
+                >der Elternbeitrag ist das Betreuungsgeld abzüglich der Ermäßigung</span
               >
             </v-tooltip>
       </v-col>
