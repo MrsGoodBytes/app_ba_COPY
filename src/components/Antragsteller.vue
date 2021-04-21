@@ -215,17 +215,17 @@
       <h4 class="my-4">
         Angaben zur Ermittlung des durchschnittlichen monatlichen
         Familieneinkommens in €
-      </h4>
-      <v-tooltip bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-icon color="primary" v-bind="attrs" v-on="on"
-            >mdi-information</v-icon
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span
+            >hierbei sind nur leibliche Eltern bzw. Adoptiveltern zu Berpc</span
           >
-        </template>
-        <span
-          >hierbei sind nur leibliche Eltern bzw. Adoptiveltern zu Berpc</span
-        >
-      </v-tooltip>
+        </v-tooltip>
+      </h4>
       <v-card>
         <v-row
           justify="space-around"
@@ -1245,7 +1245,11 @@
           <v-col cols="3"> </v-col>
         </v-row>
         <v-row v-if="eigentum_checkbox" class="pb-4">
-          <v-col><h4>Hier ist vorgesehen, dass in Zukunft Felder für Einträge aus dem entsprechenden Vordruck platziert werden könnten.</h4>
+          <v-col
+            ><h4>
+              Hier ist vorgesehen, dass in Zukunft Felder für Einträge aus dem
+              entsprechenden Vordruck platziert werden könnten.
+            </h4>
           </v-col>
         </v-row>
       </v-card>

@@ -1,5 +1,5 @@
 <template>
-  <div id="Antragsteller">
+  <div id="Nachweise">
     <h2 class="py-3">Nachweise</h2>
     <h3>Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:</h3>
 
@@ -13,6 +13,29 @@
     >
       Nachweis Sozialleistungen
     </h4>
+    <v-row
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2
+      "
+    >
+      <v-col
+        ><v-file-input
+          accept="image/*"
+          label="Nachweis über den Empfang von Sozialleistungen"
+          chips
+          truncate-length="23"
+        ></v-file-input>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="primary" dark v-bind="attrs" v-on="on"
+              >mdi-home Was sind Sozialleistungen?</v-icon
+            >
+          </template>
+          <span>Zu Sozialleistungen zählen Arbeitslosengeld II (ALGII), Grundsicherung, Asylbewerberleistungsgesetz, Kinderzuschlag der Familienkasse oder Wohngeld. Das Nachweis über eine der hier aufgeführten Leistungen reicht aus.</span>
+        </v-tooltip>
+      </v-col>
+    </v-row>
     <h4
       v-else-if="
         this.$store.state.entCheck &&
@@ -37,8 +60,8 @@
         ></v-file-input>
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-icon color="primary" dark v-bind="attrs" v-on="on"
-              >mdi-home Was sind Sozialleistungen?</v-icon
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
             >
           </template>
           <span>Zu Sozialleistungen zählen Arbeitslosengeld II (ALGII), Grundsicherung, Asylbewerberleistungsgesetz, Kinderzuschlag der Familienkasse oder Wohngeld. Das Nachweis über eine der hier aufgeführten Leistungen reicht aus.</span>
