@@ -22,7 +22,7 @@
         </v-tab>
       </v-tabs>
 
-      <Antragsteller v-if="AntragstellerDaten" />
+      <Antragsteller v-if="AntragstellerDaten" :personlist="person_list" />
       <v-btn
         v-if="AntragstellerDaten"
         class=""
@@ -90,6 +90,7 @@ export default {
       Nachweise: false,
       Abschicken: false,
 
+      person_list: [],
       child_list: [],
       entgeltkind_list: [],
       tabs: [0,1,2,3],
@@ -200,6 +201,39 @@ export default {
       // Am einfachsten geht das über array.filter()deleteTodo(id) {
       this.entgeltkind_list = this.entgeltkind_list.filter(
         (entgeltkind) => entgeltkind.id !== id
+      );
+    },
+
+    addPerson() {
+      // neues todo erzeugen
+      var neueperson = new Object();
+
+      //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
+      if (this.person_list.length == 0) {
+        neueperson.id = 0;
+        neueperson.firstname_person =  "";
+        neueperson.lastname_person = "";
+        neueperson.date_p = "";
+        neueperson.verwandtschaft_p = "";
+      } else {
+        // vermeide Duplikate
+        neueperson.id = this.person_list[this.person_list.length - 1].id + 1;
+        neueperson.firstname_person =  "";
+        neueperson.lastname_person = "";
+        neueperson.date_p = "";
+        neueperson.verwandtschaft_p = "";
+      }
+
+      //eintragen der neuen Person in das Array
+
+      this.person_list.push(neueperson);
+    },
+    deletePerson(id) {
+      // Suche nach ID im Todo-Array und entferne das Element
+      // https://love2dev.com/blog/javascript-remove-from-array/
+      // Am einfachsten geht das über array.filter()deleteTodo(id) {
+      this.person_list = this.person_list.filter(
+        (neueperson) => neueperson.id !== id
       );
     },
   },

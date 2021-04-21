@@ -102,49 +102,59 @@
     <v-divider></v-divider>
     <div id="weiterePersonen" v-if="this.$store.state.entCheck">
       <h3 class="py-3 text-left">Zum Haushalt gehörende Personen</h3>
-      <v-row v-for="item in person_list" :key="item.id">
-        <v-col>
-          <v-text-field
-            outlined
-            v-model="firstname_person"
-            :rules="nameRules"
-            label="Vorname"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            outlined
-            v-model="lastname_person"
-            :rules="nameRules"
-            label="Nachname"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            outlined
-            v-model="item.date_p"
-            label="Geburtsdatum"
-            prepend-icon="mdi-calendar"
-            :rules="dateRules"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <v-text-field
-            outlined
-            v-model="item.verwandtschaft_p"
-            label="Verwandtschaftsverhältnis zum Kind"
-            prepend-icon="mdi-calendar"
-            :rules="dateRules"
-            required
-          ></v-text-field>
-        </v-col>
-        <v-col>
-          <button class="" @click="deletePerson(item.id)">x</button>
-        </v-col>
-      </v-row>
+      <v-card v-for="item in personlist" :key="item.id">
+        <v-row class="my-3 px-3">
+          <v-col>
+            <v-text-field
+              outlined
+              v-model="firstname_person"
+              :rules="nameRules"
+              label="Vorname"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              outlined
+              v-model="lastname_person"
+              :rules="nameRules"
+              label="Nachname"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              outlined
+              v-model="item.date_p"
+              label="Geburtsdatum"
+              prepend-icon="mdi-calendar"
+              :rules="dateRules"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-text-field
+              outlined
+              v-model="item.verwandtschaft_p"
+              label="Verwandtschaftsverhältnis zum Kind"
+              prepend-icon="mdi-calendar"
+              :rules="dateRules"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col>
+            <v-btn
+              class="ma-0"
+              color="secondary"
+              @click="deletePerson(item.id)"
+            >
+              Einträge dieser Person löschen
+              <v-icon> mdi-alert </v-icon>
+            </v-btn>
+          </v-col>
+        </v-row>
+      </v-card>
+
       <v-btn class="mb-4" @click="addPerson">
         im Haushalt lebende Person hinzufügen
         <v-icon> mdi-plus </v-icon>
@@ -207,13 +217,15 @@
         Familieneinkommens in €
       </h4>
       <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="primary" v-bind="attrs" v-on="on"
-                    >mdi-information</v-icon
-                  >
-                </template>
-                <span>hierbei sind nur leibliche Eltern bzw. Adoptiveltern zu Berpc</span>
-              </v-tooltip>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon color="primary" v-bind="attrs" v-on="on"
+            >mdi-information</v-icon
+          >
+        </template>
+        <span
+          >hierbei sind nur leibliche Eltern bzw. Adoptiveltern zu Berpc</span
+        >
+      </v-tooltip>
       <v-card>
         <v-row
           justify="space-around"
@@ -295,9 +307,7 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">
-              Kindergeld
-            </h4>
+            <h4 class="text-left">Kindergeld</h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -1328,8 +1338,7 @@
               outlined
             ></v-textarea>
           </v-col>
-          <v-col cols="1">
-          </v-col>
+          <v-col cols="1"> </v-col>
         </v-row>
       </v-card>
 
@@ -1379,7 +1388,9 @@
 export default {
   name: "Antragsteller",
   components: {},
-  props: {},
+  props: {
+    personlist: Array,
+  },
   data() {
     return {
       firstname: "",
@@ -1422,7 +1433,6 @@ export default {
       verwandtschaft_p: "",
       date_p: null,
       menu_p: false,
-      person_list: [],
 
       elternteil1: {
         netto: 0,
@@ -1550,7 +1560,8 @@ export default {
     this.nettoeinkommen = this.$store.state.nettoeinkommen;
     this.selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen;
 
-    this.kontoinhaber = this.$store.state.firstname + this.$store.state.lastname;
+    this.kontoinhaber =
+      this.$store.state.firstname + this.$store.state.lastname;
     this.iban = this.$store.state.iban;
     this.bic = this.$store.state.bic;
 
@@ -1600,7 +1611,8 @@ export default {
     },
     radioGroupErmaeßigung: function (val) {
       this.$store.commit("setErmaeßigungCheck", val);
-      this.kontoinhaber = this.$store.state.firstname + this.$store.state.lastname;
+      this.kontoinhaber =
+        this.$store.state.firstname + this.$store.state.lastname;
     },
     nettoeinkommen: function (val) {
       this.$store.commit("setNettoeinkommen", val);
@@ -1614,7 +1626,7 @@ export default {
     bic: function (val) {
       this.$store.commit("setBic", val);
     },
-     eigentum_checkbox: function (val) {
+    eigentum_checkbox: function (val) {
       this.$store.commit("setEigentumCheck", val);
     },
   },
@@ -1623,29 +1635,11 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
-    addPerson() {
-      // neues todo erzeugen
-      var neueperson = new Object();
-
-      //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
-      if (this.person_list.length == 0) {
-        neueperson.id = 0;
-      } else {
-        // vermeide Duplikate
-        neueperson.id = this.person_list[this.person_list.length - 1].id + 1;
-      }
-
-      //eintragen des neuen Geschwisterkinds in das Array
-
-      this.person_list.push(neueperson);
+    deletePerson(deleteID) {
+      this.$parent.deletePerson(deleteID);
     },
-    deletePerson(id) {
-      // Suche nach ID im Todo-Array und entferne das Element
-      // https://love2dev.com/blog/javascript-remove-from-array/
-      // Am einfachsten geht das über array.filter()deleteTodo(id) {
-      this.person_list = this.person_list.filter(
-        (neueperson) => neueperson.id !== id
-      );
+    addPerson() {
+      this.$parent.addPerson();
     },
     save_p(date_p) {
       this.$refs.menu_p.save(date_p);
