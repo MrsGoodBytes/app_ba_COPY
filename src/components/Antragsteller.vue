@@ -739,7 +739,7 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-card>
+      <v-card class="mb-8">
         <v-row
           justify="space-around"
           no-gutters
@@ -782,6 +782,62 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        <v-row
+          v-if="
+            this.elternteil1.fahrtkosten > 0 || this.elternteil2.fahrtkosten > 0
+          "
+        ><v-col
+            ><h4 class="mx-auto my-3">
+              Hier ist vorgesehen, dass in Zukunft Felder für Einträge aus dem
+              entsprechenden Vordruck platziert werden könnten.
+            </h4>
+          </v-col>
+        </v-row>
+        <!-- 
+          <v-col cols="3">
+            <p>Weicht Ihr Wohnort von der Adresse der Antragstellung ab?</p>
+            <v-checkbox v-model="wohnort_checkbox" ref="wohnort"></v-checkbox>
+            <v-text-field
+              v-if="this.wohnort_checkbox"
+              v-model="wohnort"
+              label="Wohnort"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col>
+          <v-col cols="3">
+            <h4>Arbeitsstätte</h4>
+            <v-text-field
+              v-model="arbeitsstätte_name"
+              label="Arbeitgeber"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+            <v-text-field
+              v-model="arbeitsstätte_street"
+              label="Straße"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+            <v-text-field
+              v-model="arbeitsstätte_number"
+              label="Hausnummer"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+            <v-text-field
+              v-model="arbeitsstätte_postcode"
+              label="Postleitzahl"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+            <v-text-field
+              v-model="arbeitsstätte_town"
+              label="Ort"
+              v-bind="attrs"
+              v-on="on"
+            ></v-text-field>
+          </v-col> -->
       </v-card>
       <h4 class="my-4">
         Versicherungsbeiträge
@@ -1350,7 +1406,7 @@
         </v-row>
       </v-card>
 
-      <h3 v-if="this.elternteil1.netto >0">Testline</h3>
+      <h3 v-if="this.elternteil1.netto > 0">Testline</h3>
       <v-row v-if="this.$store.state.entCheck">
         <v-col>
           <v-radio-group v-model="radioGroupErmaeßigung">
@@ -1513,13 +1569,17 @@ export default {
         besondere: 0,
         unterhaltszahlungen: 0,
       },
-
+      wohnort_checkbox: false,
+      wohnort: "",
       eigentum_checkbox: false,
 
-      trip: {
-        netto1: 0,
-        netto2: 0,
-      },
+      arbeitgeber_name: "",
+      arbeitgeber_street: "",
+      arbeitgeber_number: "",
+      arbeitgeber_postcode: "",
+      arbeitgeber_town: "",
+
+      km: "",
 
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
@@ -1640,7 +1700,7 @@ export default {
     //EINKOMMEN
     netto1: function (val) {
       this.$store.state.commit("setNetto1", val);
-    }
+    },
   },
 
   methods: {
