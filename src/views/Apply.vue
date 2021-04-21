@@ -25,7 +25,8 @@
       <Antragsteller v-if="AntragstellerDaten" :personlist="person_list" />
       <v-btn
         v-if="AntragstellerDaten"
-        class=""
+        class="my-6"
+        justify="center"
         @click="funcShowKindDaten"
       >
         weiter
@@ -40,6 +41,7 @@
       <v-btn
         v-if="KindDaten && this.$store.state.geCheck && !this.$store.state.entCheck"
         class=""
+        justify="center"
         v-on:click="addChild"
       >
         Geschwisterkind hinzufügen
@@ -54,14 +56,15 @@
       <v-btn
         v-if="KindDaten && this.$store.state.entCheck"
         class=""
+        justify="center"
         v-on:click="addEntgeltkind"
       >
-        Entgeltkind hinzufügen
+        Geschwisterkind hinzufügen
         <v-icon> mdi-plus </v-icon>
       </v-btn>
       <v-btn
         v-if="KindDaten"
-        class=""
+        class="d-block mx-auto my-6"
         @click="funcShowNachweise"
       >
         weiter
@@ -70,7 +73,8 @@
       <Nachweise v-if="Nachweise" />
       <v-btn
         v-if="Nachweise"
-        class=""
+        class="my-6"
+        justify="center"
         @click="funcShowAbschicken"
       >
         weiter

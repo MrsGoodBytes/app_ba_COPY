@@ -1212,7 +1212,7 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-card>
+      <v-card class="mb-9">
         <v-row
           justify="space-around"
           no-gutters
@@ -1243,6 +1243,10 @@
             ></v-checkbox>
           </v-col>
           <v-col cols="3"> </v-col>
+        </v-row>
+        <v-row v-if="eigentum_checkbox" class="pb-4">
+          <v-col><h4>Hier ist vorgesehen, dass in Zukunft Felder für Einträge aus dem entsprechenden Vordruck platziert werden könnten.</h4>
+          </v-col>
         </v-row>
       </v-card>
       <v-card>
