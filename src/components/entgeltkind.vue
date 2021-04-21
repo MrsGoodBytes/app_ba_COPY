@@ -1,11 +1,11 @@
 <template>
-  <div id="Entgeltkind">
+  <div id="Entgeltkind" v-if="this.$store.state.entCheck">
     <v-card v-for="item in entgeltkindlist" :key="item.id">
     <v-row class="my-3 px-3">
       <v-col>
         <v-text-field
           outlined
-          v-model="item.child_firstname"
+          v-model="item.entsibling_firstname"
           label="Vorname des Kindes"
           :rules="nameRules"
           required
@@ -14,7 +14,7 @@
       <v-col>
         <v-text-field
           outlined
-          v-model="item.child_lastname"
+          v-model="item.entsibling_lastname"
           label="Nachname des Kindes"
           :rules="nameRules"
           required
@@ -23,7 +23,7 @@
       <v-col>
         <v-text-field
           outlined
-          v-model="item.date_sibling"
+          v-model="item.date_entsibling"
           label="Geburtsdatum" 
           prepend-icon="mdi-calendar"
           :rules="dateRules"
@@ -36,7 +36,7 @@
         <h4>Betreuung</h4>
         <v-radio-group v-model="radioGroupBetreuungsform">
           <v-radio
-            v-model="betreuungsform"
+            v-model="item.betreuungsform"
             ref="betreuungsform"
             v-for="n in radioListBetreuungsform"
             :key="n"
@@ -48,35 +48,35 @@
       <v-col v-if="radioGroupBetreuungsform === 3">
         <v-text-field
           outlined
-          v-model="tagespflegename"
+          v-model="item.tagespflegename"
           label="Name der Tagespflegeperson"
           :rules="nameRules"
           required
         ></v-text-field>
         <v-text-field
           outlined
-          v-model="institutionstreet"
+          v-model="item.institutionstreet"
           label="Straße der Tagespflege"
           :rules="nameRules"
           required
         ></v-text-field>
         <v-text-field
           outlined
-          v-model="institutionnumber"
+          v-model="item.institutionnumber"
           label="Hausnummer der Tagespflege"
           :rules="numberRules"
           required
         ></v-text-field>
         <v-text-field
           outlined
-          v-model="institutionpostcode"
+          v-model="item.institutionpostcode"
           label="PLZ der Tagespflege"
           :rules="nameRules"
           required
         ></v-text-field>
         <v-text-field
           outlined
-          v-model="institutiontown"
+          v-model="item.institutiontown"
           label="Ort der Tagespflege"
           :rules="nameRules"
           required
@@ -86,7 +86,7 @@
       <v-col v-else>
         <v-text-field
           outlined
-          v-model="institutionname"
+          v-model="item.institutionname"
           label="Name der Betreuungseinrichtung"
           :rules="nameRules"
           required
@@ -95,7 +95,7 @@
 
       <v-col>
         <v-checkbox
-          v-model="vorjahr_checkbox"
+          v-model="item.vorjahr_checkbox"
           ref="vorjahr_check"
           :label="'Für das Kind wurde im VORJAHR ein Ermäßigungsantrag gestellt:'"
         ></v-checkbox>
@@ -104,7 +104,7 @@
       <v-col>
         <v-text-field
           outlined
-          v-model="betreuungsentgelt"
+          v-model="item.betreuungsentgelt"
           prefix="€"
           :rules="moneyRules"
           label="Betreuungsentgelt"
@@ -140,9 +140,9 @@ export default {
       // Index des zu löschenden Eintrags übergeben
       deleteID: "",
 
-      firstname_sibling: "",
-      lastname_sibling: "",
-      date_sibling: "",
+      firstname_entsibling: "",
+      lastname_entsibling: "",
+      date_entsibling: "",
 
       betreuungsform: "",
       betreuungsentgelt: "",

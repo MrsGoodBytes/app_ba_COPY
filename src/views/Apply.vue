@@ -149,15 +149,15 @@ export default {
       //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
       if (this.child_list.length == 0) {
         geschwisterkind.id = 0;
-        geschwisterkind.firstname =  "";
-        geschwisterkind.lastname = "";
-        geschwisterkind.date = "";
+        geschwisterkind.sibling_firstname =  "";
+        geschwisterkind.sibling_lastname = "";
+        geschwisterkind.date_sibling = "";
       } else {
         // vermeide Duplikate
         geschwisterkind.id = this.child_list[this.child_list.length - 1].id + 1;
-        geschwisterkind.firstname =  "";
-        geschwisterkind.lastname = "";
-        geschwisterkind.date = "";
+        geschwisterkind.sibling_firstname =  "";
+        geschwisterkind.sibling_lastname = "";
+        geschwisterkind.date_sibling = "";
       }
 
       //eintragen des neuen Geschwisterkinds in das Array
@@ -211,17 +211,17 @@ export default {
       //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
       if (this.person_list.length == 0) {
         neueperson.id = 0;
-        neueperson.firstname_person =  "";
-        neueperson.lastname_person = "";
-        neueperson.date_p = "";
-        neueperson.verwandtschaft_p = "";
+        neueperson.firstname =  "";
+        neueperson.lastname = "";
+        neueperson.date = "";
+        neueperson.verwandtschaft = "";
       } else {
         // vermeide Duplikate
         neueperson.id = this.person_list[this.person_list.length - 1].id + 1;
-        neueperson.firstname_person =  "";
-        neueperson.lastname_person = "";
-        neueperson.date_p = "";
-        neueperson.verwandtschaft_p = "";
+        neueperson.firstname =  "";
+        neueperson.lastname = "";
+        neueperson.date = "";
+        neueperson.verwandtschaft = "";
       }
 
       //eintragen der neuen Person in das Array

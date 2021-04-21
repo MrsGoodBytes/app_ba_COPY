@@ -107,7 +107,7 @@
           <v-col>
             <v-text-field
               outlined
-              v-model="firstname_person"
+              v-model="item.firstname_person"
               :rules="nameRules"
               label="Vorname"
               required
@@ -116,7 +116,7 @@
           <v-col>
             <v-text-field
               outlined
-              v-model="lastname_person"
+              v-model="item.lastname_person"
               :rules="nameRules"
               label="Nachname"
               required
@@ -1432,7 +1432,6 @@ export default {
       lastname_person: "",
       verwandtschaft_p: "",
       date_p: null,
-      menu_p: false,
 
       elternteil1: {
         netto: 0,
@@ -1640,9 +1639,6 @@ export default {
     },
     addPerson() {
       this.$parent.addPerson();
-    },
-    save_p(date_p) {
-      this.$refs.menu_p.save(date_p);
     },
   },
 };

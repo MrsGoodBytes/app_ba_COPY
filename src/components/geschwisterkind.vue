@@ -1,11 +1,11 @@
 <template>
-  <div id="Geschwisterkind">
+  <div id="Geschwisterkind" v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
     <v-card v-for="item in childlist" :key="item.id">
     <v-row class="my-3 px-3">
       <v-col>
         <v-text-field
           outlined
-          v-model="item.child_firstname"
+          v-model="item.sibling_firstname"
           label="Vorname des Kindes"
           :rules="nameRules"
           required
@@ -14,7 +14,7 @@
       <v-col>
         <v-text-field
           outlined
-          v-model="item.child_lastname"
+          v-model="item.sibling_lastname"
           label="Nachname des Kindes"
           :rules="nameRules"
           required
@@ -54,8 +54,8 @@ export default {
       // Index des zu löschenden Eintrags übergeben
       deleteID: "",
 
-      firstname_sibling: "",
-      lastname_sibling: "",
+      sibling_firstname: "",
+      sibling_lastname: "",
       date_sibling: "",
 //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
