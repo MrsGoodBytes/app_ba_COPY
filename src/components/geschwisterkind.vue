@@ -1,5 +1,5 @@
 <template>
-  <div id="Geschwisterkind" v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
+  <div id="Geschwisterkind" v-if="this.$parent.KindDaten && this.$store.state.geCheck && !this.$store.state.entCheck">
     <v-card v-for="item in childlist" :key="item.id">
     <v-row class="my-3 px-3">
       <v-col>

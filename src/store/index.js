@@ -40,6 +40,7 @@ export default new Vuex.Store({
         institutionnumber: "",
         institutionpostcode: "",
         institutiontown: "",
+        institutionname: "",
         tagespflegename: "",
 
         essensgeld: "",
@@ -136,6 +137,8 @@ export default new Vuex.Store({
                 setDateSibling(state, value) {
                     state.date_sibling = value;
                 }, */
+
+        //BETREUUNG
         setElternbeitrag(state, value) {
             state.elternbeitrag = value;
         },

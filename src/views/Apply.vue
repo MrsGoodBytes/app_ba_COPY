@@ -59,7 +59,23 @@
         Entgeltkind hinzufügen
         <v-icon> mdi-plus </v-icon>
       </v-btn>
+      <v-btn
+        v-if="KindDaten"
+        class=""
+        @click="funcShowNachweise"
+      >
+        weiter
+        <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
+      </v-btn>
       <Nachweise v-if="Nachweise" />
+      <v-btn
+        v-if="Nachweise"
+        class=""
+        @click="funcShowAbschicken"
+      >
+        weiter
+        <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
+      </v-btn>
     </v-container>
   </div>
 </template>

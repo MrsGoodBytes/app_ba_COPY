@@ -294,7 +294,7 @@ export default {
       this.$store.commit("setInstitutionTown", val);
     },
     institutionname: function (val) {
-      this.$store.commit("setInstitutionname", val);
+      this.$store.commit("setInstitutionName", val);
     },
 
     vorjahr_checkbox: function (val) {
@@ -311,6 +311,7 @@ export default {
     this.child_lastname = this.$store.state.child_lastname;
     this.date_child = this.$store.state.date_child;
 
+    this.institutionname = this.$store.state.institutionname;
     this.institutionstreet = this.$store.state.institutionstreet;
     this.institutionnumber = this.$store.state.institutionnumber;
     this.institutionpostcode = this.$store.state.institutionpostcode;
