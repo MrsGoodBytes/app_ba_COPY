@@ -1350,6 +1350,7 @@
         </v-row>
       </v-card>
 
+      <h3 v-if="this.elternteil1.netto >0">Testline</h3>
       <v-row v-if="this.$store.state.entCheck">
         <v-col>
           <v-radio-group v-model="radioGroupErmaeßigung">
@@ -1636,6 +1637,10 @@ export default {
     eigentum_checkbox: function (val) {
       this.$store.commit("setEigentumCheck", val);
     },
+    //EINKOMMEN
+    netto1: function (val) {
+      this.$store.state.commit("setNetto1", val);
+    }
   },
 
   methods: {

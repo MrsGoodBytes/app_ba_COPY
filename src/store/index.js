@@ -52,9 +52,80 @@ export default new Vuex.Store({
         lastname_sibling: "",
         date_sibling: "",
 
+        elternteil1: {
+            netto: 0,
+            selbst: 0,
+            kindergeld: 0,
+            alg1: 0,
+            existenz: 0,
+            krankengeld: 0,
+            rente: 0,
+            unterhaltseinkunft: 0,
+            ausbildungsvergütung: 0,
+            bafög: 0,
+            elterngeld: 0,
+            kinderzuschlag: 0,
+            weitere: 0,
+            zuschussKita: 0,
+            haushaltseinkommen: 0,
+
+            arbeitsmittel: 0,
+            fahrtkosten: 0,
+            haftpflicht: 0,
+            hausrat: 0,
+            freiwilligekrankenundpflege: 0,
+            freiwilligerente: 0,
+            riester: 0,
+            lebens: 0,
+            kfzhaftpflicht: 0,
+            unfall: 0,
+            berufsunfähigkeits: 0,
+            gewerkschaft: 0,
+
+            kaltmiete: 0,
+            eigentum: 0,
+            besondere: 0,
+            unterhaltszahlungen: 0,
+        },
+
+        elternteil2: {
+            netto: 0,
+            selbst: 0,
+            kindergeld: 0,
+            alg1: 0,
+            existenz: 0,
+            krankengeld: 0,
+            rente: 0,
+            unterhaltseinkunft: 0,
+            ausbildungsvergütung: 0,
+            bafög: 0,
+            elterngeld: 0,
+            kinderzuschlag: 0,
+            weitere: 0,
+            zuschussKita: 0,
+            haushaltseinkommen: 0,
+
+            arbeitsmittel: 0,
+            fahrtkosten: 0,
+            haftpflicht: 0,
+            hausrat: 0,
+            freiwilligekrankenundpflege: 0,
+            freiwilligerente: 0,
+            riester: 0,
+            lebens: 0,
+            kfzhaftpflicht: 0,
+            unfall: 0,
+            berufsunfähigkeits: 0,
+            gewerkschaft: 0,
+
+            kaltmiete: 0,
+            eigentum: 0,
+            besondere: 0,
+            unterhaltszahlungen: 0,
+        },
     },
     mutations: {
-        //write value of textfield into variable firstname
+        //write value of textfield into variable
 
         //Antragsteller
         setFirstname(state, value) {
@@ -127,16 +198,6 @@ export default new Vuex.Store({
         setDate_child(state, value) {
             state.date_child = value;
         },
-        /* 
-                setFirstnameSibling(state, value) {
-                    state.firstname_sibling = value;
-                },
-                setLastnameSibling(state, value) {
-                    state.lastname_sibling = value;
-                },
-                setDateSibling(state, value) {
-                    state.date_sibling = value;
-                }, */
 
         //BETREUUNG
         setElternbeitrag(state, value) {
@@ -181,6 +242,11 @@ export default new Vuex.Store({
         setDate_bb(state, value) {
             state.date_bb = value;
         },
+
+        //EINKOMMEN
+        setNetto1(state, value) {
+            state.elternteil1.netto = value;
+        }
     },
     actions: {},
     modules: {}

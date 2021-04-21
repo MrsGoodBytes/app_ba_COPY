@@ -1,9 +1,11 @@
 <template>
   <div id="Nachweise">
     <h2 class="py-3">Nachweise</h2>
-    <h3>Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:</h3>
+    <h5 class="pb-3">Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:</h5>
 
-    
+    <v-row>
+      
+    </v-row>
 
     <h4
       v-if="
@@ -24,11 +26,14 @@
           accept="image/*"
           label="Nachweis über den Empfang von Sozialleistungen"
           chips
+          show-size
+          counter
+          multiple
           truncate-length="23"
         ></v-file-input>
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-icon color="primary" dark v-bind="attrs" v-on="on"
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
               >mdi-home Was sind Sozialleistungen?</v-icon
             >
           </template>
@@ -48,46 +53,17 @@
     <v-row
       v-if="
         this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 2
-      "
-    >
-      <v-col
-        ><v-file-input
-          accept="image/*"
-          label="Nachweis über den Empfang von Sozialleistungen"
-          chips
-          truncate-length="23"
-        ></v-file-input>
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>Zu Sozialleistungen zählen Arbeitslosengeld II (ALGII), Grundsicherung, Asylbewerberleistungsgesetz, Kinderzuschlag der Familienkasse oder Wohngeld. Das Nachweis über eine der hier aufgeführten Leistungen reicht aus.</span>
-        </v-tooltip>
-      </v-col>
-    </v-row><v-row
-      v-else-if="
-        this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 1
       "
     >
       <v-col
         ><v-file-input
           accept="image/*"
-          label="Einkommen des Mannes oder sowas Liste muss angeschaut werden"
+          label="Nachweis Familieneinkommen"
           chips
           truncate-length="23"
         ></v-file-input>
-      </v-col>
-      <v-col
-        ><v-file-input
-          accept="image/*"
-          label="noch ein NachweisEinkommen des Mannes oder sowas Liste muss angeschaut werden"
-          chips
-          truncate-length="23"
-        ></v-file-input>
+        
       </v-col>
     </v-row>
     <p v-else></p>
