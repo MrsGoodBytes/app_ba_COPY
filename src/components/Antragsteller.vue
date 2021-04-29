@@ -1629,7 +1629,7 @@ export default {
     this.selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen;
 
     this.kontoinhaber =
-      this.$store.state.firstname + this.$store.state.lastname;
+      this.$store.state.firstname + " " + this.$store.state.lastname;
     this.iban = this.$store.state.iban;
     this.bic = this.$store.state.bic;
 

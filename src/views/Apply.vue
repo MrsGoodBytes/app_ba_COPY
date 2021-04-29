@@ -32,6 +32,7 @@
         weiter
         <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
       </v-btn>
+
       <Kind v-if="KindDaten" />
       <!-- nur wenn KEIN Entgeltantrag aber Geschwisterermäßigung -->
       <geschwisterkind
@@ -70,6 +71,7 @@
         weiter
         <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
       </v-btn>
+
       <Nachweise v-if="Nachweise" />
       <v-btn
         v-if="Nachweise"
@@ -80,6 +82,8 @@
         weiter
         <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
       </v-btn>
+
+      <Abschicken v-if="Abschicken" />
     </v-container>
   </div>
 </template>
@@ -90,6 +94,7 @@ import Antragswahl from "@/components/Antragswahl.vue";
 import Antragsteller from "@/components/Antragsteller.vue";
 import Kind from "@/components/Kind.vue";
 import Nachweise from "@/components/Nachweise.vue";
+import Abschicken from "@/components/Abschicken.vue";
 import geschwisterkind from "@/components/geschwisterkind.vue";
 import entgeltkind from "@/components/entgeltkind.vue";
 
@@ -100,6 +105,7 @@ export default {
     Antragsteller,
     Kind,
     Nachweise,
+    Abschicken,
     geschwisterkind,
     entgeltkind,
   },
