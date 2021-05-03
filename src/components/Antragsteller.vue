@@ -176,7 +176,7 @@
             ref="antragsgrundlage"
             v-for="n in radioListAntragsgrundlage"
             :key="n"
-            :label="`${n}`"
+            :label="`${n in radioListAntragsgrundlage}`"
             :value="n"
           ></v-radio>
         </v-radio-group>
@@ -1589,7 +1589,9 @@ export default {
           /(?=.*\d)/.test(value) ||
           "Pflichtfeld. Hausnummer muss mindestens eine Zahl enthalten!",
       ],
-      plzRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      plzRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+      (value) => (value.length === 5) || "Postleitzahl sollte genau 5 Ziffern lang sein",
+      ],
       emailRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>
@@ -1598,8 +1600,11 @@ export default {
       telRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>
-          (value && value.length >= 9 && /^\d+$/.test(value)) ||
-          "Pflichtfeld. Bitte gültige Telefonnummer eingeben! Darf keine Buchstaben enthalten.",
+          (value.length >= 9) ||
+          "Bitte gültige Telefonnummer inklusive Vorwahl eingeben!",
+        (value) =>
+          (/^\d+$/.test(value)) ||
+          "Die Telefonnummer darf nur aus Zahlen bestehen!",
       ],
       ibanRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
