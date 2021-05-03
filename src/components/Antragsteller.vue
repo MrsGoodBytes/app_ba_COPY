@@ -176,7 +176,7 @@
             ref="antragsgrundlage"
             v-for="n in radioListAntragsgrundlage"
             :key="n"
-            :label="`${n in radioListAntragsgrundlage}`"
+            :label="`${n}`"
             :value="n"
           ></v-radio>
         </v-radio-group>
