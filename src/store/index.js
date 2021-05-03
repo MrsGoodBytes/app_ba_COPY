@@ -25,6 +25,7 @@ export default new Vuex.Store({
         vorjahr_checkbox: false,
 
         radioGroupAntragsgrundlage: 0,
+        privatinsolvenz: false,
         radioGroupErmaeßigung: 0,
         radioGroupBetreuungsform: 0,
 
@@ -169,6 +170,9 @@ export default new Vuex.Store({
         },
         setAntragsgrundlageCheck(state, value) {
             state.radioGroupAntragsgrundlage = value;
+        },
+        setPrivatinsolvenz(state, value) {
+            state.privatinsolvenz = value;
         },
         setErmaeßigungCheck(state, value) {
             state.radioGroupErmaeßigung = value;

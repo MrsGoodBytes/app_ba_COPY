@@ -23,15 +23,6 @@
       </v-tabs>
 
       <Antragsteller v-if="AntragstellerDaten" :personlist="person_list" />
-      <v-btn
-        v-if="AntragstellerDaten"
-        class="my-6"
-        justify="center"
-        @click="funcShowKindDaten"
-      >
-        weiter
-        <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
-      </v-btn>
 
       <Kind v-if="KindDaten" />
       <!-- nur wenn KEIN Entgeltantrag aber Geschwisterermäßigung -->
