@@ -189,19 +189,21 @@
           <p v-if="this.radioGroupAntragsgrundlage === 0">Bitte wählen Sie eine Antragsgrundlage aus!</p>
         </v-col>
 
-        <!-- Einkommensnachweise ohne Sozialleistungen -->
+        
+      </v-row>
+      <v-row><!-- Einkommensnachweise ohne Sozialleistungen -->
 
-        <v-col v-if="radioGroupAntragsgrundlage === 2">
+        <v-col v-if="radioGroupAntragsgrundlage === 2" class="text-center">
           <h4>Familieneinkommen, Belastungen, Einkommensgrenze</h4>
           <p>Die im Haushalt lebenden Personen erzielen folgendes Einkommen:</p>
         </v-col>
-        <v-col v-else-if="radioGroupAntragsgrundlage === 1">
+        <v-col v-else-if="radioGroupAntragsgrundlage === 1" class="text-left">
           <p>
             Im Falle der Privatinsolvenz muss die Entscheidung durch das
             Amtsgericht unter der Rubrik "Nachweise" angefügt werden.
           </p>
         </v-col>
-        <v-col v-else-if="radioGroupAntragsgrundlage === 3">
+        <v-col v-else-if="radioGroupAntragsgrundlage === 3" class="text-left">
           <p>
             Wenn Sie Sozialleistungen beziehen, sind Sie für die
             Entgeltermäßigung berechtigt. Die entsprechenden Bescheide sollten
@@ -210,13 +212,7 @@
         </v-col>
         <p v-else></p>
       </v-row>
-      <v-row v-if="radioGroupAntragsgrundlage === 2">
-        <p>
-          Um eine zügige Bearbeitung zu gewährleisten, sind die erforderlichen
-          Nachweise unt derm dem Punkt "Nachweise" anzufügen. Kontoauszüge
-          können NICHT als Nachweis berücksichtigt werden.
-        </p>
-      </v-row>
+      
     </v-form>
 
     <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage === 2">
@@ -1414,6 +1410,13 @@
         </v-row>
       </v-card>
     </div>
+    <v-row v-if="radioGroupAntragsgrundlage === 2">
+        <p>
+          Um eine zügige Bearbeitung zu gewährleisten, sind die erforderlichen
+          Nachweise unt derm dem Punkt "Nachweise" anzufügen. Kontoauszüge
+          können NICHT als Nachweis berücksichtigt werden.
+        </p>
+      </v-row>
     <h3 v-if="this.elternteil1.netto > 0">Testline</h3>
     <v-row v-if="this.$store.state.entCheck">
       <v-col>
@@ -1652,7 +1655,7 @@ export default {
     this.selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen;
 
     this.kontoinhaber =
-      this.$store.state.firstname + " " + this.$store.state.lastname;
+    this.$store.state.firstname + " " + this.$store.state.lastname;
     this.iban = this.$store.state.iban;
     this.bic = this.$store.state.bic;
 
@@ -1740,7 +1743,9 @@ export default {
       this.$parent.addPerson();
     },
     funcShowKindDaten() {
+      if (this.$refs.form.validate() == true){
       this.$parent.funcShowKindDaten();
+      } else {this.valid = false}
     },
   },
 };
