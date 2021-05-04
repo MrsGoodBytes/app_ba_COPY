@@ -1396,7 +1396,6 @@
         NICHT als Nachweis berücksichtigt werden.
       </p>
     </v-row>
-    <h3 v-if="this.elternteil1.netto > 0">Testline</h3>
     <!-- <v-row v-if="this.$store.state.entCheck">
       <v-col>
         <v-radio-group v-model="radioGroupErmaeßigung">

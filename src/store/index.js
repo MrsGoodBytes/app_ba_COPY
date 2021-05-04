@@ -43,6 +43,7 @@ export default new Vuex.Store({
         institutiontown: "Grevesmühlen",
         institutionname: "Kita Weltendecker",
         tagespflegename: "",
+        betreuungsform: "",
 
         essensgeld: "",
         elternbeitrag: "",
