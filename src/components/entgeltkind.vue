@@ -1,6 +1,6 @@
 <template>
   <div id="Entgeltkind" v-if="this.$parent.KindDaten && this.$store.state.entCheck">
-    <v-card v-for="item in entgeltkindlist" :key="item.id">
+    <v-card v-for="item in entgeltkindlist" :key="item.id" class="pa-3">
     <v-row class="my-3 px-3">
       <v-col>
         <v-text-field
@@ -31,7 +31,7 @@
         ></v-text-field>
       </v-col>
     </v-row>
-      <v-row>
+      <v-row class="px-3">
       <v-col>
         <h4>Betreuung</h4>
         <v-radio-group v-model="radioGroupBetreuungsform">
@@ -115,7 +115,7 @@
     </v-row>
 
     <v-row>
-      <v-col>
+      <v-col class="pt-0">
         <v-btn class="ma-0" color="secondary" v-on:click="deleteEntgeltkind(item.id)">
           Einträge dieses Kindes löschen
           <v-icon> mdi-alert </v-icon>

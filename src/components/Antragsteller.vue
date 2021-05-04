@@ -166,7 +166,7 @@
                 color="secondary"
                 @click="deletePerson(item.id)"
               >
-                Einträge dieser Person löschen
+                Person löschen
                 <v-icon> mdi-alert </v-icon>
               </v-btn>
             </v-col>

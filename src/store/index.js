@@ -16,7 +16,7 @@ export default new Vuex.Store({
 
         date: "06.10.1990",
         date_p: "",
-        date_child: "",
+        date_child: "11.07.2019",
         date_bb: "",
 
         geCheck: false,
@@ -35,13 +35,13 @@ export default new Vuex.Store({
         iban: "",
         bic: "",
 
-        child_firstname: "",
-        child_lastname: "",
-        institutionstreet: "",
-        institutionnumber: "",
-        institutionpostcode: "",
-        institutiontown: "",
-        institutionname: "",
+        child_firstname: "Ilaria",
+        child_lastname: "Gandl",
+        institutionstreet: "Carl-Gauß-Straße",
+        institutionnumber: "15",
+        institutionpostcode: "23936",
+        institutiontown: "Grevesmühlen",
+        institutionname: "Kita Weltendecker",
         tagespflegename: "",
 
         essensgeld: "",

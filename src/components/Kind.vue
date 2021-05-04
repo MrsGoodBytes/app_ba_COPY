@@ -1,7 +1,8 @@
 <template>
-  <div id="Kind" class="px-10">
+  <div id="Kind" class="pb-10">
     <h2 class="py-3">Kind/er</h2>
-    <v-row><!-- v-for="n in childList" :key="n" -->
+    <v-row
+      ><!-- v-for="n in childList" :key="n" -->
       <v-col>
         <v-text-field
           outlined
@@ -21,7 +22,7 @@
         ></v-text-field>
       </v-col>
       <v-col v-if="this.$store.state.geCheck">
-          <v-text-field
+        <v-text-field
           outlined
           v-model="date_child"
           label="Geburtsdatum"
@@ -34,7 +35,7 @@
     </v-row>
     <v-row>
       <v-col
-        v-if="this.$store.state.Check || this.$store.state.entCheck"
+        v-if="this.$store.state.geCheck || this.$store.state.entCheck"
         class="d-flex"
         cols="12"
         sm="3"
@@ -112,12 +113,12 @@
         v-if="this.$store.state.geCheck || this.$store.state.entCheck"
         class="d-flex"
         cols="12"
-        sm="3"
+        sm="4"
       >
-          <v-text-field
+        <v-text-field
           outlined
           v-model="date_bb"
-          label="Geburtsdatum"
+          label="Betreuungsbeginn"
           prepend-icon="mdi-calendar"
           :rules="dateRules"
           required
@@ -128,7 +129,7 @@
         v-if="this.$store.state.geCheck || this.$store.state.entCheck"
         class="d-flex"
         cols="12"
-        sm="3"
+        sm="4"
       >
         <v-text-field
           outlined
@@ -140,7 +141,18 @@
         ></v-text-field>
       </v-col>
       <p v-else></p>
-      <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
+      <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="4">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span
+            >der Elternbeitrag ist das Betreuungsgeld abzüglich der
+            Ermäßigung</span
+          >
+        </v-tooltip>
         <v-text-field
           outlined
           v-model="elternbeitrag"
@@ -149,25 +161,25 @@
           label="Elternbeitrag"
           required
         ></v-text-field>
-        <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span
-                >der Elternbeitrag ist das Betreuungsgeld abzüglich der Ermäßigung</span
-              >
-            </v-tooltip>
       </v-col>
       <p v-else></p>
+    </v-row>
+      <v-row>
       <v-col
         v-if="this.$store.state.bifoCheck && radioGroupBetreuungsform === 3"
         class="d-flex"
         cols="12"
-        sm="3"
+        sm="4"
       >
-        <v-text-field
+         <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>monatlicher Betrag</span>
+        </v-tooltip>
+      <v-text-field
           outlined
           v-model="essensgeld"
           :rules="moneyRules"
@@ -175,18 +187,16 @@
           prefix="€"
           required
         ></v-text-field>
+       </v-col>
+      <v-col v-if="this.$store.state.geCheck && this.radioGroupBetreuungsform === 3" class="d-flex" cols="12" sm="4">
         <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span
-                >monatlicher Betrag</span
-              >
-            </v-tooltip>
-      </v-col>
-      <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>Stunden in der Woche</span>
+        </v-tooltip>
         <v-text-field
           outlined
           v-model="betreuungsumfang"
@@ -194,18 +204,18 @@
           label="Betreuungsumfang"
           required
         ></v-text-field>
-        <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span
-                >Stunden in der Woche</span
-              >
-            </v-tooltip>
       </v-col>
       <p v-else></p>
+      <v-row>
+        <v-col cols="6">
+          <h4 class="text-left">
+            Da eine Abrechnung direkt mit der Kindertagesstätte erfolgt,
+            erhalten Sie keine Eingangsbestätigung und auch keinen Bescheid. Die
+            Kindertagesstätte wird von Ihnen nur noch den reduzierten
+            Elternbeitrag fordern.
+          </h4>
+        </v-col>
+      </v-row>
     </v-row>
   </div>
 </template>
@@ -328,7 +338,6 @@ export default {
     this.vorjahr_checkbox = this.$store.state.vorjahr_checkbox;
   },
 
-  methods: {
-  },
+  methods: {},
 };
 </script>

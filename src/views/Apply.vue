@@ -32,7 +32,7 @@
       />
       <v-btn
         v-if="KindDaten && this.$store.state.geCheck && !this.$store.state.entCheck"
-        class=""
+        class="mt-6"
         justify="center"
         v-on:click="addChild"
       >
@@ -47,7 +47,7 @@
       />
       <v-btn
         v-if="KindDaten && this.$store.state.entCheck"
-        class=""
+        class="mt-6"
         justify="center"
         v-on:click="addEntgeltkind"
       >
