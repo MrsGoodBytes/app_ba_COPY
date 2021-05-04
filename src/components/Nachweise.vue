@@ -1,10 +1,38 @@
 <template>
   <div id="Nachweise">
     <h2 class="py-3">Nachweise</h2>
-    <h5 class="pb-3">Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:</h5>
-
+    <h5 class="pb-3">
+      Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:
+    </h5>
+    <h5>Wählen Sie zum Uload mehrere Dateien gleichzeitg aus.</h5>
     <v-row>
-      
+      <v-col
+        ><h4>
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Betreuungsvertäge sind die Verträge, die mit der
+              Betreuungseinrichtung geschlossen wurden und nachweisen, dass das
+              Kind diese Einrichtung besucht.</span
+            > </v-tooltip
+          >Betreuungsverträge der im Antrag genannten Kinder
+        </h4>
+      </v-col>
+      <v-col
+        ><v-file-input
+          accept="image/*"
+          label="Betreuungsverträge"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
     </v-row>
 
     <h4
@@ -37,7 +65,12 @@
               >mdi-home Was sind Sozialleistungen?</v-icon
             >
           </template>
-          <span>Zu Sozialleistungen zählen Arbeitslosengeld II (ALGII), Grundsicherung, Asylbewerberleistungsgesetz, Kinderzuschlag der Familienkasse oder Wohngeld. Das Nachweis über eine der hier aufgeführten Leistungen reicht aus.</span>
+          <span
+            >Zu Sozialleistungen zählen Arbeitslosengeld II (ALGII),
+            Grundsicherung, Asylbewerberleistungsgesetz, Kinderzuschlag der
+            Familienkasse oder Wohngeld. Das Nachweis über eine der hier
+            aufgeführten Leistungen reicht aus.</span
+          >
         </v-tooltip>
       </v-col>
     </v-row>
@@ -49,7 +82,7 @@
     >
       Nachweise Familieneinkommen
     </h4>
-    
+
     <v-row
       v-if="
         this.$store.state.entCheck &&
@@ -63,7 +96,6 @@
           chips
           truncate-length="23"
         ></v-file-input>
-        
       </v-col>
     </v-row>
     <p v-else></p>

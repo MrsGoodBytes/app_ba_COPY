@@ -3,7 +3,7 @@
     id="Entgeltkind"
     v-if="this.$parent.KindDaten && this.$store.state.entCheck"
   >
-    <v-card v-for="item in entgeltkindlist" :key="item.id" class="pa-3 my-6">
+    <v-card v-for="item in entgeltkindlist" :key="item.id" class="pa-3 my-6" color="#F5F5F5">
       <v-row class="my-3 px-3">
         <v-col>
           <v-text-field

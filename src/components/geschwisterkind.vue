@@ -7,7 +7,7 @@
       !this.$store.state.entCheck
     "
   >
-    <v-card v-for="item in childlist" :key="item.id" class="pa-10">
+    <v-card v-for="item in childlist" :key="item.id" class="pa-10" color="#F5F5F5">
       <v-row class="my-3 px-3">
         <v-col>
           <v-text-field
