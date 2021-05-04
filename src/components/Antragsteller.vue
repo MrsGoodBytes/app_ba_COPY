@@ -1652,6 +1652,8 @@ export default {
     this.bic = this.$store.state.bic;
 
     this.eigentum_checkbox = this.$store.state.eigentum_checkbox;
+    this.elternteil1 = this.$store.state.elternteil1;
+    this.elternteil2 = this.$store.state.elternteil2;
   },
 
   watch: {
@@ -1719,9 +1721,12 @@ export default {
       this.$store.commit("setEigentumCheck", val);
     },
     //EINKOMMEN
-    netto1: function (val) {
-      this.$store.state.commit("setNetto1", val);
+    elternteil1: function (val) {
+      this.$store.state.commit("setElternteil1", val);
     },
+    elternteil2: function (val) {
+      this.$store.state.commit("setElternteil2", val);
+    }
   },
 
   methods: {

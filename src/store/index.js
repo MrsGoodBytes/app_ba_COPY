@@ -248,8 +248,11 @@ export default new Vuex.Store({
         },
 
         //EINKOMMEN
-        setNetto1(state, value) {
-            state.elternteil1.netto = value;
+        setElternteil1(state, value) {
+            state.elternteil1 = value;
+        },
+        setElternteil2(state, value) {
+            state.elternteil2 = value;
         }
     },
     actions: {},
