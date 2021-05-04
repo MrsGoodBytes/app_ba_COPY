@@ -107,7 +107,7 @@
           Zum Haushalt gehörende Personen
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
-              <v-icon color="primary" v-bind="attrs" v-on="on"
+              <v-icon color="accent" v-bind="attrs" v-on="on"
                 >mdi-information</v-icon
               >
             </template>
@@ -123,7 +123,7 @@
 
         <v-card v-for="item in personlist" :key="item.id">
           <v-row class="my-3 px-3">
-            <v-col>
+            <v-col class="pb-0">
               <v-text-field
                 outlined
                 v-model="item.firstname_person"
@@ -132,7 +132,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col>
+            <v-col class="pb-0">
               <v-text-field
                 outlined
                 v-model="item.lastname_person"
@@ -141,7 +141,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col>
+            <v-col class="pb-0">
               <v-text-field
                 outlined
                 v-model="item.date_p"
@@ -151,19 +151,18 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col>
+            <v-col class="pb-0">
               <v-text-field
                 outlined
                 v-model="item.verwandtschaft_p"
                 label="Verwandtschaft zum Kind"
-                prepend-icon="mdi-calendar"
                 :rules="dateRules"
                 required
               ></v-text-field>
             </v-col>
             <v-col>
               <v-btn
-                class="my-auto"
+                class="mt-3"
                 color="secondary"
                 @click="deletePerson(item.id)"
               >
@@ -188,7 +187,7 @@
         Antragsgrundlage
       </h3>
       <v-row v-if="this.$store.state.entCheck || this.$store.state.bifoCheck">
-        <v-col>
+        <v-col class="pb-0">
           <v-radio-group v-model="radioGroupAntragsgrundlage">
             <v-radio class="d-none"> </v-radio>
             <v-radio
@@ -201,9 +200,12 @@
               :rules="radioRules"
             ></v-radio>
           </v-radio-group>
-          <p v-if="this.radioGroupAntragsgrundlage === 0">
+          <h4
+            v-if="this.radioGroupAntragsgrundlage === 0"
+            class="text-left error--text"
+          >
             Bitte wählen Sie eine Antragsgrundlage aus!
-          </p>
+          </h4>
         </v-col>
       </v-row>
       <v-row
@@ -213,13 +215,19 @@
           <h4>Familieneinkommen, Belastungen, Einkommensgrenze</h4>
           <p>Die im Haushalt lebenden Personen erzielen folgendes Einkommen:</p>
         </v-col>
-        <v-col v-else-if="radioGroupAntragsgrundlage === 1" class="text-left">
+        <v-col
+          v-else-if="radioGroupAntragsgrundlage === 1"
+          class="text-left pt-0"
+        >
           <p>
             Im Falle der Privatinsolvenz muss die Entscheidung durch das
             Amtsgericht unter der Rubrik "Nachweise" angefügt werden.
           </p>
         </v-col>
-        <v-col v-else-if="radioGroupAntragsgrundlage === 3" class="text-left">
+        <v-col
+          v-else-if="radioGroupAntragsgrundlage === 3"
+          class="text-left pt-0"
+        >
           <p>
             Wenn Sie Sozialleistungen beziehen, sind Sie für die
             Entgeltermäßigung berechtigt. Die entsprechenden Bescheide sollten
@@ -236,12 +244,13 @@
         Familieneinkommens in €
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
-            <v-icon color="primary" v-bind="attrs" v-on="on"
+            <v-icon color="accent" v-bind="attrs" v-on="on"
               >mdi-information</v-icon
             >
           </template>
           <span
-            >hierbei sind nur leibliche Eltern bzw. Adoptiveltern zu Berpc</span
+            >Hierbei sind nur leibliche Eltern bzw. Adoptiveltern zu
+            berücksichtigen.</span
           >
         </v-tooltip>
       </h4>
@@ -450,7 +459,7 @@
               Einkommen aus Unterhalt
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
                     >mdi-information</v-icon
                   >
                 </template>
@@ -610,7 +619,7 @@
               weitere Einnahmen
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
                     >mdi-information</v-icon
                   >
                 </template>
@@ -650,7 +659,7 @@
               Zweckgebundener Zuschuss zu den Kinderbetreuungskosten
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="primary" v-bind="attrs" v-on="on"
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
                     >mdi-information</v-icon
                   >
                 </template>
@@ -1388,7 +1397,7 @@
       </p>
     </v-row>
     <h3 v-if="this.elternteil1.netto > 0">Testline</h3>
-    <v-row v-if="this.$store.state.entCheck">
+    <!-- <v-row v-if="this.$store.state.entCheck">
       <v-col>
         <v-radio-group v-model="radioGroupErmaeßigung">
           <v-radio
@@ -1425,7 +1434,17 @@
         ></v-text-field>
       </v-col>
     </v-row>
-    <p v-else></p>
+    <p v-else></p> -->
+    <v-row>
+      <v-col cols="6">
+        <h4 class="text-left">
+          Eine Ermäßigung des Betreuungsentgeltes erfolgt frühestens mit Beginn
+          des Monats der Antragstellung. Sollte ein Zuschuss gewährt werden,
+          wird dieser vom Fachbereich Kultur und Bildung direkt an den Träger
+          der Kindertageseinrichtung gezahlt.
+        </h4>
+      </v-col>
+    </v-row>
     <v-btn
       class="my-6"
       justify="center"
