@@ -92,7 +92,7 @@
         <v-col>
           <v-text-field
             outlined
-            v-model.number="tel"
+            v-model="tel"
             :rules="telRules"
             label="Telefonnummer"
             required
@@ -103,7 +103,24 @@
       <!-- Daten weiterer Personen -->
       <v-divider></v-divider>
       <div id="weiterePersonen" v-if="this.$store.state.entCheck">
-        <h3 class="py-3 text-left">Zum Haushalt gehörende Personen</h3>
+        <h3 class="py-3 text-left">
+          Zum Haushalt gehörende Personen
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="primary" v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Bitte
+              <span class="text-decoration-underline font-weight-bold"
+                >alle</span
+              >
+              Personen eintragen, die in Ihrem Haushalt leben.</span
+            >
+          </v-tooltip>
+        </h3>
+
         <v-card v-for="item in personlist" :key="item.id">
           <v-row class="my-3 px-3">
             <v-col>
@@ -138,7 +155,7 @@
               <v-text-field
                 outlined
                 v-model="item.verwandtschaft_p"
-                label="Verwandtschaftsverhältnis zum Kind"
+                label="Verwandtschaft zum Kind"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
                 required
@@ -146,7 +163,7 @@
             </v-col>
             <v-col>
               <v-btn
-                class="ma-0"
+                class="my-auto"
                 color="secondary"
                 @click="deletePerson(item.id)"
               >
@@ -173,9 +190,7 @@
       <v-row v-if="this.$store.state.entCheck || this.$store.state.bifoCheck">
         <v-col>
           <v-radio-group v-model="radioGroupAntragsgrundlage">
-          <v-radio class="d-none"
-            >
-          </v-radio>
+            <v-radio class="d-none"> </v-radio>
             <v-radio
               v-model="antragsgrundlage"
               ref="antragsgrundlage"
@@ -186,12 +201,13 @@
               :rules="radioRules"
             ></v-radio>
           </v-radio-group>
-          <p v-if="this.radioGroupAntragsgrundlage === 0">Bitte wählen Sie eine Antragsgrundlage aus!</p>
+          <p v-if="this.radioGroupAntragsgrundlage === 0">
+            Bitte wählen Sie eine Antragsgrundlage aus!
+          </p>
         </v-col>
-
-        
       </v-row>
-      <v-row><!-- Einkommensnachweise ohne Sozialleistungen -->
+      <v-row
+        ><!-- Einkommensnachweise ohne Sozialleistungen -->
 
         <v-col v-if="radioGroupAntragsgrundlage === 2" class="text-center">
           <h4>Familieneinkommen, Belastungen, Einkommensgrenze</h4>
@@ -212,7 +228,6 @@
         </v-col>
         <p v-else></p>
       </v-row>
-      
     </v-form>
 
     <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage === 2">
@@ -797,51 +812,6 @@
             </h4>
           </v-col>
         </v-row>
-        <!-- 
-          <v-col cols="3">
-            <p>Weicht Ihr Wohnort von der Adresse der Antragstellung ab?</p>
-            <v-checkbox v-model="wohnort_checkbox" ref="wohnort"></v-checkbox>
-            <v-text-field
-              v-if="this.wohnort_checkbox"
-              v-model="wohnort"
-              label="Wohnort"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="3">
-            <h4>Arbeitsstätte</h4>
-            <v-text-field
-              v-model="arbeitsstätte_name"
-              label="Arbeitgeber"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-            <v-text-field
-              v-model="arbeitsstätte_street"
-              label="Straße"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-            <v-text-field
-              v-model="arbeitsstätte_number"
-              label="Hausnummer"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-            <v-text-field
-              v-model="arbeitsstätte_postcode"
-              label="Postleitzahl"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-            <v-text-field
-              v-model="arbeitsstätte_town"
-              label="Ort"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </v-col> -->
       </v-card>
       <h4 class="my-4">
         Versicherungsbeiträge
@@ -1411,12 +1381,12 @@
       </v-card>
     </div>
     <v-row v-if="radioGroupAntragsgrundlage === 2">
-        <p>
-          Um eine zügige Bearbeitung zu gewährleisten, sind die erforderlichen
-          Nachweise unt derm dem Punkt "Nachweise" anzufügen. Kontoauszüge
-          können NICHT als Nachweis berücksichtigt werden.
-        </p>
-      </v-row>
+      <p>
+        Um eine zügige Bearbeitung zu gewährleisten, sind die erforderlichen
+        Nachweise unt derm dem Punkt "Nachweise" anzufügen. Kontoauszüge können
+        NICHT als Nachweis berücksichtigt werden.
+      </p>
+    </v-row>
     <h3 v-if="this.elternteil1.netto > 0">Testline</h3>
     <v-row v-if="this.$store.state.entCheck">
       <v-col>
@@ -1456,7 +1426,12 @@
       </v-col>
     </v-row>
     <p v-else></p>
-    <v-btn class="my-6" justify="center" @click="funcShowKindDaten" :disabled="!valid">
+    <v-btn
+      class="my-6"
+      justify="center"
+      @click="funcShowKindDaten"
+      :disabled="!valid"
+    >
       weiter
       <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
     </v-btn>
@@ -1620,9 +1595,6 @@ export default {
       telRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>
-          value.length >= 9 ||
-          "Bitte gültige Telefonnummer inklusive Vorwahl eingeben!",
-        (value) =>
           /^\d+$/.test(value) ||
           "Die Telefonnummer darf nur aus Zahlen bestehen!",
       ],
@@ -1633,6 +1605,7 @@ export default {
           "Pflichtfeld. Bitte gültige IBAN eingeben!",
       ],
       dateRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      radioRules: [(v) => v != 0],
     };
   },
 
@@ -1655,7 +1628,7 @@ export default {
     this.selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen;
 
     this.kontoinhaber =
-    this.$store.state.firstname + " " + this.$store.state.lastname;
+      this.$store.state.firstname + " " + this.$store.state.lastname;
     this.iban = this.$store.state.iban;
     this.bic = this.$store.state.bic;
 
@@ -1743,9 +1716,11 @@ export default {
       this.$parent.addPerson();
     },
     funcShowKindDaten() {
-      if (this.$refs.form.validate() == true){
-      this.$parent.funcShowKindDaten();
-      } else {this.valid = false}
+      if (this.$refs.form.validate() == true) {
+        this.$parent.funcShowKindDaten();
+      } else {
+        this.valid = false;
+      }
     },
   },
 };

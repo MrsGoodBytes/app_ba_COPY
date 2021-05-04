@@ -5,16 +5,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
-        firstname: "",
-        lastname: "",
-        street: "",
-        number: "",
-        postcode: "",
-        town: "",
-        email: "",
-        tel: "",
+        firstname: "Isabella",
+        lastname: "Gandl",
+        street: "Bahnhofstraße",
+        number: "59A",
+        postcode: "23936",
+        town: "Grevesmühlen",
+        email: "isabella.gandl@student.uni-luebeck.de",
+        tel: "03881715975",
 
-        date: "",
+        date: "06.10.1990",
         date_p: "",
         date_child: "",
         date_bb: "",
