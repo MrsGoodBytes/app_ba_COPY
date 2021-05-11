@@ -5,24 +5,28 @@
       Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:
     </h5>
     <h5>Wählen Sie zum Uload mehrere Dateien gleichzeitg aus.</h5>
-    <v-row>
-      <v-col
-        ><h4>
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon color="accent" dark v-bind="attrs" v-on="on"
-                >mdi-information</v-icon
-              >
-            </template>
-            <span
-              >Betreuungsvertäge sind die Verträge, die mit der
-              Betreuungseinrichtung geschlossen wurden und nachweisen, dass das
-              Kind diese Einrichtung besucht.</span
-            > </v-tooltip
-          >Betreuungsverträge der im Antrag genannten Kinder
+
+    <v-row justify="space-around">
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span
+            >Betreuungsvertäge sind die Verträge, die mit der
+            Betreuungseinrichtung geschlossen wurden und nachweisen, dass das
+            Kind diese Einrichtung besucht.</span
+          >
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">
+          Betreuungsverträge der im Antrag genannten Kinder
         </h4>
       </v-col>
-      <v-col
+      <v-col cols="5"
         ><v-file-input
           accept="image/*"
           label="Betreuungsverträge"
@@ -35,34 +39,29 @@
       </v-col>
     </v-row>
 
-    <h4
+    <h3
       v-if="
         this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 2
+        this.$store.state.radioGroupAntragsgrundlage === 3
       "
     >
-      Nachweis Sozialleistungen
-    </h4>
+      Nachweise zur Ermittlung des durchschnittlichen monatlichen
+      Familieneinkommens
+    </h3>
+
+    <!-- NACHWEIS SOZIALLEISTUNGEN -->
     <v-row
+      justify="space-around"
       v-if="
         this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 2
+        this.$store.state.radioGroupAntragsgrundlage === 3
       "
     >
-      <v-col
-        ><v-file-input
-          accept="image/*"
-          label="Nachweis über den Empfang von Sozialleistungen"
-          chips
-          show-size
-          counter
-          multiple
-          truncate-length="23"
-        ></v-file-input>
+      <v-col cols="1">
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-home Was sind Sozialleistungen?</v-icon
+              >mdi-information</v-icon
             >
           </template>
           <span
@@ -73,32 +72,1147 @@
           >
         </v-tooltip>
       </v-col>
-    </v-row>
-    <h4
-      v-else-if="
-        this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 1
-      "
-    >
-      Nachweise Familieneinkommen
-    </h4>
-
-    <v-row
-      v-if="
-        this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 1
-      "
-    >
-      <v-col
+      <v-col cols="6">
+        <h4 class="text-left">Bezogene Sozialleistungen</h4>
+      </v-col>
+      <v-col cols="5"
         ><v-file-input
           accept="image/*"
-          label="Nachweis Familieneinkommen"
+          label="Nachweis Sozialleistungen"
           chips
+          show-size
+          counter
+          multiple
           truncate-length="23"
         ></v-file-input>
       </v-col>
     </v-row>
-    <p v-else></p>
+
+    <!-- NACHWEIS EINKOMMEN -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.netto != 0 ||
+          this.$store.state.elternteil2.netto != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>Einkommen aus nicht selbstständiger Arbeit</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Einkommen</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Einkommensnachweise"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS SELBSTSTAENDIGKEIT -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.selbst != 0 ||
+          this.$store.state.elternteil2.selbst != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>Nachweise über Einkommen aus selbstständiger Arbeit</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Einkommen aus Selbstständigkeit</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Einkommensnachweise Selbstständigkeit"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS KINDERGELD -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.kindergeld != 0 ||
+          this.$store.state.elternteil2.kindergeld != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span
+            >Geben Sie hier an, wieviel Kindergeld dieses Elternteil
+            bezieht.</span
+          >
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Kindergeld</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Kindergeldnachweise"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS ARBEITSLOSENGELD 1 -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.alg1 != 0 ||
+          this.$store.state.elternteil2.alg1 != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span
+            >Die Nachweise über Arbeitslosengeld 1 oder Existenzgründerzuschuss
+            hier anfügen.</span
+          >
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">ALG1 oder Existenzgründerzuschuss</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweis Bescheid ALG1 / Existenzgründerzuschuss"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS KRANKENGELD -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.existenz != 0 ||
+          this.$store.state.elternteil2.existenz != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>Nachweise über Krankengeld</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Krankengeld</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Krankengeld"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS RENTEN -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.rente != 0 ||
+          this.$store.state.elternteil2.rente != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>Nachweise über Rente</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Renteneinkünfte</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Rentennachweise"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS UNTERHALT -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.unterhaltseinkunft != 0 ||
+          this.$store.state.elternteil2.unterhaltseinkunft != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span
+            >Nachweise über Einkünfte aus empfangenen Unterhaltszahlungen</span
+          >
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Empfangene Unterhaltszahlungen</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Unterhaltsnachweise"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS AUSBILDUNGSVERGUETUNG -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.ausbildungsvergütung != 0 ||
+          this.$store.state.elternteil2.ausbildungsvergütung != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>Nachweise über Einkommen durch eine Ausbildung</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Ausbildungsvergütung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Einkommensnachweise"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS AUSBILDUNGSFOERDERUNG -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.bafög != 0 ||
+          this.$store.state.elternteil2.bafög != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>Nachweise über z.B. BAFÖG Leistungen</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Ausbildungsförderung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Einkommensnachweise"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS ELTERNGELD -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.elterngeld != 0 ||
+          this.$store.state.elternteil2.elterngeld != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Ausbildungsförderung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Ausbildungsförderung"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS KINDERZUSCHLAG -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.kinderzuschlag != 0 ||
+          this.$store.state.elternteil2.kinderzuschlag != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Kinderzuschlag der Familienkasse</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Kinderzuschlag"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS WEITERE EINNAHMEN -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.weitere != 0 ||
+          this.$store.state.elternteil2.weitere != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">weiter Einnahmen</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise weiterer Einnahmen"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS KITAZUSCHUSS -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.zuschussKita != 0 ||
+          this.$store.state.elternteil2.zuschussKita != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Kitazuschuss</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Zuschuss Betreuungskosten"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS WEITERE EINKOMMEN -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.haushaltseinkommen != 0 ||
+          this.$store.state.elternteil2.haushaltseinkommen != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Einkommen weiterer Haushaltsmitglieder</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise weiterer Einkommen"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS ARBEITSMITTEL -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.arbeitsmittel != 0 ||
+          this.$store.state.elternteil2.arbeitsmittel != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Arbeitsmittel</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise über Arbeitsmittel"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS FAHRTKOSTEN -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.fahrtkosten != 0 ||
+          this.$store.state.elternteil2.fahrtkosten != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left"><v-icon>mdi-minus</v-icon> Fahrtkosten</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Fahrtkosten"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS HAFTPFLICH -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.haftpflicht != 0 ||
+          this.$store.state.elternteil2.haftpflicht != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Haftpflichtversicherung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Haftpflichtverischerung"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS HAUSRAT -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.hausrat != 0 ||
+          this.$store.state.elternteil2.hausrat != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Hausratsversicherung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Hausratsversicherung"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS FREIWILLIGE -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.freiwilligekrankenundpflege != 0 ||
+          this.$store.state.elternteil2.freiwilligekrankenundpflege != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Freiwillige Kranken- und Pflegeversicherung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise freiwillige Kranken- und Pflegevers."
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS FREIWILLIGE RENTE -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.freiwilligerente != 0 ||
+          this.$store.state.elternteil2.freiwilligerente != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Freiwillige Rentenversicherung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise freiwillige Rentenverischerung"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS RIESTER -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.riester != 0 ||
+          this.$store.state.elternteil2.riester != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Riester-Rente</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Einnahmen Riester"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS LEBENSVERISCHERUNG -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.lebens != 0 ||
+          this.$store.state.elternteil2.lebens != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">
+          Risikolebensverischerung / Sterbegeldversicherung
+        </h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Risikolebens-/Sterbegeldversicherung"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS KFZ HAFT -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.kfzhaftpflicht != 0 ||
+          this.$store.state.elternteil2.kfzhaftpflicht != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">KFZ Haftpflichtversicherung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise KFZ-Haftpflicht"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS UNFALLVERSICHERUNG -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.unfall != 0 ||
+          this.$store.state.elternteil2.unfall != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Unfallversicherung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Unfallversicherung"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS BERUFSUNF -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.berufsunfähigkeits != 0 ||
+          this.$store.state.elternteil2.berufsunfähigkeits != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Berufsunfähigkeitsversicherung</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Berufsunfähigkeitsversicherung"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS GEWERKSCH -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.gewerkschaft != 0 ||
+          this.$store.state.elternteil2.gewerkschaft != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Beiträge zu Berufsverbänden</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Berufsverbandsbeiträge"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS KALTMIETE -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.kalt != 0 ||
+          this.$store.state.elternteil2.kalt != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Kaltmiete und Betriebskosten</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Kaltmiete/Betriebskosten"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS EIGENTUM -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.eigentum != 0 ||
+          this.$store.state.elternteil2.eigentum != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Belastungen bei Wohnungs-/ Hauseigentum</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Belastungen Wohneigentum"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS BESONDERE -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.besondere != 0 ||
+          this.$store.state.elternteil2.besondere != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Besondere Belastungen</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise besonderer Belastungen"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS UNTERHALTSBELASTUNG -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.unterhaltszahlungen != 0 ||
+          this.$store.state.elternteil2.unterhaltszahlungen != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Belastungen durch Unterhaltszahlungen</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise Belastungen Unterhaltszahlungen"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
+
+    <!-- NACHWEIS SONSTIGE -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2 &&
+        (this.$store.state.elternteil1.sonstiges != 0 ||
+          this.$store.state.elternteil2.sonstiges != 0)
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span>z.B.</span>
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Sonstiges</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweise der Ergänzungen"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
 
     <v-divider></v-divider>
 
@@ -128,31 +1242,13 @@
 
     <v-divider></v-divider>
 
-    <h4
-      v-if="
-        this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 1
-      "
-    >
-      Nachweise Einkommensgrenze
-    </h4>
     <v-row
       v-if="
-        this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 1
+        this.$store.state.bifoCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 0
       "
     >
-      <v-col
-        ><v-file-input
-          accept="image/*"
-          label="Einkommen des Mannes oder sowas Liste muss angeschaut werden"
-          chips
-          truncate-length="23"
-        ></v-file-input>
-      </v-col>
-    </v-row>
-    <v-row v-else-if="this.$store.state.bifoCheck">
-      <v-col v-if="this.$store.state.radioGroupAntragsgrundlage === 0">
+      <v-col>
         <v-file-input
           accept="image/*"
           label="Nachweis über Privatinsolvenz hier hochladen"
@@ -160,7 +1256,6 @@
           truncate-length="23"
         ></v-file-input>
       </v-col>
-      <p v-else></p>
     </v-row>
   </div>
 </template>

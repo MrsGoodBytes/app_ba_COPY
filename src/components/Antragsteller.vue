@@ -1211,46 +1211,6 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-card>
-        <v-row
-          justify="space-around"
-          no-gutters
-          style="width: 100%"
-          class="d-flex align-center mb-6"
-        >
-          <v-col cols="4">
-            <h4 class="text-left">
-              Kaltmiete und Betriebskosten
-              <v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="accent" v-bind="attrs" v-on="on"
-                    >mdi-information</v-icon
-                  >
-                </template>
-                <span>(ohne Heizkosten und ohne Strom)</span>
-              </v-tooltip>
-            </h4>
-          </v-col>
-          <v-col cols="3">
-            <v-text-field
-              v-model="elternteil1.kaltmiete"
-              label="Elternteil 1"
-              prefix="€"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </v-col>
-          <v-col cols="3">
-            <v-text-field
-              v-model="elternteil2.kaltmiete"
-              label="Elternteil 2"
-              prefix="€"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </v-col>
-        </v-row>
-      </v-card>
       <v-card class="mb-9">
         <v-row
           justify="space-around"
