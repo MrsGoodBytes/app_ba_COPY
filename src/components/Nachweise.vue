@@ -4,9 +4,9 @@
     <h5 class="pb-3">
       Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:
     </h5>
-    <h5 class="warning">Wählen Sie zum Uload mehrere Dateien gleichzeitg aus.</h5>
+    <h5 class="warning mb-5">Wählen Sie zum Uload mehrere Dateien gleichzeitg aus.</h5>
 
-    <h3>Allgemeine Nachweise</h3>
+    <h3 class="pb-3">Allgemeine Nachweise</h3>
     <v-row justify="space-around">
       <v-col cols="1">
         <v-tooltip bottom>
@@ -40,7 +40,7 @@
       </v-col>
     </v-row>
 
-    <h3
+    <h3 class="pb-3"
       v-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 2
@@ -49,7 +49,7 @@
       Nachweise zur Ermittlung des durchschnittlichen monatlichen
       Familieneinkommens
     </h3>
-    <h3
+    <h3 class="pb-3"
       v-else-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 3
@@ -57,7 +57,7 @@
     >
       Nachweise über den Empfang von Sozialleistungen
     </h3>
-    <h3
+    <h3 class="pb-3"
       v-else-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 1
@@ -655,7 +655,7 @@
 
     <v-divider></v-divider>
 
-    <h3 v-if="this.$store.state.radioGroupAntragsgrundlage === 2 && (this.$store.state.elternteil1.arbeitsmittel != 0 || this.$store.state.elternteil2.arbeitsmittel) || (this.$store.state.elternteil1.fahrtkosten != 0 || this.$store.state.elternteil2.fahrtkosten != 0)">Nachweise über anrechenbare Belastungen</h3>
+    <h3  class="pb-3" v-if="this.$store.state.radioGroupAntragsgrundlage === 2 && (this.$store.state.elternteil1.arbeitsmittel != 0 || this.$store.state.elternteil2.arbeitsmittel) || (this.$store.state.elternteil1.fahrtkosten != 0 || this.$store.state.elternteil2.fahrtkosten != 0)">Nachweise über anrechenbare Belastungen</h3>
     <!-- NACHWEIS ARBEITSMITTEL -->
     <v-row
       justify="space-around"
@@ -728,7 +728,7 @@
       </v-col>
     </v-row>
 
-    <h3 v-if="this.$store.state.radioGroupAntragsgrundlage === 2 &&
+    <h3 class="pb-3" v-if="this.$store.state.radioGroupAntragsgrundlage === 2 &&
     (this.$store.state.elternteil1.haftpflicht != 0 || this.$store.state.elternteil2.haftpflicht) ||
     (this.$store.state.elternteil1.hausrat != 0 || this.$store.state.elternteil2.hausrat != 0) || 
     (this.$store.state.elternteil1.freiwilligekrankenundpflege != 0 || this.$store.state.elternteil2.freiwilligekrankenundpflege != 0) || 
@@ -1102,7 +1102,7 @@
       </v-col>
     </v-row>
 
-    <h3 v-if="(this.$store.state.elternteil1.kaltmiete != 0 ||
+    <h3 class="pb-3" v-if="(this.$store.state.elternteil1.kaltmiete != 0 ||
           this.$store.state.elternteil2.kaltmiete != 0) || 
           this.$store.state.eigentum_checkbox === true || (this.$store.state.elternteil1.besondere != 0 ||
           this.$store.state.elternteil2.besondere != 0) || (this.$store.state.elternteil1.unterhaltszahlungen != 0 ||
@@ -1290,7 +1290,7 @@
 
     <v-divider></v-divider>
 
-    <h4
+    <h4 class="pb-3"
       v-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 1
@@ -1314,23 +1314,6 @@
       </v-col>
     </v-row>
 
-    <v-divider></v-divider>
-
-    <v-row
-      v-if="
-        this.$store.state.bifoCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 0
-      "
-    >
-      <v-col>
-        <v-file-input
-          accept="image/*"
-          label="Nachweis über Privatinsolvenz hier hochladen"
-          chips
-          truncate-length="23"
-        ></v-file-input>
-      </v-col>
-    </v-row>
   </div>
 </template>
 
