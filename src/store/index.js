@@ -23,6 +23,7 @@ export default new Vuex.Store({
         entCheck: false,
         bifoCheck: false,
         vorjahr_checkbox: false,
+        eigentum_checkbox: false,
 
         radioGroupAntragsgrundlage: 0,
         privatinsolvenz: false,
@@ -85,7 +86,6 @@ export default new Vuex.Store({
             gewerkschaft: 0,
 
             kaltmiete: 0,
-            eigentum: 0,
             besondere: 0,
             unterhaltszahlungen: 0,
             sonstiges: "",
@@ -122,7 +122,6 @@ export default new Vuex.Store({
             gewerkschaft: 0,
 
             kaltmiete: 0,
-            eigentum: 0,
             besondere: 0,
             unterhaltszahlungen: 0,
             sonstiges: "",

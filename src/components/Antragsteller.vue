@@ -1401,14 +1401,16 @@
     </v-row>
     <p v-else></p> -->
     <v-row>
-      <v-col cols="6">
+      <v-card class="mx-auto pa-5"
+      max-width="400"
+      outlined>
         <h4 class="text-left">
           Eine Ermäßigung des Betreuungsentgeltes erfolgt frühestens mit Beginn
           des Monats der Antragstellung. Sollte ein Zuschuss gewährt werden,
           wird dieser vom Fachbereich Kultur und Bildung direkt an den Träger
           der Kindertageseinrichtung gezahlt.
         </h4>
-      </v-col>
+      </v-card>
     </v-row>
     <v-btn
       class="my-6"

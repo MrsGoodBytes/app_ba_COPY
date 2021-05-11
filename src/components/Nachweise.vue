@@ -4,8 +4,9 @@
     <h5 class="pb-3">
       Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:
     </h5>
-    <h5>Wählen Sie zum Uload mehrere Dateien gleichzeitg aus.</h5>
+    <h5 class="warning">Wählen Sie zum Uload mehrere Dateien gleichzeitg aus.</h5>
 
+    <h3>Allgemeine Nachweise</h3>
     <v-row justify="space-around">
       <v-col cols="1">
         <v-tooltip bottom>
@@ -42,12 +43,64 @@
     <h3
       v-if="
         this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 3
+        this.$store.state.radioGroupAntragsgrundlage === 2
       "
     >
       Nachweise zur Ermittlung des durchschnittlichen monatlichen
       Familieneinkommens
     </h3>
+    <h3
+      v-else-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 3
+      "
+    >
+      Nachweise über den Empfang von Sozialleistungen
+    </h3>
+    <h3
+      v-else-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 1
+      "
+    >
+      Nachweise über Privatinsolvenz
+    </h3>
+
+    <!-- NACHWEIS PRIVATINSOLVENZ -->
+    <v-row
+      justify="space-around"
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 1
+      "
+    >
+      <v-col cols="1">
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" dark v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
+            >
+          </template>
+          <span
+            >Im Falle der Privatinsolvenz ist die Entscheidung durch das Amtsgerichts vorzulegen.</span
+          >
+        </v-tooltip>
+      </v-col>
+      <v-col cols="6">
+        <h4 class="text-left">Privatinsolvenzbescheid</h4>
+      </v-col>
+      <v-col cols="5"
+        ><v-file-input
+          accept="image/*"
+          label="Nachweis Privatinsolvenz"
+          chips
+          show-size
+          counter
+          multiple
+          truncate-length="23"
+        ></v-file-input>
+      </v-col>
+    </v-row>
 
     <!-- NACHWEIS SOZIALLEISTUNGEN -->
     <v-row
@@ -600,6 +653,9 @@
       </v-col>
     </v-row>
 
+    <v-divider></v-divider>
+
+    <h3 v-if="this.$store.state.radioGroupAntragsgrundlage === 2 && (this.$store.state.elternteil1.arbeitsmittel != 0 || this.$store.state.elternteil2.arbeitsmittel) || (this.$store.state.elternteil1.fahrtkosten != 0 || this.$store.state.elternteil2.fahrtkosten != 0)">Nachweise über anrechenbare Belastungen</h3>
     <!-- NACHWEIS ARBEITSMITTEL -->
     <v-row
       justify="space-around"
@@ -672,6 +728,18 @@
       </v-col>
     </v-row>
 
+    <h3 v-if="this.$store.state.radioGroupAntragsgrundlage === 2 &&
+    (this.$store.state.elternteil1.haftpflicht != 0 || this.$store.state.elternteil2.haftpflicht) ||
+    (this.$store.state.elternteil1.hausrat != 0 || this.$store.state.elternteil2.hausrat != 0) || 
+    (this.$store.state.elternteil1.freiwilligekrankenundpflege != 0 || this.$store.state.elternteil2.freiwilligekrankenundpflege != 0) || 
+    (this.$store.state.elternteil1.freiwilligerente != 0 || this.$store.state.elternteil2.freiwilligerente != 0) || 
+    (this.$store.state.elternteil1.riester != 0 || this.$store.state.elternteil2.riester != 0) ||
+     (this.$store.state.elternteil1.lebens != 0 || this.$store.state.elternteil2.lebens != 0) || 
+     (this.$store.state.elternteil1.kfzhaftpflicht != 0 || this.$store.state.elternteil2.kfzhaftpflicht != 0) ||
+     (this.$store.state.elternteil1.unfall != 0 || this.$store.state.elternteil2.unfall != 0) ||
+     (this.$store.state.elternteil1.berufsunfähigkeits != 0 || this.$store.state.elternteil2.berufsunfähigkeits != 0) ||
+     (this.$store.state.elternteil1.gewerkschaft != 0 || this.$store.state.elternteil2.gewerkschaft != 0)
+     ">Nachweise über Verischerungsbeiträge</h3>
     <!-- NACHWEIS HAFTPFLICH -->
     <v-row
       justify="space-around"
@@ -1034,14 +1102,21 @@
       </v-col>
     </v-row>
 
+    <h3 v-if="(this.$store.state.elternteil1.kaltmiete != 0 ||
+          this.$store.state.elternteil2.kaltmiete != 0) || 
+          this.$store.state.eigentum_checkbox === true || (this.$store.state.elternteil1.besondere != 0 ||
+          this.$store.state.elternteil2.besondere != 0) || (this.$store.state.elternteil1.unterhaltszahlungen != 0 ||
+          this.$store.state.elternteil2.unterhaltszahlungen != 0) || (this.$store.state.elternteil1.sonstiges != 0 ||
+          this.$store.state.elternteil2.sonstiges != 0)">Nachweise zur Ermittlung der Einkommensgrenze</h3>
+
     <!-- NACHWEIS KALTMIETE -->
     <v-row
       justify="space-around"
       v-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 2 &&
-        (this.$store.state.elternteil1.kalt != 0 ||
-          this.$store.state.elternteil2.kalt != 0)
+        (this.$store.state.elternteil1.kaltmiete != 0 ||
+          this.$store.state.elternteil2.kaltmiete != 0)
       "
     >
       <v-col cols="1">
@@ -1076,8 +1151,7 @@
       v-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 2 &&
-        (this.$store.state.elternteil1.eigentum != 0 ||
-          this.$store.state.elternteil2.eigentum != 0)
+        this.$store.state.eigentum_checkbox === true
       "
     >
       <v-col cols="1">
