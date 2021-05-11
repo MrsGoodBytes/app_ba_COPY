@@ -88,6 +88,7 @@ export default new Vuex.Store({
             eigentum: 0,
             besondere: 0,
             unterhaltszahlungen: 0,
+            sonstiges: "",
         },
 
         elternteil2: {
@@ -124,6 +125,7 @@ export default new Vuex.Store({
             eigentum: 0,
             besondere: 0,
             unterhaltszahlungen: 0,
+            sonstiges: "",
         },
     },
     mutations: {

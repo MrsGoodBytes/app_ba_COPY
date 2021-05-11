@@ -1374,10 +1374,8 @@
           style="width: 100%"
           class="d-flex align-center mb-6"
         >
-          <v-col cols="4">
-            <h4 class="text-left">Sonstige Ergänzungen / Angaben</h4>
-          </v-col>
           <v-col cols="5">
+            <h4 class="text-left">Sonstige Ergänzungen / Angaben</h4>
             <v-textarea
               v-model="elternteil1.sonstiges"
               v-bind="attrs"
@@ -1385,7 +1383,15 @@
               outlined
             ></v-textarea>
           </v-col>
-          <v-col cols="1"> </v-col>
+          <v-col cols="5">
+            <h4 class="text-left">Sonstige Ergänzungen / Angaben</h4>
+            <v-textarea
+              v-model="elternteil2.sonstiges"
+              v-bind="attrs"
+              v-on="on"
+              outlined
+            ></v-textarea>
+          </v-col>
         </v-row>
       </v-card>
     </div>
@@ -1543,6 +1549,7 @@ export default {
         eigentum: 0,
         besondere: 0,
         unterhaltszahlungen: 0,
+        sonstiges: "",
       },
 
       elternteil2: {
@@ -1579,6 +1586,7 @@ export default {
         eigentum: 0,
         besondere: 0,
         unterhaltszahlungen: 0,
+        sonstiges: "",
       },
       wohnort_checkbox: false,
       wohnort: "",
