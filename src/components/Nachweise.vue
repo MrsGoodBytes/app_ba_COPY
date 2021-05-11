@@ -4,30 +4,31 @@
     <h5 class="pb-3">
       Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:
     </h5>
-    <h5 class="warning mb-5">Wählen Sie zum Uload mehrere Dateien gleichzeitg aus.</h5>
+    <h5 class="warning mb-5">
+      <v-icon>mdi-alert</v-icon>HINWEIS: Wählen Sie zum Uload mehrere Dateien
+      gleichzeitg aus.
+    </h5>
 
-    <h3 class="pb-3">Allgemeine Nachweise</h3>
+    <h3>Allgemeine Nachweise</h3>
     <v-row justify="space-around">
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span
-            >Betreuungsvertäge sind die Verträge, die mit der
-            Betreuungseinrichtung geschlossen wurden und nachweisen, dass das
-            Kind diese Einrichtung besucht.</span
-          >
-        </v-tooltip>
-      </v-col>
-      <v-col cols="6">
+      <v-col cols="4" class="my-auto">
         <h4 class="text-left">
           Betreuungsverträge der im Antrag genannten Kinder
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Betreuungsvertäge sind die Verträge, die mit der
+              Betreuungseinrichtung geschlossen wurden und nachweisen, dass das
+              Kind diese Einrichtung besucht.</span
+            >
+          </v-tooltip>
         </h4>
       </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Betreuungsverträge"
@@ -40,7 +41,8 @@
       </v-col>
     </v-row>
 
-    <h3 class="pb-3"
+    <h3
+      class="my-6"
       v-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 2
@@ -49,7 +51,8 @@
       Nachweise zur Ermittlung des durchschnittlichen monatlichen
       Familieneinkommens
     </h3>
-    <h3 class="pb-3"
+    <h3
+      class="pb-3"
       v-else-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 3
@@ -57,7 +60,8 @@
     >
       Nachweise über den Empfang von Sozialleistungen
     </h3>
-    <h3 class="pb-3"
+    <h3
+      class="pb-3"
       v-else-if="
         this.$store.state.entCheck &&
         this.$store.state.radioGroupAntragsgrundlage === 1
@@ -74,22 +78,23 @@
         this.$store.state.radioGroupAntragsgrundlage === 1
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Privatinsolvenzbescheid
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Im Falle der Privatinsolvenz ist die Entscheidung durch das
+              Amtsgerichts vorzulegen.</span
             >
-          </template>
-          <span
-            >Im Falle der Privatinsolvenz ist die Entscheidung durch das Amtsgerichts vorzulegen.</span
-          >
-        </v-tooltip>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Privatinsolvenzbescheid</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweis Privatinsolvenz"
@@ -110,25 +115,25 @@
         this.$store.state.radioGroupAntragsgrundlage === 3
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Bezogene Sozialleistungen
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Zu Sozialleistungen zählen Arbeitslosengeld II (ALGII),
+              Grundsicherung, Asylbewerberleistungsgesetz, Kinderzuschlag der
+              Familienkasse oder Wohngeld. Das Nachweis über eine der hier
+              aufgeführten Leistungen reicht aus.</span
             >
-          </template>
-          <span
-            >Zu Sozialleistungen zählen Arbeitslosengeld II (ALGII),
-            Grundsicherung, Asylbewerberleistungsgesetz, Kinderzuschlag der
-            Familienkasse oder Wohngeld. Das Nachweis über eine der hier
-            aufgeführten Leistungen reicht aus.</span
-          >
-        </v-tooltip>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Bezogene Sozialleistungen</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweis Sozialleistungen"
@@ -151,20 +156,20 @@
           this.$store.state.elternteil2.netto != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>Einkommen aus nicht selbstständiger Arbeit</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Einkommen
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>Nachweise über das Einkommen der Eltern</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Einkommen</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Einkommensnachweise"
@@ -174,6 +179,38 @@
           multiple
           truncate-length="23"
         ></v-file-input>
+        <div class="text-right">
+          <v-dialog v-model="dialog" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="accent" text dark v-bind="attrs" v-on="on">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+                <v-btn
+                  color="accent"
+                  @click="dialog = false"
+                  class="align-right"
+                >
+                  x
+                </v-btn>
+              </v-card-title>
+
+              <v-card-text>
+                <v-img :src="require('/src/img/einkommen.jpg')" />
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-col>
     </v-row>
 
@@ -187,20 +224,20 @@
           this.$store.state.elternteil2.selbst != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>Nachweise über Einkommen aus selbstständiger Arbeit</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Einkommen aus Selbstständigkeit
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>Nachweise über Einkommen aus selbstständiger Arbeit</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Einkommen aus Selbstständigkeit</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Einkommensnachweise Selbstständigkeit"
@@ -223,23 +260,23 @@
           this.$store.state.elternteil2.kindergeld != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Kindergeld
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Geben Sie hier an, wieviel Kindergeld dieses Elternteil
+              bezieht.</span
             >
-          </template>
-          <span
-            >Geben Sie hier an, wieviel Kindergeld dieses Elternteil
-            bezieht.</span
-          >
-        </v-tooltip>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Kindergeld</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Kindergeldnachweise"
@@ -262,23 +299,23 @@
           this.$store.state.elternteil2.alg1 != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          ALG1 oder Existenzgründerzuschuss
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Die Nachweise über Arbeitslosengeld 1 oder
+              Existenzgründerzuschuss hier anfügen.</span
             >
-          </template>
-          <span
-            >Die Nachweise über Arbeitslosengeld 1 oder Existenzgründerzuschuss
-            hier anfügen.</span
-          >
-        </v-tooltip>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">ALG1 oder Existenzgründerzuschuss</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweis Bescheid ALG1 / Existenzgründerzuschuss"
@@ -288,6 +325,38 @@
           multiple
           truncate-length="23"
         ></v-file-input>
+        <div class="text-right">
+          <v-dialog v-model="dialog" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="accent" text dark v-bind="attrs" v-on="on">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+                <v-btn
+                  color="accent"
+                  @click="dialog = false"
+                  class="align-right"
+                >
+                  x
+                </v-btn>
+              </v-card-title>
+
+              <v-card-text>
+                <v-img :src="require('/src/img/alg1.jpg')" />
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-col>
     </v-row>
 
@@ -301,20 +370,20 @@
           this.$store.state.elternteil2.existenz != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>Nachweise über Krankengeld</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Krankengeld
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>Nachweise über Krankengeld</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Krankengeld</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Krankengeld"
@@ -337,20 +406,20 @@
           this.$store.state.elternteil2.rente != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>Nachweise über Rente</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Renteneinkünfte
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>Nachweise über Einkünfte aus gesetzlicher Rente</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Renteneinkünfte</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Rentennachweise"
@@ -373,22 +442,23 @@
           this.$store.state.elternteil2.unterhaltseinkunft != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Empfangene Unterhaltszahlungen
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Nachweise über Einkünfte aus empfangenen
+              Unterhaltszahlungen</span
             >
-          </template>
-          <span
-            >Nachweise über Einkünfte aus empfangenen Unterhaltszahlungen</span
-          >
-        </v-tooltip>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Empfangene Unterhaltszahlungen</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Unterhaltsnachweise"
@@ -411,20 +481,20 @@
           this.$store.state.elternteil2.ausbildungsvergütung != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>Nachweise über Einkommen durch eine Ausbildung</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Ausbildungsvergütung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>Nachweise über Einkommen durch eine Ausbildung</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Ausbildungsvergütung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Einkommensnachweise"
@@ -447,20 +517,20 @@
           this.$store.state.elternteil2.bafög != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>Nachweise über z.B. BAFÖG Leistungen</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Ausbildungsförderung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>Nachweise über z.B. BAFÖG Leistungen</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Ausbildungsförderung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Einkommensnachweise"
@@ -483,20 +553,20 @@
           this.$store.state.elternteil2.elterngeld != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Ausbildungsförderung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Ausbildungsförderung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Ausbildungsförderung"
@@ -519,20 +589,20 @@
           this.$store.state.elternteil2.kinderzuschlag != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Kinderzuschlag der Familienkasse
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Kinderzuschlag der Familienkasse</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Kinderzuschlag"
@@ -555,20 +625,20 @@
           this.$store.state.elternteil2.weitere != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          weiter Einnahmen
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">weiter Einnahmen</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise weiterer Einnahmen"
@@ -591,20 +661,20 @@
           this.$store.state.elternteil2.zuschussKita != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Kitazuschuss
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Kitazuschuss</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Zuschuss Betreuungskosten"
@@ -627,20 +697,20 @@
           this.$store.state.elternteil2.haushaltseinkommen != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Einkommen weiterer Haushaltsmitglieder
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Einkommen weiterer Haushaltsmitglieder</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise weiterer Einkommen"
@@ -653,9 +723,26 @@
       </v-col>
     </v-row>
 
-    <v-divider></v-divider>
+    <v-divider
+      v-if="
+        this.$store.state.entCheck &&
+        this.$store.state.radioGroupAntragsgrundlage === 2
+      "
+      class="my-3"
+    ></v-divider>
 
-    <h3  class="pb-3" v-if="this.$store.state.radioGroupAntragsgrundlage === 2 && (this.$store.state.elternteil1.arbeitsmittel != 0 || this.$store.state.elternteil2.arbeitsmittel) || (this.$store.state.elternteil1.fahrtkosten != 0 || this.$store.state.elternteil2.fahrtkosten != 0)">Nachweise über anrechenbare Belastungen</h3>
+    <h3
+      class="my-6"
+      v-if="
+        (this.$store.state.radioGroupAntragsgrundlage === 2 &&
+          (this.$store.state.elternteil1.arbeitsmittel != 0 ||
+            this.$store.state.elternteil2.arbeitsmittel)) ||
+        this.$store.state.elternteil1.fahrtkosten != 0 ||
+        this.$store.state.elternteil2.fahrtkosten != 0
+      "
+    >
+      Nachweise über anrechenbare Belastungen
+    </h3>
     <!-- NACHWEIS ARBEITSMITTEL -->
     <v-row
       justify="space-around"
@@ -666,20 +753,20 @@
           this.$store.state.elternteil2.arbeitsmittel != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Arbeitsmittel
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Arbeitsmittel</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise über Arbeitsmittel"
@@ -702,20 +789,20 @@
           this.$store.state.elternteil2.fahrtkosten != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          <v-icon>mdi-minus</v-icon> Fahrtkosten
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left"><v-icon>mdi-minus</v-icon> Fahrtkosten</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Fahrtkosten"
@@ -728,18 +815,45 @@
       </v-col>
     </v-row>
 
-    <h3 class="pb-3" v-if="this.$store.state.radioGroupAntragsgrundlage === 2 &&
-    (this.$store.state.elternteil1.haftpflicht != 0 || this.$store.state.elternteil2.haftpflicht) ||
-    (this.$store.state.elternteil1.hausrat != 0 || this.$store.state.elternteil2.hausrat != 0) || 
-    (this.$store.state.elternteil1.freiwilligekrankenundpflege != 0 || this.$store.state.elternteil2.freiwilligekrankenundpflege != 0) || 
-    (this.$store.state.elternteil1.freiwilligerente != 0 || this.$store.state.elternteil2.freiwilligerente != 0) || 
-    (this.$store.state.elternteil1.riester != 0 || this.$store.state.elternteil2.riester != 0) ||
-     (this.$store.state.elternteil1.lebens != 0 || this.$store.state.elternteil2.lebens != 0) || 
-     (this.$store.state.elternteil1.kfzhaftpflicht != 0 || this.$store.state.elternteil2.kfzhaftpflicht != 0) ||
-     (this.$store.state.elternteil1.unfall != 0 || this.$store.state.elternteil2.unfall != 0) ||
-     (this.$store.state.elternteil1.berufsunfähigkeits != 0 || this.$store.state.elternteil2.berufsunfähigkeits != 0) ||
-     (this.$store.state.elternteil1.gewerkschaft != 0 || this.$store.state.elternteil2.gewerkschaft != 0)
-     ">Nachweise über Verischerungsbeiträge</h3>
+    <v-divider
+      v-if="
+        (this.$store.state.radioGroupAntragsgrundlage === 2 &&
+          (this.$store.state.elternteil1.arbeitsmittel != 0 ||
+            this.$store.state.elternteil2.arbeitsmittel)) ||
+        this.$store.state.elternteil1.fahrtkosten != 0 ||
+        this.$store.state.elternteil2.fahrtkosten != 0
+      "
+      class="my-3"
+    ></v-divider>
+
+    <h3
+      class="my-6"
+      v-if="
+        (this.$store.state.radioGroupAntragsgrundlage === 2 &&
+          (this.$store.state.elternteil1.haftpflicht != 0 ||
+            this.$store.state.elternteil2.haftpflicht)) ||
+        this.$store.state.elternteil1.hausrat != 0 ||
+        this.$store.state.elternteil2.hausrat != 0 ||
+        this.$store.state.elternteil1.freiwilligekrankenundpflege != 0 ||
+        this.$store.state.elternteil2.freiwilligekrankenundpflege != 0 ||
+        this.$store.state.elternteil1.freiwilligerente != 0 ||
+        this.$store.state.elternteil2.freiwilligerente != 0 ||
+        this.$store.state.elternteil1.riester != 0 ||
+        this.$store.state.elternteil2.riester != 0 ||
+        this.$store.state.elternteil1.lebens != 0 ||
+        this.$store.state.elternteil2.lebens != 0 ||
+        this.$store.state.elternteil1.kfzhaftpflicht != 0 ||
+        this.$store.state.elternteil2.kfzhaftpflicht != 0 ||
+        this.$store.state.elternteil1.unfall != 0 ||
+        this.$store.state.elternteil2.unfall != 0 ||
+        this.$store.state.elternteil1.berufsunfähigkeits != 0 ||
+        this.$store.state.elternteil2.berufsunfähigkeits != 0 ||
+        this.$store.state.elternteil1.gewerkschaft != 0 ||
+        this.$store.state.elternteil2.gewerkschaft != 0
+      "
+    >
+      Nachweise über Verischerungsbeiträge
+    </h3>
     <!-- NACHWEIS HAFTPFLICH -->
     <v-row
       justify="space-around"
@@ -750,20 +864,20 @@
           this.$store.state.elternteil2.haftpflicht != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Haftpflichtversicherung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Haftpflichtversicherung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Haftpflichtverischerung"
@@ -786,20 +900,20 @@
           this.$store.state.elternteil2.hausrat != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Hausratsversicherung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Hausratsversicherung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Hausratsversicherung"
@@ -822,20 +936,20 @@
           this.$store.state.elternteil2.freiwilligekrankenundpflege != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Freiwillige Kranken- und Pflegeversicherung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Freiwillige Kranken- und Pflegeversicherung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise freiwillige Kranken- und Pflegevers."
@@ -858,20 +972,20 @@
           this.$store.state.elternteil2.freiwilligerente != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Freiwillige Rentenversicherung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Freiwillige Rentenversicherung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise freiwillige Rentenverischerung"
@@ -894,20 +1008,20 @@
           this.$store.state.elternteil2.riester != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Riester-Rente
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Riester-Rente</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Einnahmen Riester"
@@ -930,22 +1044,20 @@
           this.$store.state.elternteil2.lebens != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
-      </v-col>
-      <v-col cols="6">
+      <v-col cols="4" class="my-auto">
         <h4 class="text-left">
           Risikolebensverischerung / Sterbegeldversicherung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
         </h4>
       </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Risikolebens-/Sterbegeldversicherung"
@@ -968,20 +1080,20 @@
           this.$store.state.elternteil2.kfzhaftpflicht != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          KFZ Haftpflichtversicherung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">KFZ Haftpflichtversicherung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise KFZ-Haftpflicht"
@@ -1004,20 +1116,20 @@
           this.$store.state.elternteil2.unfall != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Unfallversicherung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Unfallversicherung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Unfallversicherung"
@@ -1040,20 +1152,20 @@
           this.$store.state.elternteil2.berufsunfähigkeits != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Berufsunfähigkeitsversicherung
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Berufsunfähigkeitsversicherung</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Berufsunfähigkeitsversicherung"
@@ -1076,20 +1188,20 @@
           this.$store.state.elternteil2.gewerkschaft != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Beiträge zu Berufsverbänden
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Beiträge zu Berufsverbänden</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Berufsverbandsbeiträge"
@@ -1101,13 +1213,49 @@
         ></v-file-input>
       </v-col>
     </v-row>
+    <v-divider
+      class="my-3"
+      v-if="
+        (this.$store.state.radioGroupAntragsgrundlage === 2 &&
+          (this.$store.state.elternteil1.haftpflicht != 0 ||
+            this.$store.state.elternteil2.haftpflicht)) ||
+        this.$store.state.elternteil1.hausrat != 0 ||
+        this.$store.state.elternteil2.hausrat != 0 ||
+        this.$store.state.elternteil1.freiwilligekrankenundpflege != 0 ||
+        this.$store.state.elternteil2.freiwilligekrankenundpflege != 0 ||
+        this.$store.state.elternteil1.freiwilligerente != 0 ||
+        this.$store.state.elternteil2.freiwilligerente != 0 ||
+        this.$store.state.elternteil1.riester != 0 ||
+        this.$store.state.elternteil2.riester != 0 ||
+        this.$store.state.elternteil1.lebens != 0 ||
+        this.$store.state.elternteil2.lebens != 0 ||
+        this.$store.state.elternteil1.kfzhaftpflicht != 0 ||
+        this.$store.state.elternteil2.kfzhaftpflicht != 0 ||
+        this.$store.state.elternteil1.unfall != 0 ||
+        this.$store.state.elternteil2.unfall != 0 ||
+        this.$store.state.elternteil1.berufsunfähigkeits != 0 ||
+        this.$store.state.elternteil2.berufsunfähigkeits != 0 ||
+        this.$store.state.elternteil1.gewerkschaft != 0 ||
+        this.$store.state.elternteil2.gewerkschaft != 0
+      "
+    ></v-divider>
 
-    <h3 class="pb-3" v-if="(this.$store.state.elternteil1.kaltmiete != 0 ||
-          this.$store.state.elternteil2.kaltmiete != 0) || 
-          this.$store.state.eigentum_checkbox === true || (this.$store.state.elternteil1.besondere != 0 ||
-          this.$store.state.elternteil2.besondere != 0) || (this.$store.state.elternteil1.unterhaltszahlungen != 0 ||
-          this.$store.state.elternteil2.unterhaltszahlungen != 0) || (this.$store.state.elternteil1.sonstiges != 0 ||
-          this.$store.state.elternteil2.sonstiges != 0)">Nachweise zur Ermittlung der Einkommensgrenze</h3>
+    <h3
+      class="my-6"
+      v-if="
+        this.$store.state.elternteil1.kaltmiete != 0 ||
+        this.$store.state.elternteil2.kaltmiete != 0 ||
+        this.$store.state.eigentum_checkbox === true ||
+        this.$store.state.elternteil1.besondere != 0 ||
+        this.$store.state.elternteil2.besondere != 0 ||
+        this.$store.state.elternteil1.unterhaltszahlungen != 0 ||
+        this.$store.state.elternteil2.unterhaltszahlungen != 0 ||
+        this.$store.state.elternteil1.sonstiges != 0 ||
+        this.$store.state.elternteil2.sonstiges != 0
+      "
+    >
+      Nachweise zur Ermittlung der Einkommensgrenze
+    </h3>
 
     <!-- NACHWEIS KALTMIETE -->
     <v-row
@@ -1119,20 +1267,20 @@
           this.$store.state.elternteil2.kaltmiete != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Kaltmiete und Betriebskosten
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Kaltmiete und Betriebskosten</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Kaltmiete/Betriebskosten"
@@ -1154,20 +1302,20 @@
         this.$store.state.eigentum_checkbox === true
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Belastungen bei Wohnungs-/ Hauseigentum
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Belastungen bei Wohnungs-/ Hauseigentum</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Belastungen Wohneigentum"
@@ -1190,20 +1338,20 @@
           this.$store.state.elternteil2.besondere != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Besondere Belastungen
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Besondere Belastungen</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise besonderer Belastungen"
@@ -1226,20 +1374,20 @@
           this.$store.state.elternteil2.unterhaltszahlungen != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Belastungen durch Unterhaltszahlungen
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Belastungen durch Unterhaltszahlungen</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise Belastungen Unterhaltszahlungen"
@@ -1262,20 +1410,20 @@
           this.$store.state.elternteil2.sonstiges != 0)
       "
     >
-      <v-col cols="1">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ on, attrs }">
-            <v-icon color="accent" dark v-bind="attrs" v-on="on"
-              >mdi-information</v-icon
-            >
-          </template>
-          <span>z.B.</span>
-        </v-tooltip>
+      <v-col cols="4" class="my-auto">
+        <h4 class="text-left">
+          Sonstiges
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" dark v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>z.B.</span>
+          </v-tooltip>
+        </h4>
       </v-col>
-      <v-col cols="6">
-        <h4 class="text-left">Sonstiges</h4>
-      </v-col>
-      <v-col cols="5"
+      <v-col cols="8"
         ><v-file-input
           accept="image/*"
           label="Nachweise der Ergänzungen"
@@ -1287,33 +1435,6 @@
         ></v-file-input>
       </v-col>
     </v-row>
-
-    <v-divider></v-divider>
-
-    <h4 class="pb-3"
-      v-if="
-        this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 1
-      "
-    >
-      Nachweise Belastungen
-    </h4>
-    <v-row
-      v-if="
-        this.$store.state.entCheck &&
-        this.$store.state.radioGroupAntragsgrundlage === 1
-      "
-    >
-      <v-col
-        ><v-file-input
-          accept="image/*"
-          label="Einkommen des Mannes oder sowas Liste muss angeschaut werden"
-          chips
-          truncate-length="23"
-        ></v-file-input>
-      </v-col>
-    </v-row>
-
   </div>
 </template>
 
@@ -1354,6 +1475,7 @@ export default {
           (value && value.length >= 22 && /^\d+$/.test(value)) ||
           "Pflichtfeld. Bitte gültige IBAN eingeben!",
       ],
+      dialog: false,
     };
   },
 

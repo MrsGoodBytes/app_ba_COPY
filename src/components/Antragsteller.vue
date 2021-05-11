@@ -1400,7 +1400,7 @@
       </v-col>
     </v-row>
     <p v-else></p> -->
-    <v-row>
+    <v-row v-if="this.$store.state.entCheck || this.$store.state.geCheck">
       <v-card class="mx-auto pa-5"
       max-width="400"
       outlined>
