@@ -26,6 +26,7 @@ export default new Vuex.Store({
         eigentum_checkbox: false,
 
         radioGroupAntragsgrundlage: 0,
+        antragsgrundlage: "",
         privatinsolvenz: false,
         radioGroupErmaeßigung: 0,
         radioGroupBetreuungsform: 0,
@@ -172,6 +173,9 @@ export default new Vuex.Store({
         },
         setAntragsgrundlageCheck(state, value) {
             state.radioGroupAntragsgrundlage = value;
+        },
+        setAntragsgrundlage(state, value) {
+            state.antragsgrundlage = value;
         },
         setPrivatinsolvenz(state, value) {
             state.privatinsolvenz = value;

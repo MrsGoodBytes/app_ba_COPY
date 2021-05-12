@@ -1657,6 +1657,9 @@ export default {
     radioGroupAntragsgrundlage: function (val) {
       this.$store.commit("setAntragsgrundlageCheck", val);
     },
+    antragsgrundlage: function (val) {
+      this.$store.commit("setAntragsgrundlage", val);
+    },
     privatinsolvenz: function (val) {
       this.$store.commit("setPrivatinsolvenz", val);
     },

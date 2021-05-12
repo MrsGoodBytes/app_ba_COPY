@@ -15,25 +15,47 @@
     </v-row>
     <v-row>
       <v-col cols="3" class="text-left">
-        <h6>Antragsteller/in</h6>
+        <h6 class="text--disabled">Antragsteller/in</h6>
         <h5>{{ this.name }}</h5>
+        <h6 class="text--disabled" v-if="this.$store.state.geCheck">
+          Geburtsdatum
+        </h6>
+        <h5 v-if="this.$store.state.geCheck">{{ this.date }}</h5>
       </v-col>
       <v-col cols="4" class="text-left">
-        <h6>Anschrift</h6>
+        <h6 class="text--disabled">Anschrift</h6>
         <h5>{{ this.adress }}</h5>
       </v-col>
       <v-col cols="4" class="text-left">
-        <h6>E-Mail</h6>
+        <h6 class="text--disabled">E-Mail</h6>
         <h5>{{ this.email }}</h5>
-        <h6>Telefonnummer</h6>
+        <h6 class="text--disabled">Telefonnummer</h6>
         <h5>{{ this.tel }}</h5>
       </v-col>
     </v-row>
+
     <v-row>
       <v-col cols="3" class="text-left">
-        <h6>weitere im Haushalt lebende Personen</h6>
+        <h6 class="text--disabled">Antragsgrundlage</h6>
+        <h5 v-if="this.antragsgrundlage === 1">Privatinsolvenz</h5>
+        <h5 v-else-if="this.antragsgrundlage === 2">Einkommen</h5>
+        <h5 v-else-if="this.antragsgrundlage === 3">
+          Bezug von Sozialleistungen
+        </h5>
+        <h5 v-else>
+          <v-btn @click="funcShowAntragstellerDaten"
+            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+              >mdi-pencil</v-icon
+            ></v-btn
+          >
+          Antragsgrundlage wählen!
+        </h5>
+      </v-col>
+      <v-col cols="4" class="text-left">
+        <h6 class="text--disabled">weitere im Haushalt lebende Personen</h6>
         <h5>{{ this.person }}</h5>
       </v-col>
+      <v-col cols="4" class="text-left"> </v-col>
     </v-row>
     <v-divider class="my-8"></v-divider>
     <v-row>
@@ -46,20 +68,53 @@
         >
       </h4>
     </v-row>
+
     <v-row>
       <v-col cols="3" class="text-left">
-        <h6>Kind</h6>
+        <h6 class="text--disabled">Kind</h6>
         <h5>{{ this.child_name }}</h5>
       </v-col>
       <v-col cols="4" class="text-left">
-        <h6>Geburtstag</h6>
+        <h6 class="text--disabled">Geburtstag</h6>
         <h5>{{ this.child_date }}</h5>
       </v-col>
     </v-row>
     <v-row>
+      <v-col cols="3" class="text-left">
+        <h6 class="text--disabled">Betreuungsform</h6>
+        <h5 v-if="this.betreuung === 0">Krippe</h5>
+        <h5 v-else-if="this.betreuung === 1">Elementar</h5>
+        <h5 v-else-if="this.betreuung === 2">Hort</h5>
+        <h5 v-else-if="this.betreuung === 3">Tagespflege</h5>
+        <h5 v-else-if="this.betreuung === 4">Ganztags an Schulen</h5>
+      </v-col>
       <v-col cols="4" class="text-left">
-        <h6>Betreuung</h6>
-        <h5>{{ this.child_betreuung }}</h5>
+        <h6 class="text--disabled">Betreuungseinrichtung</h6>
+        <h5 v-if="this.betreuung === 3">{{ this.tagespflege }}</h5>
+        <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
+      </v-col>
+      <v-col cols="4" class="text-left">
+        <h6 class="text--disabled">Ermäßigungsantrag im Vorjahr gestellt:</h6>
+        <h5 v-if="this.vorjahr === true">ja</h5>
+        <h5 v-else>nein</h5>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col v-if="this.$store.state.entCheck" cols="3" class="text-left">
+        <h6 class="text--disabled">Betreuungsbeginn</h6>
+        <h5 v-if="this.betreuung === 0">Krippe</h5>
+      </v-col>
+      <v-col cols="3" class="text-left">
+        <h6 class="text--disabled">Betreuungsentgelt</h6>
+        <h5 v-if="this.betreuung === 0">Krippe</h5>
+      </v-col>
+      <v-col cols="3" class="text-left">
+        <h6 class="text--disabled">Elternbeitrag</h6>
+        <h5 v-if="this.betreuung === 0">Krippe</h5>
+      </v-col>
+      <v-col cols="3" class="text-left">
+        <h6 class="text--disabled">Essensgeld</h6>
+        <h5 v-if="this.betreuung === 0">Krippe</h5>
       </v-col>
     </v-row>
   </div>
@@ -107,11 +162,12 @@ export default {
 
   created() {
     this.name = this.$store.state.firstname + " " + this.$store.state.lastname;
+    this.date = this.$store.state.date;
     this.adress =
       this.$store.state.street +
       " " +
       this.$store.state.number +
-      " " +
+      ", " +
       this.$store.state.postcode +
       " " +
       this.$store.state.town;
@@ -125,9 +181,25 @@ export default {
       this.$store.state.date_p +
       " " +
       this.$store.state.verwandtschaft_p;
-    this.child_name = this.$store.state.child_firstname + " " + this.$store.state.child_lastname;
+    this.child_name =
+      this.$store.state.child_firstname +
+      " " +
+      this.$store.state.child_lastname;
     this.child_date = this.$store.state.date_child;
     this.betreuung = this.$store.state.radioGroupBetreuungsform;
+    this.antragsgrundlage = this.$store.state.radioGroupAntragsgrundlage;
+    this.tagespflege =
+      this.$store.state.tagespflegename +
+      " " +
+      this.$store.state.institutionstreet +
+      " " +
+      this.$store.state.institutionnumber +
+      ", " +
+      this.$store.state.institutionpostcode +
+      " " +
+      this.$store.state.institutiontown;
+    this.betreuungseinrichtung = this.$store.state.institutionname;
+    this.vorjahr = this.$store.state.vorjahr_checkbox;
   },
 
   watch: {},
