@@ -41,6 +41,7 @@
       </v-col>
     </v-row>
 
+    <v-divider class="my-3"></v-divider>
     <h3
       class="my-6"
       v-if="

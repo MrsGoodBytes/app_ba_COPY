@@ -70,7 +70,6 @@ export default new Vuex.Store({
             kinderzuschlag: 0,
             weitere: 0,
             zuschussKita: 0,
-            haushaltseinkommen: 0,
 
             arbeitsmittel: 0,
             fahrtkosten: 0,
@@ -106,7 +105,6 @@ export default new Vuex.Store({
             kinderzuschlag: 0,
             weitere: 0,
             zuschussKita: 0,
-            haushaltseinkommen: 0,
 
             arbeitsmittel: 0,
             fahrtkosten: 0,
@@ -126,6 +124,8 @@ export default new Vuex.Store({
             unterhaltszahlungen: 0,
             sonstiges: "",
         },
+
+        haushaltseinkommen: 0,
     },
     mutations: {
         //write value of textfield into variable

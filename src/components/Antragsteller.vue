@@ -701,25 +701,16 @@
           </v-col>
           <v-col cols="3">
             <v-text-field
-              v-model="elternteil1.haushaltseinkommen"
-              label="Elternteil 1"
+              v-model="haushaltseinkommen"
+              label="weitere"
               prefix="€"
               v-bind="attrs"
               v-on="on"
             ></v-text-field>
           </v-col>
-          <v-col cols="3">
-            <v-text-field
-              v-model="elternteil2.haushaltseinkommen"
-              label="Elternteil 2"
-              prefix="€"
-              v-bind="attrs"
-              v-on="on"
-            ></v-text-field>
-          </v-col>
+          <v-col cols="3"></v-col>
         </v-row>
       </v-card>
-      <v-divider class="my-4"></v-divider>
       <h4 class="my-4">
         Angaben zur Ermittlung der auf das Einkommen anrechenbaren Belastungen
         in €
@@ -1401,7 +1392,7 @@
     </v-row>
     <p v-else></p> -->
     <v-row v-if="this.$store.state.entCheck || this.$store.state.geCheck">
-      <v-card class="mx-auto pa-5"
+      <v-card class="mx-auto pa-5 my-5"
       max-width="400"
       outlined>
         <h4 class="text-left">
@@ -1593,7 +1584,7 @@ export default {
           "Pflichtfeld. Bitte gültige IBAN eingeben!",
       ],
       dateRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
-      radioRules: [(v) => v != 0],
+      radioRules: [(value) => value != 0],
     };
   },
 
