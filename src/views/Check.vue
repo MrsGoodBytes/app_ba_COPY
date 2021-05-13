@@ -96,11 +96,11 @@
 
         <v-stepper-content step="4" class="mb-6 mx-auto" height="200px">
           <h5 class="text-center">
-            Sie haben angegeben keine Sozialleistungen zu beziehen. Um zu
+            Sie haben angegeben weder privatinsolvent gemeldet zu sein und auch keine Sozialleistungen zu beziehen. Um zu
             ermitteln, ob Ihre Einkommen unterhalbt der Einkommensgrenze liegt,
             beantworten Sie bitte die folgenden Fragen. Diese werden im weiteren
             Verlauf der Antragstellung übernommen und müssen nicht erneut
-            ausgefüllt werden.
+            eingegeben werden.
           </h5>
           <v-btn class="my-3" @click="e1 = 3"
             ><v-icon>mdi-arrow-left</v-icon> zurück</v-btn
@@ -1139,19 +1139,19 @@
           <v-checkbox
             class="font-weight-medium"
             v-model="ge_checkbox"
-            :disabled="this.e1 < 4"
+            :disabled="this.e1 < 5"
             ref="ge_check"
             :label="`Geschwisterermäßigung`"
           ></v-checkbox>
           <v-checkbox
             v-model="ent_checkbox"
-            :disabled="this.e1 < 4"
+            :disabled="this.e1 < 5"
             ref="ent_check"
             :label="`Entgeltermäßigung`"
           ></v-checkbox>
           <v-checkbox
             v-model="bifo_checkbox"
-            :disabled="this.e1 < 4"
+            :disabled="this.e1 < 5"
             ref="bifo_check"
             :label="`Bildungsfond`"
           ></v-checkbox>
@@ -1163,7 +1163,7 @@
     </v-row>
 
     <router-link :to="{ name: 'Apply' }" href="#" class=""
-      ><v-btn color="primary" class="text-button" :disabled="this.e1 < 4"
+      ><v-btn color="primary" class="text-button" :disabled="this.e1 < 5"
         >Gewählte Anträge stellen</v-btn
       ></router-link
     >
@@ -1271,6 +1271,8 @@ export default {
       arbeitgeber_town: "",
 
       km: "",
+
+      einkommen: 0,
     };
   },
 
@@ -1345,10 +1347,13 @@ export default {
     },
 
     fourAdd() {
-      if (this.einkommen > 0) {
+      this.einkommen = (this.elternteil1.netto.value +  this.elternteil2.netto.value);
+      if (this.einkommen < 3000) {
         this.$store.state.entCheck = true;
+        this.entErfolg = true;
+        this.ent_checkbox = true;
         this.e1 = 5;
-      }
+      } else {/* this.e1 = 5 */}
     },
   },
 };
