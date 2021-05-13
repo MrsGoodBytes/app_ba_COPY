@@ -1353,7 +1353,7 @@ export default {
         this.entErfolg = true;
         this.ent_checkbox = true;
         this.e1 = 5;
-      } else {/* this.e1 = 5 */}
+      } else {this.e1 = 5}
     },
   },
 };
