@@ -127,6 +127,7 @@ export default new Vuex.Store({
         },
 
         haushaltseinkommen: 0,
+        one: true,
     },
     mutations: {
         //write value of textfield into variable
@@ -259,7 +260,7 @@ export default new Vuex.Store({
         },
         setElternteil2(state, value) {
             state.elternteil2 = value;
-        }
+        },
     },
     actions: {},
     modules: {}

@@ -2,6 +2,19 @@
   <div id="antrag_auswahl">
     <v-container>
       <Antragswahl msg="Welche Anträge möchtest du stellen?" />
+      <v-alert
+        v-if="
+          !(
+            this.$store.state.geCheck ||
+            this.$store.state.entCheck ||
+            this.$store.state.bifoCheck
+          )
+        "
+        type="warning"
+        class="pa-2 text-button"
+        >Bitte wählen Sie mindestens einen Antrag aus.</v-alert
+      >
+      <p v-else></p>
       <v-tabs fixed-tabs background-color="indigo" dark v-model="activeTab">
         <v-tab
           class="pa-4"
@@ -11,13 +24,28 @@
           :key="tabs[0]"
           >Antragsteller/in
         </v-tab>
-        <v-tab class="pa-4" color="primary" tile @click="funcShowKindDaten" :key="tabs[1]"
+        <v-tab
+          class="pa-4"
+          color="primary"
+          tile
+          @click="funcShowKindDaten"
+          :key="tabs[1]"
           >Kind/er
         </v-tab>
-        <v-tab class="pa-4" color="primary" tile @click="funcShowNachweise" :key="tabs[2]"
+        <v-tab
+          class="pa-4"
+          color="primary"
+          tile
+          @click="funcShowNachweise"
+          :key="tabs[2]"
           >Nachweise
         </v-tab>
-        <v-tab class="pa-4" color="primary" tile @click="funcShowAbschicken" :key="tabs[3]"
+        <v-tab
+          class="pa-4"
+          color="primary"
+          tile
+          @click="funcShowAbschicken"
+          :key="tabs[3]"
           >Abschicken
         </v-tab>
       </v-tabs>
@@ -26,12 +54,11 @@
 
       <Kind v-if="KindDaten" />
       <!-- nur wenn KEIN Entgeltantrag aber Geschwisterermäßigung -->
-      <geschwisterkind
-        msg="Geschwisterkind"
-        :childlist="child_list"
-      />
+      <geschwisterkind msg="Geschwisterkind" :childlist="child_list" />
       <v-btn
-        v-if="KindDaten && this.$store.state.geCheck && !this.$store.state.entCheck"
+        v-if="
+          KindDaten && this.$store.state.geCheck && !this.$store.state.entCheck
+        "
         class="mt-6"
         justify="center"
         v-on:click="addChild"
@@ -39,12 +66,9 @@
         Geschwisterkind hinzufügen
         <v-icon> mdi-plus </v-icon>
       </v-btn>
-      
+
       <!-- wenn nur oder auch Entgeltantrag -->
-      <entgeltkind
-        msg="Entgeltkind"
-        :entgeltkindlist="entgeltkind_list"
-      />
+      <entgeltkind msg="Entgeltkind" :entgeltkindlist="entgeltkind_list" />
       <v-btn
         v-if="KindDaten && this.$store.state.entCheck"
         class="mt-6"
@@ -110,7 +134,7 @@ export default {
       person_list: [],
       child_list: [],
       entgeltkind_list: [],
-      tabs: [0,1,2,3],
+      tabs: [0, 1, 2, 3],
       activeTab: 0,
     };
   },
@@ -166,13 +190,13 @@ export default {
       //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
       if (this.child_list.length == 0) {
         geschwisterkind.id = 0;
-        geschwisterkind.sibling_firstname =  "";
+        geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
       } else {
         // vermeide Duplikate
         geschwisterkind.id = this.child_list[this.child_list.length - 1].id + 1;
-        geschwisterkind.sibling_firstname =  "";
+        geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
       }
@@ -197,13 +221,14 @@ export default {
       //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
       if (this.entgeltkind_list.length == 0) {
         entgeltkind.id = 0;
-        entgeltkind.firstname =  "";
+        entgeltkind.firstname = "";
         entgeltkind.lastname = "";
         entgeltkind.date = "";
       } else {
         // vermeide Duplikate
-        entgeltkind.id = this.entgeltkind_list[this.entgeltkind_list.length - 1].id + 1;
-        entgeltkind.firstname =  "";
+        entgeltkind.id =
+          this.entgeltkind_list[this.entgeltkind_list.length - 1].id + 1;
+        entgeltkind.firstname = "";
         entgeltkind.lastname = "";
         entgeltkind.date = "";
       }
@@ -228,14 +253,14 @@ export default {
       //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
       if (this.person_list.length == 0) {
         neueperson.id = 0;
-        neueperson.firstname =  "";
+        neueperson.firstname = "";
         neueperson.lastname = "";
         neueperson.date = "";
         neueperson.verwandtschaft = "";
       } else {
         // vermeide Duplikate
         neueperson.id = this.person_list[this.person_list.length - 1].id + 1;
-        neueperson.firstname =  "";
+        neueperson.firstname = "";
         neueperson.lastname = "";
         neueperson.date = "";
         neueperson.verwandtschaft = "";

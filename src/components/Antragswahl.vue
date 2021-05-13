@@ -20,8 +20,6 @@
             :label="`Bildungsfond`"
           ></v-checkbox>
       </v-row>
-      <v-alert v-if="!(this.$store.state.geCheck || this.$store.state.entCheck || this.$store.state.bifoCheck)" type="warning" class="pa-2 text-button">Bitte mindestens einen Antrag auswählen um fortzufahren.</v-alert>
-      <p v-else></p>
       <p class="caption pt-0">
         Es ist möglich die Antragswahl jederzeit zu ändern.
       </p>
