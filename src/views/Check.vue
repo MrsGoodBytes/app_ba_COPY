@@ -1,7 +1,8 @@
 <template>
   <div class="check">
-    
-          <router-link to="/"><v-btn right><v-icon>mdi-close</v-icon></v-btn></router-link>
+    <router-link to="/"
+      ><v-btn right><v-icon>mdi-close</v-icon></v-btn></router-link
+    >
     <h1 class="px-12">
       Bitte beantworten Sie die 4 Fragen um die für Sie relevanten Anträge zu
       ermitteln:
@@ -26,17 +27,17 @@
 
       <v-stepper-items>
         <v-stepper-content step="1" class="mb-6 mx-auto" height="200px">
-          <h4 class="text-center">
+          <h4 class="text-center mb-4">
             Haben Sie mehr als eines Ihrer Kinder in einer Betreuungseinrichtung
             angemeldet?
           </h4>
-          <v-btn color="accent" @click="oneAddYes"> Ja </v-btn>
+          <v-btn class="mx-3" color="accent" @click="oneAddYes"> Ja </v-btn>
 
-          <v-btn color="accent" @click="oneAddNo"> Nein </v-btn>
+          <v-btn class="mx-3" color="accent" @click="oneAddNo"> Nein </v-btn>
         </v-stepper-content>
 
         <v-stepper-content step="2" class="mb-6 mx-auto" height="200px">
-          <h4 class="text-center">
+          <h4 class="text-center mb-4">
             Beziehen Sie, als Antragssteller, Sozialleistungen?
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
@@ -57,9 +58,9 @@
               </span>
             </v-tooltip>
           </h4>
-          <v-btn color="accent" @click="twoAddYes"> Ja </v-btn>
+          <v-btn class="mx-3" color="accent" @click="twoAddYes"> Ja </v-btn>
 
-          <v-btn color="accent" @click="twoAddNo"> Nein </v-btn>
+          <v-btn class="mx-3" color="accent" @click="twoAddNo"> Nein </v-btn>
         </v-stepper-content>
 
         <v-stepper-content step="3" class="mb-6 mx-auto" height="200px">
@@ -70,7 +71,7 @@
             Verlauf der Antragstellung übernommen und müssen nicht erneut
             ausgefüllt werden.
           </h5>
-          <v-btn color="accent" @click="e1 = 2"> Zurück </v-btn>
+          <v-btn class="my-3" @click="e1 = 2"> Zurück </v-btn>
           <div id="einkommensnachweis">
             <h4 class="my-4">
               Angaben zur Ermittlung des durchschnittlichen monatlichen
@@ -1088,8 +1089,10 @@
 
         <v-stepper-content step="4" class="mb-6 mx-auto" height="200px">
           <h3 class="text-center">Geschafft!</h3>
-          <h6>Verklickt? <v-btn text @click="e1 = 1">Fragen erneut starten</v-btn></h6>
-      <h4>Folgende Anträge haben Aussicht auf Erfolg:</h4>
+          <h6>
+            Verklickt? <v-btn text @click="e1 = 1">Fragen erneut starten</v-btn>
+          </h6>
+          <h4>Folgende Anträge haben Aussicht auf Erfolg:</h4>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -1123,9 +1126,8 @@
       </v-container>
     </v-row>
 
-    <router-link :to="{ name: 'Apply' }" href="#" class=""
-      ><v-btn color="primary" class="text-button"
-            :disabled="this.e1 < 4"
+    <router-link :to="{ name: 'Apply' }" href="#" class="" 
+      ><v-btn color="primary" class="text-button" :disabled="this.e1 < 4"
         >Gewählte Anträge stellen</v-btn
       ></router-link
     >
@@ -1242,19 +1244,17 @@ export default {
     this.elternteil2 = this.$store.state.elternteil2;
   },
 
-  watch: {ge_checkbox: function (val)
-    {
+  watch: {
+    ge_checkbox: function (val) {
       this.$store.commit("setGeCheck", val);
     },
-    ent_checkbox: function (val)
-    {
+    ent_checkbox: function (val) {
       this.$store.commit("setEntCheck", val);
     },
-    bifo_checkbox: function (val)
-    {
+    bifo_checkbox: function (val) {
       this.$store.commit("setBifoCheck", val);
     },
-    
+
     eigentum_checkbox: function (val) {
       this.$store.commit("setEigentumCheck", val);
     },
