@@ -1,8 +1,10 @@
 <template>
   <div class="check">
-    <router-link to="/"
-      ><v-btn right><v-icon>mdi-close</v-icon></v-btn></router-link
-    >
+    <p class="text-right">
+      <router-link to="/"
+        ><v-btn fab class="mr-3"><v-icon>mdi-close</v-icon></v-btn></router-link
+      >
+    </p>
     <h1 class="px-12">
       Bitte beantworten Sie die 4 Fragen um die für Sie relevanten Anträge zu
       ermitteln:
@@ -10,19 +12,31 @@
 
     <v-stepper v-model="e1">
       <v-stepper-header>
-        <v-stepper-step :complete="e1 > 1" step="1"> Frage 1 </v-stepper-step>
+        <v-stepper-step :complete="e1 > 1" step="1" @click="e1 = 1">
+          Frage 1
+        </v-stepper-step>
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 2" step="2"> Frage 2 </v-stepper-step>
+        <v-stepper-step :complete="e1 > 2" step="2" @click="e1 = 2">
+          Frage 2
+        </v-stepper-step>
 
         <v-divider></v-divider>
 
-        <v-stepper-step step="3" :complete="e1 > 3"> Frage 3 </v-stepper-step>
+        <v-stepper-step :complete="e1 > 3" step="3" @click="e1 = 3">
+          Frage 3
+        </v-stepper-step>
 
         <v-divider></v-divider>
 
-        <v-stepper-step step="4" :complete="e1 > 3"> Frage 4 </v-stepper-step>
+        <v-stepper-step :complete="e1 > 4" step="4" @click="e1 = 4">
+          Frage 4
+        </v-stepper-step>
+
+        <v-divider></v-divider>
+
+        <v-stepper-step :complete="e1 > 4" step="6"> Frage 5 </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
@@ -59,11 +73,28 @@
             </v-tooltip>
           </h4>
           <v-btn class="mx-3" color="accent" @click="twoAddYes"> Ja </v-btn>
-
           <v-btn class="mx-3" color="accent" @click="twoAddNo"> Nein </v-btn>
+          <p>
+            <v-btn class="my-3" @click="e1 = 1"
+              ><v-icon>mdi-arrow-left</v-icon> zurück</v-btn
+            >
+          </p>
         </v-stepper-content>
 
         <v-stepper-content step="3" class="mb-6 mx-auto" height="200px">
+          <h4 class="text-center mb-4">
+            Sind sie amtsgerichtlich privatinsolvent gemeldet?
+          </h4>
+          <v-btn class="mx-3" color="accent" @click="threeAddYes"> Ja </v-btn>
+          <v-btn class="mx-3" color="accent" @click="threeAddNo"> Nein </v-btn>
+          <p>
+            <v-btn class="my-3" @click="e1 = 2"
+              ><v-icon>mdi-arrow-left</v-icon> zurück</v-btn
+            >
+          </p>
+        </v-stepper-content>
+
+        <v-stepper-content step="4" class="mb-6 mx-auto" height="200px">
           <h5 class="text-center">
             Sie haben angegeben keine Sozialleistungen zu beziehen. Um zu
             ermitteln, ob Ihre Einkommen unterhalbt der Einkommensgrenze liegt,
@@ -71,7 +102,9 @@
             Verlauf der Antragstellung übernommen und müssen nicht erneut
             ausgefüllt werden.
           </h5>
-          <v-btn class="my-3" @click="e1 = 2"> Zurück </v-btn>
+          <v-btn class="my-3" @click="e1 = 3"
+            ><v-icon>mdi-arrow-left</v-icon> zurück</v-btn
+          >
           <div id="einkommensnachweis">
             <h4 class="my-4">
               Angaben zur Ermittlung des durchschnittlichen monatlichen
@@ -1084,15 +1117,18 @@
               </v-row>
             </v-card>
           </div>
-          <v-btn color="accent" @click="threeAdd"> weiter </v-btn>
+          <v-btn color="accent" @click="fourAdd"> weiter </v-btn>
         </v-stepper-content>
 
-        <v-stepper-content step="4" class="mb-6 mx-auto" height="200px">
+        <v-stepper-content step="5" class="mb-6 mx-auto" height="200px">
           <h3 class="text-center">Geschafft!</h3>
           <h6>
             Verklickt? <v-btn text @click="e1 = 1">Fragen erneut starten</v-btn>
           </h6>
-          <h4>Folgende Anträge haben Aussicht auf Erfolg:</h4>
+          <h4 v-if="this.$store.state.geCheck === true || this.$store.state.entCheck === true || this.$store.state.bifoCheck === true">
+            Folgende Anträge haben Aussicht auf Erfolg:
+          </h4>
+          <h4 v-else>Sie scheinen nicht berechtigt zu sein, einen der Anträge zu stellen.</h4>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -1126,7 +1162,7 @@
       </v-container>
     </v-row>
 
-    <router-link :to="{ name: 'Apply' }" href="#" class="" 
+    <router-link :to="{ name: 'Apply' }" href="#" class=""
       ><v-btn color="primary" class="text-button" :disabled="this.e1 < 4"
         >Gewählte Anträge stellen</v-btn
       ></router-link
@@ -1285,18 +1321,34 @@ export default {
       this.$store.state.bifoCheck = true;
       this.entErfolg = true;
       this.bifoErfolg = true;
-      (this.$store.state.radioGroupAntragsgrundlage = 3), (this.e1 = 4);
       this.ent_checkbox = true;
       this.bifo_checkbox = true;
+      this.$store.state.radioGroupAntragsgrundlage = 3;
+      this.e1 = 5;
     },
     twoAddNo() {
       this.e1 = 3;
-      this.$store.state.radioGroupAntragsgrundlage = 4;
     },
 
-    threeAdd() {
-      if (this.$store.state.einkommen) this.$store.state.entCheck = true;
+    threeAddYes() {
+      this.$store.state.entCheck = true;
+      this.$store.state.bifoCheck = true;
+      this.entErfolg = true;
+      this.bifoErfolg = true;
+      this.ent_checkbox = true;
+      this.bifo_checkbox = true;
+      this.$store.state.radioGroupAntragsgrundlage = 1;
+      this.e1 = 5;
+    },
+    threeAddNo() {
       this.e1 = 4;
+    },
+
+    fourAdd() {
+      if (this.einkommen > 0) {
+        this.$store.state.entCheck = true;
+        this.e1 = 5;
+      }
     },
   },
 };
