@@ -1,6 +1,8 @@
 <template>
   <div class="check">
-    <h1>
+    
+          <router-link to="/"><v-btn right><v-icon>mdi-close</v-icon></v-btn></router-link>
+    <h1 class="px-12">
       Bitte beantworten Sie die 4 Fragen um die für Sie relevanten Anträge zu
       ermitteln:
     </h1>
@@ -68,6 +70,7 @@
             Verlauf der Antragstellung übernommen und müssen nicht erneut
             ausgefüllt werden.
           </h5>
+          <v-btn color="accent" @click="e1 = 2"> Zurück </v-btn>
           <div id="einkommensnachweis">
             <h4 class="my-4">
               Angaben zur Ermittlung des durchschnittlichen monatlichen
@@ -102,8 +105,10 @@
                       </template>
                       <span
                         >Nettoarbeitseinkommen aus nichtselbstständiger Arbeit
-                        der letzten 12 Monate (inkl. Weihnachts- und
-                        Urlaubsgeld)</span
+                        <span class="text-decoration-underline font-weight-bold"
+                          >der letzten 12 Monate</span
+                        >
+                        (inkl. Weihnachts- und Urlaubsgeld)</span
                       >
                     </v-tooltip>
                   </h4>
@@ -113,7 +118,6 @@
                     v-model="elternteil1.netto"
                     label="Netto Elternteil 1"
                     prefix="€"
-                    
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
@@ -121,7 +125,6 @@
                     v-model="elternteil2.netto"
                     label="Netto Elternteil 2"
                     prefix="€"
-                    
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -139,17 +142,15 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.selbst"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="Selbstständikteit Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.selbst"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="Selbstständikteit Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -167,17 +168,15 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.kindergeld"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="Kindergeld Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.kindergeld"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="Kindergeld Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row> </v-card
@@ -196,17 +195,15 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.alg1"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="ALG1/EGZ Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.alg1"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="ALG1/EGZ Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row> </v-card
@@ -223,17 +220,15 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.krankengeld"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="Krankengeld Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.krankengeld"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="Krankengeld Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -246,22 +241,33 @@
                 class="d-flex align-center mb-6"
               >
                 <v-col cols="4">
-                  <h4 class="text-left">Renten</h4>
+                  <h4 class="text-left">
+                    Renten
+                    <v-tooltip bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon color="accent" v-bind="attrs" v-on="on"
+                          >mdi-information</v-icon
+                        >
+                      </template>
+                      <span
+                        >Bitte hier Einkommen aus gesetzlicher
+                        Rentenversicherung angeben.</span
+                      >
+                    </v-tooltip>
+                  </h4>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.rente"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="Rente Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.rente"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="Rente Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -289,17 +295,15 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.unterhaltseinkunft"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="Unterhalt an Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.unterhaltseinkunft"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="Unterhalt an Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -317,17 +321,15 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.ausbildungsvergütung"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="Ausbildungsvergütung Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.ausbildungsvergütung"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="Ausbildungsvergütung Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -347,17 +349,15 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.bafög"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="BAföG Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.bafög"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="BAföG Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -375,17 +375,15 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.elterngeld"
-                    label="Elternteil 1"
-                    prefix="€"
-                    
+                    label="Elterngeld Elternteil 1"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.elterngeld"
-                    label="Elternteil 2"
-                    prefix="€"
-                    
+                    label="Elterngeld Elternteil 2"
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -404,16 +402,14 @@
                   <v-text-field
                     v-model="elternteil1.kinderzuschlag"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.kinderzuschlag"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -442,16 +438,14 @@
                   <v-text-field
                     v-model="elternteil1.weitere"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.weitere"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -480,16 +474,14 @@
                   <v-text-field
                     v-model="elternteil1.zuschussKita"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.zuschussKita"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -510,8 +502,7 @@
                   <v-text-field
                     v-model="haushaltseinkommen"
                     label="weitere"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3"></v-col>
@@ -548,16 +539,14 @@
                   <v-text-field
                     v-model="elternteil1.arbeitsmittel"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.arbeitsmittel"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -590,16 +579,14 @@
                   <v-text-field
                     v-model="elternteil1.fahrtkosten"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.fahrtkosten"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -644,16 +631,14 @@
                   <v-text-field
                     v-model="elternteil1.haftpflicht"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.haftpflicht"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -672,16 +657,14 @@
                   <v-text-field
                     v-model="elternteil1.hausrat"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.hausrat"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -710,16 +693,14 @@
                   <v-text-field
                     v-model="elternteil1.freiwilligekrankenundpflege"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.freiwilligekrankenundpflege"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -749,16 +730,14 @@
                   <v-text-field
                     v-model="elternteil1.freiwilligerente"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.freiwilligerente"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -777,16 +756,14 @@
                   <v-text-field
                     v-model="elternteil1.riester"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.riester"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -807,16 +784,14 @@
                   <v-text-field
                     v-model="elternteil1.lebens"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.lebens"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -835,16 +810,14 @@
                   <v-text-field
                     v-model="elternteil1.haftpflicht"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.haftpflicht"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -863,16 +836,14 @@
                   <v-text-field
                     v-model="elternteil1.unfall"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.unfall"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -891,16 +862,14 @@
                   <v-text-field
                     v-model="elternteil1.berufsunfähigkeits"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.berufsunfähigkeits"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -929,16 +898,14 @@
                   <v-text-field
                     v-model="elternteil1.gewerkschaft"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.gewerkschaft"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -970,16 +937,14 @@
                   <v-text-field
                     v-model="elternteil1.kaltmiete"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.kaltmiete"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -1056,16 +1021,14 @@
                   <v-text-field
                     v-model="elternteil1.besondere"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.besondere"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -1084,16 +1047,14 @@
                   <v-text-field
                     v-model="elternteil1.unterhaltszahlungen"
                     label="Elternteil 1"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.unterhaltszahlungen"
                     label="Elternteil 2"
-                    prefix="€"
-                    
+                    prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
               </v-row>
@@ -1109,7 +1070,6 @@
                   <h4 class="text-left">Sonstige Ergänzungen / Angaben</h4>
                   <v-textarea
                     v-model="elternteil1.sonstiges"
-                    
                     outlined
                   ></v-textarea>
                 </v-col>
@@ -1117,7 +1077,6 @@
                   <h4 class="text-left">Sonstige Ergänzungen / Angaben</h4>
                   <v-textarea
                     v-model="elternteil2.sonstiges"
-                    
                     outlined
                   ></v-textarea>
                 </v-col>
@@ -1128,31 +1087,32 @@
         </v-stepper-content>
 
         <v-stepper-content step="4" class="mb-6 mx-auto" height="200px">
-          <h4 class="text-center">Geschafft!</h4>
+          <h3 class="text-center">Geschafft!</h3>
+          <h6>Verklickt? <v-btn text @click="e1 = 1">Fragen erneut starten</v-btn></h6>
+      <h4>Folgende Anträge haben Aussicht auf Erfolg:</h4>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
 
     <v-row>
-      <h4>Folgende Anträge haben Aussicht auf Erfolg:</h4>
       <v-container class="pb-0">
         <v-row justify="space-around">
           <v-checkbox
             class="font-weight-medium"
             v-model="ge_checkbox"
-            disabled
+            :disabled="this.e1 < 4"
             ref="ge_check"
             :label="`Geschwisterermäßigung`"
           ></v-checkbox>
           <v-checkbox
             v-model="ent_checkbox"
-            disabled
+            :disabled="this.e1 < 4"
             ref="ent_check"
             :label="`Entgeltermäßigung`"
           ></v-checkbox>
           <v-checkbox
             v-model="bifo_checkbox"
-            disabled
+            :disabled="this.e1 < 4"
             ref="bifo_check"
             :label="`Bildungsfond`"
           ></v-checkbox>
@@ -1165,6 +1125,7 @@
 
     <router-link :to="{ name: 'Apply' }" href="#" class=""
       ><v-btn color="primary" class="text-button"
+            :disabled="this.e1 < 4"
         >Gewählte Anträge stellen</v-btn
       ></router-link
     >
@@ -1260,7 +1221,6 @@ export default {
         sonstiges: "",
       },
 
-      
       haushaltseinkommen: 0,
       wohnort_checkbox: false,
       wohnort: "",
@@ -1282,7 +1242,19 @@ export default {
     this.elternteil2 = this.$store.state.elternteil2;
   },
 
-  watch: {
+  watch: {ge_checkbox: function (val)
+    {
+      this.$store.commit("setGeCheck", val);
+    },
+    ent_checkbox: function (val)
+    {
+      this.$store.commit("setEntCheck", val);
+    },
+    bifo_checkbox: function (val)
+    {
+      this.$store.commit("setBifoCheck", val);
+    },
+    
     eigentum_checkbox: function (val) {
       this.$store.commit("setEigentumCheck", val);
     },
@@ -1296,7 +1268,7 @@ export default {
   },
 
   methods: {
-//GESCHWISTERERM
+    //GESCHWISTERERM
     oneAddYes() {
       this.$store.state.geCheck = true;
       this.e1 = 2;
@@ -1307,17 +1279,15 @@ export default {
       this.e1 = 2;
       this.ge_checkbox = false;
     },
-//ENTGELT SOZI
+    //ENTGELT SOZI
     twoAddYes() {
       this.$store.state.entCheck = true;
       this.$store.state.bifoCheck = true;
       this.entErfolg = true;
       this.bifoErfolg = true;
-      this.$store.state.radioGroupAntragsgrundlage = 3,
-      this.e1 = 4;
+      (this.$store.state.radioGroupAntragsgrundlage = 3), (this.e1 = 4);
       this.ent_checkbox = true;
       this.bifo_checkbox = true;
-      this.$("#ge_check").attr("enabled", true);
     },
     twoAddNo() {
       this.e1 = 3;
