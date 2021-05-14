@@ -151,6 +151,7 @@
                   <v-text-field
                     v-model="elternteil1.netto"
                     label="Netto Elternteil 1"
+                    type="number"
                     prefix="€"
                   ></v-text-field>
                 </v-col>
@@ -158,6 +159,7 @@
                   <v-text-field
                     v-model="elternteil2.netto"
                     label="Netto Elternteil 2"
+                    type="number"
                     prefix="€"
                   ></v-text-field>
                 </v-col>
@@ -1347,7 +1349,7 @@ export default {
     },
 
     fourAdd() {
-      this.einkommen = (this.elternteil1.netto.value +  this.elternteil2.netto.value);
+      this.einkommen = (this.elternteil1.netto) +  (this.elternteil2.netto);
       if (this.einkommen < 3000) {
         this.$store.state.entCheck = true;
         this.entErfolg = true;
