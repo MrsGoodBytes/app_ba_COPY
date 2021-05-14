@@ -52,40 +52,8 @@
 
       <Antragsteller v-if="AntragstellerDaten" :personlist="person_list" />
 
-      <Kind v-if="KindDaten" />
-      <!-- nur wenn KEIN Entgeltantrag aber Geschwisterermäßigung -->
-      <geschwisterkind msg="Geschwisterkind" :childlist="child_list" />
-      <v-btn
-        v-if="
-          KindDaten && this.$store.state.geCheck && !this.$store.state.entCheck
-        "
-        class="mt-6"
-        justify="center"
-        v-on:click="addChild"
-      >
-        Geschwisterkind hinzufügen
-        <v-icon> mdi-plus </v-icon>
-      </v-btn>
-
-      <!-- wenn nur oder auch Entgeltantrag -->
-      <entgeltkind msg="Entgeltkind" :entgeltkindlist="entgeltkind_list" />
-      <v-btn
-        v-if="KindDaten && this.$store.state.entCheck"
-        class="mt-6"
-        justify="center"
-        v-on:click="addEntgeltkind"
-      >
-        Geschwisterkind hinzufügen
-        <v-icon> mdi-plus </v-icon>
-      </v-btn>
-      <v-btn
-        v-if="KindDaten"
-        class="d-block mx-auto my-6"
-        @click="funcShowNachweise"
-      >
-        weiter
-        <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
-      </v-btn>
+      <Kind v-if="KindDaten" :childlist="child_list" />
+      
 
       <Nachweise v-if="Nachweise" />
       <v-btn
@@ -110,8 +78,6 @@ import Antragsteller from "@/components/Antragsteller.vue";
 import Kind from "@/components/Kind.vue";
 import Nachweise from "@/components/Nachweise.vue";
 import Abschicken from "@/components/Abschicken.vue";
-import geschwisterkind from "@/components/geschwisterkind.vue";
-import entgeltkind from "@/components/entgeltkind.vue";
 
 export default {
   name: "Apply",
@@ -120,9 +86,7 @@ export default {
     Antragsteller,
     Kind,
     Nachweise,
-    Abschicken,
-    geschwisterkind,
-    entgeltkind,
+    Abschicken
   },
   data() {
     return {
@@ -133,9 +97,41 @@ export default {
 
       person_list: [],
       child_list: [],
-      entgeltkind_list: [],
       tabs: [0, 1, 2, 3],
       activeTab: 0,
+
+      //RULES
+      nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      numberRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          /(?=.*\d)/.test(value) ||
+          "Pflichtfeld. Hausnummer muss mindestens eine Zahl enthalten!",
+      ],
+      plzRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          value.length === 5 || "Postleitzahl sollte genau 5 Ziffern lang sein",
+      ],
+      emailRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          /.+@.+\..+/.test(value) || "Bitte geben Sie eine gülitge E-mail an!",
+      ],
+      telRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          /^\d+$/.test(value) ||
+          "Die Telefonnummer darf nur aus Zahlen bestehen!",
+      ],
+      ibanRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (value && value.length >= 22) ||
+          "Pflichtfeld. Bitte gültige IBAN eingeben!",
+      ],
+      dateRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      radioRules: [(value) => value != 0],
     };
   },
 
@@ -184,7 +180,7 @@ export default {
     },
 
     addChild() {
-      // neues todo erzeugen
+      // neues geKind erzeugen
       var geschwisterkind = new Object();
 
       //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
@@ -211,38 +207,6 @@ export default {
       // Am einfachsten geht das über array.filter()deleteTodo(id) {
       this.child_list = this.child_list.filter(
         (geschwisterkind) => geschwisterkind.id !== id
-      );
-    },
-
-    addEntgeltkind() {
-      // neues todo erzeugen
-      var entgeltkind = new Object();
-
-      //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
-      if (this.entgeltkind_list.length == 0) {
-        entgeltkind.id = 0;
-        entgeltkind.firstname = "";
-        entgeltkind.lastname = "";
-        entgeltkind.date = "";
-      } else {
-        // vermeide Duplikate
-        entgeltkind.id =
-          this.entgeltkind_list[this.entgeltkind_list.length - 1].id + 1;
-        entgeltkind.firstname = "";
-        entgeltkind.lastname = "";
-        entgeltkind.date = "";
-      }
-
-      //eintragen des neuen Geschwisterkinds in das Array
-
-      this.entgeltkind_list.push(entgeltkind);
-    },
-    deleteEntgeltkind(id) {
-      // Suche nach ID im Todo-Array und entferne das Element
-      // https://love2dev.com/blog/javascript-remove-from-array/
-      // Am einfachsten geht das über array.filter()deleteTodo(id) {
-      this.entgeltkind_list = this.entgeltkind_list.filter(
-        (entgeltkind) => entgeltkind.id !== id
       );
     },
 

@@ -100,23 +100,30 @@
       </v-col>
     </v-row>
     <v-row>
-      <v-col v-if="this.$store.state.entCheck" cols="3" class="text-left">
+      <v-col v-if="this.$store.state.entCheck" cols="4" class="text-left">
         <h6 class="text--disabled">Betreuungsbeginn</h6>
-        <h5 v-if="this.betreuung === 0">Krippe</h5>
+        <h5>{{ this.betreuungsbeginn }}</h5>
       </v-col>
-      <v-col cols="3" class="text-left">
+      <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Betreuungsentgelt</h6>
-        <h5 v-if="this.betreuung === 0">Krippe</h5>
+        <h5>{{ this.betreuungsentgelt }}</h5>
       </v-col>
-      <v-col cols="3" class="text-left">
+      <v-col cols="4" v-if="this.radioGroupBetreuungsform === 3" class="text-left">
         <h6 class="text--disabled">Elternbeitrag</h6>
-        <h5 v-if="this.betreuung === 0">Krippe</h5>
-      </v-col>
-      <v-col cols="3" class="text-left">
-        <h6 class="text--disabled">Essensgeld</h6>
-        <h5 v-if="this.betreuung === 0">Krippe</h5>
+        <h5>{{ this.elternbeitrag }}</h5>
       </v-col>
     </v-row>
+    <v-row>
+      <v-col cols="3" class="text-left">
+        <h6 class="text--disabled">Essensgeld</h6>
+        <h5>{{ this.essensgeld }}</h5>
+      </v-col>
+      <v-col cols="3" class="text-left">
+        <h6 class="text--disabled">Betreuungsumfang</h6>
+        <h5>{{ this.betreuungsumfang }}</h5>
+      </v-col>
+    </v-row>
+
   </div>
 </template>
 
@@ -200,6 +207,7 @@ export default {
       this.$store.state.institutiontown;
     this.betreuungseinrichtung = this.$store.state.institutionname;
     this.vorjahr = this.$store.state.vorjahr_checkbox;
+    this.elternbeitrag = this.$store.state.elternbeitrag;
   },
 
   watch: {},
