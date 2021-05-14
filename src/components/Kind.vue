@@ -235,8 +235,7 @@
     <div
       id="Geschwisterkind"
       v-if="
-        this.$parent.KindDaten &&
-        this.$store.state.geCheck &&
+        this.$store.state.geCheck ||
         !this.$store.state.entCheck
       "
     >
@@ -352,7 +351,7 @@
             </v-tooltip>
             <v-text-field
               outlined
-              v-model="elternbeitrag"
+              v-model="item.elternbeitrag"
               prefix="€"
               :rules="moneyRules"
               label="Elternbeitrag"
@@ -385,6 +384,11 @@
           </v-col>
         </v-row>
       </v-card>
+      
+       <v-btn class="mb-4" @click="addChild">
+          Geschwisterkind hinzufügen
+          <v-icon> mdi-plus </v-icon>
+        </v-btn>
     </div>
 
     <v-btn
@@ -536,6 +540,7 @@ export default {
     this.radioGroupBetreuungsform = this.$store.state.radioGroupBetreuungsform;
 
     this.essensgeld = this.$store.state.essensgeld;
+    this.betreuungsumfang = this.$store.state.betreuungsumfang;
     this.vorjahr_checkbox = this.$store.state.vorjahr_checkbox;
   },
 

@@ -53,7 +53,6 @@
       <Antragsteller v-if="AntragstellerDaten" :personlist="person_list" />
 
       <Kind v-if="KindDaten" :childlist="child_list" />
-      
 
       <Nachweise v-if="Nachweise" />
       <v-btn
@@ -86,7 +85,7 @@ export default {
     Antragsteller,
     Kind,
     Nachweise,
-    Abschicken
+    Abschicken,
   },
   data() {
     return {
@@ -157,6 +156,19 @@ export default {
       this.Nachweise = false;
       this.Abschicken = false;
       this.activeTab = 1;
+
+      if (
+        (this.$store.state.geCheck === true ||
+          this.$store.state.entCheck === true) &&
+        this.child_list.length == 0
+      ) {
+        var geschwisterkind = new Object();
+        geschwisterkind.id = 0;
+        geschwisterkind.sibling_firstname = "";
+        geschwisterkind.sibling_lastname = "";
+        geschwisterkind.date_sibling = "";
+        this.child_list.push(geschwisterkind);
+      }
     },
 
     funcShowNachweise() {
