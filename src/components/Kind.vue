@@ -115,12 +115,7 @@
         <p v-else></p>
       </v-row>
       <v-row>
-        <v-col
-          v-if="this.$store.state.geCheck || this.$store.state.entCheck"
-          class="d-flex"
-          cols="12"
-          sm="4"
-        >
+        <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="4">
           <v-text-field
             outlined
             v-model="date_bb"
@@ -234,10 +229,7 @@
 
     <div
       id="Geschwisterkind"
-      v-if="
-        this.$store.state.geCheck ||
-        !this.$store.state.entCheck
-      "
+      v-if="this.$store.state.geCheck || !this.$store.state.entCheck"
     >
       <v-card
         v-for="item in childlist"
@@ -336,7 +328,34 @@
             ></v-text-field>
           </v-col>
         </v-row>
+
         <v-row>
+          <!-- <v-col
+            v-if="this.$store.state.geCheck"
+            class="d-flex"
+            cols="12"
+            sm="4"
+          >
+            <v-text-field
+              outlined
+              v-model="item.date_bb"
+              label="Betreuungsbeginn"
+              prepend-icon="mdi-calendar"
+              :rules="dateRules"
+              required
+            ></v-text-field>
+          </v-col>
+          <p v-else></p> -->
+          <v-col class="d-flex" cols="12" sm="4">
+            <v-text-field
+              outlined
+              v-model="item.betreuungsentgelt"
+              prefix="€"
+              :rules="moneyRules"
+              label="Betreuungsentgelt"
+              required
+            ></v-text-field>
+          </v-col>
           <v-col class="d-flex" cols="12" sm="4">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
@@ -358,37 +377,21 @@
               required
             ></v-text-field>
           </v-col>
-
-          <v-col class="d-flex" cols="12" sm="4">
-            <v-text-field
-              outlined
-              v-model="item.betreuungsentgelt"
-              prefix="€"
-              :rules="moneyRules"
-              label="Betreuungsentgelt"
-              required
-            ></v-text-field>
-          </v-col>
         </v-row>
 
         <v-row>
           <v-col class="pt-0">
-            <v-btn
-              class="ma-0"
-              color="secondary"
-              v-on:click="deleteChild(item.id)"
-            >
+            <v-btn class="ma-0" color="secondary" @click="deleteChild(item.id)">
               Einträge dieses Kindes löschen
               <v-icon> mdi-alert </v-icon>
             </v-btn>
           </v-col>
         </v-row>
       </v-card>
-      
-       <v-btn class="mb-4" @click="addChild">
-          Geschwisterkind hinzufügen
-          <v-icon> mdi-plus </v-icon>
-        </v-btn>
+      <v-btn class="mb-4" @click="addChild">
+        Geschwisterkind hinzufügen
+        <v-icon> mdi-plus </v-icon>
+      </v-btn>
     </div>
 
     <v-btn
@@ -451,7 +454,7 @@ export default {
       ],
       dateRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       //RULES
-      
+
       numberRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>
@@ -468,7 +471,6 @@ export default {
         (value) =>
           /.+@.+\..+/.test(value) || "Bitte geben Sie eine gülitge E-mail an!",
       ],
-
     };
   },
 
@@ -535,7 +537,7 @@ export default {
 
     this.elternbeitrag = this.$store.state.elternbeitrag;
     this.betreuungsentgelt = this.$store.state.betreuungsentgelt;
-    this.date_bb = this.$store.state.date_child;
+    this.date_bb = this.$store.state.date_bb;
 
     this.radioGroupBetreuungsform = this.$store.state.radioGroupBetreuungsform;
 

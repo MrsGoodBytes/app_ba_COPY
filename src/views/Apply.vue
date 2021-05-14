@@ -167,6 +167,11 @@ export default {
         geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
+        geschwisterkind.date_bb = "";
+        geschwisterkind.betreuungsentgelt = 0;
+        geschwisterkind.vorjahr_checkbox = false;
+        geschwisterkind.essensgeld = 0;
+        geschwisterkind.elternbeitrag =0;
         this.child_list.push(geschwisterkind);
       }
     },
@@ -201,12 +206,22 @@ export default {
         geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
+        geschwisterkind.date_bb = "";
+        geschwisterkind.betreuungsentgelt = 0;
+        geschwisterkind.vorjahr_checkbox = false;
+        geschwisterkind.essensgeld = 0;
+        geschwisterkind.elternbeitrag =0;
       } else {
         // vermeide Duplikate
         geschwisterkind.id = this.child_list[this.child_list.length - 1].id + 1;
         geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
+        geschwisterkind.date_bb ="";
+        geschwisterkind.betreuungsentgelt = 0;
+        geschwisterkind.vorjahr_checkbox = false;
+        geschwisterkind.essensgeld = 0;
+        geschwisterkind.elternbeitrag =0;
       }
 
       //eintragen des neuen Geschwisterkinds in das Array
