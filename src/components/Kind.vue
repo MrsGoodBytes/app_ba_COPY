@@ -42,7 +42,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col v-if="this.$store.state.geCheck">
+        <v-col>
           <v-text-field
             outlined
             v-model="date_child"
@@ -52,7 +52,6 @@
             required
           ></v-text-field>
         </v-col>
-        <p v-else></p>
       </v-row>
       <v-row>
         <v-col
@@ -129,7 +128,7 @@
           <v-checkbox
             v-model="vorjahr_checkbox"
             ref="vorjahr_check"
-            :label="'Für das Kind wurde im VORJAHR ein Ermäßigungsantrag gestellt:'"
+            :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt:'"
           ></v-checkbox>
         </v-col>
         <p v-else></p>
@@ -187,7 +186,7 @@
       </v-row>
       <v-row>
         <v-col
-          v-if="this.$store.state.bifoCheck || radioGroupBetreuungsform === 3"
+          v-if="this.$store.state.bifoCheck"
           class="d-flex"
           cols="12"
           sm="4"
@@ -240,9 +239,17 @@
     <div id="Geschwisterkind">
       <h3>Geschwisterkind/er</h3>
       <h5>
-        Bitte tragen Sie hier alle Kinder ein, die sich in einem
-        Betreuungsverhältnis befinden, ausgenommen ist eine Betreuung in der
-        betreuten Grundschule.
+        <span v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
+          Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in einem
+        Betreuungsverhältnis befinden.</span>
+        <span v-else-if="this.$store.state.entCheck && !this.$store.state.geCheck">
+          Bitte tragen Sie hier alle Ihre Kinder ein, für die Sie eine Ermäßigung beantragen möchten.
+          Ausgenommen ist eine Betreuung in der
+        betreuten Grundschule.</span>
+        <span v-else-if="this.$store.state.entCheck && this.$store.state.geCheck">
+          Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in einem
+        Betreuungsverhältnis befinden und/oder für die Sie eine Ermäßigung beantragen möchten. Ausgenommen für die Entgeltermäßigung ist eine Betreuung in der
+        betreuten Grundschule.</span>
       </h5>
       <v-card
         v-for="item in childlist"
@@ -299,7 +306,20 @@
         ></v-row> -->
 
         <v-row class="px-3">
-          <v-col class="d-flex" cols="12" sm="3">
+          <v-col v-if="item.geCheck" class="d-flex" cols="12" sm="3">
+            <h4>Betreuung</h4>
+            <v-radio-group v-model="radioGroupBetreuungsform">
+              <v-radio
+                v-model="item.betreuungsform"
+                ref="betreuungsform"
+                v-for="n in radioListBetreuungsform_ganz"
+                :key="n"
+                :label="`${n}`"
+                :value="n"
+              ></v-radio>
+            </v-radio-group>
+          </v-col>
+          <v-col v-else class="d-flex" cols="12" sm="3">
             <h4>Betreuung</h4>
             <v-radio-group v-model="radioGroupBetreuungsform">
               <v-radio
@@ -358,11 +378,24 @@
               required
             ></v-text-field>
           </v-col>
+          <v-col
+          v-if="item.geCheck"
+          class="d-flex"
+          cols="12"
+          sm="12"
+        >
+          <v-checkbox
+            v-model="item.vorjahr_checkbox"
+            ref="vorjahr_check"
+            :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt:'"
+          ></v-checkbox>
+        </v-col>
+        <p v-else></p>
         </v-row>
 
         <v-row>
-          <!-- <v-col
-            v-if="this.$store.state.geCheck"
+          <v-col
+            v-if="item.geCheck"
             class="d-flex"
             cols="12"
             sm="4"
@@ -376,7 +409,7 @@
               required
             ></v-text-field>
           </v-col>
-          <p v-else></p> -->
+          <p v-else></p>
           <v-col class="d-flex" cols="12" sm="4">
             <v-text-field
               outlined
@@ -475,6 +508,12 @@ export default {
       betreuungsumfang: "",
       radioGroupBetreuungsform: 0,
       radioListBetreuungsform: [
+        "Krippe",
+        "Elementar",
+        "Hort",
+        "Tagespflege",
+      ],
+      radioListBetreuungsform_ganz: [
         "Krippe",
         "Elementar",
         "Hort",

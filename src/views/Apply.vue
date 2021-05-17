@@ -163,6 +163,9 @@ export default {
       ) {
         var geschwisterkind = new Object();
         geschwisterkind.id = 0;
+        geschwisterkind.geCheck = this.$store.state.geCheck;
+        geschwisterkind.entCheck = this.$store.state.entCheck;
+        geschwisterkind.bifoCheck = this.$store.state.bifoCheck;
         geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
@@ -204,6 +207,9 @@ export default {
       //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
       if (this.child_list.length == 0) {
         geschwisterkind.id = 0;
+        geschwisterkind.geCheck = this.$store.state.geCheck;
+        geschwisterkind.entCheck = this.$store.state.entCheck;
+        geschwisterkind.bifoCheck = this.$store.state.bifoCheck;
         geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
@@ -217,6 +223,9 @@ export default {
       } else {
         // vermeide Duplikate
         geschwisterkind.id = this.child_list[this.child_list.length - 1].id + 1;
+        geschwisterkind.geCheck = this.$store.state.geCheck;
+        geschwisterkind.entCheck = this.$store.state.entCheck;
+        geschwisterkind.bifoCheck = this.$store.state.bifoCheck;
         geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
