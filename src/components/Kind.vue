@@ -1,6 +1,14 @@
 <template>
   <div id="Kind" class="pb-10">
-    <h2 class="py-3">Kind/er</h2>
+    <h2 class="pt-3">Kind/er</h2>
+    <h5 class="pb-3" v-if="this.$store.state.geCheck">Bitte tragen Sie hier das Kind ein, für das eine Geschwisterermäßigung beantragt wird.<v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>Bitte tragen Sie Ihr jüngstes Kind ein</span>
+          </v-tooltip></h5>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row
         ><!-- v-for="n in childList" :key="n" -->
@@ -215,44 +223,12 @@
         </v-col>
         <p v-else></p>
       </v-row>
-      <v-row>
-        <v-card
-          v-if="this.$store.state.geCheck"
-          class="mx-auto pa-5 mb-8"
-          max-width="400"
-          outlined
-        ><p class="text-left"><v-icon>mdi-information</v-icon></p>
-          <h4 class="text-left">
-            Hinweis Geschwisterermäßigung
-          </h4>
-            <p class="text-left">
-              Da eine Abrechnung direkt mit der Kindertagesstätte erfolgt,
-              erhalten Sie keine Eingangsbestätigung und auch keinen Bescheid.
-              Die Kindertagesstätte wird von Ihnen nur noch den reduzierten
-              Elternbeitrag fordern.
-            </p>
-        </v-card>
-
-        <v-card
-          v-if="this.$store.state.entCheck"
-          class="mx-auto pa-5 mb-8"
-          max-width="400"
-          outlined
-        ><p class="text-left"><v-icon>mdi-information</v-icon></p>
-          <h4 class="text-left">
-            Hinweis Entgeltermäßigung
-          </h4>
-            <p class="text-left">
-              Sollte ein Zuschuss gewährt werden, wird dieser vom Fachbereich
-              Kultur und Bildung direkt an den Träger der Kindertageseinrichtung
-              gezahlt.
-            </p>
-        </v-card>
-      </v-row>
+      
     </v-form>
 
     <div id="Geschwisterkind">
       <h3>Geschwisterkind/er</h3>
+      <h5>Bitte tragen Sie hier alle Kinder ein, die sich in einem Betreuungsverhältnis befinden, ausgenommen ist eine Betreuung in der betreuten Grundschule.</h5>
       <v-card
         v-for="item in childlist"
         :key="item.id"
@@ -289,11 +265,11 @@
             ></v-text-field>
           </v-col>
         </v-row>
-
+<!-- 
         <v-row class="my-0 px-3">
-          <v-checkbox
+          <v-checkbox 
             class="my-0"
-            v-model="item.sibling_erm_checkbox"
+            v-model="item.sibling_ent_checkbox"
             ref="sib_erm_check"
             :label="'Für dieses Kind soll ebenfalls ein Antrag auf Entgeltermäßigung gestellt werden:'"
           ></v-checkbox
@@ -305,7 +281,7 @@
             ref="sib_bifo_check"
             :label="'Für dieses Kind soll ebenfalls ein Antrag auf Mittel aus dem Bildungsfond gestellt werden:'"
           ></v-checkbox
-        ></v-row>
+        ></v-row> -->
 
         <v-row class="px-3">
           <v-col class="d-flex" cols="12" sm="3">
@@ -434,7 +410,7 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-btn class="mb-4" @click="addChild">
+      <v-btn class="my-4" @click="addChild">
         Geschwisterkind hinzufügen
         <v-icon> mdi-plus </v-icon>
       </v-btn>

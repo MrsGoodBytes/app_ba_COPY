@@ -1283,18 +1283,41 @@
       </v-col>
     </v-row>
     <p v-else></p> -->
-    <v-row v-if="this.$store.state.entCheck || this.$store.state.geCheck">
-      <v-card class="mx-auto pa-5 my-5"
-      max-width="400"
-      outlined>
-        <h4 class="text-left">
-          Eine Ermäßigung des Betreuungsentgeltes erfolgt frühestens mit Beginn
-          des Monats der Antragstellung. Sollte ein Zuschuss gewährt werden,
-          wird dieser vom Fachbereich Kultur und Bildung direkt an den Träger
-          der Kindertageseinrichtung gezahlt.
-        </h4>
-      </v-card>
-    </v-row>
+    <v-row>
+        <v-card
+          v-if="this.$store.state.geCheck"
+          class="mx-auto pa-5 my-8"
+          max-width="400"
+          outlined
+        ><p class="text-left"><v-icon>mdi-information</v-icon></p>
+          <h4 class="text-left">
+            Hinweis Geschwisterermäßigung
+          </h4>
+            <p class="text-left">
+              Da eine Abrechnung direkt mit der Kindertagesstätte erfolgt,
+              erhalten Sie keine Eingangsbestätigung und auch keinen Bescheid.
+              Die Kindertagesstätte wird von Ihnen nur noch den reduzierten
+              Elternbeitrag fordern.
+            </p>
+        </v-card>
+
+        <v-card
+          v-if="this.$store.state.entCheck"
+          class="mx-auto pa-5 my-8"
+          max-width="400"
+          outlined
+        ><p class="text-left"><v-icon>mdi-information</v-icon></p>
+          <h4 class="text-left">
+            Hinweis Entgeltermäßigung
+          </h4>
+            <p class="text-left">
+              Sollte ein Zuschuss gewährt werden, wird dieser vom Fachbereich
+              Kultur und Bildung direkt an den Träger der Kindertageseinrichtung
+              gezahlt.
+            </p>
+        </v-card>
+      </v-row>
+
     <v-btn
       class="my-6"
       justify="center"

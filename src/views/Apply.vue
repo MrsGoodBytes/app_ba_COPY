@@ -158,9 +158,8 @@ export default {
       this.activeTab = 1;
 
       if (
-        (this.$store.state.geCheck === true ||
-          this.$store.state.entCheck === true) &&
-        this.child_list.length == 0
+        (this.$store.state.geCheck) &&
+        (this.child_list.length == 0)
       ) {
         var geschwisterkind = new Object();
         geschwisterkind.id = 0;
@@ -212,7 +211,9 @@ export default {
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
-        geschwisterkind.elternbeitrag =0;
+        geschwisterkind.elternbeitrag = 0;
+        geschwisterkind.sibling_ent_checkbox = false;
+        geschwisterkind.sibling_bifo_checkbox = false;
       } else {
         // vermeide Duplikate
         geschwisterkind.id = this.child_list[this.child_list.length - 1].id + 1;
@@ -223,7 +224,9 @@ export default {
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
-        geschwisterkind.elternbeitrag =0;
+        geschwisterkind.elternbeitrag = 0;
+        geschwisterkind.sibling_ent_checkbox = false;
+        geschwisterkind.sibling_bifo_checkbox = false;
       }
 
       //eintragen des neuen Geschwisterkinds in das Array
