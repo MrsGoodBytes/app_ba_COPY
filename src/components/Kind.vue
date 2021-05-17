@@ -151,6 +151,16 @@
           cols="12"
           sm="4"
         >
+        <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Das Betreuungsentgelt ist die zu entrichtende Summe OHNE Abzüge und Ermäßigungen.</span
+            >
+          </v-tooltip>
           <v-text-field
             outlined
             v-model="betreuungsentgelt"
@@ -169,8 +179,8 @@
               >
             </template>
             <span
-              >der Elternbeitrag ist das Betreuungsgeld abzüglich der
-              Ermäßigung</span
+              >Der Elternbeitrag ist das Betreuungsgeld abzüglich der
+              Ermäßigung.</span
             >
           </v-tooltip>
           <v-text-field
@@ -379,7 +389,7 @@
             ></v-text-field>
           </v-col>
           <v-col
-          v-if="item.geCheck"
+          v-if="item.entCheck"
           class="d-flex"
           cols="12"
           sm="12"
@@ -420,7 +430,7 @@
               required
             ></v-text-field>
           </v-col>
-          <v-col class="d-flex" cols="12" sm="4">
+          <v-col v-if="item.elternbeitrag" class="d-flex" cols="12" sm="4">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-icon color="accent" v-bind="attrs" v-on="on"
