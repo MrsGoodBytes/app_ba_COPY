@@ -214,7 +214,7 @@
         ><!-- Einkommensnachweise ohne Sozialleistungen -->
 
         <v-col v-if="radioGroupAntragsgrundlage === 2" class="text-center">
-          <h4>Familieneinkommen, Belastungen, Einkommensgrenze</h4>
+          <h3>Familieneinkommen, Belastungen, Einkommensgrenze</h3>
           <p>Die im Haushalt lebenden Personen erzielen folgendes Einkommen:</p>
         </v-col>
         <v-col
@@ -227,7 +227,9 @@
           </p>
         </v-col>
         <v-col
-          v-else-if="radioGroupAntragsgrundlage === 3"
+          v-else-if="
+            radioGroupAntragsgrundlage === 3 && this.$store.state.entCheck
+          "
           class="text-left pt-0"
         >
           <p>
@@ -236,13 +238,39 @@
             unter der Rubrik "Nachweise" angefügt werden.
           </p>
         </v-col>
+        <v-col
+          v-if="radioGroupAntragsgrundlage === 3 && this.$store.state.bifoCheck"
+          class="text-left pt-0"
+        >
+          <p>
+            Der Bildungsfonds möchte in erster Linie einfach und zielgerichtet
+            finanzielle Unterstützung zur Verfügung stellen. Grundsätzlich
+            können Familien Unterstützung erhalten, die:
+            <v-list>
+              <li>ALG II oder Sozialhilfe beziehen</li>
+              <li>oder Kinderzuschlag von der Familienkasse erhalten</li>
+              <li>oder Wohngeld erhalten</li>
+              <li>
+                oder sich aus sonstigen Gründen in finanzieller Not befinden und
+                dies in einem vereinfachten Nachweis darlegen.
+              </li>
+            </v-list>
+
+            Als erste Anlaufstelle sind Mitarbeiterinnen und Mitarbeiter in
+            Kindertagesstätten und Lehrkräfte in Schulen für Sie da. Die
+            Entscheidung über eine Förderung wird vor Ort getroffen: Bitte
+            wenden Sie sich an die Schule oder Kita, die Ihr Kind besucht. Dort
+            hilft man Ihnen gerne weiter.
+          </p>
+        </v-col>
         <p v-else></p>
       </v-row>
     </v-form>
 
     <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage === 2">
       <h4 class="my-4">
-        Angaben zur Ermittlung des durchschnittlichen monatlichen Familieneinkommens in €
+        Angaben zur Ermittlung des durchschnittlichen monatlichen
+        Familieneinkommens in €
         <v-tooltip bottom>
           <template v-slot:activator="{ on, attrs }">
             <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -272,8 +300,11 @@
                   >
                 </template>
                 <span
-                  >Nettoarbeitseinkommen aus nichtselbstständiger Arbeit <span class="text-decoration-underline font-weight-bold">der
-                  letzten 12 Monate</span> (inkl. Weihnachts- und Urlaubsgeld)</span
+                  >Nettoarbeitseinkommen aus nichtselbstständiger Arbeit
+                  <span class="text-decoration-underline font-weight-bold"
+                    >der letzten 12 Monate</span
+                  >
+                  (inkl. Weihnachts- und Urlaubsgeld)</span
                 >
               </v-tooltip>
             </h4>
@@ -406,16 +437,20 @@
           class="d-flex align-center mb-6"
         >
           <v-col cols="4">
-            <h4 class="text-left">Renten <v-tooltip bottom>
+            <h4 class="text-left">
+              Renten
+              <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon color="accent" v-bind="attrs" v-on="on"
                     >mdi-information</v-icon
                   >
                 </template>
                 <span
-                  >Bitte hier Einkommen aus gesetzlicher Rentenversicherung angeben.</span
+                  >Bitte hier Einkommen aus gesetzlicher Rentenversicherung
+                  angeben.</span
                 >
-              </v-tooltip></h4>
+              </v-tooltip>
+            </h4>
           </v-col>
           <v-col cols="3">
             <v-text-field
@@ -1223,17 +1258,11 @@
         >
           <v-col cols="5">
             <h4 class="text-left">Sonstige Ergänzungen / Angaben</h4>
-            <v-textarea
-              v-model="elternteil1.sonstiges"
-              outlined
-            ></v-textarea>
+            <v-textarea v-model="elternteil1.sonstiges" outlined></v-textarea>
           </v-col>
           <v-col cols="5">
             <h4 class="text-left">Sonstige Ergänzungen / Angaben</h4>
-            <v-textarea
-              v-model="elternteil2.sonstiges"
-              outlined
-            ></v-textarea>
+            <v-textarea v-model="elternteil2.sonstiges" outlined></v-textarea>
           </v-col>
         </v-row>
       </v-card>
@@ -1284,39 +1313,34 @@
     </v-row>
     <p v-else></p> -->
     <v-row>
-        <v-card
-          v-if="this.$store.state.geCheck"
-          class="mx-auto pa-5 my-8"
-          max-width="400"
-          outlined
+      <v-card
+        v-if="this.$store.state.geCheck"
+        class="mx-auto pa-5 my-8"
+        max-width="400"
+        outlined
         ><p class="text-left"><v-icon>mdi-information</v-icon></p>
-          <h4 class="text-left">
-            Hinweis Geschwisterermäßigung
-          </h4>
-            <p class="text-left">
-              Da eine Abrechnung direkt mit der Kindertagesstätte erfolgt,
-              erhalten Sie keine Eingangsbestätigung und auch keinen Bescheid.
-              Die Kindertagesstätte wird von Ihnen nur noch den reduzierten
-              Elternbeitrag fordern.
-            </p>
-        </v-card>
+        <h4 class="text-left">Hinweis Geschwisterermäßigung</h4>
+        <p class="text-left">
+          Da eine Abrechnung direkt mit der Kindertagesstätte erfolgt, erhalten
+          Sie keine Eingangsbestätigung und auch keinen Bescheid. Die
+          Kindertagesstätte wird von Ihnen nur noch den reduzierten
+          Elternbeitrag fordern.
+        </p>
+      </v-card>
 
-        <v-card
-          v-if="this.$store.state.entCheck"
-          class="mx-auto pa-5 my-8"
-          max-width="400"
-          outlined
+      <v-card
+        v-if="this.$store.state.entCheck"
+        class="mx-auto pa-5 my-8"
+        max-width="400"
+        outlined
         ><p class="text-left"><v-icon>mdi-information</v-icon></p>
-          <h4 class="text-left">
-            Hinweis Entgeltermäßigung
-          </h4>
-            <p class="text-left">
-              Sollte ein Zuschuss gewährt werden, wird dieser vom Fachbereich
-              Kultur und Bildung direkt an den Träger der Kindertageseinrichtung
-              gezahlt.
-            </p>
-        </v-card>
-      </v-row>
+        <h4 class="text-left">Hinweis Entgeltermäßigung</h4>
+        <p class="text-left">
+          Sollte ein Zuschuss gewährt werden, wird dieser vom Fachbereich Kultur
+          und Bildung direkt an den Träger der Kindertageseinrichtung gezahlt.
+        </p>
+      </v-card>
+    </v-row>
 
     <v-btn
       class="my-6"
@@ -1454,7 +1478,7 @@ export default {
         unterhaltszahlungen: 0,
         sonstiges: "",
       },
-      
+
       haushaltseinkommen: 0,
       wohnort_checkbox: false,
       wohnort: "",
@@ -1604,7 +1628,7 @@ export default {
     },
     elternteil2: function (val) {
       this.$store.commit("setElternteil2", val);
-    }
+    },
   },
 
   methods: {

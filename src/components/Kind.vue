@@ -55,11 +55,28 @@
       </v-row>
       <v-row>
         <v-col
-          v-if="this.$store.state.geCheck || this.$store.state.entCheck"
+          v-if="
+            this.$store.state.bifoCheck &&
+            !this.$store.state.entCheck &&
+            !this.$store.state.geCheck
+          "
           class="d-flex"
           cols="12"
           sm="3"
         >
+          <h4>Betreuung</h4>
+          <v-radio-group v-model="radioGroupBetreuungsform">
+            <v-radio
+              v-model="betreuungsform"
+              ref="betreuungsform"
+              v-for="n in radioListBetreuungsform_bifo"
+              :key="n"
+              :label="`${n}`"
+              :value="n"
+            ></v-radio>
+          </v-radio-group>
+        </v-col>
+        <v-col v-else class="d-flex" cols="12" sm="3">
           <h4>Betreuung</h4>
           <v-radio-group v-model="radioGroupBetreuungsform">
             <v-radio
@@ -72,8 +89,11 @@
             ></v-radio>
           </v-radio-group>
         </v-col>
-        <p v-else></p>
-        <v-col v-if="radioGroupBetreuungsform === 3">
+        <v-col
+          v-if="
+            radioGroupBetreuungsform === 0
+          "
+        >
           <v-text-field
             outlined
             v-model="tagespflegename"
@@ -151,14 +171,15 @@
           cols="12"
           sm="4"
         >
-        <v-tooltip bottom>
+          <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-icon color="accent" v-bind="attrs" v-on="on"
                 >mdi-information</v-icon
               >
             </template>
             <span
-              >Das Betreuungsentgelt ist die zu entrichtende Summe OHNE Abzüge und Ermäßigungen.</span
+              >Das Betreuungsentgelt ist die zu entrichtende Summe OHNE Abzüge
+              und Ermäßigungen.</span
             >
           </v-tooltip>
           <v-text-field
@@ -250,16 +271,24 @@
       <h3>Geschwisterkind/er</h3>
       <h5>
         <span v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
-          Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in einem
-        Betreuungsverhältnis befinden.</span>
-        <span v-else-if="this.$store.state.entCheck && !this.$store.state.geCheck">
-          Bitte tragen Sie hier alle Ihre Kinder ein, für die Sie eine Ermäßigung beantragen möchten.
-          Ausgenommen ist eine Betreuung in der
-        betreuten Grundschule.</span>
-        <span v-else-if="this.$store.state.entCheck && this.$store.state.geCheck">
-          Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in einem
-        Betreuungsverhältnis befinden und/oder für die Sie eine Ermäßigung beantragen möchten. Ausgenommen für die Entgeltermäßigung ist eine Betreuung in der
-        betreuten Grundschule.</span>
+          Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
+          einem Betreuungsverhältnis befinden.</span
+        >
+        <span
+          v-else-if="this.$store.state.entCheck && !this.$store.state.geCheck"
+        >
+          Bitte tragen Sie hier alle Ihre Kinder ein, für die Sie eine
+          Ermäßigung beantragen möchten. Ausgenommen ist eine Betreuung in der
+          betreuten Grundschule.</span
+        >
+        <span
+          v-else-if="this.$store.state.entCheck && this.$store.state.geCheck"
+        >
+          Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in
+          einem Betreuungsverhältnis befinden und/oder für die Sie eine
+          Ermäßigung beantragen möchten. Ausgenommen für die Entgeltermäßigung
+          ist eine Betreuung in der betreuten Grundschule.</span
+        >
       </h5>
       <v-card
         v-for="item in childlist"
@@ -318,7 +347,7 @@
         <v-row class="px-3">
           <v-col v-if="item.geCheck" class="d-flex" cols="12" sm="3">
             <h4>Betreuung</h4>
-            <v-radio-group v-model="radioGroupBetreuungsform">
+            <v-radio-group v-model="radioGroupBetreuungsform_sibling">
               <v-radio
                 v-model="item.betreuungsform"
                 ref="betreuungsform"
@@ -331,7 +360,7 @@
           </v-col>
           <v-col v-else class="d-flex" cols="12" sm="3">
             <h4>Betreuung</h4>
-            <v-radio-group v-model="radioGroupBetreuungsform">
+            <v-radio-group v-model="radioGroupBetreuungsform_sibling">
               <v-radio
                 v-model="item.betreuungsform"
                 ref="betreuungsform"
@@ -342,7 +371,7 @@
               ></v-radio>
             </v-radio-group>
           </v-col>
-          <v-col v-if="radioGroupBetreuungsform === 3">
+          <v-col v-if="radioGroupBetreuungsform_sibling === 0">
             <v-text-field
               outlined
               v-model="item.tagespflegename"
@@ -388,28 +417,18 @@
               required
             ></v-text-field>
           </v-col>
-          <v-col
-          v-if="item.entCheck"
-          class="d-flex"
-          cols="12"
-          sm="12"
-        >
-          <v-checkbox
-            v-model="item.vorjahr_checkbox"
-            ref="vorjahr_check"
-            :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt:'"
-          ></v-checkbox>
-        </v-col>
-        <p v-else></p>
+          <v-col v-if="item.entCheck" class="d-flex" cols="12" sm="12">
+            <v-checkbox
+              v-model="item.vorjahr_checkbox"
+              ref="vorjahr_check"
+              :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt:'"
+            ></v-checkbox>
+          </v-col>
+          <p v-else></p>
         </v-row>
 
         <v-row>
-          <v-col
-            v-if="item.geCheck"
-            class="d-flex"
-            cols="12"
-            sm="4"
-          >
+          <v-col v-if="item.geCheck" class="d-flex" cols="12" sm="4">
             <v-text-field
               outlined
               v-model="item.date_bb"
@@ -420,7 +439,12 @@
             ></v-text-field>
           </v-col>
           <p v-else></p>
-          <v-col class="d-flex" cols="12" sm="4">
+          <v-col
+            v-if="item.geCheck || item.entCheck"
+            class="d-flex"
+            cols="12"
+            sm="4"
+          >
             <v-text-field
               outlined
               v-model="item.betreuungsentgelt"
@@ -430,7 +454,7 @@
               required
             ></v-text-field>
           </v-col>
-          <v-col v-if="item.elternbeitrag" class="d-flex" cols="12" sm="4">
+          <v-col v-if="item.entCheck" class="d-flex" cols="12" sm="4">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -448,6 +472,24 @@
               prefix="€"
               :rules="moneyRules"
               label="Elternbeitrag"
+              required
+            ></v-text-field>
+          </v-col>
+          <v-col v-if="item.bifoCheck" class="d-flex" cols="12" sm="4">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span>monatlicher Betrag</span>
+            </v-tooltip>
+            <v-text-field
+              outlined
+              v-model="essensgeld"
+              :rules="moneyRules"
+              label="Essensgeld"
+              prefix="€"
               required
             ></v-text-field>
           </v-col>
@@ -517,12 +559,9 @@ export default {
       betreuungsform: "",
       betreuungsumfang: "",
       radioGroupBetreuungsform: 0,
-      radioListBetreuungsform: [
-        "Krippe",
-        "Elementar",
-        "Hort",
-        "Tagespflege",
-      ],
+      radioGroupBetreuungsform_sibling: 0,
+      radioListBetreuungsform: ["Tagespflege", "Krippe", "Elementar", "Hort"],
+      radioListBetreuungsform_bifo: ["Tagespflege", "Kindertageseinrichtung"],
       radioListBetreuungsform_ganz: [
         "Krippe",
         "Elementar",
