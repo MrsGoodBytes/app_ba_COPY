@@ -122,7 +122,7 @@
         </h3>
 
         <v-card v-for="item in personlist" :key="item.id">
-          <v-row class="my-3 px-3">
+          <v-row class="mt-1 mb-3 px-3">
             <v-col class="pb-0">
               <v-text-field
                 outlined
@@ -163,6 +163,8 @@
             <v-col>
               <v-btn
                 class="mt-3"
+                text
+                outlined
                 color="secondary"
                 @click="deletePerson(item.id)"
               >

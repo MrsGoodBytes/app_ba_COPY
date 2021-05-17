@@ -167,7 +167,7 @@
       </v-row>
       <v-row>
         <v-col
-          v-if="this.$store.state.bifoCheck && radioGroupBetreuungsform === 3"
+          v-if="this.$store.state.bifoCheck || radioGroupBetreuungsform === 3"
           class="d-flex"
           cols="12"
           sm="4"
@@ -214,30 +214,52 @@
           ></v-text-field>
         </v-col>
         <p v-else></p>
-        <v-row>
-          <v-col cols="6">
-            <h4 class="text-left">
+      </v-row>
+      <v-row>
+        <v-card
+          v-if="this.$store.state.geCheck"
+          class="mx-auto pa-5 mb-8"
+          max-width="400"
+          outlined
+        ><p class="text-left"><v-icon>mdi-information</v-icon></p>
+          <h4 class="text-left">
+            Hinweis Geschwisterermäßigung
+          </h4>
+            <p class="text-left">
               Da eine Abrechnung direkt mit der Kindertagesstätte erfolgt,
               erhalten Sie keine Eingangsbestätigung und auch keinen Bescheid.
               Die Kindertagesstätte wird von Ihnen nur noch den reduzierten
               Elternbeitrag fordern.
-            </h4>
-          </v-col>
-        </v-row>
+            </p>
+        </v-card>
+
+        <v-card
+          v-if="this.$store.state.entCheck"
+          class="mx-auto pa-5 mb-8"
+          max-width="400"
+          outlined
+        ><p class="text-left"><v-icon>mdi-information</v-icon></p>
+          <h4 class="text-left">
+            Hinweis Entgeltermäßigung
+          </h4>
+            <p class="text-left">
+              Sollte ein Zuschuss gewährt werden, wird dieser vom Fachbereich
+              Kultur und Bildung direkt an den Träger der Kindertageseinrichtung
+              gezahlt.
+            </p>
+        </v-card>
       </v-row>
     </v-form>
 
-    <div
-      id="Geschwisterkind"
-      v-if="this.$store.state.geCheck || !this.$store.state.entCheck"
-    >
+    <div id="Geschwisterkind">
+      <h3>Geschwisterkind/er</h3>
       <v-card
         v-for="item in childlist"
         :key="item.id"
-        class="pa-10"
+        class="pa-8"
         color="#F5F5F5"
       >
-        <v-row class="my-3 px-3">
+        <v-row class="mb-0 px-3">
           <v-col>
             <v-text-field
               outlined
@@ -267,6 +289,24 @@
             ></v-text-field>
           </v-col>
         </v-row>
+
+        <v-row class="my-0 px-3">
+          <v-checkbox
+            class="my-0"
+            v-model="item.sibling_erm_checkbox"
+            ref="sib_erm_check"
+            :label="'Für dieses Kind soll ebenfalls ein Antrag auf Entgeltermäßigung gestellt werden:'"
+          ></v-checkbox
+        ></v-row>
+        <v-row class="my-0 px-3">
+          <v-checkbox
+            class="my-0"
+            v-model="item.sibling_bifo_checkbox"
+            ref="sib_bifo_check"
+            :label="'Für dieses Kind soll ebenfalls ein Antrag auf Mittel aus dem Bildungsfond gestellt werden:'"
+          ></v-checkbox
+        ></v-row>
+
         <v-row class="px-3">
           <v-col class="d-flex" cols="12" sm="3">
             <h4>Betreuung</h4>
@@ -381,7 +421,13 @@
 
         <v-row>
           <v-col class="pt-0">
-            <v-btn class="ma-0" color="secondary" @click="deleteChild(item.id)">
+            <v-btn
+              class="ma-0"
+              text
+              outlined
+              color="secondary"
+              @click="deleteChild(item.id)"
+            >
               Einträge dieses Kindes löschen
               <v-icon> mdi-alert </v-icon>
             </v-btn>
@@ -431,6 +477,8 @@ export default {
       institutionname: "",
 
       vorjahr_checkbox: false,
+      sibling_ent_checkbox: false,
+      sibling_bifo_checkbox: false,
 
       betreuungsform: "",
       betreuungsumfang: "",

@@ -172,6 +172,8 @@ export default {
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
         geschwisterkind.elternbeitrag =0;
+        geschwisterkind.sibling_ent_checkbox = false;
+        geschwisterkind.sibling_bifo_checkbox = false;
         this.child_list.push(geschwisterkind);
       }
     },
