@@ -1,14 +1,26 @@
 <template>
   <div id="Kind" class="pb-10">
     <h2 class="pt-3">Kind/er</h2>
-    <h5 class="pb-3" v-if="this.$store.state.geCheck">Bitte tragen Sie hier das Kind ein, für das eine Geschwisterermäßigung beantragt wird.<v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon color="accent" v-bind="attrs" v-on="on"
-                >mdi-information</v-icon
-              >
-            </template>
-            <span>Bitte tragen Sie Ihr jüngstes Kind ein</span>
-          </v-tooltip></h5>
+    <h5 class="pb-3" v-if="this.$store.state.geCheck">
+      Bitte tragen Sie hier das Kind ein, für das eine Geschwisterermäßigung
+      beantragt wird.
+      <v-tooltip max-width="600" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon color="accent" v-bind="attrs" v-on="on"
+            >mdi-information</v-icon
+          >
+        </template>
+        <span
+          >Werden mehrere in einem Haushalt lebende Kinder einer Familie
+          gleichzeitig in anerkannten Kindertageseinrichtungen,
+          Kindertagespflegestellen oder an Lübecker Schulen nach dem Modell
+          „Ganztag an Schule“ betreut, übernimmt die Hansestadt Lübeck den
+          Elternbeitrag: - für das zweitälteste Kind zur Hälfte - für jedes
+          weitere jüngere Kind vollständig Die Ermäßigung erfolgt unabhängig vom
+          Einkommen.</span
+        >
+      </v-tooltip>
+    </h5>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row
         ><!-- v-for="n in childList" :key="n" -->
@@ -223,12 +235,15 @@
         </v-col>
         <p v-else></p>
       </v-row>
-      
     </v-form>
 
     <div id="Geschwisterkind">
       <h3>Geschwisterkind/er</h3>
-      <h5>Bitte tragen Sie hier alle Kinder ein, die sich in einem Betreuungsverhältnis befinden, ausgenommen ist eine Betreuung in der betreuten Grundschule.</h5>
+      <h5>
+        Bitte tragen Sie hier alle Kinder ein, die sich in einem
+        Betreuungsverhältnis befinden, ausgenommen ist eine Betreuung in der
+        betreuten Grundschule.
+      </h5>
       <v-card
         v-for="item in childlist"
         :key="item.id"
@@ -265,7 +280,7 @@
             ></v-text-field>
           </v-col>
         </v-row>
-<!-- 
+        <!-- 
         <v-row class="my-0 px-3">
           <v-checkbox 
             class="my-0"
