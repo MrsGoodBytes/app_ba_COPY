@@ -289,13 +289,52 @@
           <v-text-field
             outlined
             v-model="essensgeld"
-            :rules="moneyRules"
+            :rules="essensgeldRules"
             label="Essensgeld"
             prefix="€"
-            required
           ></v-text-field>
         </v-col>
         <v-col class="d-flex" cols="12" sm="4">
+          <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span>Gültig ab sofort wenn kein Datum angegeben</span>
+          </v-tooltip>
+          <v-text-field
+            outlined
+            v-model="gueltig"
+            label="Gültig ab"
+            required
+          ></v-text-field>
+        </v-col>
+      </v-row>
+
+      <h4
+        v-if="
+          this.$store.state.bifoCheck &&
+          this.$store.state.radioGroupBetreuungsform === 1
+        "
+        class="text-left"
+      >
+        Anteilige Kostenerstattung Ausflüge
+      </h4>
+      <v-row
+        v-if="
+          this.$store.state.bifoCheck &&
+          this.$store.state.radioGroupBetreuungsform === 1
+        "
+      >
+        <v-col class="d-flex pt-0" cols="12" sm="8">
+          <v-checkbox
+            v-model="kostenerstattung"
+            ref="vorjahr_check"
+            :label="'Wir beantragen eine anteiligeKostenerstattung für ein- und mehrtägig  Ausflüge durch Mittel aus dem Bildungsfond.'"
+          ></v-checkbox>
+        </v-col>
+        <v-col class="d-flex align-center" cols="12" sm="4">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -313,6 +352,7 @@
           ></v-text-field>
         </v-col>
       </v-row>
+
       <v-row
         v-if="
           this.$store.state.bifoCheck &&
@@ -351,6 +391,25 @@
             label="BIC"
             required
           ></v-text-field>
+        </v-col>
+      </v-row>
+      <p v-else></p>
+
+      <h4 v-if="this.$store.state.bifoCheck" class="text-left">Aktiv-Pass</h4>
+      <v-row v-if="this.$store.state.bifoCheck">
+        <v-col class="text-left" cols="4">
+          <h5>
+            Um an einer Aktivität des Aktiv-Passes teilnehmen zu können, wird
+            die Kostenerstattung für fol- gende Anschaffung beantragt:
+          </h5>
+        </v-col>
+        <v-col cols="8">
+          <h4 class="text-left">
+            Ausführliche Begründung zur Notwendigkeit der Anschaffung und
+            weshalb die Anschaffung nicht -endgültig- aus eigenen Mitteln
+            finanziert werden kann:
+          </h4>
+          <v-textarea v-model="bifo_begr" outlined></v-textarea>
         </v-col>
       </v-row>
       <p v-else></p>
@@ -624,13 +683,45 @@
             <v-text-field
               outlined
               v-model="item.essensgeld"
-              :rules="moneyRules"
+              :rules="essensgeldRules"
               label="Essensgeld"
               prefix="€"
-              required
             ></v-text-field>
           </v-col>
           <v-col class="d-flex" cols="12" sm="4">
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span>Gültig ab sofort wenn kein Datum angegeben</span>
+            </v-tooltip>
+            <v-text-field
+              outlined
+              v-model="item.gueltig"
+              label="Gültig ab"
+              required
+            ></v-text-field>
+          </v-col>
+        </v-row>
+        <h4
+          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
+          class="text-left"
+        >
+          Anteilige Kostenerstattung Ausflüge
+        </h4>
+        <v-row
+          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
+        >
+          <v-col class="d-flex pt-0" cols="12" sm="8">
+            <v-checkbox
+              v-model="item.kostenerstattung"
+              ref="vorjahr_check"
+              :label="'Wir beantragen eine anteiligeKostenerstattung für ein- und mehrtägig  Ausflüge durch Mittel aus dem Bildungsfond.'"
+            ></v-checkbox>
+          </v-col>
+          <v-col class="d-flex align-center" cols="12" sm="4">
             <v-tooltip bottom>
               <template v-slot:activator="{ on, attrs }">
                 <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -648,28 +739,25 @@
             ></v-text-field>
           </v-col>
         </v-row>
-        <h4
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
-          class="text-left mb-3"
-        >
-          Anteilige Kostenerstattung Ausflüge
-        </h4>
-        <v-row
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
-        >
-          <v-col
-          class="d-flex my-0 py-0"
-          cols="12"
-          sm="12"
-        >
-          <v-checkbox
-            class="my-0 py-0"
-            v-model="item.kostenerstattung"
-            ref="vorjahr_check"
-            :label="'Wir beantragen eine anteiligeKostenerstattung für ein- und mehrtägig  Ausflüge durch Mittel aus dem Bildungsfond.'"
-          ></v-checkbox>
+
+        <h4 v-if="item.bifoCheck" class="text-left">Aktiv-Pass</h4>
+      <v-row v-if="item.bifoCheck">
+        <v-col class="text-left" cols="4">
+          <h5>
+            Um an einer Aktivität des Aktiv-Passes teilnehmen zu können, wird
+            die Kostenerstattung für fol- gende Anschaffung beantragt:
+          </h5>
         </v-col>
-        </v-row>
+        <v-col cols="8">
+          <h4 class="text-left">
+            Ausführliche Begründung zur Notwendigkeit der Anschaffung und
+            weshalb die Anschaffung nicht -endgültig- aus eigenen Mitteln
+            finanziert werden kann:
+          </h4>
+          <v-textarea v-model="item.bifo_begr" outlined></v-textarea>
+        </v-col>
+      </v-row>
+      <p v-else></p>
 
         <v-row>
           <v-col class="pt-0">
@@ -750,9 +838,16 @@ export default {
       iban: "",
       bic: "",
 
+      kostenerstattung: false,
+      gueltig: "",
+      bifo_begr: "",
+
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       moneyRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
+      essensgeldRules: [
+        (value) => /^\d+$/.test(value) || "Wert muss eine Zahl sein.",
+      ],
       telRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>

@@ -197,6 +197,7 @@ export default {
         geschwisterkind.essensgeld = 0;
         geschwisterkind.gueltig = "";
         geschwisterkind.kostenerstattung = "";
+        geschwisterkind.bifo_begr = "";
         this.child_list.push(geschwisterkind);
       }
     },
@@ -244,6 +245,7 @@ export default {
         geschwisterkind.sibling_bifo_checkbox = false;
         geschwisterkind.essensgeld = 0;
         geschwisterkind.gueltig = "";
+        geschwisterkind.bifo_begr = "";
         geschwisterkind.kostenerstattung = "";
       } else {
         // vermeide Duplikate
@@ -264,6 +266,7 @@ export default {
         geschwisterkind.sibling_bifo_checkbox = false;
         geschwisterkind.essensgeld = 0;
         geschwisterkind.gueltig = "";
+        geschwisterkind.bifo_begr = "";
         geschwisterkind.kostenerstattung = "";
       }
 
