@@ -1384,18 +1384,8 @@ export default {
       sozialleistungen: false,
       ohnesozialleistungen: false,
 
-      radioGroupErmaeßigung: 0, //wählt aus welcher Radiobutton default gewählt ist
-      radioList: [
-        "den Träger der Kindertagesstätte",
-        "den/die Antragsteller/in",
-      ],
-
       nettoeinkommen: "",
       selbstständigkeiteinkommen: "",
-
-      kontoinhaber: "",
-      iban: "",
-      bic: "",
 
       menu: false,
       date: null,
@@ -1544,11 +1534,6 @@ export default {
 
     this.nettoeinkommen = this.$store.state.nettoeinkommen;
     this.selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen;
-
-    this.kontoinhaber =
-      this.$store.state.firstname + " " + this.$store.state.lastname;
-    this.iban = this.$store.state.iban;
-    this.bic = this.$store.state.bic;
 
     this.eigentum_checkbox = this.$store.state.eigentum_checkbox;
     this.elternteil1 = this.$store.state.elternteil1;

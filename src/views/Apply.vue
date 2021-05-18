@@ -187,12 +187,16 @@ export default {
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
+        geschwisterkind.betreuungsform_sibling = 0;
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
         geschwisterkind.elternbeitrag = 0;
         geschwisterkind.sibling_ent_checkbox = false;
         geschwisterkind.sibling_bifo_checkbox = false;
+        geschwisterkind.essensgeld = 0;
+        geschwisterkind.gueltig = "";
+        geschwisterkind.kostenerstattung = "";
         this.child_list.push(geschwisterkind);
       }
     },
@@ -231,12 +235,16 @@ export default {
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
+        geschwisterkind.betreuungsform_sibling = 0;
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
         geschwisterkind.elternbeitrag = 0;
         geschwisterkind.sibling_ent_checkbox = false;
         geschwisterkind.sibling_bifo_checkbox = false;
+        geschwisterkind.essensgeld = 0;
+        geschwisterkind.gueltig = "";
+        geschwisterkind.kostenerstattung = "";
       } else {
         // vermeide Duplikate
         geschwisterkind.id = this.child_list[this.child_list.length - 1].id + 1;
@@ -247,12 +255,16 @@ export default {
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
+        geschwisterkind.betreuungsform_sibling = 0;
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
         geschwisterkind.elternbeitrag = 0;
         geschwisterkind.sibling_ent_checkbox = false;
         geschwisterkind.sibling_bifo_checkbox = false;
+        geschwisterkind.essensgeld = 0;
+        geschwisterkind.gueltig = "";
+        geschwisterkind.kostenerstattung = "";
       }
 
       //eintragen des neuen Geschwisterkinds in das Array
