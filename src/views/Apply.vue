@@ -1,6 +1,25 @@
 <template>
   <div id="antrag_auswahl">
     <v-container>
+      <v-card color="#F5F5F5" class="mb-8">
+        <v-row class="py-6"
+          ><v-col class="text-left pl-16">
+            <h1>Willkommen</h1>
+            <h4>Erstellen Sie Anträge auf <span class="text-decoration-underline">Entgeltermäßigung, Geschwisterermäßigung und Mittel aus dem Bildungsfond</span> jetzt vollständig digital.</h4>
+          </v-col>
+          <v-col>
+            <v-card outlined class="mx-16 py-6" color="#E8EAF6">
+              <h3 class="">Falls Sie unsicher sind</h3>
+              <p>hilft Ihnen unser Test auf Berechtigung weiter:</p>
+              <router-link :to="{ name: 'Check' }" href="#" class=""
+                ><v-btn color="accent" class="mb-3 text-button"
+                  >Welche Anträge sollte ich stellen?</v-btn
+                ></router-link
+              >
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-card>
       <Antragswahl msg="Welche Anträge möchtest du stellen?" />
       <v-alert
         v-if="
@@ -15,6 +34,7 @@
         >Bitte wählen Sie mindestens einen Antrag aus.</v-alert
       >
       <p v-else></p>
+
       <v-tabs fixed-tabs background-color="indigo" dark v-model="activeTab">
         <v-tab
           class="pa-4"
@@ -157,10 +177,7 @@ export default {
       this.Abschicken = false;
       this.activeTab = 1;
 
-      if (
-        (this.$store.state.geCheck) &&
-        (this.child_list.length == 0)
-      ) {
+      if (this.$store.state.geCheck && this.child_list.length == 0) {
         var geschwisterkind = new Object();
         geschwisterkind.id = 0;
         geschwisterkind.geCheck = this.$store.state.geCheck;
@@ -173,7 +190,7 @@ export default {
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
-        geschwisterkind.elternbeitrag =0;
+        geschwisterkind.elternbeitrag = 0;
         geschwisterkind.sibling_ent_checkbox = false;
         geschwisterkind.sibling_bifo_checkbox = false;
         this.child_list.push(geschwisterkind);
@@ -229,7 +246,7 @@ export default {
         geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
-        geschwisterkind.date_bb ="";
+        geschwisterkind.date_bb = "";
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;

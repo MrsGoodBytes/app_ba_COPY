@@ -1,6 +1,6 @@
 <template>
   <div id="antrag_auswahl">
-    <h1 class="text-base font-semibold">{{ msg }}</h1>
+    <h2 class="text-base font-semibold">{{ msg }}</h2>
     <v-container class="pb-0">
       <v-row justify="space-around">
           <v-checkbox

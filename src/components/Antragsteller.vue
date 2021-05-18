@@ -190,7 +190,8 @@
       </h3>
       <v-row v-if="this.$store.state.entCheck || this.$store.state.bifoCheck">
         <v-col class="pb-0">
-          <v-radio-group v-model="radioGroupAntragsgrundlage">
+          <v-radio-group v-model="radioGroupAntragsgrundlage"
+              :rules="radioRules">
             <v-radio class="d-none"> </v-radio>
             <v-radio
               v-model="antragsgrundlage"
@@ -199,7 +200,6 @@
               :key="n"
               :label="`${n}`"
               :value="n"
-              :rules="radioRules"
             ></v-radio>
           </v-radio-group>
           <h4
@@ -1523,7 +1523,7 @@ export default {
           "Pflichtfeld. Bitte gültige IBAN eingeben!",
       ],
       dateRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
-      radioRules: [(value) => value != 0],
+      radioRules: [this.radioGroupAntragsgrundlage != 0 || "Bitte wählen Sie eine Antragsgrundlage aus!"],
     };
   },
 
