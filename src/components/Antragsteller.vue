@@ -187,7 +187,36 @@
         v-if="this.$store.state.entCheck || this.$store.state.bifoCheck"
       >
         Antragsgrundlage
+        <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >Zu <span class="font-weight-bold">Sozialleistungen</span> zählen
+                <list class="text-left">
+                  <li>Leistungen vom Jobcenter (Arbeitslosengeld II)</li>
+                  <li>Wohngeld nach dem Wohngeldgesetz</li>
+                  <li>Kinderzuschlag der Familienkassen</li>
+                  <li>Hilfe zum Lebensunterhalt</li>
+                  <li>Grundsicherung im Alter und bei Erwerbsminderung</li>
+                  <li>Leistungen nach dem Asylbewerberleistungsgesetz</li>
+                </list>
+              </span>
+              <p></p>
+              <span>Sie <span class="font-weight-bold">Privatinsolvenz</span> angemeldet haben, muss hierfür der amtsgerichtliche Bescheid vorliegen.</span>
+              <p></p>
+              <span>Fall von <span class="font-weight-bold">Einkommen</span> wird anhand der Einkommensgrenze entschieden, ob sie förderungsfähig sind.</span>
+            </v-tooltip>
       </h3>
+          <h4
+            v-if="(this.$store.state.entCheck || this.$store.state.bifoCheck) && (this.radioGroupAntragsgrundlage === 0)"
+            class="text-left error--text"
+          >
+            <v-icon color="secondary">mdi-alert</v-icon>
+            Bitte wählen Sie eine Antragsgrundlage aus!
+          </h4>
       <v-row v-if="this.$store.state.entCheck || this.$store.state.bifoCheck">
         <v-col class="pb-0">
           <v-radio-group v-model="radioGroupAntragsgrundlage"
@@ -202,17 +231,11 @@
               :value="n"
             ></v-radio>
           </v-radio-group>
-          <h4
-            v-if="this.radioGroupAntragsgrundlage === 0"
-            class="text-left error--text"
-          >
-            Bitte wählen Sie eine Antragsgrundlage aus!
-          </h4>
         </v-col>
       </v-row>
+<!-- TEXT Antragsgrundlage -->
       <v-row
-        ><!-- Einkommensnachweise ohne Sozialleistungen -->
-
+        >
         <v-col v-if="radioGroupAntragsgrundlage === 2" class="text-center">
           <h3>Familieneinkommen, Belastungen, Einkommensgrenze</h3>
           <p>Die im Haushalt lebenden Personen erzielen folgendes Einkommen:</p>
@@ -267,6 +290,7 @@
       </v-row>
     </v-form>
 
+<!-- Einkommensnachweise ohne Sozialleistungen -->
     <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage === 2">
       <h4 class="my-4">
         Angaben zur Ermittlung des durchschnittlichen monatlichen
@@ -1321,10 +1345,9 @@
         ><p class="text-left"><v-icon>mdi-information</v-icon></p>
         <h4 class="text-left">Hinweis Geschwisterermäßigung</h4>
         <p class="text-left">
-          Da eine Abrechnung direkt mit der Kindertagesstätte erfolgt, erhalten
-          Sie keine Eingangsbestätigung und auch keinen Bescheid. Die
-          Kindertagesstätte wird von Ihnen nur noch den reduzierten
-          Elternbeitrag fordern.
+          Da eine Abrechnung direkt mit dem Träger der Kindertageseinrichtung erfolgt, erhalten
+          Sie keine Eingangsbestätigung und auch keinen Bescheid. Von Ihnen wird nur noch den reduzierte
+          Elternbeitrag gefordert.
         </p>
       </v-card>
 
@@ -1627,7 +1650,7 @@ export default {
       this.$parent.addPerson();
     },
     funcShowKindDaten() {
-      if (this.$refs.form.validate() == true) {
+      if ((this.$refs.form.validate() == true) && (this.radioGroupAntragsgrundlage != 0)) {
         this.$parent.funcShowKindDaten();
       } else {
         this.valid = false;

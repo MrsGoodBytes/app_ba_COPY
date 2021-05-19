@@ -2,8 +2,8 @@
   <div id="Kind" class="pb-10">
     <h2 class="pt-3">Kind/er</h2>
     <h5 class="pb-3" v-if="this.$store.state.geCheck">
-      Bitte tragen Sie hier das Kind ein, für das eine Geschwisterermäßigung
-      beantragt wird.
+      Bitte tragen Sie hier das jüngste Kind ein, für das ein oder mehrere
+      Anträge gestellt werden.
       <v-tooltip max-width="600" bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -53,6 +53,8 @@
           ></v-text-field>
         </v-col>
       </v-row>
+      <v-divider></v-divider>
+      <h3 class="text-left py-3">Folgeantrag</h3>
       <v-row class="my-0 py-0">
         <v-col
           v-if="this.$store.state.entCheck"
@@ -69,7 +71,15 @@
         </v-col>
         <p v-else></p>
       </v-row>
-      <h4 class="text-left">Betreuung</h4>
+      <v-divider></v-divider>
+      <h3 class="text-left py-3">Betreuung</h3>
+      <h4
+        v-if="this.radioGroupBetreuungsform === 0"
+        class="text-left error--text"
+      >
+        <v-icon color="secondary">mdi-alert</v-icon>
+        Bitte wählen Sie eine Betreuungsform aus!
+      </h4>
       <v-row>
         <v-col
           v-if="
@@ -94,8 +104,8 @@
         </v-col>
 
         <v-col v-else class="d-flex" cols="12" sm="4">
-          <h4>Betreuung</h4>
           <v-radio-group v-model="radioGroupBetreuungsform">
+            <v-radio class="d-none"> </v-radio>
             <v-radio
               v-model="betreuungsform"
               ref="betreuungsform"
@@ -107,7 +117,7 @@
           </v-radio-group>
         </v-col>
 
-        <v-col v-if="radioGroupBetreuungsform === 0" cols="12" sm="8">
+        <v-col v-if="radioGroupBetreuungsform === 1" cols="12" sm="8">
           <v-text-field
             outlined
             v-model="tagespflegename"
@@ -144,7 +154,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col v-else>
+        <v-col v-else-if="radioGroupBetreuungsform != 0">
           <v-text-field
             outlined
             v-model="institutionname"
@@ -158,7 +168,7 @@
         <v-col
           v-if="
             this.$store.state.geCheck ||
-            this.$store.state.radioGroupBetreuungsform === 0
+            this.$store.state.radioGroupBetreuungsform === 1
           "
           class="d-flex"
           cols="12"
@@ -178,8 +188,8 @@
         <v-col
           v-if="
             (this.$store.state.geCheck &&
-              this.radioGroupBetreuungsform === 0) ||
-            (this.$store.state.entCheck && this.radioGroupBetreuungsform === 0)
+              this.radioGroupBetreuungsform === 1) ||
+            (this.$store.state.entCheck && this.radioGroupBetreuungsform === 1)
           "
           class="d-flex"
           cols="12"
@@ -254,12 +264,20 @@
         </v-col>
         <p v-else></p>
       </v-row>
-      <v-row>
+      <h3 v-if="this.$store.state.bifoCheck" class="text-left py-3">
+        Mittel aus dem Bildungsfond
+      </h3>
+      <v-row
+        v-if="
+          this.$store.state.bifoCheck &&
+          this.$store.state.radioGroupBetreuungsform === 1
+        "
+      >
         <v-col class="text-left" cols="4">
           <h5
             v-if="
               this.$store.state.bifoCheck &&
-              this.$store.state.radioGroupBetreuungsform === 0
+              this.$store.state.radioGroupBetreuungsform === 1
             "
           >
             Für Beantragung von Mitteln aus dem Bildungsfond zur
@@ -269,15 +287,7 @@
             bitte angeben:
           </h5>
         </v-col>
-        <v-col
-          v-if="
-            this.$store.state.bifoCheck &&
-            this.$store.state.radioGroupBetreuungsform === 0
-          "
-          class="d-flex"
-          cols="12"
-          sm="4"
-        >
+        <v-col class="d-flex" cols="12" sm="4">
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -315,7 +325,7 @@
       <h4
         v-if="
           this.$store.state.bifoCheck &&
-          this.$store.state.radioGroupBetreuungsform === 1
+          this.$store.state.radioGroupBetreuungsform === 2
         "
         class="text-left"
       >
@@ -324,7 +334,7 @@
       <v-row
         v-if="
           this.$store.state.bifoCheck &&
-          this.$store.state.radioGroupBetreuungsform === 1
+          this.$store.state.radioGroupBetreuungsform === 2
         "
       >
         <v-col class="d-flex pt-0" cols="12" sm="8">
@@ -352,11 +362,11 @@
           ></v-text-field>
         </v-col>
       </v-row>
-
+      <p v-else></p>
       <v-row
         v-if="
           this.$store.state.bifoCheck &&
-          this.$store.state.radioGroupBetreuungsform === 0
+          this.$store.state.radioGroupBetreuungsform === 1
         "
       >
         <v-col class="text-left" cols="12" sm="4">
@@ -393,7 +403,6 @@
           ></v-text-field>
         </v-col>
       </v-row>
-      <p v-else></p>
 
       <h4 v-if="this.$store.state.bifoCheck" class="text-left">Aktiv-Pass</h4>
       <v-row v-if="this.$store.state.bifoCheck">
@@ -404,40 +413,36 @@
           </h5>
         </v-col>
         <v-col cols="8">
-          <h4 class="text-left">
+          <h5 class="text-left">
             Ausführliche Begründung zur Notwendigkeit der Anschaffung und
             weshalb die Anschaffung nicht -endgültig- aus eigenen Mitteln
             finanziert werden kann:
-          </h4>
+          </h5>
           <v-textarea v-model="bifo_begr" outlined></v-textarea>
         </v-col>
       </v-row>
       <p v-else></p>
     </v-form>
-
+    <v-divider></v-divider>
     <div id="Geschwisterkind">
-      <h3>Geschwisterkind/er</h3>
-      <h5>
-        <span v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
-          Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
-          einem Betreuungsverhältnis befinden.</span
-        >
-        <span
-          v-else-if="this.$store.state.entCheck && !this.$store.state.geCheck"
-        >
-          Bitte tragen Sie hier alle Ihre Kinder ein, für die Sie eine
-          Ermäßigung beantragen möchten. Ausgenommen ist eine Betreuung in der
-          betreuten Grundschule.</span
-        >
-        <span
-          v-else-if="this.$store.state.entCheck && this.$store.state.geCheck"
-        >
-          Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in
-          einem Betreuungsverhältnis befinden und/oder für die Sie eine
-          Ermäßigung beantragen möchten. Ausgenommen für die Entgeltermäßigung
-          ist eine Betreuung in der betreuten Grundschule.</span
-        >
+      <h3 class="my-3">Geschwisterkind/er</h3>
+
+      <h5 v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
+        Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
+        einem Betreuungsverhältnis befinden.
       </h5>
+      <h5 v-else-if="this.$store.state.entCheck && !this.$store.state.geCheck">
+        Bitte tragen Sie hier alle Ihre Kinder ein, für die Sie eine Ermäßigung
+        beantragen möchten. Ausgenommen ist eine Betreuung in der betreuten
+        Grundschule.
+      </h5>
+      <h5 v-else-if="this.$store.state.entCheck && this.$store.state.geCheck">
+        Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in einem
+        Betreuungsverhältnis befinden und/oder für die Sie eine Ermäßigung
+        beantragen möchten. Ausgenommen für die Entgeltermäßigung ist eine
+        Betreuung in der betreuten Grundschule.
+      </h5>
+
       <v-card
         v-for="item in childlist"
         :key="item.id"
@@ -509,9 +514,18 @@
         ></v-row> -->
 
         <h4 class="text-left">Betreuung</h4>
+        <h5
+          v-if="item.radioGroupBetreuungsform_sibling === 0"
+          class="text-left error--text"
+        >
+          <v-icon color="secondary">mdi-alert</v-icon>
+          Bitte wählen Sie eine Betreuungsform aus!
+        </h5>
+        <p v-else></p>
         <v-row class="px-3">
           <v-col v-if="item.geCheck" class="d-flex" cols="12" sm="3">
             <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
+              <v-radio class="d-none"> </v-radio>
               <v-radio
                 v-model="item.betreuungsform"
                 ref="betreuungsform"
@@ -524,6 +538,7 @@
           </v-col>
           <v-col v-else-if="item.bifoCheck" class="d-flex" cols="12" sm="3">
             <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
+              <v-radio class="d-none"> </v-radio>
               <v-radio
                 v-model="item.betreuungsform"
                 ref="betreuungsform"
@@ -536,6 +551,7 @@
           </v-col>
           <v-col v-else class="d-flex" cols="12" sm="3">
             <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
+              <v-radio class="d-none"> </v-radio>
               <v-radio
                 v-model="item.betreuungsform"
                 ref="betreuungsform"
@@ -546,7 +562,7 @@
               ></v-radio>
             </v-radio-group>
           </v-col>
-          <v-col v-if="item.radioGroupBetreuungsform_sibling === 0">
+          <v-col v-if="item.radioGroupBetreuungsform_sibling === 1">
             <v-text-field
               outlined
               v-model="item.tagespflegename"
@@ -591,6 +607,14 @@
               :rules="nameRules"
               required
             ></v-text-field>
+
+            <h5
+              class="text-left mt-0 pt-0"
+              v-if="item.radioGroupBetreuungsform_sibling === 5"
+            >
+              <v-icon>mdi-alert</v-icon>Für Kinder in der Grundschulbetreuung
+              wird kein Antrag auf Ermäßigung gestellt.
+            </h5>
           </v-col>
         </v-row>
 
@@ -598,7 +622,7 @@
           <v-col
             v-if="
               item.geCheck ||
-              (item.bifoCheck && item.radioGroupBetreuungsform_sibling === 0)
+              (item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1)
             "
             class="d-flex"
             cols="12"
@@ -654,13 +678,13 @@
           <p v-else></p>
         </v-row>
         <h4
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 0"
+          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
           class="text-left"
         >
           Kostenerstattung Mittagessen
         </h4>
         <v-row
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 0"
+          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
         >
           <v-col cols="4" class="text-left">
             <h5>
@@ -706,13 +730,13 @@
           </v-col>
         </v-row>
         <h4
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
+          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 2"
           class="text-left"
         >
           Anteilige Kostenerstattung Ausflüge
         </h4>
         <v-row
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
+          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 2"
         >
           <v-col class="d-flex pt-0" cols="12" sm="8">
             <v-checkbox
@@ -741,23 +765,23 @@
         </v-row>
 
         <h4 v-if="item.bifoCheck" class="text-left">Aktiv-Pass</h4>
-      <v-row v-if="item.bifoCheck">
-        <v-col class="text-left" cols="4">
-          <h5>
-            Um an einer Aktivität des Aktiv-Passes teilnehmen zu können, wird
-            die Kostenerstattung für fol- gende Anschaffung beantragt:
-          </h5>
-        </v-col>
-        <v-col cols="8">
-          <h4 class="text-left">
-            Ausführliche Begründung zur Notwendigkeit der Anschaffung und
-            weshalb die Anschaffung nicht -endgültig- aus eigenen Mitteln
-            finanziert werden kann:
-          </h4>
-          <v-textarea v-model="item.bifo_begr" outlined></v-textarea>
-        </v-col>
-      </v-row>
-      <p v-else></p>
+        <v-row v-if="item.bifoCheck">
+          <v-col class="text-left" cols="4">
+            <h5>
+              Um an einer Aktivität des Aktiv-Passes teilnehmen zu können, wird
+              die Kostenerstattung für fol- gende Anschaffung beantragt:
+            </h5>
+          </v-col>
+          <v-col cols="8">
+            <h4 class="text-left">
+              Ausführliche Begründung zur Notwendigkeit der Anschaffung und
+              weshalb die Anschaffung nicht -endgültig- aus eigenen Mitteln
+              finanziert werden kann:
+            </h4>
+            <v-textarea v-model="item.bifo_begr" outlined></v-textarea>
+          </v-col>
+        </v-row>
+        <p v-else></p>
 
         <v-row>
           <v-col class="pt-0">
@@ -827,10 +851,10 @@ export default {
       radioListBetreuungsform: ["Tagespflege", "Krippe", "Elementar", "Hort"],
       radioListBetreuungsform_bifo: ["Tagespflege", "Kindertageseinrichtung"],
       radioListBetreuungsform_ganz: [
+        "Tagespflege",
         "Krippe",
         "Elementar",
         "Hort",
-        "Tagespflege",
         "Ganztags an Schule",
       ],
       bankname: "",
