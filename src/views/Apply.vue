@@ -82,7 +82,7 @@
         @click="funcShowKindDaten"
       >
         <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
-        zurück
+        Kind/er
       </v-btn>
 
       <Abschicken v-if="Abschicken" />
@@ -102,7 +102,7 @@
         @click="funcShowNachweise"
       >
         <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
-        zurück
+        Nachweise
       </v-btn>
 
     </v-container>

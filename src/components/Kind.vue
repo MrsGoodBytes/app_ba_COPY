@@ -865,7 +865,7 @@
       :disabled="!valid"
     >
       <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
-      zurück
+      Antragsteller/in
     </v-btn>
   </div>
 </template>
