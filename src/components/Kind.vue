@@ -521,7 +521,6 @@
           <v-icon color="secondary">mdi-alert</v-icon>
           Bitte wählen Sie eine Betreuungsform aus!
         </h5>
-        <p v-else></p>
         <v-row class="px-3">
           <v-col v-if="item.geCheck" class="d-flex" cols="12" sm="3">
             <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
@@ -677,6 +676,10 @@
           </v-col>
           <p v-else></p>
         </v-row>
+
+        <h3 v-if="item.bifoCheck" class="text-left py-3">
+          Mittel aus dem Bildungsfond
+        </h3>
         <h4
           v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
           class="text-left"
@@ -769,15 +772,15 @@
           <v-col class="text-left" cols="4">
             <h5>
               Um an einer Aktivität des Aktiv-Passes teilnehmen zu können, wird
-              die Kostenerstattung für fol- gende Anschaffung beantragt:
+              die Kostenerstattung für folgende Anschaffung beantragt:
             </h5>
           </v-col>
           <v-col cols="8">
-            <h4 class="text-left">
+            <h5 class="text-left">
               Ausführliche Begründung zur Notwendigkeit der Anschaffung und
-              weshalb die Anschaffung nicht -endgültig- aus eigenen Mitteln
+              weshalb die Anschaffung nicht - endgültig - aus eigenen Mitteln
               finanziert werden kann:
-            </h4>
+            </h5>
             <v-textarea v-model="item.bifo_begr" outlined></v-textarea>
           </v-col>
         </v-row>
