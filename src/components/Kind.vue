@@ -285,6 +285,12 @@
         "
       >
         <v-col class="text-left" cols="4">
+          <h4
+            v-if="this.$store.state.bifoCheck && this.$store.state.radioGroupBetreuungsform === 1"
+            class="text-left"
+          >
+            Kostenerstattung Mittagessen
+          </h4>
           <h5
             v-if="
               this.$store.state.bifoCheck &&
