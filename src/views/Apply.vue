@@ -35,10 +35,9 @@
       >
       <p v-else></p>
 
-      <v-tabs fixed-tabs background-color="indigo" dark v-model="activeTab">
+      <v-tabs fixed-tabs color="#fff" v-model="activeTab">
         <v-tab
           class="pa-4"
-          color="primary"
           tile
           @click="funcShowAntragstellerDaten"
           :key="tabs[0]"
@@ -46,7 +45,6 @@
         </v-tab>
         <v-tab
           class="pa-4"
-          color="primary"
           tile
           @click="funcShowKindDaten"
           :key="tabs[1]"
@@ -54,7 +52,6 @@
         </v-tab>
         <v-tab
           class="pa-4"
-          color="primary"
           tile
           @click="funcShowNachweise"
           :key="tabs[2]"
@@ -62,7 +59,6 @@
         </v-tab>
         <v-tab
           class="pa-4"
-          color="primary"
           tile
           @click="funcShowAbschicken"
           :key="tabs[3]"
