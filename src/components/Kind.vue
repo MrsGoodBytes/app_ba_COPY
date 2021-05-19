@@ -67,7 +67,18 @@
             v-model="vorjahr_checkbox"
             ref="vorjahr_check"
             :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt:'"
-          ></v-checkbox>
+          ></v-checkbox
+          ><v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Gilt auch, wenn der Antrag für eine andere Einrichtung gestellt
+              wurde.</span
+            >
+          </v-tooltip>
         </v-col>
         <p v-else></p>
       </v-row>
@@ -479,6 +490,8 @@
             ></v-text-field>
           </v-col>
         </v-row>
+        <v-divider></v-divider>
+        <h4 class="text-left py-3">Folgeantrag</h4>
         <v-row class="my-0 py-0">
           <v-col
             v-if="item.entCheck"
@@ -490,11 +503,23 @@
               class="my-0 py-0"
               v-model="item.vorjahr_checkbox"
               ref="vorjahr_check"
-              :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt:'"
-            ></v-checkbox>
+              :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt.'"
+            ></v-checkbox
+            ><v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >Gilt auch, wenn der Antrag für eine andere Einrichtung gestellt
+                wurde.</span
+              >
+            </v-tooltip>
           </v-col>
           <p v-else></p>
         </v-row>
+        <v-divider></v-divider>
         <!-- 
         <v-row class="my-0 px-3">
           <v-checkbox 
@@ -513,7 +538,7 @@
           ></v-checkbox
         ></v-row> -->
 
-        <h4 class="text-left">Betreuung</h4>
+        <h4 class="text-left pt-3">Betreuung</h4>
         <h5
           v-if="item.radioGroupBetreuungsform_sibling === 0"
           class="text-left error--text"
@@ -643,6 +668,17 @@
             cols="12"
             sm="4"
           >
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >Das Betreuungsentgelt ist die zu entrichtende Summe OHNE Abzüge
+                und Ermäßigungen.</span
+              >
+            </v-tooltip>
             <v-text-field
               outlined
               v-model="item.betreuungsentgelt"
@@ -745,7 +781,7 @@
             <v-checkbox
               v-model="item.kostenerstattung"
               ref="vorjahr_check"
-              :label="'Wir beantragen eine anteiligeKostenerstattung für ein- und mehrtägig  Ausflüge durch Mittel aus dem Bildungsfond.'"
+              :label="'Wir beantragen eine anteilige Kostenerstattung für ein- und mehrtägig Ausflüge durch Mittel aus dem Bildungsfond.'"
             ></v-checkbox>
           </v-col>
           <v-col class="d-flex align-center" cols="12" sm="4">

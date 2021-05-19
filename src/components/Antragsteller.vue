@@ -193,7 +193,7 @@
                   >mdi-information</v-icon
                 >
               </template>
-              <span
+              <span  class="text-left"
                 >Zu <span class="font-weight-bold">Sozialleistungen</span> zählen
                 <list class="text-left">
                   <li>Leistungen vom Jobcenter (Arbeitslosengeld II)</li>
@@ -205,9 +205,9 @@
                 </list>
               </span>
               <p></p>
-              <span>Sie <span class="font-weight-bold">Privatinsolvenz</span> angemeldet haben, muss hierfür der amtsgerichtliche Bescheid vorliegen.</span>
+              <p class="text-left">Wenn Sie <span class="font-weight-bold">Privatinsolvenz</span> angemeldet haben, muss hierfür der amtsgerichtliche Bescheid vorliegen.</p>
               <p></p>
-              <span>Fall von <span class="font-weight-bold">Einkommen</span> wird anhand der Einkommensgrenze entschieden, ob sie förderungsfähig sind.</span>
+              <p class="text-left">Fall von <span class="font-weight-bold">Einkommen</span> wird anhand der Einkommensgrenze entschieden, ob sie förderungsfähig sind.</p>
             </v-tooltip>
       </h3>
           <h4
@@ -797,14 +797,14 @@
             <v-text-field
               v-model="elternteil1.fahrtkosten"
               label="Elternteil 1"
-              prefix="€/mtl."
+              prefix="km"
             ></v-text-field>
           </v-col>
           <v-col cols="3">
             <v-text-field
               v-model="elternteil2.fahrtkosten"
               label="Elternteil 2"
-              prefix="€/mtl."
+              prefix="km"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -1145,7 +1145,7 @@
                     >mdi-information</v-icon
                   >
                 </template>
-                <span>(ohne Heizkosten und ohne Strom)</span>
+                <span>Ohne Heizkosten und ohne Strom.</span>
               </v-tooltip>
             </h4>
           </v-col>
@@ -1226,7 +1226,7 @@
                   >z.B Kredite
                   <span style="font-weight: bolder">mit</span> Angabe des
                   Verwendungszwecks, wobei die Zinsbelastung nachgewiesen werden
-                  <span style="font-weight: bolder">muss</span>
+                  <span style="font-weight: bolder">muss</span>.
                 </span>
               </v-tooltip>
             </h4>
