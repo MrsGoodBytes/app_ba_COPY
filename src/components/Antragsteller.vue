@@ -2,7 +2,7 @@
   <div id="Antragsteller" class="px-10">
     <!-- Daten Antragsteller -->
 
-    <h2 class="py-3">Zur Person</h2>
+    <h2 class="py-3">Daten Antragsteller/in</h2>
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row>
         <v-col>
