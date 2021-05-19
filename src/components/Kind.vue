@@ -712,10 +712,10 @@
           </v-col>
           <p v-else></p>
         </v-row>
-
-        <h3 v-if="item.bifoCheck" class="text-left py-3">
+        <v-divider></v-divider>
+        <h4 v-if="item.bifoCheck" class="text-left py-3">
           Mittel aus dem Bildungsfond
-        </h3>
+        </h4>
         <h4
           v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
           class="text-left"
@@ -852,7 +852,7 @@
       weiter
       <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
     </v-btn>
-    
+
     <v-btn
       class="d-block mx-auto my-6"
       @click="funcShowAntragstellerDaten"
