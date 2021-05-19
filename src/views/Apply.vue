@@ -5,7 +5,14 @@
         <v-row class="py-6"
           ><v-col class="text-left pl-16">
             <h1>Willkommen</h1>
-            <h4>Erstellen Sie Anträge auf <span class="text-decoration-underline">Entgeltermäßigung, Geschwisterermäßigung und Mittel aus dem Bildungsfond</span> jetzt vollständig digital.</h4>
+            <h4>
+              Erstellen Sie Anträge auf
+              <span class="text-decoration-underline"
+                >Entgeltermäßigung, Geschwisterermäßigung und Mittel aus dem
+                Bildungsfond</span
+              >
+              jetzt vollständig digital.
+            </h4>
           </v-col>
           <v-col>
             <v-card outlined class="mx-16 py-6" color="#E8EAF6">
@@ -43,25 +50,13 @@
           :key="tabs[0]"
           >Antragsteller/in
         </v-tab>
-        <v-tab
-          class="pa-4"
-          tile
-          @click="funcShowKindDaten"
-          :key="tabs[1]"
+        <v-tab class="pa-4" tile @click="funcShowKindDaten" :key="tabs[1]"
           >Kind/er
         </v-tab>
-        <v-tab
-          class="pa-4"
-          tile
-          @click="funcShowNachweise"
-          :key="tabs[2]"
+        <v-tab class="pa-4" tile @click="funcShowNachweise" :key="tabs[2]"
           >Nachweise
         </v-tab>
-        <v-tab
-          class="pa-4"
-          tile
-          @click="funcShowAbschicken"
-          :key="tabs[3]"
+        <v-tab class="pa-4" tile @click="funcShowAbschicken" :key="tabs[3]"
           >Abschicken
         </v-tab>
       </v-tabs>
@@ -81,7 +76,35 @@
         <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
       </v-btn>
 
+      <v-btn
+        v-if="Nachweise"
+        class="d-block mx-auto my-6"
+        @click="funcShowKindDaten"
+      >
+        <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
+        zurück
+      </v-btn>
+
       <Abschicken v-if="Abschicken" />
+      <v-btn
+        v-if="Abschicken"
+        class="my-6"
+        justify="center"
+        @click="funcShowAbschicken"
+        color="accent"
+      >
+        Anträge abschicken
+        <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
+      </v-btn>
+      <v-btn
+        v-if="Abschicken"
+        class="d-block mx-auto my-6"
+        @click="funcShowNachweise"
+      >
+        <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
+        zurück
+      </v-btn>
+
     </v-container>
   </div>
 </template>

@@ -847,9 +847,19 @@
       class="d-block mx-auto my-6"
       @click="funcShowNachweise"
       :disabled="!valid"
+      color="accent"
     >
       weiter
       <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
+    </v-btn>
+    
+    <v-btn
+      class="d-block mx-auto my-6"
+      @click="funcShowAntragstellerDaten"
+      :disabled="!valid"
+    >
+      <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
+      zurück
     </v-btn>
   </div>
 </template>

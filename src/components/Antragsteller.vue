@@ -1370,6 +1370,7 @@
       justify="center"
       @click="funcShowKindDaten"
       :disabled="!valid"
+      color="accent"
     >
       weiter
       <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
