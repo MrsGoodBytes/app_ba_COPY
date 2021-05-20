@@ -4,13 +4,10 @@
       <v-card color="#F5F5F5" class="mb-8">
         <v-row class="py-6"
           ><v-col class="text-left pl-16">
-            <h1>Willkommen</h1>
+            <h1 class="mb-2">Willkommen</h1>
             <h4>
               Erstellen Sie Anträge auf
-              <span class="text-decoration-underline"
-                >Entgeltermäßigung, Geschwisterermäßigung und Mittel aus dem
-                Bildungsfond</span
-              >
+                  <h3>Entgeltermäßigung Geschwisterermäßigung <br>und Mittel aus dem Bildungsfond</h3>
               jetzt vollständig digital.
             </h4>
           </v-col>
@@ -104,7 +101,6 @@
         <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
         Nachweise
       </v-btn>
-
     </v-container>
   </div>
 </template>
