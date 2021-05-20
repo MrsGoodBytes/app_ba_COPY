@@ -360,7 +360,16 @@
             "
             class="text-left"
           >
-            Kostenerstattung Mittagessen
+            Kostenerstattung Mittagessen <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Kann nur für Kinder beantragt werden, welche in einer Tagespflegeeinrichtung betreut werden.</span
+            >
+          </v-tooltip>
           </h4>
           <h5
             v-if="
@@ -452,6 +461,16 @@
         class="text-left"
       >
         Anteilige Kostenerstattung Ausflüge
+        <v-tooltip bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span
+              >Kann nur für Kinder beantragt werden, die <span class="text-decoration-underline font-weight-bold">nicht</span> in einer Tagespflege-Einrichtung betreut werden.</span
+            >
+          </v-tooltip>
       </h4>
       <v-row
         v-if="
