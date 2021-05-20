@@ -36,6 +36,7 @@ export default new Vuex.Store({
         kontoinhaber: "",
         iban: "",
         bic: "",
+        bank: "",
 
         child_firstname: "Ilaria",
         child_lastname: "Gandl",
@@ -47,10 +48,12 @@ export default new Vuex.Store({
         tagespflegename: "",
         betreuungsform: "",
 
-        essensgeld: "",
-        elternbeitrag: "",
+        betreuungsumfang: "",
         betreuungsbeginn: "",
         betreuungsentgelt: "",
+        elternbeitrag: "",
+        essensgeld: "",
+
 
         firstname_sibling: "",
         lastname_sibling: "",
@@ -199,6 +202,9 @@ export default new Vuex.Store({
         setBic(state, value) {
             state.bic = value;
         },
+        setBank(state, value) {
+            state.bank = value;
+        },
         //Kind
         setChildFirstname(state, value) {
             state.child_firstname = value;
@@ -208,6 +214,9 @@ export default new Vuex.Store({
         },
         setDate_child(state, value) {
             state.date_child = value;
+        },
+        setChildBB(state, value) {
+            state.date_bb = value;
         },
 
         //BETREUUNG

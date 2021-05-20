@@ -12,6 +12,9 @@
           ></v-btn
         >
       </h4>
+      <h4 v-if="this.$store.state.valid === false">
+        Bitte diesen Bereich Prüfen. Es fehlen Angaben.
+      </h4>
     </v-row>
     <v-row>
       <v-col cols="3" class="text-left">
@@ -82,48 +85,99 @@
     <v-row>
       <v-col cols="3" class="text-left">
         <h6 class="text--disabled">Betreuungsform</h6>
-        <h5 v-if="this.betreuung === 0">Krippe</h5>
-        <h5 v-else-if="this.betreuung === 1">Elementar</h5>
-        <h5 v-else-if="this.betreuung === 2">Hort</h5>
-        <h5 v-else-if="this.betreuung === 3">Tagespflege</h5>
+        <h5 v-if="this.betreuung === 1">Tagespflege</h5>
+        <h5 v-else-if="this.betreuung === 2">Elementar</h5>
+        <h5 v-else-if="this.betreuung === 3">Hort</h5>
         <h5 v-else-if="this.betreuung === 4">Ganztags an Schulen</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+              >mdi-pencil</v-icon
+            ></v-btn
+          >
+          Betreuungsform wählen!
+        </h5>
       </v-col>
+
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Betreuungseinrichtung</h6>
-        <h5 v-if="this.betreuung === 3">{{ this.tagespflege }}</h5>
+        <h5 v-if="this.betreuung === 1">{{ this.tagespflege }}</h5>
         <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
       </v-col>
+
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Ermäßigungsantrag im Vorjahr gestellt:</h6>
         <h5 v-if="this.vorjahr === true">ja</h5>
         <h5 v-else>nein</h5>
       </v-col>
     </v-row>
+
     <v-row>
-      <v-col v-if="this.$store.state.entCheck" cols="4" class="text-left">
+      <v-col
+        v-if="
+          this.$store.state.geCheck ||
+          this.$store.state.radioGroupBetreuungsform === 1
+        "
+        cols="12" sm="3"
+        class="text-left"
+      >
         <h6 class="text--disabled">Betreuungsbeginn</h6>
         <h5>{{ this.betreuungsbeginn }}</h5>
       </v-col>
-      <v-col cols="4" class="text-left">
-        <h6 class="text--disabled">Betreuungsentgelt</h6>
-        <h5>{{ this.betreuungsentgelt }}</h5>
-      </v-col>
-      <v-col cols="4" v-if="this.radioGroupBetreuungsform === 3" class="text-left">
-        <h6 class="text--disabled">Elternbeitrag</h6>
-        <h5>{{ this.elternbeitrag }}</h5>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="3" class="text-left">
-        <h6 class="text--disabled">Essensgeld</h6>
-        <h5>{{ this.essensgeld }}</h5>
-      </v-col>
-      <v-col cols="3" class="text-left">
+
+      <v-col
+         v-if="
+            (this.$store.state.geCheck &&
+              this.$store.state.radioGroupBetreuungsform === 1) ||
+            (this.$store.state.entCheck && this.$store.state.radioGroupBetreuungsform === 1)
+          "
+        cols="12" sm="3"
+        class="text-left"
+      >
         <h6 class="text--disabled">Betreuungsumfang</h6>
-        <h5>{{ this.betreuungsumfang }}</h5>
+        <h5>{{ this.betreuungsumfang }} Stunden</h5>
+      </v-col>
+
+      <v-col
+        v-if="this.$store.state.geCheck || this.$store.state.entCheck"
+        cols="12" sm="3"
+        class="text-left"
+      >
+        <h6 class="text--disabled">Betreuungsentgelt</h6>
+        <h5>{{ this.betreuungsentgelt }} €</h5>
+      </v-col>
+
+      <v-col cols="12" sm="3" v-if="this.$store.state.geCheck" class="text-left">
+        <h6 class="text--disabled">Elternbeitrag</h6>
+        <h5 v-if="this.elternbeitrag != 0">{{ this.elternbeitrag }} €</h5>
+        <h5 v-else>0 €</h5>
       </v-col>
     </v-row>
 
+    <v-row>
+      <v-col
+        v-if="
+          this.$store.state.bifoCheck &&
+          this.$store.state.radioGroupBetreuungsform === 1
+        "
+        cols="3"
+        class="text-left"
+      >
+        <h6 class="text--disabled">Essensgeld</h6>
+        <h5 v-if="this.essensgeld != 0">{{ this.essensgeld }} €</h5>
+        <h5 v-else>0 €</h5>
+      </v-col>
+      <v-col v-if="
+          this.$store.state.bifoCheck &&
+          this.$store.state.radioGroupBetreuungsform === 1
+        "
+        cols="3"
+        class="text-left"
+      >
+        <h6 class="text--disabled">Kontoinhaber für Ermäßigung des Essensgeldes</h6>
+        <h5>{{ this.konto }}</h5>
+      </v-col>
+    </v-row>
   </div>
 </template>
 
@@ -208,6 +262,16 @@ export default {
     this.betreuungseinrichtung = this.$store.state.institutionname;
     this.vorjahr = this.$store.state.vorjahr_checkbox;
     this.elternbeitrag = this.$store.state.elternbeitrag;
+    this.betreuungsentgelt = this.$store.state.betreuungsentgelt;
+    this.date_bb = this.$store.state.date_bb;
+    this.essensgeld = this.$store.state.essensgeld;
+    this.betreuungsumfang = this.$store.state.betreuungsumfang;
+    this.betreuungsbeginn = this.$store.state.date_bb;
+    this.konto = this.$store.state.firstname + 
+    " " + this.$store.state.lastname + 
+    ", IBAN: " + this.$store.state.iban + 
+    ", BIC: " +  this.$store.state.bic + 
+    ", " + this.$store.state.bank;
   },
 
   watch: {},

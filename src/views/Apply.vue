@@ -65,9 +65,10 @@
       <Nachweise v-if="Nachweise" />
       <v-btn
         v-if="Nachweise"
-        class="my-6"
+        class="mt-6"
         justify="center"
         @click="funcShowAbschicken"
+        color="accent"
       >
         weiter
         <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
@@ -75,7 +76,7 @@
 
       <v-btn
         v-if="Nachweise"
-        class="d-block mx-auto my-6"
+        class="d-block mx-auto my-8"
         @click="funcShowKindDaten"
       >
         <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
@@ -202,7 +203,7 @@ export default {
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
-        geschwisterkind.betreuungsform_sibling = 0;
+        geschwisterkind.radioGroupBetreuungsform_sibling = 0;
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
@@ -251,7 +252,7 @@ export default {
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
-        geschwisterkind.betreuungsform_sibling = 0;
+        geschwisterkind.radioGroupBetreuungsform_sibling = 0;
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
@@ -272,7 +273,7 @@ export default {
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
-        geschwisterkind.betreuungsform_sibling = 0;
+        geschwisterkind.radioGroupBetreuungsform_sibling = 0;
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;

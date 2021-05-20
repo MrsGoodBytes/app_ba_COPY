@@ -24,7 +24,7 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row class="my-0 py-0"
         ><!-- v-for="n in childList" :key="n" -->
-        <v-col>
+        <v-col cols="12" sm="4">
           <v-text-field
             outlined
             v-model="child_firstname"
@@ -33,7 +33,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col cols="12" sm="4">
           <v-text-field
             outlined
             v-model="child_lastname"
@@ -42,7 +42,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col>
+        <v-col cols="12" sm="4">
           <v-text-field
             outlined
             v-model="date_child"
@@ -84,10 +84,7 @@
       </v-row>
       <v-divider></v-divider>
       <h3 class="text-left py-3">Betreuung</h3>
-      <h4
-        v-if="this.radioGroupBetreuungsform === 0"
-        class="text-left error--text"
-      >
+      <h4 v-if="this.valid != true" class="text-left error--text">
         <v-icon color="secondary">mdi-alert</v-icon>
         Bitte wählen Sie eine Betreuungsform aus!
       </h4>
@@ -183,7 +180,8 @@
           "
           class="d-flex"
           cols="12"
-          sm="3"
+          md="3"
+          sm="6"
         >
           <v-text-field
             outlined
@@ -204,7 +202,8 @@
           "
           class="d-flex"
           cols="12"
-          sm="3"
+          md="3"
+          sm="6"
         >
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
@@ -228,7 +227,8 @@
           v-if="this.$store.state.geCheck || this.$store.state.entCheck"
           class="d-flex"
           cols="12"
-          sm="3"
+          md="3"
+          sm="6"
         >
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
@@ -252,7 +252,13 @@
         </v-col>
         <p v-else></p>
 
-        <v-col v-if="this.$store.state.geCheck" class="d-flex" cols="12" sm="3">
+        <v-col
+          v-if="this.$store.state.geCheck"
+          class="d-flex"
+          cols="12"
+          md="3"
+          sm="6"
+        >
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -275,6 +281,7 @@
         </v-col>
         <p v-else></p>
       </v-row>
+
       <h3 v-if="this.$store.state.bifoCheck" class="text-left py-3">
         Mittel aus dem Bildungsfond
       </h3>
@@ -286,7 +293,10 @@
       >
         <v-col class="text-left" cols="4">
           <h4
-            v-if="this.$store.state.bifoCheck && this.$store.state.radioGroupBetreuungsform === 1"
+            v-if="
+              this.$store.state.bifoCheck &&
+              this.$store.state.radioGroupBetreuungsform === 1
+            "
             class="text-left"
           >
             Kostenerstattung Mittagessen
@@ -316,7 +326,7 @@
           <v-text-field
             outlined
             v-model="essensgeld"
-            :rules="essensgeldRules"
+            :rules="moneyNotReqRules"
             label="Essensgeld"
             prefix="€"
           ></v-text-field>
@@ -339,6 +349,40 @@
         </v-col>
       </v-row>
 
+      <v-row
+        v-if="
+          this.$store.state.bifoCheck &&
+          this.$store.state.radioGroupBetreuungsform === 1
+        "
+      >
+        <v-col class="text-left" cols="12" sm="4">
+          <h5>Ermäßigung des Essensgeldes bitte überweisen an:</h5>
+        </v-col>
+        <v-col cols="12" sm="8">
+          <v-text-field
+            outlined
+            v-model="kontoinhaber"
+            :rules="nameRules"
+            label="Kontoinhaber/in"
+            disabled
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="iban"
+            :rules="ibanRules"
+            label="IBAN"
+            required
+          ></v-text-field>
+          <v-text-field
+            outlined
+            v-model="bic"
+            :rules="nameRules"
+            label="BIC"
+            required
+          ></v-text-field>
+          <v-text-field outlined v-model="bank" label="Bank"></v-text-field>
+        </v-col>
+      </v-row>
       <h4
         v-if="
           this.$store.state.bifoCheck &&
@@ -380,46 +424,6 @@
         </v-col>
       </v-row>
       <p v-else></p>
-      <v-row
-        v-if="
-          this.$store.state.bifoCheck &&
-          this.$store.state.radioGroupBetreuungsform === 1
-        "
-      >
-        <v-col class="text-left" cols="12" sm="4">
-          <h5>Ermäßigung des Essensgeldes bitte überweisen an:</h5>
-        </v-col>
-        <v-col cols="12" sm="8">
-          <v-text-field
-            outlined
-            v-model="kontoinhaber"
-            :rules="nameRules"
-            label="Kontoinhaber/in"
-            disabled
-          ></v-text-field>
-          <v-text-field
-            outlined
-            v-model="iban"
-            :rules="ibanRules"
-            label="IBAN"
-            required
-          ></v-text-field>
-          <v-text-field
-            outlined
-            v-model="bic"
-            :rules="nameRules"
-            label="BIC"
-            required
-          ></v-text-field>
-          <v-text-field
-            outlined
-            v-model="bankname"
-            :rules="nameRules"
-            label="BIC"
-            required
-          ></v-text-field>
-        </v-col>
-      </v-row>
 
       <h4 v-if="this.$store.state.bifoCheck" class="text-left">Aktiv-Pass</h4>
       <v-row v-if="this.$store.state.bifoCheck">
@@ -439,416 +443,404 @@
         </v-col>
       </v-row>
       <p v-else></p>
-    </v-form>
-    <v-divider></v-divider>
-    <div id="Geschwisterkind">
-      <h3 class="my-3">Geschwisterkind/er</h3>
 
-      <h5 v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
-        Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
-        einem Betreuungsverhältnis befinden.
-      </h5>
-      <h5 v-else-if="this.$store.state.entCheck && !this.$store.state.geCheck">
-        Bitte tragen Sie hier alle Ihre Kinder ein, für die Sie eine Ermäßigung
-        beantragen möchten. Ausgenommen ist eine Betreuung in der betreuten
-        Grundschule.
-      </h5>
-      <h5 v-else-if="this.$store.state.entCheck && this.$store.state.geCheck">
-        Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in einem
-        Betreuungsverhältnis befinden und/oder für die Sie eine Ermäßigung
-        beantragen möchten. Ausgenommen für die Entgeltermäßigung ist eine
-        Betreuung in der betreuten Grundschule.
-      </h5>
+      <v-divider></v-divider>
 
-      <v-card
-        v-for="item in childlist"
-        :key="item.id"
-        class="pa-8 my-6"
-        color="#F5F5F5"
-      >
-        <v-row class="mb-0 px-3">
-          <v-col>
-            <v-text-field
-              outlined
-              v-model="item.sibling_firstname"
-              label="Vorname des Kindes"
-              :rules="nameRules"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              outlined
-              v-model="item.sibling_lastname"
-              label="Nachname des Kindes"
-              :rules="nameRules"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col>
-            <v-text-field
-              outlined
-              v-model="item.date_sibling"
-              label="Geburtsdatum"
-              prepend-icon="mdi-calendar"
-              :rules="dateRules"
-              required
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <v-divider></v-divider>
-        <h4 class="text-left py-3">Folgeantrag</h4>
-        <v-row class="my-0 py-0">
-          <v-col
-            v-if="item.entCheck"
-            class="d-flex my-0 py-0"
-            cols="12"
-            sm="12"
-          >
-            <v-checkbox
-              class="my-0 py-0"
-              v-model="item.vorjahr_checkbox"
-              ref="vorjahr_check"
-              :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt.'"
-            ></v-checkbox
-            ><v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span
-                >Gilt auch, wenn der Antrag für eine andere Einrichtung gestellt
-                wurde.</span
-              >
-            </v-tooltip>
-          </v-col>
-          <p v-else></p>
-        </v-row>
-        <v-divider></v-divider>
-        <!-- 
-        <v-row class="my-0 px-3">
-          <v-checkbox 
-            class="my-0"
-            v-model="item.sibling_ent_checkbox"
-            ref="sib_erm_check"
-            :label="'Für dieses Kind soll ebenfalls ein Antrag auf Entgeltermäßigung gestellt werden:'"
-          ></v-checkbox
-        ></v-row>
-        <v-row class="my-0 px-3">
-          <v-checkbox
-            class="my-0"
-            v-model="item.sibling_bifo_checkbox"
-            ref="sib_bifo_check"
-            :label="'Für dieses Kind soll ebenfalls ein Antrag auf Mittel aus dem Bildungsfond gestellt werden:'"
-          ></v-checkbox
-        ></v-row> -->
+      <div id="Geschwisterkind">
+        <h3 class="my-3">Geschwisterkind/er</h3>
 
-        <h4 class="text-left pt-3">Betreuung</h4>
-        <h5
-          v-if="item.radioGroupBetreuungsform_sibling === 0"
-          class="text-left error--text"
-        >
-          <v-icon color="secondary">mdi-alert</v-icon>
-          Bitte wählen Sie eine Betreuungsform aus!
+        <h5 v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
+          Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
+          einem Betreuungsverhältnis befinden.
         </h5>
-        <v-row class="px-3">
-          <v-col v-if="item.geCheck" class="d-flex" cols="12" sm="3">
-            <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
-              <v-radio class="d-none"> </v-radio>
-              <v-radio
-                v-model="item.betreuungsform"
-                ref="betreuungsform"
-                v-for="n in radioListBetreuungsform_ganz"
-                :key="n"
-                :label="`${n}`"
-                :value="n"
-              ></v-radio>
-            </v-radio-group>
-          </v-col>
-          <v-col v-else-if="item.bifoCheck" class="d-flex" cols="12" sm="3">
-            <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
-              <v-radio class="d-none"> </v-radio>
-              <v-radio
-                v-model="item.betreuungsform"
-                ref="betreuungsform"
-                v-for="n in radioListBetreuungsform_bifo"
-                :key="n"
-                :label="`${n}`"
-                :value="n"
-              ></v-radio>
-            </v-radio-group>
-          </v-col>
-          <v-col v-else class="d-flex" cols="12" sm="3">
-            <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
-              <v-radio class="d-none"> </v-radio>
-              <v-radio
-                v-model="item.betreuungsform"
-                ref="betreuungsform"
-                v-for="n in radioListBetreuungsform"
-                :key="n"
-                :label="`${n}`"
-                :value="n"
-              ></v-radio>
-            </v-radio-group>
-          </v-col>
-          <v-col v-if="item.radioGroupBetreuungsform_sibling === 1">
-            <v-text-field
-              outlined
-              v-model="item.tagespflegename"
-              label="Name der Tagespflegeperson"
-              :rules="nameRules"
-              required
-            ></v-text-field>
-            <v-text-field
-              outlined
-              v-model="item.institutionstreet"
-              label="Straße der Tagespflege"
-              :rules="nameRules"
-              required
-            ></v-text-field>
-            <v-text-field
-              outlined
-              v-model="item.institutionnumber"
-              label="Hausnummer der Tagespflege"
-              :rules="numberRules"
-              required
-            ></v-text-field>
-            <v-text-field
-              outlined
-              v-model="item.institutionpostcode"
-              label="PLZ der Tagespflege"
-              :rules="nameRules"
-              required
-            ></v-text-field>
-            <v-text-field
-              outlined
-              v-model="item.institutiontown"
-              label="Ort der Tagespflege"
-              :rules="nameRules"
-              required
-            ></v-text-field>
-          </v-col>
-          <v-col v-else>
-            <v-text-field
-              outlined
-              v-model="item.institutionname"
-              label="Name der Betreuungseinrichtung"
-              :rules="nameRules"
-              required
-            ></v-text-field>
+        <h5
+          v-else-if="this.$store.state.entCheck && !this.$store.state.geCheck"
+        >
+          Bitte tragen Sie hier alle Ihre Kinder ein, für die Sie eine
+          Ermäßigung beantragen möchten. Ausgenommen ist eine Betreuung in der
+          betreuten Grundschule.
+        </h5>
+        <h5 v-else-if="this.$store.state.entCheck && this.$store.state.geCheck">
+          Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in
+          einem Betreuungsverhältnis befinden und/oder für die Sie eine
+          Ermäßigung beantragen möchten. Ausgenommen für die Entgeltermäßigung
+          ist eine Betreuung in der betreuten Grundschule.
+        </h5>
 
-            <h5
-              class="text-left mt-0 pt-0"
-              v-if="item.radioGroupBetreuungsform_sibling === 5"
+        <v-card
+          v-for="item in childlist"
+          :key="item.id"
+          class="pa-8 my-6"
+          color="#F5F5F5"
+        >
+          <v-row class="mb-0 px-3">
+            <v-col>
+              <v-text-field
+                outlined
+                v-model="item.sibling_firstname"
+                label="Vorname des Kindes"
+                :rules="nameRules"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+                outlined
+                v-model="item.sibling_lastname"
+                label="Nachname des Kindes"
+                :rules="nameRules"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col>
+              <v-text-field
+                outlined
+                v-model="item.date_sibling"
+                label="Geburtsdatum"
+                prepend-icon="mdi-calendar"
+                :rules="dateRules"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-divider></v-divider>
+          <h4 class="text-left py-3">Folgeantrag</h4>
+          <v-row class="my-0 py-0">
+            <v-col
+              v-if="item.entCheck"
+              class="d-flex my-0 py-0"
+              cols="12"
+              sm="12"
             >
-              <v-icon>mdi-alert</v-icon>Für Kinder in der Grundschulbetreuung
-              wird kein Antrag auf Ermäßigung gestellt.
-            </h5>
-          </v-col>
-        </v-row>
+              <v-checkbox
+                class="my-0 py-0"
+                v-model="item.vorjahr_checkbox"
+                ref="vorjahr_check"
+                :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt.'"
+              ></v-checkbox
+              ><v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span
+                  >Gilt auch, wenn der Antrag für eine andere Einrichtung
+                  gestellt wurde.</span
+                >
+              </v-tooltip>
+            </v-col>
+            <p v-else></p>
+          </v-row>
+          <v-divider></v-divider>
 
-        <v-row>
-          <v-col
-            v-if="
-              item.geCheck ||
-              (item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1)
-            "
-            class="d-flex"
-            cols="12"
-            sm="4"
+          <h4 class="text-left pt-3">Betreuung</h4>
+          <h5
+            v-if="item.radioGroupBetreuungsform_sibling === 0"
+            class="text-left error--text"
           >
-            <v-text-field
-              outlined
-              v-model="item.date_bb"
-              label="Betreuungsbeginn"
-              prepend-icon="mdi-calendar"
-              :rules="dateRules"
-              required
-            ></v-text-field>
-          </v-col>
-          <p v-else></p>
-          <v-col
-            v-if="item.geCheck || item.entCheck"
-            class="d-flex"
-            cols="12"
-            sm="4"
-          >
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span
-                >Das Betreuungsentgelt ist die zu entrichtende Summe OHNE Abzüge
-                und Ermäßigungen.</span
-              >
-            </v-tooltip>
-            <v-text-field
-              outlined
-              v-model="item.betreuungsentgelt"
-              prefix="€"
-              :rules="moneyRules"
-              label="Betreuungsentgelt"
-              required
-            ></v-text-field>
-          </v-col>
-          <p v-else></p>
-          <v-col v-if="item.entCheck" class="d-flex" cols="12" sm="4">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span
-                >der Elternbeitrag ist das Betreuungsgeld abzüglich der
-                Ermäßigung</span
-              >
-            </v-tooltip>
-            <v-text-field
-              outlined
-              v-model="item.elternbeitrag"
-              prefix="€"
-              :rules="moneyRules"
-              label="Elternbeitrag"
-              required
-            ></v-text-field>
-          </v-col>
-          <p v-else></p>
-        </v-row>
-        <v-divider></v-divider>
-        <h4 v-if="item.bifoCheck" class="text-left py-3">
-          Mittel aus dem Bildungsfond
-        </h4>
-        <h4
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
-          class="text-left"
-        >
-          Kostenerstattung Mittagessen
-        </h4>
-        <v-row
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
-        >
-          <v-col cols="4" class="text-left">
-            <h5>
-              Für Beantragung von Mitteln aus dem Bildungsfond zur
-              <span class="text-decoration-underline"
-                >Kostenerstattung des Mittagessens</span
-              >
-              bitte angeben:
-            </h5>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="4">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span>monatlicher Betrag</span>
-            </v-tooltip>
-            <v-text-field
-              outlined
-              v-model="item.essensgeld"
-              :rules="essensgeldRules"
-              label="Essensgeld"
-              prefix="€"
-            ></v-text-field>
-          </v-col>
-          <v-col class="d-flex" cols="12" sm="4">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span>Gültig ab sofort wenn kein Datum angegeben</span>
-            </v-tooltip>
-            <v-text-field
-              outlined
-              v-model="item.gueltig"
-              label="Gültig ab"
-              required
-            ></v-text-field>
-          </v-col>
-        </v-row>
-        <h4
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 2"
-          class="text-left"
-        >
-          Anteilige Kostenerstattung Ausflüge
-        </h4>
-        <v-row
-          v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 2"
-        >
-          <v-col class="d-flex pt-0" cols="12" sm="8">
-            <v-checkbox
-              v-model="item.kostenerstattung"
-              ref="vorjahr_check"
-              :label="'Wir beantragen eine anteilige Kostenerstattung für ein- und mehrtägig Ausflüge durch Mittel aus dem Bildungsfond.'"
-            ></v-checkbox>
-          </v-col>
-          <v-col class="d-flex align-center" cols="12" sm="4">
-            <v-tooltip bottom>
-              <template v-slot:activator="{ on, attrs }">
-                <v-icon color="accent" v-bind="attrs" v-on="on"
-                  >mdi-information</v-icon
-                >
-              </template>
-              <span>Gültig ab sofort wenn kein Datum angegeben</span>
-            </v-tooltip>
-            <v-text-field
-              outlined
-              v-model="item.gueltig"
-              :rules="dateRules"
-              label="Gültig ab"
-              required
-            ></v-text-field>
-          </v-col>
-        </v-row>
+            <v-icon color="secondary">mdi-alert</v-icon>
+            Bitte wählen Sie eine Betreuungsform aus!
+          </h5>
+          <v-row class="px-3">
+            <v-col v-if="item.geCheck" class="d-flex" cols="12" sm="3">
+              <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
+                <v-radio class="d-none"> </v-radio>
+                <v-radio
+                  v-model="item.betreuungsform"
+                  ref="betreuungsform"
+                  v-for="n in radioListBetreuungsform_ganz"
+                  :key="n"
+                  :label="`${n}`"
+                  :value="n"
+                ></v-radio>
+              </v-radio-group>
+            </v-col>
+            <v-col v-else-if="item.bifoCheck" class="d-flex" cols="12" sm="3">
+              <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
+                <v-radio class="d-none"> </v-radio>
+                <v-radio
+                  v-model="item.betreuungsform"
+                  ref="betreuungsform"
+                  v-for="n in radioListBetreuungsform_bifo"
+                  :key="n"
+                  :label="`${n}`"
+                  :value="n"
+                ></v-radio>
+              </v-radio-group>
+            </v-col>
+            <v-col v-else class="d-flex" cols="12" sm="3">
+              <v-radio-group v-model="item.radioGroupBetreuungsform_sibling">
+                <v-radio class="d-none"> </v-radio>
+                <v-radio
+                  v-model="item.betreuungsform"
+                  ref="betreuungsform"
+                  v-for="n in radioListBetreuungsform"
+                  :key="n"
+                  :label="`${n}`"
+                  :value="n"
+                ></v-radio>
+              </v-radio-group>
+            </v-col>
+            <v-col v-if="item.radioGroupBetreuungsform_sibling === 1">
+              <v-text-field
+                outlined
+                v-model="item.tagespflegename"
+                label="Name der Tagespflegeperson"
+                :rules="nameRules"
+                required
+              ></v-text-field>
+              <v-text-field
+                outlined
+                v-model="item.institutionstreet"
+                label="Straße der Tagespflege"
+                :rules="nameRules"
+                required
+              ></v-text-field>
+              <v-text-field
+                outlined
+                v-model="item.institutionnumber"
+                label="Hausnummer der Tagespflege"
+                :rules="numberRules"
+                required
+              ></v-text-field>
+              <v-text-field
+                outlined
+                v-model="item.institutionpostcode"
+                label="PLZ der Tagespflege"
+                :rules="nameRules"
+                required
+              ></v-text-field>
+              <v-text-field
+                outlined
+                v-model="item.institutiontown"
+                label="Ort der Tagespflege"
+                :rules="nameRules"
+                required
+              ></v-text-field>
+            </v-col>
+            <v-col v-else>
+              <v-text-field
+                outlined
+                v-model="item.institutionname"
+                label="Name der Betreuungseinrichtung"
+                :rules="nameRules"
+                required
+              ></v-text-field>
 
-        <h4 v-if="item.bifoCheck" class="text-left">Aktiv-Pass</h4>
-        <v-row v-if="item.bifoCheck">
-          <v-col class="text-left" cols="4">
-            <h5>
-              Um an einer Aktivität des Aktiv-Passes teilnehmen zu können, wird
-              die Kostenerstattung für folgende Anschaffung beantragt:
-            </h5>
-          </v-col>
-          <v-col cols="8">
-            <h5 class="text-left">
-              Ausführliche Begründung zur Notwendigkeit der Anschaffung und
-              weshalb die Anschaffung nicht - endgültig - aus eigenen Mitteln
-              finanziert werden kann:
-            </h5>
-            <v-textarea v-model="item.bifo_begr" outlined></v-textarea>
-          </v-col>
-        </v-row>
-        <p v-else></p>
+              <h5
+                class="text-left mt-0 pt-0"
+                v-if="item.radioGroupBetreuungsform_sibling === 5"
+              >
+                <v-icon>mdi-alert</v-icon>Für Kinder in der Grundschulbetreuung
+                wird kein Antrag auf Ermäßigung gestellt.
+              </h5>
+            </v-col>
+          </v-row>
 
-        <v-row>
-          <v-col class="pt-0">
-            <v-btn
-              class="ma-0"
-              text
-              outlined
-              color="secondary"
-              @click="deleteChild(item.id)"
+          <v-row>
+            <v-col
+              v-if="
+                item.geCheck ||
+                (item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1)
+              "
+              class="d-flex"
+              cols="12"
+              sm="4"
             >
-              Einträge dieses Kindes löschen
-              <v-icon> mdi-alert </v-icon>
-            </v-btn>
-          </v-col>
-        </v-row>
-      </v-card>
-      <v-btn class="my-4" @click="addChild">
-        Geschwisterkind hinzufügen
-        <v-icon> mdi-plus </v-icon>
-      </v-btn>
-    </div>
+              <v-text-field
+                outlined
+                v-model="item.date_bb"
+                label="Betreuungsbeginn"
+                prepend-icon="mdi-calendar"
+                :rules="dateRules"
+                required
+              ></v-text-field>
+            </v-col>
+            <p v-else></p>
+            <v-col
+              v-if="item.geCheck || item.entCheck"
+              class="d-flex"
+              cols="12"
+              sm="4"
+            >
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span
+                  >Das Betreuungsentgelt ist die zu entrichtende Summe OHNE
+                  Abzüge und Ermäßigungen.</span
+                >
+              </v-tooltip>
+              <v-text-field
+                outlined
+                v-model="item.betreuungsentgelt"
+                prefix="€"
+                :rules="moneyRules"
+                label="Betreuungsentgelt"
+                required
+              ></v-text-field>
+            </v-col>
+            <p v-else></p>
+            <v-col v-if="item.entCheck" class="d-flex" cols="12" sm="4">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span
+                  >der Elternbeitrag ist das Betreuungsgeld abzüglich der
+                  Ermäßigung</span
+                >
+              </v-tooltip>
+              <v-text-field
+                outlined
+                v-model="item.elternbeitrag"
+                prefix="€"
+                :rules="moneyRules"
+                label="Elternbeitrag"
+                required
+              ></v-text-field>
+            </v-col>
+            <p v-else></p>
+          </v-row>
 
+          <v-divider></v-divider>
+
+          <h4 v-if="item.bifoCheck" class="text-left py-3">
+            Mittel aus dem Bildungsfond
+          </h4>
+          <h4
+            v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
+            class="text-left"
+          >
+            Kostenerstattung Mittagessen
+          </h4>
+          <v-row
+            v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 1"
+          >
+            <v-col cols="4" class="text-left">
+              <h5>
+                Für Beantragung von Mitteln aus dem Bildungsfond zur
+                <span class="text-decoration-underline"
+                  >Kostenerstattung des Mittagessens</span
+                >
+                bitte angeben:
+              </h5>
+            </v-col>
+            <v-col class="d-flex" cols="12" sm="4">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>monatlicher Betrag</span>
+              </v-tooltip>
+              <v-text-field
+                outlined
+                v-model="item.essensgeld"
+                :rules="MoneyNoReqRules"
+                label="Essensgeld"
+                prefix="€"
+              ></v-text-field>
+            </v-col>
+            <v-col class="d-flex" cols="12" sm="4">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>Gültig ab sofort wenn kein Datum angegeben</span>
+              </v-tooltip>
+              <v-text-field
+                outlined
+                v-model="item.gueltig"
+                label="Gültig ab"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <h4
+            v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 2"
+            class="text-left"
+          >
+            Anteilige Kostenerstattung Ausflüge
+          </h4>
+          <v-row
+            v-if="item.bifoCheck && item.radioGroupBetreuungsform_sibling === 2"
+          >
+            <v-col class="d-flex pt-0" cols="12" sm="8">
+              <v-checkbox
+                v-model="item.kostenerstattung"
+                ref="vorjahr_check"
+                :label="'Wir beantragen eine anteilige Kostenerstattung für ein- und mehrtägig Ausflüge durch Mittel aus dem Bildungsfond.'"
+              ></v-checkbox>
+            </v-col>
+            <v-col class="d-flex align-center" cols="12" sm="4">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span>Gültig ab sofort wenn kein Datum angegeben</span>
+              </v-tooltip>
+              <v-text-field
+                outlined
+                v-model="item.gueltig"
+                :rules="dateRules"
+                label="Gültig ab"
+                required
+              ></v-text-field>
+            </v-col>
+          </v-row>
+
+          <h4 v-if="item.bifoCheck" class="text-left">Aktiv-Pass</h4>
+          <v-row v-if="item.bifoCheck">
+            <v-col class="text-left" cols="4">
+              <h5>
+                Um an einer Aktivität des Aktiv-Passes teilnehmen zu können,
+                wird die Kostenerstattung für folgende Anschaffung beantragt:
+              </h5>
+            </v-col>
+            <v-col cols="8">
+              <h5 class="text-left">
+                Ausführliche Begründung zur Notwendigkeit der Anschaffung und
+                weshalb die Anschaffung nicht - endgültig - aus eigenen Mitteln
+                finanziert werden kann:
+              </h5>
+              <v-textarea v-model="item.bifo_begr" outlined></v-textarea>
+            </v-col>
+          </v-row>
+          <p v-else></p>
+
+          <v-row>
+            <v-col class="pt-0">
+              <v-btn
+                class="ma-0"
+                text
+                outlined
+                color="secondary"
+                @click="deleteChild(item.id)"
+              >
+                Einträge dieses Kindes löschen
+                <v-icon> mdi-alert </v-icon>
+              </v-btn>
+            </v-col>
+          </v-row>
+        </v-card>
+        <v-btn class="my-4" @click="addChild">
+          Geschwisterkind hinzufügen
+          <v-icon> mdi-plus </v-icon>
+        </v-btn>
+      </div>
+    </v-form>
     <v-btn
       class="d-block mx-auto my-6"
       @click="funcShowNachweise"
@@ -859,11 +851,7 @@
       <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
     </v-btn>
 
-    <v-btn
-      class="d-block mx-auto my-6"
-      @click="funcShowAntragstellerDaten"
-      :disabled="!valid"
-    >
+    <v-btn class="d-block mx-auto my-6" @click="funcShowAntragstellerDaten">
       <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
       Antragsteller/in
     </v-btn>
@@ -884,7 +872,7 @@ export default {
       child_lastname: "",
 
       elternbeitrag: "",
-      betreuungsbeginn: "",
+      date_bb: "",
       betreuungsentgelt: "",
       essensgeld: "",
 
@@ -912,7 +900,7 @@ export default {
         "Hort",
         "Ganztags an Schule",
       ],
-      bankname: "",
+      bank: "",
       kontoinhaber: "",
       iban: "",
       bic: "",
@@ -923,8 +911,11 @@ export default {
 
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
-      moneyRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
-      essensgeldRules: [
+      moneyRules: [
+        ((value) => !!value && /^\d+$/.test(value)) ||
+          "Pflichtfeld. Bitte ausfüllen!",
+      ],
+      moneyNotReqRules: [
         (value) => /^\d+$/.test(value) || "Wert muss eine Zahl sein.",
       ],
       telRules: [
@@ -934,8 +925,12 @@ export default {
           "Pflichtfeld. Bitte gültige Telefonnummer eingeben! Darf keine Buchstaben enthalten.",
       ],
       dateRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
-      //RULES
-
+      ibanRules: [
+        (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
+        (value) =>
+          (value && value.length >= 22) ||
+          "Pflichtfeld. Bitte gültige IBAN eingeben!",
+      ],
       numberRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",
         (value) =>
@@ -963,6 +958,9 @@ export default {
       this.$store.commit("setChildLastname", val);
     },
 
+    date_bb: function (val) {
+      this.$store.commit("setChildBB", val);
+    },
     elternbeitrag: function (val) {
       this.$store.commit("setElternbeitrag", val);
     },
@@ -1002,6 +1000,18 @@ export default {
     radioGroupBetreuungsform: function (val) {
       this.$store.commit("setBetreuungsform", val);
     },
+    bank: function (val) {
+      this.$store.commit("setBank", val);
+    },
+    kontoinhaber: function (val) {
+      this.$store.commit("setKontoinhaber", val);
+    },
+    iban: function (val) {
+      this.$store.commit("setIban", val);
+    },
+    bic: function (val) {
+      this.$store.commit("setBic", val);
+    },
   },
   //load previus values from store
   created() {
@@ -1030,6 +1040,7 @@ export default {
       this.$store.state.firstname + " " + this.$store.state.lastname;
     this.iban = this.$store.state.iban;
     this.bic = this.$store.state.bic;
+    this.bank = this.$store.state.bank;
   },
 
   methods: {
@@ -1040,6 +1051,10 @@ export default {
         this.valid = false;
       }
     },
+    funcShowAntragstellerDaten() {
+      this.$parent.funcShowAntragstellerDaten();
+    },
+
     deleteChild(deleteID) {
       this.$parent.deleteChild(deleteID);
     },
