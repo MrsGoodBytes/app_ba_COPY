@@ -1,9 +1,15 @@
 <template>
   <div id="Kind" class="pb-10">
     <h2 class="pt-3">Kind/er</h2>
-    <h5 class="pb-3" v-if="this.$store.state.geCheck">
-      Bitte tragen Sie hier das jüngste Kind ein, für das ein oder mehrere
-      Anträge gestellt werden.
+
+    <h5 class="pb-3" v-if="this.$store.state.geCheck && !this.$store.state.entCheck"
+    >
+      Bitte tragen Sie hier das jüngste Kind ein, für das die
+      Geschwisterermäßigung
+      <span v-if="this.$store.state.bifoCheck">
+        und/oder Hilfe aus dem Bildungsfond</span
+      >
+      beantragt werden soll.
       <v-tooltip max-width="600" bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -16,11 +22,66 @@
           Kindertagespflegestellen oder an Lübecker Schulen nach dem Modell
           „Ganztag an Schule“ betreut, übernimmt die Hansestadt Lübeck den
           Elternbeitrag: - für das zweitälteste Kind zur Hälfte - für jedes
-          weitere jüngere Kind vollständig Die Ermäßigung erfolgt unabhängig vom
-          Einkommen.</span
+          weitere jüngere Kind vollständig. Die <span class="font-weight-bold">Geschwisterermäßigung</span> erfolgt unabhängig
+          vom Einkommen.</span
         >
       </v-tooltip>
     </h5>
+
+    <h5
+      class="pb-3"
+      v-if="this.$store.state.geCheck && this.$store.state.entCheck"
+    >
+      Bitte tragen Sie hier das jüngste Kind ein, für das die
+      Geschwisterermäßigung<span v-if="this.$store.state.bifoCheck">
+        und/oder Mittel aus dem Bildungsfond</span
+      >
+      sowie eine Entgeltermäßigung beantragt werden soll.
+      <v-tooltip max-width="600" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon color="accent" v-bind="attrs" v-on="on"
+            >mdi-information</v-icon
+          >
+        </template>
+        <span
+          >Werden mehrere in einem Haushalt lebende Kinder einer Familie
+          gleichzeitig in anerkannten Kindertageseinrichtungen,
+          Kindertagespflegestellen oder an Lübecker Schulen nach dem Modell
+          „Ganztag an Schule“ betreut, übernimmt die Hansestadt Lübeck den
+          Elternbeitrag: - für das zweitälteste Kind zur Hälfte - für jedes
+          weitere jüngere Kind vollständig. Die <span class="font-weight-bold">Geschwisterermäßigung</span> erfolgt unabhängig
+          vom Einkommen.</span
+        ><p v-if="this.$store.state.entCheck">
+          Von der <span class="font-weight-bold">Entgeltermäßigung</span> ausgenommen sind Kinder, welche in einem
+          Betreuungsverhältnis in einer Betreuten Grundschule stehen.
+        </p>
+      </v-tooltip>
+    </h5>
+
+    <h5
+      class="pb-3"
+      v-if="
+        !this.$store.state.geCheck &&
+        this.$store.state.entCheck
+      "
+    >
+      Bitte tragen Sie im folgenden alle Kinder ein, für die eine
+      Entgeltermäßigung<span v-if="this.$store.state.bifoCheck">
+        und/oder Hilfe aus dem Bildungsfond</span
+      > beantragt werden soll.
+      <v-tooltip max-width="600" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon color="accent" v-bind="attrs" v-on="on"
+            >mdi-information</v-icon
+          >
+        </template>
+        <span
+          >Von der Entgeltermäßigung ausgenommen sind Kinder, welche in einem
+          Betreuungsverhältnis in einer Betreuten Grundschule stehen.</span
+        >
+      </v-tooltip>
+    </h5>
+
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row class="my-0 py-0"
         ><!-- v-for="n in childList" :key="n" -->
@@ -266,8 +327,8 @@
               >
             </template>
             <span
-              >Der Elternbeitrag ist das Betreuungsgeld abzüglich der
-              Ermäßigung.</span
+              >Der Elternbeitrag beträgt 50% des Betreuungsgeldes, was einer
+              Ermäßigung von 50% entspricht.</span
             >
           </v-tooltip>
           <v-text-field
@@ -451,20 +512,32 @@
 
         <h5 v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
           Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
-          einem Betreuungsverhältnis befinden.
+          einem Betreuungsverhältnis befinden<span
+            v-if="this.$store.state.bifoCheck"
+          >
+            und/oder für welche Mittel aus dem Bildungsfond beantragt werden
+            sollen</span
+          >.
         </h5>
         <h5
           v-else-if="this.$store.state.entCheck && !this.$store.state.geCheck"
         >
           Bitte tragen Sie hier alle Ihre Kinder ein, für die Sie eine
-          Ermäßigung beantragen möchten. Ausgenommen ist eine Betreuung in der
-          betreuten Grundschule.
+          Entgeltermäßigung<span v-if="this.$store.state.bifoCheck">
+            und/oder Mittel aus dem Bildungsfond</span
+          >
+          beantragen möchten. Ausgenommen von der Entgeltermäßigung ist eine
+          Betreuung in der betreuten Grundschule.
         </h5>
         <h5 v-else-if="this.$store.state.entCheck && this.$store.state.geCheck">
           Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in
-          einem Betreuungsverhältnis befinden und/oder für die Sie eine
-          Ermäßigung beantragen möchten. Ausgenommen für die Entgeltermäßigung
-          ist eine Betreuung in der betreuten Grundschule.
+          einem Betreuungsverhältnis befinden<span
+            v-if="this.$store.state.bifoCheck"
+            >, für die Sie Mittel aus dem Bildungsfond
+          </span>
+          und/oder für die Sie eine Entgeltermäßigung beantragen möchten.
+          Ausgenommen für die Entgeltermäßigung ist eine Betreuung in der
+          betreuten Grundschule.
         </h5>
 
         <v-card
