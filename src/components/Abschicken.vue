@@ -60,7 +60,9 @@
       </v-col>
       <v-col cols="4" class="text-left"> </v-col>
     </v-row>
+    
     <v-divider class="my-8"></v-divider>
+
     <v-row>
       <h4>
         Kind/er Daten
@@ -102,6 +104,14 @@
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Betreuungseinrichtung</h6>
         <h5 v-if="this.betreuung === 1">{{ this.tagespflege }}</h5>
+        <h5 v-else-if="this.betreuung === 0">
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+              >mdi-pencil</v-icon
+            ></v-btn
+          >
+          Betreuungseinrichtung angeben!
+        </h5>
         <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
       </v-col>
 
@@ -122,7 +132,15 @@
         class="text-left"
       >
         <h6 class="text--disabled">Betreuungsbeginn</h6>
-        <h5>{{ this.betreuungsbeginn }}</h5>
+        <h5 v-if="this.betreuungsbeginn != 0">{{ this.betreuungsbeginn }}</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+              >mdi-pencil</v-icon
+            ></v-btn
+          >
+          Betreuungsbeginn angeben!
+        </h5>
       </v-col>
 
       <v-col
@@ -135,7 +153,15 @@
         class="text-left"
       >
         <h6 class="text--disabled">Betreuungsumfang</h6>
-        <h5>{{ this.betreuungsumfang }} Stunden</h5>
+        <h5 v-if="this.betreuungsumfang != 0">{{ this.betreuungsumfang }} Stunden</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+              >mdi-pencil</v-icon
+            ></v-btn
+          >
+          Betreuungsumfang angeben!
+        </h5>
       </v-col>
 
       <v-col
@@ -176,6 +202,67 @@
       >
         <h6 class="text--disabled">Kontoinhaber für Ermäßigung des Essensgeldes</h6>
         <h5>{{ this.konto }}</h5>
+      </v-col>
+    </v-row>
+
+    <v-divider class="my-8"></v-divider>
+
+     <v-row>
+      <h4>
+        Geschwisterkind/er Daten
+        <v-btn @click="funcShowKindDaten"
+          ><v-icon color="accent" v-bind="attrs" v-on="on"
+            >mdi-pencil</v-icon
+          ></v-btn
+        >
+      </h4>
+    </v-row>
+
+    <v-row>
+      <v-col cols="3" class="text-left">
+        <h6 class="text--disabled">Kind</h6>
+        <h5>{{ }}</h5>
+      </v-col>
+      <v-col cols="4" class="text-left">
+        <h6 class="text--disabled">Geburtstag</h6>
+        <h5>{{ this.child_date }}</h5>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="3" class="text-left">
+        <h6 class="text--disabled">Betreuungsform</h6>
+        <h5 v-if="this.betreuung === 1">Tagespflege</h5>
+        <h5 v-else-if="this.betreuung === 2">Elementar</h5>
+        <h5 v-else-if="this.betreuung === 3">Hort</h5>
+        <h5 v-else-if="this.betreuung === 4">Ganztags an Schulen</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+              >mdi-pencil</v-icon
+            ></v-btn
+          >
+          Betreuungsform wählen!
+        </h5>
+      </v-col>
+
+      <v-col cols="4" class="text-left">
+        <h6 class="text--disabled">Betreuungseinrichtung</h6>
+        <h5 v-if="this.betreuung === 1">{{ this.tagespflege }}</h5>
+        <h5 v-else-if="this.betreuung === 0">
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+              >mdi-pencil</v-icon
+            ></v-btn
+          >
+          Betreuungseinrichtung angeben!
+        </h5>
+        <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
+      </v-col>
+
+      <v-col cols="4" class="text-left">
+        <h6 class="text--disabled">Ermäßigungsantrag im Vorjahr gestellt:</h6>
+        <h5 v-if="this.vorjahr === true">ja</h5>
+        <h5 v-else>nein</h5>
       </v-col>
     </v-row>
   </div>
