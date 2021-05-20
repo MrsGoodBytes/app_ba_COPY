@@ -2,7 +2,9 @@
   <div id="Kind" class="pb-10">
     <h2 class="pt-3">Kind/er</h2>
 
-    <h5 class="pb-3" v-if="this.$store.state.geCheck && !this.$store.state.entCheck"
+    <h5
+      class="pb-3"
+      v-if="this.$store.state.geCheck && !this.$store.state.entCheck"
     >
       Bitte tragen Sie hier das jüngste Kind ein, für das die
       Geschwisterermäßigung
@@ -22,8 +24,9 @@
           Kindertagespflegestellen oder an Lübecker Schulen nach dem Modell
           „Ganztag an Schule“ betreut, übernimmt die Hansestadt Lübeck den
           Elternbeitrag: - für das zweitälteste Kind zur Hälfte - für jedes
-          weitere jüngere Kind vollständig. Die <span class="font-weight-bold">Geschwisterermäßigung</span> erfolgt unabhängig
-          vom Einkommen.</span
+          weitere jüngere Kind vollständig. Die
+          <span class="font-weight-bold">Geschwisterermäßigung</span> erfolgt
+          unabhängig vom Einkommen.</span
         >
       </v-tooltip>
     </h5>
@@ -49,26 +52,28 @@
           Kindertagespflegestellen oder an Lübecker Schulen nach dem Modell
           „Ganztag an Schule“ betreut, übernimmt die Hansestadt Lübeck den
           Elternbeitrag: - für das zweitälteste Kind zur Hälfte - für jedes
-          weitere jüngere Kind vollständig. Die <span class="font-weight-bold">Geschwisterermäßigung</span> erfolgt unabhängig
-          vom Einkommen.</span
-        ><p v-if="this.$store.state.entCheck">
-          Von der <span class="font-weight-bold">Entgeltermäßigung</span> ausgenommen sind Kinder, welche in einem
-          Betreuungsverhältnis in einer Betreuten Grundschule stehen.
+          weitere jüngere Kind vollständig. Die
+          <span class="font-weight-bold">Geschwisterermäßigung</span> erfolgt
+          unabhängig vom Einkommen.</span
+        >
+        <p v-if="this.$store.state.entCheck">
+          Von der
+          <span class="font-weight-bold">Entgeltermäßigung</span> ausgenommen
+          sind Kinder, welche in einem Betreuungsverhältnis in einer Betreuten
+          Grundschule stehen.
         </p>
       </v-tooltip>
     </h5>
 
     <h5
       class="pb-3"
-      v-if="
-        !this.$store.state.geCheck &&
-        this.$store.state.entCheck
-      "
+      v-if="!this.$store.state.geCheck && this.$store.state.entCheck"
     >
       Bitte tragen Sie im folgenden alle Kinder ein, für die eine
       Entgeltermäßigung<span v-if="this.$store.state.bifoCheck">
         und/oder Hilfe aus dem Bildungsfond</span
-      > beantragt werden soll.
+      >
+      beantragt werden soll.
       <v-tooltip max-width="600" bottom>
         <template v-slot:activator="{ on, attrs }">
           <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -360,16 +365,18 @@
             "
             class="text-left"
           >
-            Kostenerstattung Mittagessen <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon color="accent" v-bind="attrs" v-on="on"
-                >mdi-information</v-icon
+            Kostenerstattung Mittagessen
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >Kann nur für Kinder beantragt werden, welche in einer
+                Tagespflegeeinrichtung betreut werden.</span
               >
-            </template>
-            <span
-              >Kann nur für Kinder beantragt werden, welche in einer Tagespflegeeinrichtung betreut werden.</span
-            >
-          </v-tooltip>
+            </v-tooltip>
           </h4>
           <h5
             v-if="
@@ -462,15 +469,19 @@
       >
         Anteilige Kostenerstattung Ausflüge
         <v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon color="accent" v-bind="attrs" v-on="on"
-                >mdi-information</v-icon
-              >
-            </template>
-            <span
-              >Kann nur für Kinder beantragt werden, die <span class="text-decoration-underline font-weight-bold">nicht</span> in einer Tagespflege-Einrichtung betreut werden.</span
+          <template v-slot:activator="{ on, attrs }">
+            <v-icon color="accent" v-bind="attrs" v-on="on"
+              >mdi-information</v-icon
             >
-          </v-tooltip>
+          </template>
+          <span
+            >Kann nur für Kinder beantragt werden, die
+            <span class="text-decoration-underline font-weight-bold"
+              >nicht</span
+            >
+            in einer Tagespflege-Einrichtung betreut werden.</span
+          >
+        </v-tooltip>
       </h4>
       <v-row
         v-if="
@@ -627,10 +638,7 @@
           <v-divider></v-divider>
 
           <h4 class="text-left pt-3">Betreuung</h4>
-          <h5
-            v-if="item.radioGroupBetreuungsform_sibling === 0"
-            class="text-left error--text"
-          >
+          <h5 v-if="valid_sibling" class="text-left error--text">
             <v-icon color="secondary">mdi-alert</v-icon>
             Bitte wählen Sie eine Betreuungsform aus!
           </h5>
@@ -959,6 +967,7 @@ export default {
   data() {
     return {
       valid: false,
+      valid_sibling: false,
 
       child_firstname: "",
       child_lastname: "",

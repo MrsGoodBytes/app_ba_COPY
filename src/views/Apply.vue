@@ -83,7 +83,7 @@
         Kind/er
       </v-btn>
 
-      <Abschicken v-if="Abschicken" />
+      <Abschicken v-if="Abschicken" :child_list="this.child_list"  :person_list="this.person_list" />
       <v-btn
         v-if="Abschicken"
         class="my-6"

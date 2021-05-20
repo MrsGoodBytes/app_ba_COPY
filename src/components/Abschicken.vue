@@ -7,7 +7,7 @@
       <h4>
         Antragsteller Daten
         <v-btn @click="funcShowAntragstellerDaten"
-          ><v-icon color="accent" v-bind="attrs" v-on="on"
+          ><v-icon color="accent"
             >mdi-pencil</v-icon
           ></v-btn
         >
@@ -47,7 +47,7 @@
         </h5>
         <h5 v-else>
           <v-btn @click="funcShowAntragstellerDaten"
-            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+            ><v-icon color="secondary"
               >mdi-pencil</v-icon
             ></v-btn
           >
@@ -67,7 +67,7 @@
       <h4>
         Kind/er Daten
         <v-btn @click="funcShowKindDaten"
-          ><v-icon color="accent" v-bind="attrs" v-on="on"
+          ><v-icon color="accent"
             >mdi-pencil</v-icon
           ></v-btn
         >
@@ -93,7 +93,7 @@
         <h5 v-else-if="this.betreuung === 4">Ganztags an Schulen</h5>
         <h5 v-else>
           <v-btn @click="funcShowKindDaten"
-            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+            ><v-icon color="secondary"
               >mdi-pencil</v-icon
             ></v-btn
           >
@@ -106,7 +106,7 @@
         <h5 v-if="this.betreuung === 1">{{ this.tagespflege }}</h5>
         <h5 v-else-if="this.betreuung === 0">
           <v-btn @click="funcShowKindDaten"
-            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+            ><v-icon color="secondary"
               >mdi-pencil</v-icon
             ></v-btn
           >
@@ -135,7 +135,7 @@
         <h5 v-if="this.betreuungsbeginn != 0">{{ this.betreuungsbeginn }}</h5>
         <h5 v-else>
           <v-btn @click="funcShowKindDaten"
-            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+            ><v-icon color="secondary"
               >mdi-pencil</v-icon
             ></v-btn
           >
@@ -156,7 +156,7 @@
         <h5 v-if="this.betreuungsumfang != 0">{{ this.betreuungsumfang }} Stunden</h5>
         <h5 v-else>
           <v-btn @click="funcShowKindDaten"
-            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+            ><v-icon color="secondary"
               >mdi-pencil</v-icon
             ></v-btn
           >
@@ -211,21 +211,21 @@
       <h4>
         Geschwisterkind/er Daten
         <v-btn @click="funcShowKindDaten"
-          ><v-icon color="accent" v-bind="attrs" v-on="on"
+          ><v-icon color="accent"
             >mdi-pencil</v-icon
           ></v-btn
         >
       </h4>
     </v-row>
 
-    <v-row>
+    <v-row v-for="(n, index) in child_list" :key="n">
       <v-col cols="3" class="text-left">
         <h6 class="text--disabled">Kind</h6>
-        <h5>{{ }}</h5>
+        <h5>{{ child_list[index].sibling_firstname }}</h5>
       </v-col>
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Geburtstag</h6>
-        <h5>{{ this.child_date }}</h5>
+        <h5>{{ child_list[index].date_sibling }}</h5>
       </v-col>
     </v-row>
     <v-row>
@@ -237,7 +237,7 @@
         <h5 v-else-if="this.betreuung === 4">Ganztags an Schulen</h5>
         <h5 v-else>
           <v-btn @click="funcShowKindDaten"
-            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+            ><v-icon color="secondary"
               >mdi-pencil</v-icon
             ></v-btn
           >
@@ -250,7 +250,7 @@
         <h5 v-if="this.betreuung === 1">{{ this.tagespflege }}</h5>
         <h5 v-else-if="this.betreuung === 0">
           <v-btn @click="funcShowKindDaten"
-            ><v-icon color="secondary" v-bind="attrs" v-on="on"
+            ><v-icon color="secondary"
               >mdi-pencil</v-icon
             ></v-btn
           >
@@ -265,13 +265,22 @@
         <h5 v-else>nein</h5>
       </v-col>
     </v-row>
+    <Ent :child_list="this.child_list"  :person_list="this.person_list" />
   </div>
 </template>
 
 <script>
+import Ent from "@/views/Ent.vue";
+
 export default {
   name: "Abschicken",
-  props: {},
+  components: {
+    Ent,
+  },
+  props: {
+    child_list: Array,
+    person_list: Array,
+  },
   data() {
     return {
       //RULES

@@ -1526,6 +1526,10 @@ export default {
       arbeitgeber_postcode: "",
       arbeitgeber_town: "",
 
+      einkommensgrenze1: 0,
+      einkommensgrenze2: 0,
+      einkommensgrenze_gesamt: 0,
+
       km: "",
 
       //RULES
@@ -1647,14 +1651,29 @@ export default {
     },
     //EINKOMMEN
     elternteil1: function (val) {
-      this.$store.commit("setElternteil1", val);
+      this.$store.commit("setElternteil1", val);      
+      var sum = 0;
+      sum = parseInt(this.elternteil1.netto) + parseInt(this.elternteil1.selbst);
+      sum = sum + this.einkommensgrenze2;
+      this.einkommensgrenze_gesamt = sum;
     },
     elternteil2: function (val) {
       this.$store.commit("setElternteil2", val);
+      var sum = 0;      
+      sum = parseInt(this.elternteil2.netto) + parseInt(this.elternteil2.selbst);
+      sum = sum + this.einkommensgrenze1;
+      this.einkommensgrenze_gesamt = sum;
     },
   },
 
   methods: {
+    /*addSum() {
+      var sum = 0;
+      sum = parseInt(this.elternteil1.netto) + parseInt(this.elternteil1.selbst);
+      sum = sum + parseInt(this.elternteil2.netto) + parseInt(this.elternteil2.selbst);
+      this.einkommensgrenze = sum;
+    },*/
+
     save(date) {
       this.$refs.menu.save(date);
     },
