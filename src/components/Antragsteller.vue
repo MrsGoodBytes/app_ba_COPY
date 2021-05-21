@@ -236,12 +236,12 @@
 <!-- TEXT Antragsgrundlage -->
       <v-row
         >
-        <v-col v-if="radioGroupAntragsgrundlage === 2" class="text-center">
+        <v-col v-if="radioGroupAntragsgrundlage === 2 && (this.$store.state.entCheck || this.$store.state.bifoCheck)" class="text-center">
           <h3>Familieneinkommen, Belastungen, Einkommensgrenze</h3>
           <p>Die im Haushalt lebenden Personen erzielen folgendes Einkommen:</p>
         </v-col>
         <v-col
-          v-else-if="radioGroupAntragsgrundlage === 1"
+          v-else-if="radioGroupAntragsgrundlage === 1 && (this.$store.state.entCheck || this.$store.state.bifoCheck)"
           class="text-left pt-0"
         >
           <p>
@@ -251,7 +251,7 @@
         </v-col>
         <v-col
           v-else-if="
-            radioGroupAntragsgrundlage === 3 && this.$store.state.entCheck
+            radioGroupAntragsgrundlage === 3  && (this.$store.state.entCheck || this.$store.state.bifoCheck)
           "
           class="text-left pt-0"
         >
@@ -290,7 +290,7 @@
       </v-row>
 
 <!-- Einkommensnachweise ohne Sozialleistungen -->
-    <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage === 2">
+    <div id="einkommensnachweis" v-if="radioGroupAntragsgrundlage === 2 && (this.$store.state.entCheck || this.$store.state.bifoCheck)">
       <h4 class="my-4">
         Angaben zur Ermittlung des durchschnittlichen monatlichen
         Familieneinkommens in €

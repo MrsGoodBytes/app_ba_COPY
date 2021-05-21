@@ -1,54 +1,65 @@
 <template>
-  <div id="Ent">
-      <h2 class="py-3">PDF ENT</h2>
-    <h5 class="pb-3">Bitte prüfen Sie die Angaben auf ihre Richtigkeit!</h5>
+  <div id="Ent" class="mx-16">
+    <v-row><v-col><v-img :src="require('/src/img/hl.jpg')" class="float-left" max-width="300" />
+    </v-col><v-col><v-img :src="require('/src/img/adler.jpg')" class="float-right" max-width="100" /></v-col>
+    </v-row>
+
+    <h2 class="font-weight-light pb-3">
+      Antrag auf Geschwisterermäßigung in Kindertagesstättenfür<br> das Kita-Jahr
+      {{ new Date().getFullYear() }} / {{ new Date().getFullYear() + 1 }}
+    </h2>
 
     <v-row>
-      <h4>
-        Antragsteller Daten
-        <v-btn @click="funcShowAntragstellerDaten"
-          ><v-icon color="accent" v-bind="attrs" v-on="on"
-            >mdi-pencil</v-icon
-          ></v-btn
-        >
-      </h4>
-      <h4 v-if="this.$store.state.valid === false">
-        Bitte diesen Bereich Prüfen. Es fehlen Angaben.
-      </h4>
-    </v-row>
-    <v-row>
-      <v-col cols="3" class="text-left">
-        <h6 class="text--disabled">Antragsteller/in</h6>
-        <h5>{{ this.name }}</h5>
-        <h6 class="text--disabled" v-if="this.$store.state.geCheck">
-          Geburtsdatum
-        </h6>
-        <h5 v-if="this.$store.state.geCheck">{{ this.date }}</h5>
+      <v-col class="text-left">
+        <p>
+          Hansestadt Lübeck<br />
+          Fachbereich Kultur und Bildung<br />
+          Entgeltermäßigung Kindertagesbetreuung<br />
+          Kronsforder Allee 2-6<br />
+          23539 Lübeck
+        </p>
       </v-col>
-      <v-col cols="4" class="text-left">
+      <v-col cols="12" md="4" class="text-left float-right">
+        <h6 class="text--disabled">Antragstellende Person (Elternteil)</h6>
+        <h5>{{ this.name }}</h5>
+
         <h6 class="text--disabled">Anschrift</h6>
         <h5>{{ this.adress }}</h5>
-      </v-col>
-      <v-col cols="4" class="text-left">
-        <h6 class="text--disabled">E-Mail</h6>
-        <h5>{{ this.email }}</h5>
+      
         <h6 class="text--disabled">Telefonnummer</h6>
         <h5>{{ this.tel }}</h5>
+
+        <h6 class="text--disabled">E-Mail</h6>
+        <h5>{{ this.email }}</h5>
       </v-col>
+    </v-row>
+    <h3 class="text-left">Hiermit wird die Geschwisterermäßigungfür Kinder in Kindertagesstätten beantragt.</h3>
+    <h6 class="text-left">Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder Entgelten 
+      für die Betreuung von Kindern in Kindertageseinrichtungen oder Kindertagespflegestellen“ 
+      der Hansestadt Lübeck.</h6>
+      <p class="text-left">Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer Familie eine 
+        öffentlich geförderte Kindertageseinrichtung, Kindertagespflegestelle 
+        oder eine Ganztagsbetreuung an Schulen mit einer Nachmittagsbetreuung an mindestens 3 Tagen pro 
+        Woche für mindestens 70 EUR, wird der Elternbeitrag auf Antrag ermäßigt.<br>
+        <list><li>Für das älteste Kind ist der Elternbeitrag in voller Höhe zu entrichten.</li>
+        <li>Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,</li>
+        <li>für jedes weitere jüngere Kind um 100%.</li>
+        </list><br>
+        Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.</p>
+    <v-row>
+      
     </v-row>
   </div>
 </template>
 
 
 <script>
-
 export default {
   name: "Ent",
-  components: {
-  },
+  components: {},
   props: {
-      child_list: Array,
-      person_list: Array,
+    child_list: Array,
+    person_list: Array,
   },
   data() {
     return {
@@ -169,14 +180,66 @@ export default {
       arbeitgeber_town: "",
 
       km: "",
+      
     };
   },
 
   watch: {},
 
-  methods: {
-    
+  created() {
+    this.name = this.$store.state.firstname + " " + this.$store.state.lastname;
+    this.date = this.$store.state.date;
+    this.adress =
+      this.$store.state.street +
+      " " +
+      this.$store.state.number +
+      ", " +
+      this.$store.state.postcode +
+      " " +
+      this.$store.state.town;
+    this.email = this.$store.state.email;
+    this.tel = this.$store.state.tel;
+    this.person =
+      this.$store.state.firstname_person +
+      " " +
+      this.$store.state.lastname_person +
+      " " +
+      this.$store.state.date_p +
+      " " +
+      this.$store.state.verwandtschaft_p;
+    this.child_name =
+      this.$store.state.child_firstname +
+      " " +
+      this.$store.state.child_lastname;
+    this.child_date = this.$store.state.date_child;
+    this.betreuung = this.$store.state.radioGroupBetreuungsform;
+    this.antragsgrundlage = this.$store.state.radioGroupAntragsgrundlage;
+    this.tagespflege =
+      this.$store.state.tagespflegename +
+      " " +
+      this.$store.state.institutionstreet +
+      " " +
+      this.$store.state.institutionnumber +
+      ", " +
+      this.$store.state.institutionpostcode +
+      " " +
+      this.$store.state.institutiontown;
+    this.betreuungseinrichtung = this.$store.state.institutionname;
+    this.vorjahr = this.$store.state.vorjahr_checkbox;
+    this.elternbeitrag = this.$store.state.elternbeitrag;
+    this.betreuungsentgelt = this.$store.state.betreuungsentgelt;
+    this.date_bb = this.$store.state.date_bb;
+    this.essensgeld = this.$store.state.essensgeld;
+    this.betreuungsumfang = this.$store.state.betreuungsumfang;
+    this.betreuungsbeginn = this.$store.state.date_bb;
+    this.konto = this.$store.state.firstname + 
+    " " + this.$store.state.lastname + 
+    ", IBAN: " + this.$store.state.iban + 
+    ", BIC: " +  this.$store.state.bic + 
+    ", " + this.$store.state.bank;
   },
+
+  methods: {},
 };
 </script>
 
