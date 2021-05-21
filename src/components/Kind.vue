@@ -349,6 +349,8 @@
         <p v-else></p>
       </v-row>
 
+      <v-divider></v-divider>
+
       <h3 v-if="this.$store.state.bifoCheck" class="text-left py-3">
         Mittel aus dem Bildungsfond
       </h3>
@@ -1015,7 +1017,7 @@ export default {
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       moneyRules: [
         ((value) => !!value && /^\d+$/.test(value)) ||
-          "Pflichtfeld. Bitte ausfüllen!",
+          "Wollen Sie dieses Feld wirklich leer lassen?",
       ],
       moneyNotReqRules: [
         (value) => /^\d+$/.test(value) || "Wert muss eine Zahl sein.",

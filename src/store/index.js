@@ -175,11 +175,8 @@ export default new Vuex.Store({
         setBifoCheck(state, value) {
             state.bifoCheck = value;
         },
-        setAntragsgrundlageCheck(state, value) {
-            state.radioGroupAntragsgrundlage = value;
-        },
         setAntragsgrundlage(state, value) {
-            state.antragsgrundlage = value;
+            state.radioGroupAntragsgrundlage = value;
         },
         setPrivatinsolvenz(state, value) {
             state.privatinsolvenz = value;
