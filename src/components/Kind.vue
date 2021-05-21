@@ -150,7 +150,7 @@
       </v-row>
       <v-divider></v-divider>
       <h3 class="text-left py-3">Betreuung</h3>
-      <h4 v-if="this.valid != true" class="text-left error--text">
+      <h4 v-if="this.valid != true && this.$store.state.radioGroupBetreuungsform == 0" class="text-left error--text">
         <v-icon color="secondary">mdi-alert</v-icon>
         Bitte wählen Sie eine Betreuungsform aus!
       </h4>
@@ -284,6 +284,7 @@
             v-model="betreuungsumfang"
             :rules="moneyRules"
             label="Betreuungsumfang"
+            prefix="Std."
             required
           ></v-text-field>
         </v-col>
