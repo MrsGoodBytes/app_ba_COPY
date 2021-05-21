@@ -51,7 +51,7 @@
               >mdi-pencil</v-icon
             ></v-btn
           >
-          Antragsgrundlage wählen!
+          Antragsgrundlage fehlt!
         </h5>
       </v-col>
       <v-col cols="4" class="text-left">
@@ -97,7 +97,7 @@
               >mdi-pencil</v-icon
             ></v-btn
           >
-          Betreuungsform wählen!
+          Betreuungsform fehlt!
         </h5>
       </v-col>
 
@@ -110,7 +110,7 @@
               >mdi-pencil</v-icon
             ></v-btn
           >
-          Betreuungseinrichtung angeben!
+          Betreuungseinrichtung fehlt!
         </h5>
         <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
       </v-col>
@@ -139,7 +139,7 @@
               >mdi-pencil</v-icon
             ></v-btn
           >
-          Betreuungsbeginn angeben!
+          Betreuungsbeginn fehlt!
         </h5>
       </v-col>
 
@@ -160,7 +160,7 @@
               >mdi-pencil</v-icon
             ></v-btn
           >
-          Betreuungsumfang angeben!
+          Betreuungsumfang fehlt!
         </h5>
       </v-col>
 
@@ -254,7 +254,7 @@
               >mdi-pencil</v-icon
             ></v-btn
           >
-          Betreuungseinrichtung angeben!
+          Betreuungseinrichtung fehlt!
         </h5>
         <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
       </v-col>
