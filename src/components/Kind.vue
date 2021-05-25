@@ -150,7 +150,12 @@
       </v-row>
       <v-divider></v-divider>
       <h3 class="text-left py-3">Betreuung</h3>
-      <h4 v-if="this.valid != true && this.$store.state.radioGroupBetreuungsform == 0" class="text-left error--text">
+      <h4
+        v-if="
+          this.valid != true && this.$store.state.radioGroupBetreuungsform == 0
+        "
+        class="text-left error--text"
+      >
         <v-icon color="secondary">mdi-alert</v-icon>
         Bitte wählen Sie eine Betreuungsform aus!
       </h4>
@@ -640,7 +645,22 @@
           </v-row>
           <v-divider></v-divider>
 
-          <h4 class="text-left pt-3">Betreuung</h4>
+          <h4 class="text-left pt-3">
+            Betreuung
+            <v-tooltip bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >Offene Ganztagsschule mit einer Nachmittagsbetreuung an mindestens 3
+                Tagen pro Woche für mindestens 70 EURO monatlich (die 70 EUR
+                beziehen sich auf den Grundbetrag ohne Abzug jeglicher
+                Ermäßigungen)</span
+              >
+            </v-tooltip>
+          </h4>
           <h5 v-if="valid_sibling" class="text-left error--text">
             <v-icon color="secondary">mdi-alert</v-icon>
             Bitte wählen Sie eine Betreuungsform aus!
