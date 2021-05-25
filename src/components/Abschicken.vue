@@ -162,7 +162,8 @@
         class="text-left"
       >
         <h6 class="text--disabled">Betreuungsentgelt</h6>
-        <h5>{{ this.betreuungsentgelt }} €</h5>
+        <h5 v-if="this.betreuungsentgelt != 0">{{ this.betreuungsentgelt }} €</h5>
+        <h5 v-else>0 €</h5>
       </v-col>
 
       <v-col
@@ -260,17 +261,17 @@
         </v-col>
       </v-row>
     </div>
-    <Ent :child_list="this.child_list" :person_list="this.person_list" />
+    <Ge :child_list="this.child_list" :person_list="this.person_list" />
   </div>
 </template>
 
 <script>
-import Ent from "@/views/Ent.vue";
+import Ge from "@/views/Ge.vue";
 
 export default {
   name: "Abschicken",
   components: {
-    Ent,
+    Ge,
   },
   props: {
     child_list: Array,

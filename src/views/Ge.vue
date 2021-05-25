@@ -1,5 +1,5 @@
 <template>
-  <div id="Ent" class="mx-16">
+  <div id="Ge" class="mx-16">
     <v-row
       ><v-col
         ><v-img
