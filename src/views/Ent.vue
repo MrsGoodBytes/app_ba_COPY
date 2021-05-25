@@ -78,29 +78,26 @@
     <h4 class="text-left">
       1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:
     </h4>
-    <v-card outlined>
-      <v-row class="pa-6">
+    <v-card class="pa-3" outlined>
+      <v-row>
         <v-col cols="12" md="7" class="text-left">
           <h5>Name, Vorname: {{ this.child_name }}</h5>
         </v-col>
         <v-col cols="12" md="5" class="text-left">
-          <h5>Geburtstag {{ this.child_date }}</h5>
+          <h5>Geburtdatum: {{ this.child_date }}</h5>
         </v-col>
       </v-row>
-    </v-card>
 
-    <v-card v-if="this.betreuung != 0 && this.betreuung != 1" outlined>
-      <v-row class="pa-6">
+      <v-row v-if="this.betreuung != 0 && this.betreuung != 1">
         <v-col cols="12" md="7" class="text-left">
-          <h5>Kindertagesstätte: {{ this.betreuungseinrichtung }}</h5>
+          <h5>Name der Einrichtung: {{ this.betreuungseinrichtung }}</h5>
         </v-col>
         <v-col cols="12" md="5" class="text-left">
           <h5>Betreuungsbeginn: {{ this.date_bb }}</h5>
         </v-col>
       </v-row>
-    </v-card>
-    <v-card v-if="this.betreuung == 1" outlined>
-      <v-row class="pa-6">
+
+      <v-row v-if="this.betreuung == 1">
         <v-col cols="12" md="7" class="text-left">
           <h5>Kindertagespflegeperson: {{ this.tagespflege }}</h5>
         </v-col>
@@ -108,13 +105,11 @@
           <h5>Betreuungsbeginn: {{ this.date_bb }}</h5>
         </v-col>
         <v-col cols="12">
-          <h5> {{this.betreuungsumfang}} </h5>
+          <h5>{{ this.betreuungsumfang }}</h5>
         </v-col>
       </v-row>
-    </v-card>
 
-    <v-card v-if="this.betreuung != 0 && this.betreuung != 1" outlined>
-      <v-row class="pa-6">
+      <v-row v-if="this.betreuung != 0 && this.betreuung != 1">
         <v-col cols="12" class="text-left">
           <h5>
             <span v-if="this.betreuung == 2">Krippe</span>
@@ -123,20 +118,125 @@
           </h5>
         </v-col>
       </v-row>
-    </v-card>
 
-    <v-card outlined>
-      <v-row class="pa-6">
+      <v-row>
         <v-col cols="12" md="6" class="text-left">
           <h5>Betreuungsentgelt: {{ this.betreuungsentgelt }} €</h5>
         </v-col>
         <v-col cols="12" md="6" class="text-left">
-          <h5>Elternbeitrag: <span v-if="this.elternbeitrag != 0">{{ this.elternbeitrag }} €</span>
-          <span v-else>0 €</span></h5>
+          <h5>
+            Elternbeitrag:
+            <span v-if="this.elternbeitrag != 0"
+              >{{ this.elternbeitrag }} €</span
+            >
+            <span v-else>0 €</span>
+          </h5>
         </v-col>
       </v-row>
     </v-card>
 
+    <div v-if="this.child_list.length != 0" class="mt-4">
+      <h4 class="text-left">
+        2. Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
+        anerkannten Betreuungsverhältnissen befinden:
+      </h4>
+
+      <v-card
+        v-for="(n, index) in child_list"
+        :key="n"
+        class="text-left pa-3"
+        outlined
+      >
+        <h5>{{ child_list[index].id + 1 }} .Geschwisterkind</h5>
+        <v-row>
+          <v-col cols="12" md="7" class="text-left">
+            <h5>
+              Name, Vorname: {{ child_list[index].sibling_firstname }},
+              {{ child_list[index].sibling_lastname }}
+            </h5>
+          </v-col>
+          <v-col cols="12" md="5" class="text-left">
+            <h5>Geburtsdatum: {{ child_list[index].date_sibling }}</h5>
+          </v-col>
+        </v-row>
+
+        <v-row
+          v-if="
+            child_list[index].radioGroupBetreuungsform_sibling != 0 &&
+            child_list[index].radioGroupBetreuungsform_sibling != 1
+          "
+        >
+          <v-col cols="12" md="7" class="text-left">
+            <h5>
+              Name der Einrichtung: {{ child_list[index].betreuungseinrichtung }}
+            </h5>
+          </v-col>
+          <v-col cols="12" md="5" class="text-left">
+            <h5>Betreuungsbeginn: {{ child_list[index].date_bb }}</h5>
+          </v-col>
+        </v-row>
+
+        <v-row v-if="child_list[index].radioGroupBetreuungsform_sibling == 1">
+          <v-col cols="12" md="7" class="text-left">
+            <h5>
+              Kindertagespflegeperson: {{ child_list[index].tagespflegename }},
+              {{ child_list[index].institutionstreet }}
+              {{ child_list[index].institutionnumber }},
+              {{ child_list[index].institutionpostcode }}
+              {{ child_list[index].institutiontown }}
+            </h5>
+          </v-col>
+          <v-col cols="12" md="5" class="text-left">
+            <h5>Betreuungsbeginn: {{ child_list[index].date_bb }}</h5>
+          </v-col>
+        </v-row>
+
+        <v-row
+          v-if="
+            child_list[index].radioGroupBetreuungsform_sibling != 0 &&
+            child_list[index].radioGroupBetreuungsform_sibling != 1
+          "
+        >
+          <v-col cols="12" class="text-left">
+            <h5>
+              <span
+                v-if="child_list[index].radioGroupBetreuungsform_sibling == 2"
+                >Krippe</span
+              >
+              <span
+                v-if="child_list[index].radioGroupBetreuungsform_sibling == 3"
+                >Elementar</span
+              >
+              <span
+                v-if="child_list[index].radioGroupBetreuungsform_sibling == 4"
+                >Hort</span
+              >
+              <span
+                v-if="child_list[index].radioGroupBetreuungsform_sibling == 5"
+                >Ganztagsschule</span
+              >
+            </h5>
+          </v-col>
+        </v-row>
+
+        <v-row>
+          <v-col cols="12" md="6" class="text-left">
+            <h5>
+              Betreuungsentgelt: {{ child_list[index].betreuungsentgelt }} €
+            </h5>
+          </v-col>
+          <v-col cols="12" md="6" class="text-left">
+            <h5>
+              Elternbeitrag:
+              <span v-if="child_list[index].elternbeitrag != 0"
+                >{{ child_list[index].elternbeitrag }} €</span
+              >
+              <span v-else>0 €</span>
+            </h5>
+          </v-col>
+        </v-row>
+      </v-card>
+    </div>
   </div>
 </template>
 

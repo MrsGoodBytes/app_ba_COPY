@@ -296,7 +296,7 @@
         <p v-else></p>
 
         <v-col
-          v-if="this.$store.state.geCheck || this.$store.state.entCheck"
+          v-if="this.$store.state.entCheck"
           class="d-flex"
           cols="12"
           md="3"
@@ -338,8 +338,7 @@
               >
             </template>
             <span
-              >Der Elternbeitrag beträgt 50% des Betreuungsgeldes, was einer
-              Ermäßigung von 50% entspricht.</span
+              >Der Elternbeitrag ist das Betreuungsentgelt abzüglich ggf. vom Träger gewährter Geschwisterermäßigung.</span
             >
           </v-tooltip>
           <v-text-field
