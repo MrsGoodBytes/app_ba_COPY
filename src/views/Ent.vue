@@ -1,12 +1,24 @@
 <template>
   <div id="Ent" class="mx-16">
-    <v-row><v-col><v-img :src="require('/src/img/hl.jpg')" class="float-left" max-width="300" />
-    </v-col><v-col><v-img :src="require('/src/img/adler.jpg')" class="float-right" max-width="100" /></v-col>
+    <v-row
+      ><v-col
+        ><v-img
+          :src="require('/src/img/hl.jpg')"
+          class="float-left"
+          max-width="300"
+        /> </v-col
+      ><v-col
+        ><v-img
+          :src="require('/src/img/adler.jpg')"
+          class="float-right"
+          max-width="100"
+      /></v-col>
     </v-row>
 
     <h2 class="font-weight-light pb-3">
-      Antrag auf Geschwisterermäßigung in Kindertagesstättenfür<br> das Kita-Jahr
-      {{ new Date().getFullYear() }} / {{ new Date().getFullYear() + 1 }}
+      Antrag auf Geschwisterermäßigung in Kindertagesstättenfür<br />
+      das Kita-Jahr {{ new Date().getFullYear() }} /
+      {{ new Date().getFullYear() + 1 }}
     </h2>
 
     <v-row>
@@ -25,7 +37,7 @@
 
         <h6 class="text--disabled">Anschrift</h6>
         <h5>{{ this.adress }}</h5>
-      
+
         <h6 class="text--disabled">Telefonnummer</h6>
         <h5>{{ this.tel }}</h5>
 
@@ -33,22 +45,98 @@
         <h5>{{ this.email }}</h5>
       </v-col>
     </v-row>
-    <h3 class="text-left">Hiermit wird die Geschwisterermäßigungfür Kinder in Kindertagesstätten beantragt.</h3>
-    <h6 class="text-left">Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder Entgelten 
-      für die Betreuung von Kindern in Kindertageseinrichtungen oder Kindertagespflegestellen“ 
-      der Hansestadt Lübeck.</h6>
-      <p class="text-left">Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer Familie eine 
-        öffentlich geförderte Kindertageseinrichtung, Kindertagespflegestelle 
-        oder eine Ganztagsbetreuung an Schulen mit einer Nachmittagsbetreuung an mindestens 3 Tagen pro 
-        Woche für mindestens 70 EUR, wird der Elternbeitrag auf Antrag ermäßigt.<br>
-        <list><li>Für das älteste Kind ist der Elternbeitrag in voller Höhe zu entrichten.</li>
-        <li>Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,</li>
-        <li>für jedes weitere jüngere Kind um 100%.</li>
-        </list><br>
-        Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.</p>
-    <v-row>
-      
-    </v-row>
+    <h4 class="text-left">
+      Hiermit wird die Geschwisterermäßigungfür Kinder in Kindertagesstätten
+      beantragt.
+    </h4>
+    <h6 class="text-left">
+      Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder
+      Entgelten für die Betreuung von Kindern in Kindertageseinrichtungen oder
+      Kindertagespflegestellen“ der Hansestadt Lübeck.
+    </h6>
+    <p class="text-left">
+      Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer
+      Familie eine öffentlich geförderte Kindertageseinrichtung,
+      Kindertagespflegestelle oder eine Ganztagsbetreuung an Schulen mit einer
+      Nachmittagsbetreuung an mindestens 3 Tagen pro Woche für mindestens 70
+      EUR, wird der Elternbeitrag auf Antrag ermäßigt.<br />
+      <list
+        ><li>
+          Für das älteste Kind ist der Elternbeitrag in voller Höhe zu
+          entrichten.
+        </li>
+        <li>
+          Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,
+        </li>
+        <li>für jedes weitere jüngere Kind um 100%.</li> </list
+      ><br />
+      Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind
+      Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden
+      melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.
+    </p>
+
+    <h4 class="text-left">
+      1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:
+    </h4>
+    <v-card outlined>
+      <v-row class="pa-6">
+        <v-col cols="12" md="7" class="text-left">
+          <h5>Name, Vorname: {{ this.child_name }}</h5>
+        </v-col>
+        <v-col cols="12" md="5" class="text-left">
+          <h5>Geburtstag {{ this.child_date }}</h5>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <v-card v-if="this.betreuung != 0 && this.betreuung != 1" outlined>
+      <v-row class="pa-6">
+        <v-col cols="12" md="7" class="text-left">
+          <h5>Kindertagesstätte: {{ this.betreuungseinrichtung }}</h5>
+        </v-col>
+        <v-col cols="12" md="5" class="text-left">
+          <h5>Betreuungsbeginn: {{ this.date_bb }}</h5>
+        </v-col>
+      </v-row>
+    </v-card>
+    <v-card v-if="this.betreuung == 1" outlined>
+      <v-row class="pa-6">
+        <v-col cols="12" md="7" class="text-left">
+          <h5>Kindertagespflegeperson: {{ this.tagespflege }}</h5>
+        </v-col>
+        <v-col cols="12" md="5" class="text-left">
+          <h5>Betreuungsbeginn: {{ this.date_bb }}</h5>
+        </v-col>
+        <v-col cols="12">
+          <h5> {{this.betreuungsumfang}} </h5>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <v-card v-if="this.betreuung != 0 && this.betreuung != 1" outlined>
+      <v-row class="pa-6">
+        <v-col cols="12" class="text-left">
+          <h5>
+            <span v-if="this.betreuung == 2">Krippe</span>
+            <span v-if="this.betreuung == 3">Elementar</span>
+            <span v-if="this.betreuung == 4">Hort</span>
+          </h5>
+        </v-col>
+      </v-row>
+    </v-card>
+
+    <v-card outlined>
+      <v-row class="pa-6">
+        <v-col cols="12" md="6" class="text-left">
+          <h5>Betreuungsentgelt: {{ this.betreuungsentgelt }} €</h5>
+        </v-col>
+        <v-col cols="12" md="6" class="text-left">
+          <h5>Elternbeitrag: <span v-if="this.elternbeitrag != 0">{{ this.elternbeitrag }} €</span>
+          <span v-else>0 €</span></h5>
+        </v-col>
+      </v-row>
+    </v-card>
+
   </div>
 </template>
 
@@ -180,7 +268,6 @@ export default {
       arbeitgeber_town: "",
 
       km: "",
-      
     };
   },
 
@@ -232,11 +319,16 @@ export default {
     this.essensgeld = this.$store.state.essensgeld;
     this.betreuungsumfang = this.$store.state.betreuungsumfang;
     this.betreuungsbeginn = this.$store.state.date_bb;
-    this.konto = this.$store.state.firstname + 
-    " " + this.$store.state.lastname + 
-    ", IBAN: " + this.$store.state.iban + 
-    ", BIC: " +  this.$store.state.bic + 
-    ", " + this.$store.state.bank;
+    this.konto =
+      this.$store.state.firstname +
+      " " +
+      this.$store.state.lastname +
+      ", IBAN: " +
+      this.$store.state.iban +
+      ", BIC: " +
+      this.$store.state.bic +
+      ", " +
+      this.$store.state.bank;
   },
 
   methods: {},

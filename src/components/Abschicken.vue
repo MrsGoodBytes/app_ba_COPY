@@ -1,5 +1,5 @@
 <template>
-  <div id="Nachweise">
+  <div id="Abschicken">
     <h2 class="py-3">Anträge absenden</h2>
     <h5 class="pb-3">Bitte prüfen Sie die Angaben auf ihre Richtigkeit!</h5>
 
