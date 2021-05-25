@@ -50,7 +50,7 @@
           Antragsgrundlage fehlt!
         </h5>
       </v-col>
-      <v-col cols="4" class="text-left">
+      <v-col v-if="person_list != 0" cols="4" class="text-left">
         <h6 class="text--disabled">weitere im Haushalt lebende Personen</h6>
         <h5>{{ this.person }}</h5>
       </v-col>
