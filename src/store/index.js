@@ -58,6 +58,7 @@ export default new Vuex.Store({
         firstname_sibling: "",
         lastname_sibling: "",
         date_sibling: "",
+        child_list: [],
 
         elternteil1: {
             netto: 0,
@@ -214,6 +215,9 @@ export default new Vuex.Store({
         },
         setChildBB(state, value) {
             state.date_bb = value;
+        },
+        setChildList(state, value) {
+            state.child_list = value;
         },
 
         //BETREUUNG

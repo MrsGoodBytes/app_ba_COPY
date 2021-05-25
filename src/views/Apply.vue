@@ -170,7 +170,11 @@ export default {
     };
   },
 
-  watch: {},
+  watch: {
+    child_list: function (val) {
+      this.$store.commit("setChildList", val);
+    },
+  },
 
   methods: {
     testFunktion() {
