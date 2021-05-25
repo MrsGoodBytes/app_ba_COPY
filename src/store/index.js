@@ -54,6 +54,9 @@ export default new Vuex.Store({
         elternbeitrag: "",
         essensgeld: "",
 
+        kostenerstattung: false,
+        gueltig: "",
+        bifo_begr: "",
 
         firstname_sibling: "",
         lastname_sibling: "",
@@ -262,6 +265,15 @@ export default new Vuex.Store({
         },
         setDate_bb(state, value) {
             state.date_bb = value;
+        },
+        setKostenerstattung(state, value) {
+            state.kostenerstattung = value;
+        },
+        setGueltig(state, value) {
+            state.gueltig = value;
+        },
+        setBifoBegr(state, value) {
+            state.bifo_begr = value;
         },
 
         //EINKOMMEN

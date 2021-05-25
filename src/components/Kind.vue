@@ -997,7 +997,11 @@ export default {
       elternbeitrag: "",
       date_bb: "",
       betreuungsentgelt: "",
+
       essensgeld: "",
+      kostenerstattung: false,
+      gueltig: "",
+      bifo_begr: "",
 
       tagespflegename: "",
       institutionstreet: "",
@@ -1027,10 +1031,6 @@ export default {
       kontoinhaber: "",
       iban: "",
       bic: "",
-
-      kostenerstattung: false,
-      gueltig: "",
-      bifo_begr: "",
 
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
@@ -1120,6 +1120,16 @@ export default {
       this.$store.commit("setVorjahrCheck", val);
     },
 
+    kostenerstattung: function (val) {
+      this.$store.commit("setKostenerstattung", val);
+    },
+    gueltig: function (val) {
+      this.$store.commit("setGueltig", val);
+    },
+    bifo_begr: function (val) {
+      this.$store.commit("setBifoBegr", val);
+    },
+
     radioGroupBetreuungsform: function (val) {
       this.$store.commit("setBetreuungsform", val);
     },
@@ -1158,6 +1168,9 @@ export default {
     this.essensgeld = this.$store.state.essensgeld;
     this.betreuungsumfang = this.$store.state.betreuungsumfang;
     this.vorjahr_checkbox = this.$store.state.vorjahr_checkbox;
+    this.kostenerstattung = this.$store.state.kostenerstattung;
+    this.gueltig = this.$store.state.kostenerstattung;
+    this.bifo_begr = this.$store.state.bifo_begr;
 
     this.kontoinhaber =
       this.$store.state.firstname + " " + this.$store.state.lastname;
