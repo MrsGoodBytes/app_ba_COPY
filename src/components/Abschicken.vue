@@ -162,7 +162,9 @@
         class="text-left"
       >
         <h6 class="text--disabled">Betreuungsentgelt</h6>
-        <h5 v-if="this.betreuungsentgelt != 0">{{ this.betreuungsentgelt }} €</h5>
+        <h5 v-if="this.betreuungsentgelt != 0">
+          {{ this.betreuungsentgelt }} €
+        </h5>
         <h5 v-else>0 €</h5>
       </v-col>
 
@@ -261,6 +263,15 @@
         </v-col>
       </v-row>
     </div>
+    <v-btn
+      class="my-6"
+      justify="center"
+      @click="funcDownloadData"
+      color="accent"
+    >
+      Daten lokal speichern
+      <v-icon> mdi-download-circle-outline </v-icon>
+    </v-btn>
     <Ge :child_list="this.child_list" :person_list="this.person_list" />
   </div>
 </template>

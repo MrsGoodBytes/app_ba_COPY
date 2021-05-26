@@ -88,11 +88,11 @@
         v-if="Abschicken"
         class="my-6"
         justify="center"
-        @click="funcShowAbschicken"
+        @click="funcSendPDF"
         color="accent"
       >
         Anträge abschicken
-        <v-icon> mdi-arrow-right-bold-circle-outline </v-icon>
+        <v-icon> mdi-email-send </v-icon>
       </v-btn>
       <v-btn
         v-if="Abschicken"
@@ -177,10 +177,6 @@ export default {
   },
 
   methods: {
-    testFunktion() {
-      this.test = !this.test;
-      this.test2 = !this.test2;
-    },
 
     funcShowAntragstellerDaten() {
       this.AntragstellerDaten = true;
