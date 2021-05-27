@@ -4,7 +4,15 @@
     <h5 class="pb-3">
       Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:
     </h5>
-        <v-card
+    <v-alert
+        type="warning"
+        class="pa-2"
+        ><v-icon>mdi-information</v-icon>
+          
+            <span class="font-weight-bold">Uploadhinweis:</span> Wählen Sie zum Upload mehrere Dateien
+      gleichzeitg aus.</v-alert
+      >
+        <!-- <v-card
           class="mx-auto pt-4 mb-4"
           outlined
         ><p><v-icon>mdi-information</v-icon>
@@ -12,7 +20,7 @@
             <span class="font-weight-bold">Uploadhinweis:</span> Wählen Sie zum Upload mehrere Dateien
       gleichzeitg aus.
           </p>
-        </v-card>
+        </v-card> -->
     <h3>Allgemeine Nachweise</h3>
     <v-row justify="space-around">
       <v-col cols="4" class="my-auto">
