@@ -27,8 +27,8 @@
           <v-text-field
             outlined
             v-model="date"
+            type="date"
             label="Geburtsdatum"
-            placeholder="tt.mm.jjjj"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
             required
@@ -145,6 +145,7 @@
               <v-text-field
                 outlined
                 v-model="item.date_p"
+                type="date"
                 label="Geburtsdatum"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"

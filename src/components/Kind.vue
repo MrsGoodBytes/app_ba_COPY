@@ -112,6 +112,7 @@
           <v-text-field
             outlined
             v-model="date_child"
+            type="date"
             label="Geburtsdatum"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
@@ -260,6 +261,7 @@
           <v-text-field
             outlined
             v-model="date_bb"
+            type="date"
             label="Betreuungsbeginn"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
@@ -609,6 +611,7 @@
               <v-text-field
                 outlined
                 v-model="item.date_sibling"
+                type="date"
                 label="Geburtsdatum"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
@@ -776,6 +779,7 @@
               <v-text-field
                 outlined
                 v-model="item.date_bb"
+                type="date"
                 label="Betreuungsbeginn"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
@@ -886,6 +890,7 @@
               <v-text-field
                 outlined
                 v-model="item.gueltig"
+                type="date"
                 label="Gültig ab"
               ></v-text-field>
             </v-col>
@@ -918,6 +923,7 @@
               <v-text-field
                 outlined
                 v-model="item.gueltig"
+                type="date"
                 :rules="dateRules"
                 label="Gültig ab"
               ></v-text-field>
@@ -1170,7 +1176,7 @@ export default {
     this.betreuungsumfang = this.$store.state.betreuungsumfang;
     this.vorjahr_checkbox = this.$store.state.vorjahr_checkbox;
     this.kostenerstattung = this.$store.state.kostenerstattung;
-    this.gueltig = this.$store.state.kostenerstattung;
+    this.gueltig = this.$store.state.gueltig;
     this.bifo_begr = this.$store.state.bifo_begr;
 
     this.kontoinhaber =
