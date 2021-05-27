@@ -27,7 +27,8 @@
         <h6 class="text--disabled" v-if="this.$store.state.entCheck">
           Geburtsdatum
         </h6>
-        <h5 v-if="this.$store.state.entCheck && (this.date != 0)">{{ this.date }}</h5><h5 v-else>
+        <h5 v-if="this.$store.state.entCheck">{{ this.date }}</h5>
+        <h5 v-else-if="this.date == 0">
           <v-btn @click="funcShowAntragstellerDaten"
             ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
           >
@@ -64,7 +65,7 @@
       </v-col>
     </v-row>
 
-    <v-row>
+    <v-row v-if="this.$store.state.entCheck || this.$store.state.bifoCheck">
       <v-col cols="3" class="text-left">
         <h6 class="text--disabled">Antragsgrundlage</h6>
         <h5 v-if="this.antragsgrundlage == 1">Privatinsolvenz</h5>
@@ -175,7 +176,7 @@
         class="text-left"
       >
         <h6 class="text--disabled">Betreuungsbeginn</h6>
-        <h5 v-if="this.betreuungsbeginn != 0">{{ this.betreuungsbeginn }}</h5>
+        <h5 v-if="this.betreuungsbeginn != 0 ">{{ this.betreuungsbeginn }}</h5>
         <h5 v-else>
           <v-btn @click="funcShowKindDaten"
             ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
