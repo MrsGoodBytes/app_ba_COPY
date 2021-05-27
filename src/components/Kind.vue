@@ -521,6 +521,7 @@
           <v-text-field
             outlined
             v-model="gueltig"
+            type="date"
             :rules="dateRules"
             label="Gültig ab"
             required

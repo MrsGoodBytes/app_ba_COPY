@@ -50,6 +50,39 @@
           multiple
           truncate-length="23"
         ></v-file-input>
+        <div class="text-right">
+          <v-dialog v-model="dialog_betreuung" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="accent" text dark v-bind="attrs" v-on="on">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+                <v-btn
+                  color="accent"
+                  @click="dialog_betreuung = false"
+                  class="align-right"
+                >
+                  x
+                </v-btn>
+              </v-card-title>
+
+              <v-card-text>
+                <v-img :src="require('/src/img/Betreuungsvertrag_Tagespflege.jpg')" />
+                <v-img :src="require('/src/img/Betreuungsvertrag_städtische.jpg')" />
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-col>
     </v-row>
 
@@ -193,7 +226,7 @@
           truncate-length="23"
         ></v-file-input>
         <div class="text-right">
-          <v-dialog v-model="dialog" width="500">
+          <v-dialog v-model="dialog_einkommen" width="500">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="accent" text dark v-bind="attrs" v-on="on">
                 <v-icon>mdi-file-find</v-icon> Beispielnachweis
@@ -205,7 +238,7 @@
                 <v-icon>mdi-file-find</v-icon> Beispielnachweis
                 <v-btn
                   color="accent"
-                  @click="dialog = false"
+                  @click="dialog_einkommen = false"
                   class="align-right"
                 >
                   x
@@ -299,6 +332,38 @@
           multiple
           truncate-length="23"
         ></v-file-input>
+        <div class="text-right">
+          <v-dialog v-model="dialog_kindergeld" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="accent" text dark v-bind="attrs" v-on="on">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+                <v-btn
+                  color="accent"
+                  @click="dialog_kindergeld = false"
+                  class="align-right"
+                >
+                  x
+                </v-btn>
+              </v-card-title>
+
+              <v-card-text>
+                <v-img :src="require('/src/img/kindergeld.jpg')" />
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-col>
     </v-row>
 
@@ -339,7 +404,7 @@
           truncate-length="23"
         ></v-file-input>
         <div class="text-right">
-          <v-dialog v-model="dialog" width="500">
+          <v-dialog v-model="dialog_alg1" width="500">
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="accent" text dark v-bind="attrs" v-on="on">
                 <v-icon>mdi-file-find</v-icon> Beispielnachweis
@@ -351,7 +416,7 @@
                 <v-icon>mdi-file-find</v-icon> Beispielnachweis
                 <v-btn
                   color="accent"
-                  @click="dialog = false"
+                  @click="dialog_alg1 = false"
                   class="align-right"
                 >
                   x
@@ -546,13 +611,45 @@
       <v-col cols="8"
         ><v-file-input
           accept="image/*"
-          label="Einkommensnachweise"
+          label="Nachweis Ausbildungsförderung"
           chips
           show-size
           counter
           multiple
           truncate-length="23"
         ></v-file-input>
+        <div class="text-right">
+          <v-dialog v-model="dialog_bafög" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="accent" text dark v-bind="attrs" v-on="on">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+                <v-btn
+                  color="accent"
+                  @click="dialog_bafög = false"
+                  class="align-right"
+                >
+                  x
+                </v-btn>
+              </v-card-title>
+
+              <v-card-text>
+                <v-img :src="require('/src/img/bafög.jpg')" />
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-col>
     </v-row>
 
@@ -568,7 +665,7 @@
     >
       <v-col cols="4" class="my-auto">
         <h4 class="text-left">
-          Ausbildungsförderung
+          Elterngeld
           <v-tooltip bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-icon color="accent" dark v-bind="attrs" v-on="on"
@@ -582,13 +679,45 @@
       <v-col cols="8"
         ><v-file-input
           accept="image/*"
-          label="Nachweise Ausbildungsförderung"
+          label="Nachweise Elterngeld"
           chips
           show-size
           counter
           multiple
           truncate-length="23"
         ></v-file-input>
+        <div class="text-right">
+          <v-dialog v-model="dialog_elterngeld" width="500">
+            <template v-slot:activator="{ on, attrs }">
+              <v-btn color="accent" text dark v-bind="attrs" v-on="on">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+              </v-btn>
+            </template>
+
+            <v-card>
+              <v-card-title class="headline grey lighten-2">
+                <v-icon>mdi-file-find</v-icon> Beispielnachweis
+                <v-btn
+                  color="accent"
+                  @click="dialog_elterngeld = false"
+                  class="align-right"
+                >
+                  x
+                </v-btn>
+              </v-card-title>
+
+              <v-card-text>
+                <v-img :src="require('/src/img/elterngeld.jpg')" />
+              </v-card-text>
+
+              <v-divider></v-divider>
+
+              <v-card-actions>
+                <v-spacer></v-spacer>
+              </v-card-actions>
+            </v-card>
+          </v-dialog>
+        </div>
       </v-col>
     </v-row>
 
@@ -1488,7 +1617,12 @@ export default {
           (value && value.length >= 22 && /^\d+$/.test(value)) ||
           "Pflichtfeld. Bitte gültige IBAN eingeben!",
       ],
-      dialog: false,
+      dialog_betreuung: false,
+      dialog_kindergeld: false,
+      dialog_elterngeld: false,
+      dialog_alg1: false,
+      dialog_einkommen: false,
+      dialog_bafög: false,
     };
   },
 
