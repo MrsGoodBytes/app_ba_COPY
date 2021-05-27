@@ -432,6 +432,7 @@
           <v-text-field
             outlined
             v-model="gueltig"
+            type="date"
             label="Gültig ab"
             required
           ></v-text-field>

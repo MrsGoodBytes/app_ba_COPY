@@ -18,10 +18,10 @@
       <v-col cols="3" class="text-left">
         <h6 class="text--disabled">Antragsteller/in</h6>
         <h5>{{ this.name }}</h5>
-        <h6 class="text--disabled" v-if="this.$store.state.geCheck">
+        <h6 class="text--disabled" v-if="this.$store.state.entCheck">
           Geburtsdatum
         </h6>
-        <h5 v-if="this.$store.state.geCheck">{{ this.date }}</h5>
+        <h5 v-if="this.$store.state.entCheck">{{ this.date }}</h5>
       </v-col>
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Anschrift</h6>

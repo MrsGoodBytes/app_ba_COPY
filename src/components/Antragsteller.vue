@@ -23,7 +23,7 @@
             required
           ></v-text-field>
         </v-col>
-        <v-col cols="12" md="4" sm="12" v-if="this.$store.state.geCheck">
+        <v-col cols="12" md="4" sm="12" v-if="this.$store.state.entCheck">
           <v-text-field
             outlined
             v-model="date"
