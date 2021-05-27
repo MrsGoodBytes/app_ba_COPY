@@ -10,28 +10,57 @@
           ><v-icon color="accent">mdi-pencil</v-icon></v-btn
         >
       </h4>
-      <h4 v-if="this.$store.state.valid === false">
+      <h4 v-if="this.$store.state.valid == false">
         Bitte diesen Bereich Prüfen. Es fehlen Angaben.
       </h4>
     </v-row>
     <v-row>
       <v-col cols="3" class="text-left">
         <h6 class="text--disabled">Antragsteller/in</h6>
-        <h5>{{ this.name }}</h5>
+        <h5 v-if="(this.$store.state.firstname != 0) && (this.$store.state.lastname != 0)">{{ this.name }}</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowAntragstellerDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Name unvollständig!
+        </h5>
         <h6 class="text--disabled" v-if="this.$store.state.entCheck">
           Geburtsdatum
         </h6>
-        <h5 v-if="this.$store.state.entCheck">{{ this.date }}</h5>
+        <h5 v-if="this.$store.state.entCheck && (this.date != 0)">{{ this.date }}</h5><h5 v-else>
+          <v-btn @click="funcShowAntragstellerDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Bitte Geburtsdatum angeben!
+        </h5>
       </v-col>
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Anschrift</h6>
-        <h5>{{ this.adress }}</h5>
+        <h5 v-if="(this.$store.state.street != 0) &&(this.$store.state.number != 0) && (this.$store.state.postcode != 0) && (this.$store.state.town != 0)">{{ this.adress }}</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowAntragstellerDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Anschrift unvollständig!
+        </h5>
       </v-col>
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">E-Mail</h6>
-        <h5>{{ this.email }}</h5>
+        <h5 v-if="this.email != 0">{{ this.email }}</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowAntragstellerDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Gültige Mail angeben!
+        </h5>
         <h6 class="text--disabled">Telefonnummer</h6>
-        <h5>{{ this.tel }}</h5>
+        <h5 v-if="this.tel != 0">{{ this.tel }}</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowAntragstellerDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Telefonnummer fehlt
+        </h5>
       </v-col>
     </v-row>
 
@@ -55,6 +84,12 @@
         <v-row v-for="(n, index) in person_list" :key="n">
         <v-col class="text-left py-0">
           <h5>{{ person_list[index].firstname_person }} {{ person_list[index].lastname_person }}, {{ person_list[index].date_p }}, {{ person_list[index].verwandtschaft_p }}</h5>
+        <!-- <h5 v-else>
+          <v-btn @click="funcShowAntragstellerDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Personendaten unvollständig!
+        </h5> -->
         </v-col>
         </v-row>
       </v-col>
