@@ -38,23 +38,26 @@
     <v-row>
       <v-col cols="3" class="text-left">
         <h6 class="text--disabled">Antragsgrundlage</h6>
-        <h5 v-if="this.antragsgrundlage === 1">Privatinsolvenz</h5>
-        <h5 v-else-if="this.antragsgrundlage === 2">Einkommen</h5>
-        <h5 v-else-if="this.antragsgrundlage === 3">
+        <h5 v-if="this.antragsgrundlage == 1">Privatinsolvenz</h5>
+        <h5 v-else-if="this.antragsgrundlage == 2">Einkommen</h5>
+        <h5 v-else-if="this.antragsgrundlage == 3">
           Bezug von Sozialleistungen
         </h5>
         <h5 v-else>
           <v-btn @click="funcShowAntragstellerDaten"
             ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
           >
-          Antragsgrundlage fehlt!
+          Antragsgrundlage angeben!
         </h5>
       </v-col>
-      <v-col v-if="person_list != 0" cols="4" class="text-left">
-        <h6 class="text--disabled">weitere im Haushalt lebende Personen</h6>
-        <h5>{{ this.person }}</h5>
+      <v-col v-if="person_list != 0" cols="8" class="text-left">
+        <h6 class="text--disabled pb-3">weitere im Haushalt lebende Personen</h6>
+        <v-row v-for="(n, index) in person_list" :key="n">
+        <v-col class="text-left py-0">
+          <h5>{{ person_list[index].firstname_person }} {{ person_list[index].lastname_person }}, {{ person_list[index].date_p }}, {{ person_list[index].verwandtschaft_p }}</h5>
+        </v-col>
+        </v-row>
       </v-col>
-      <v-col cols="4" class="text-left"> </v-col>
     </v-row>
 
     <v-divider class="my-8"></v-divider>
@@ -81,33 +84,35 @@
     <v-row>
       <v-col cols="3" class="text-left">
         <h6 class="text--disabled">Betreuungsform</h6>
-        <h5 v-if="this.betreuung === 1">Tagespflege</h5>
-        <h5 v-else-if="this.betreuung === 2">Elementar</h5>
-        <h5 v-else-if="this.betreuung === 3">Hort</h5>
-        <h5 v-else-if="this.betreuung === 4">Ganztags an Schulen</h5>
+        <h5 v-if="this.betreuung == 1">Tagespflege</h5>
+        <h5 v-else-if="this.betreuung == 2">Krippe</h5>
+        <h5 v-else-if="this.betreuung == 3">Elementar</h5>
+        <h5 v-else-if="this.betreuung == 4">Hort</h5>
+        <h5 v-else-if="this.betreuung == 5">Ganztags an Schulen</h5>
+        <h5 v-else-if="this.betreuung == 6">Kindertagesstätte</h5>
         <h5 v-else>
           <v-btn @click="funcShowKindDaten"
             ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
           >
-          Betreuungsform fehlt!
+          Betreuungsform angeben!
         </h5>
       </v-col>
 
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Betreuungseinrichtung</h6>
-        <h5 v-if="this.betreuung === 1">{{ this.tagespflege }}</h5>
-        <h5 v-else-if="this.betreuung === 0">
+        <h5 v-if="this.betreuung == 1">{{ this.tagespflege }}</h5>
+        <h5 v-else-if="this.betreuung == 0">
           <v-btn @click="funcShowKindDaten"
             ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
           >
-          Betreuungseinrichtung fehlt!
+          Betreuungseinrichtung angeben!
         </h5>
         <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
       </v-col>
 
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Ermäßigungsantrag im Vorjahr gestellt:</h6>
-        <h5 v-if="this.vorjahr === true">ja</h5>
+        <h5 v-if="this.vorjahr == true">ja</h5>
         <h5 v-else>nein</h5>
       </v-col>
     </v-row>
@@ -116,7 +121,7 @@
       <v-col
         v-if="
           this.$store.state.geCheck ||
-          this.$store.state.radioGroupBetreuungsform === 1
+          this.$store.state.radioGroupBetreuungsform == 1
         "
         cols="12"
         sm="3"
@@ -128,16 +133,16 @@
           <v-btn @click="funcShowKindDaten"
             ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
           >
-          Betreuungsbeginn fehlt!
+          Betreuungsbeginn fehlt
         </h5>
       </v-col>
 
       <v-col
         v-if="
           (this.$store.state.geCheck &&
-            this.$store.state.radioGroupBetreuungsform === 1) ||
+            this.$store.state.radioGroupBetreuungsform == 1) ||
           (this.$store.state.entCheck &&
-            this.$store.state.radioGroupBetreuungsform === 1)
+            this.$store.state.radioGroupBetreuungsform == 1)
         "
         cols="12"
         sm="3"
@@ -151,7 +156,7 @@
           <v-btn @click="funcShowKindDaten"
             ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
           >
-          Betreuungsumfang fehlt!
+          Betreuungsumfang fehlt
         </h5>
       </v-col>
 
@@ -184,7 +189,7 @@
       <v-col
         v-if="
           this.$store.state.bifoCheck &&
-          this.$store.state.radioGroupBetreuungsform === 1
+          this.$store.state.radioGroupBetreuungsform == 1
         "
         cols="3"
         class="text-left"
@@ -196,7 +201,7 @@
       <v-col
         v-if="
           this.$store.state.bifoCheck &&
-          this.$store.state.radioGroupBetreuungsform === 1
+          this.$store.state.radioGroupBetreuungsform == 1
         "
         cols="3"
         class="text-left"
@@ -232,10 +237,10 @@
       <v-row>
         <v-col cols="3" class="text-left">
           <h6 class="text--disabled">Betreuungsform</h6>
-          <h5 v-if="this.betreuung === 1">Tagespflege</h5>
-          <h5 v-else-if="this.betreuung === 2">Elementar</h5>
-          <h5 v-else-if="this.betreuung === 3">Hort</h5>
-          <h5 v-else-if="this.betreuung === 4">Ganztags an Schulen</h5>
+          <h5 v-if="this.betreuung == 1">Tagespflege</h5>
+          <h5 v-else-if="this.betreuung == 2">Elementar</h5>
+          <h5 v-else-if="this.betreuung == 3">Hort</h5>
+          <h5 v-else-if="this.betreuung == 4">Ganztags an Schulen</h5>
           <h5 v-else>
             <v-btn @click="funcShowKindDaten"
               ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
@@ -246,12 +251,12 @@
 
         <v-col cols="4" class="text-left">
           <h6 class="text--disabled">Betreuungseinrichtung</h6>
-          <h5 v-if="this.betreuung === 1">{{ this.tagespflege }}</h5>
-          <h5 v-else-if="this.betreuung === 0">
+          <h5 v-if="this.betreuung == 1">{{ this.tagespflege }}</h5>
+          <h5 v-else-if="this.betreuung == 0">
             <v-btn @click="funcShowKindDaten"
               ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
             >
-            Betreuungseinrichtung fehlt!
+            Betreuungseinrichtung angeben!
           </h5>
           <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
         </v-col>
@@ -273,6 +278,7 @@
       <v-icon> mdi-download-circle-outline </v-icon>
     </v-btn>
     <Ge :child_list="this.child_list" :person_list="this.person_list" />
+    
   </div>
 </template>
 
@@ -337,14 +343,7 @@ export default {
       this.$store.state.town;
     this.email = this.$store.state.email;
     this.tel = this.$store.state.tel;
-    this.person =
-      this.$store.state.firstname_person +
-      " " +
-      this.$store.state.lastname_person +
-      " " +
-      this.$store.state.date_p +
-      " " +
-      this.$store.state.verwandtschaft_p;
+    
     this.child_name =
       this.$store.state.child_firstname +
       " " +
@@ -390,6 +389,9 @@ export default {
     },
     funcShowKindDaten() {
       this.$parent.funcShowKindDaten();
+    },
+    funcShowNachweise() {
+      this.$parent.funcShowNachweise();
     },
   },
 };

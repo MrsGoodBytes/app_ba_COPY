@@ -168,7 +168,8 @@
         >
           <v-col cols="12" md="7" class="text-left">
             <h5>
-              Name der Einrichtung: {{ child_list[index].betreuungseinrichtung }}
+              Name der Einrichtung:
+              {{ child_list[index].betreuungseinrichtung }}
             </h5>
           </v-col>
           <v-col cols="12" md="5" class="text-left">
@@ -237,11 +238,21 @@
         </v-row>
       </v-card>
     </div>
+    <v-btn class="my-6" justify="center" @click="download" color="accent">
+      Anträge abschicken
+      <v-icon> mdi-email-send </v-icon>
+    </v-btn>
+    <v-btn class="d-block mx-auto my-6" @click="funcShowNachweise">
+      <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
+      Nachweise
+    </v-btn>
   </div>
 </template>
 
 
 <script>
+import jsPDF from "jspdf";
+
 export default {
   name: "Ent",
   components: {},
@@ -259,6 +270,12 @@ export default {
       town: "",
       email: "",
       tel: "",
+      headline: [
+        "Antrag auf Geschwisterermäßigung in",
+        "Kindertagesstätten für",
+        "das Kita-Jahr",
+      ],
+      year: "",
 
       antragsgrundlage: "",
       radioGroupAntragsgrundlage: 0,
@@ -429,9 +446,23 @@ export default {
       this.$store.state.bic +
       ", " +
       this.$store.state.bank;
+
+    this.year = new Date().getFullYear();
   },
 
-  methods: {},
+  methods: {
+    download() {
+      let pdfName = "Antrag_Geschwisterermaeßigung";
+      
+
+      var h = document.getElementById("#Ge")
+      var doc = new jsPDF()
+
+      doc.fromHTML(h,15,15)
+
+      doc.save(pdfName + ".pdf")
+    },
+  },
 };
 </script>
 

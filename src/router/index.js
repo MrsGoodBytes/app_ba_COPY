@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Check from '../views/Check.vue'
 import Apply from '../views/Apply.vue'
+import Ge from '../views/Ge.vue'
 
 Vue.use(VueRouter)
 
@@ -14,7 +15,12 @@ const routes = [{
         path: '/',
         name: 'Apply',
         component: Apply
-    }
+    },
+    {
+        path: '/ge',
+        name: 'Ge',
+        component: Ge
+    },
 ]
 
 const router = new VueRouter({

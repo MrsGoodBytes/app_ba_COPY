@@ -120,10 +120,9 @@
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <h3 class="text-left py-3">Folgeantrag</h3>
-      <v-row class="my-0 py-0">
+      <h3 v-if="this.$store.state.entCheck" class="text-left py-3">Folgeantrag</h3>
+      <v-row v-if="this.$store.state.entCheck" class="my-0 py-0">
         <v-col
-          v-if="this.$store.state.entCheck"
           class="d-flex my-0 py-0"
           cols="12"
           sm="12"
@@ -146,7 +145,6 @@
             >
           </v-tooltip>
         </v-col>
-        <p v-else></p>
       </v-row>
       <v-divider></v-divider>
       <h3 class="text-left py-3">Betreuung</h3>
@@ -171,14 +169,19 @@
           sm="4"
         >
           <v-radio-group v-model="radioGroupBetreuungsform">
+            <v-radio class="d-none"> </v-radio>
             <v-radio
-              v-model="betreuungsform"
-              ref="betreuungsform"
-              v-for="n in radioListBetreuungsform_bifo"
-              :key="n"
-              :label="`${n}`"
-              :value="n"
-            ></v-radio>
+                  label="Tagespflege"
+                  value="1"
+                ></v-radio>
+                <v-radio class="d-none"> </v-radio>
+                <v-radio class="d-none"> </v-radio>
+                <v-radio class="d-none"> </v-radio>
+                <v-radio class="d-none"> </v-radio>
+            <v-radio
+                  label="Kindertagesstätte"
+                  value="6"
+                ></v-radio>
           </v-radio-group>
         </v-col>
 
@@ -614,7 +617,7 @@
             </v-col>
           </v-row>
           <v-divider></v-divider>
-          <h4 class="text-left py-3">Folgeantrag</h4>
+          <h4 v-if="item.entCheck" class="text-left py-3">Folgeantrag</h4>
           <v-row class="my-0 py-0">
             <v-col
               v-if="item.entCheck"
@@ -642,7 +645,7 @@
             </v-col>
             <p v-else></p>
           </v-row>
-          <v-divider></v-divider>
+          <v-divider v-if="item.entCheck"></v-divider>
 
           <h4 class="text-left pt-3">
             Betreuung
@@ -884,7 +887,6 @@
                 outlined
                 v-model="item.gueltig"
                 label="Gültig ab"
-                required
               ></v-text-field>
             </v-col>
           </v-row>
@@ -918,7 +920,6 @@
                 v-model="item.gueltig"
                 :rules="dateRules"
                 label="Gültig ab"
-                required
               ></v-text-field>
             </v-col>
           </v-row>

@@ -1420,7 +1420,6 @@
     <v-btn
       class="my-6"
       justify="center"
-      v-model="btn_weiterzuKind"
       @click="funcShowKindDaten"
       :disabled="!valid"
       color="accent"

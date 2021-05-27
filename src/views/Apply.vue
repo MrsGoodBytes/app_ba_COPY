@@ -84,24 +84,7 @@
       </v-btn>
 
       <Abschicken v-if="Abschicken" :child_list="this.child_list"  :person_list="this.person_list" />
-      <v-btn
-        v-if="Abschicken"
-        class="my-6"
-        justify="center"
-        @click="funcSendPDF"
-        color="accent"
-      >
-        Anträge abschicken
-        <v-icon> mdi-email-send </v-icon>
-      </v-btn>
-      <v-btn
-        v-if="Abschicken"
-        class="d-block mx-auto my-6"
-        @click="funcShowNachweise"
-      >
-        <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
-        Nachweise
-      </v-btn>
+      
     </v-container>
   </div>
 </template>
