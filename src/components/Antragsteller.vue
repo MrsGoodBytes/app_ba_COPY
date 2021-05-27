@@ -1096,7 +1096,7 @@
             </v-col>
             <v-col cols="3">
               <v-text-field
-                v-model="elternteil1.haftpflicht"
+                v-model="elternteil1.kfzhaftpflicht"
                 label="Elternteil 1"
                 prefix="€/mtl."
                 :rules="moneyNotReqRules"
@@ -1104,7 +1104,7 @@
             </v-col>
             <v-col cols="3">
               <v-text-field
-                v-model="elternteil2.haftpflicht"
+                v-model="elternteil2.kfzhaftpflicht"
                 label="Elternteil 2"
                 prefix="€/mtl."
                 :rules="moneyNotReqRules"
