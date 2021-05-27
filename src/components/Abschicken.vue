@@ -109,11 +109,23 @@
     <v-row>
       <v-col cols="3" class="text-left">
         <h6 class="text--disabled">Kind</h6>
-        <h5>{{ this.child_name }}</h5>
+        <h5 v-if="(this.child_firstname != 0) && (this.child_lastname != 0)">{{ this.child_name }}</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Name unvollständig!
+        </h5>
       </v-col>
       <v-col cols="4" class="text-left">
         <h6 class="text--disabled">Geburtstag</h6>
-        <h5>{{ this.child_date }}</h5>
+        <h5 v-if="this.child_date != 0">{{ this.child_date }}</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Geburtsdatum eintragen!
+        </h5>
       </v-col>
     </v-row>
     <v-row>
@@ -244,7 +256,12 @@
         <h6 class="text--disabled">
           Kontoinhaber für Ermäßigung des Essensgeldes
         </h6>
-        <h5>{{ this.konto }}</h5>
+        <h5 v-if="(this.bic != 0) && (this.iban != 0)">{{ this.konto }}</h5><h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Kontodaten unvollständig
+        </h5>
       </v-col>
     </v-row>
 
@@ -262,11 +279,23 @@
       <v-row v-for="(n, index) in child_list" :key="n">
         <v-col cols="3" class="text-left">
           <h6 class="text--disabled">Kind</h6>
-          <h5>{{ child_list[index].sibling_firstname }}</h5>
+          <h5 v-if="(child_list[index].sibling_firstname != 0) && (child_list[index].sibling_lastname != 0)">{{ child_list[index].sibling_firstname }} {{ child_list[index].sibling_lastname }}</h5>
+          <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Name unvollständig!
+        </h5>
         </v-col>
         <v-col cols="4" class="text-left">
           <h6 class="text--disabled">Geburtstag</h6>
-          <h5>{{ child_list[index].date_sibling }}</h5>
+          <h5 v-if="child_list[index].date_sibling != 0">{{ child_list[index].date_sibling }}</h5>
+          <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Bitte Geburtsdatum angeben!
+        </h5>
         </v-col>
       </v-row>
       <v-row>
