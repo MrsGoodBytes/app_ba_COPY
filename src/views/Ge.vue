@@ -251,7 +251,7 @@
 
 
 <script>
-import jsPDF from "jspdf";
+import jspdf from "jspdf";
 
 export default {
   name: "Ent",
@@ -456,7 +456,7 @@ export default {
       
 
       var h = document.getElementById("#Ge")
-      var doc = new jsPDF()
+      var doc = new jspdf()
 
       doc.fromHTML(h,15,15)
 

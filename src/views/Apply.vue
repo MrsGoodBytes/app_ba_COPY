@@ -83,7 +83,7 @@
         Kind/er
       </v-btn>
 
-      <Abschicken v-if="Abschicken" :child_list="this.child_list"  :person_list="this.person_list" />
+      <Abschicken v-if="Abschicken" :child_list="this.child_list" :person_list="this.person_list" />
       
     </v-container>
   </div>
@@ -108,6 +108,10 @@ export default {
   },
   data() {
     return {
+      geCheck: false,
+      entCheck: false,
+      bifoCheck: false,
+
       AntragstellerDaten: true,
       KindDaten: false,
       Nachweise: false,
@@ -157,6 +161,28 @@ export default {
     child_list: function (val) {
       this.$store.commit("setChildList", val);
     },
+    geCheck: function (val) {
+      for(let i = 0; i < this.child_list.length; i++) {
+        this.child_list[i].geCheck = val;
+      }
+      
+    },
+    entCheck: function (val) {
+      for(let i = 0; i < this.child_list.length; i++) {
+        this.child_list[i].entCheck = val;
+      }
+    },
+    bifoCheck: function (val) {
+      for(let i = 0; i < this.child_list.length; i++) {
+        this.child_list[i].bifoCheck = val;
+      }
+    },
+  },
+
+  created() {
+    this.geCheck = this.$store.state.geCheck;
+    this.entCheck = this.$store.state.entCheck;
+    this.bifoCheck = this.$store.state.bifoCheck;
   },
 
   methods: {
@@ -179,9 +205,9 @@ export default {
       if (this.$store.state.geCheck && this.child_list.length == 0) {
         var geschwisterkind = new Object();
         geschwisterkind.id = 0;
-        geschwisterkind.geCheck = this.$store.state.geCheck;
-        geschwisterkind.entCheck = this.$store.state.entCheck;
-        geschwisterkind.bifoCheck = this.$store.state.bifoCheck;
+        geschwisterkind.geCheck = this.geCheck;
+        geschwisterkind.entCheck = this.entCheck;
+        geschwisterkind.bifoCheck = this.bifoCheck;
         geschwisterkind.sibling_firstname = "";
         geschwisterkind.sibling_lastname = "";
         geschwisterkind.date_sibling = "";
@@ -313,6 +339,15 @@ export default {
       this.person_list = this.person_list.filter(
         (neueperson) => neueperson.id !== id
       );
+    },
+    setGeCheck(state) {
+      this.geCheck = state;
+    },
+    setEntCheck(state) {
+      this.entCheck = state;
+    },
+    setBifoCheck(state) {
+      this.bifoCheck = state;
     },
   },
 };

@@ -650,7 +650,7 @@
             </v-col>
             <p v-else></p>
           </v-row>
-          <v-divider v-if="item.entCheck"></v-divider>
+          <v-divider v-if="stateGeCheck"></v-divider>
 
           <h4 class="text-left pt-3">
             Betreuung
@@ -997,6 +997,8 @@ export default {
   },
   data() {
     return {
+      stateGeCheck: false,
+
       valid: false,
       valid_sibling: false,
 
@@ -1154,6 +1156,7 @@ export default {
     bic: function (val) {
       this.$store.commit("setBic", val);
     },
+    
   },
   //load previus values from store
   created() {

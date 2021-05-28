@@ -114,12 +114,15 @@ export default {
   watch: {
     ge_checkbox: function (val) {
       this.$store.commit("setGeCheck", val);
+      this.$parent.setGeCheck(val);
     },
     ent_checkbox: function (val) {
       this.$store.commit("setEntCheck", val);
+      this.$parent.setEntCheck(val);
     },
     bifo_checkbox: function (val) {
       this.$store.commit("setBifoCheck", val);
+      this.$parent.setBifoCheck(val);
     },
   },
 
