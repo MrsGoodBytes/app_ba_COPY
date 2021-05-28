@@ -451,16 +451,93 @@ export default {
   },
 
   methods: {
+    jsonDownload() {
+      var jsonObject = {
+        firstname: this.$store.state.firstname,
+        lastname: this.$store.state.lastname,
+        street: this.$store.state.street,
+        number: this.$store.state.number,
+        postcode: this.$store.state.postcode,
+        town: this.$store.state.town,
+        email: this.$store.state.email,
+        tel: this.$store.state.tel,
+      };
+      console.log(jsonObject);
+    },
+
     download() {
       let pdfName = "Antrag_Geschwisterermaeßigung";
+
+      var doc = new jspdf();
+      var yearPlus = new Date().getFullYear() + 1;
+      var firstname = this.$store.state.firstname;
+      var lastname = this.$store.state.lastname;
+      var street = this.$store.state.street;
+      var number = this.$store.state.number;
+      var postcode = this.$store.state.postcode;
+      var town = this.$store.state.town;
+      var email = this.$store.state.email;
+      var tel = this.$store.state.tel;
+
+      doc.setFontSize("15");
+      doc.text(
+        "Antrag auf Geschwisterermäßigung in Kindertagesstätten",
+        40,
+        30
+      );
+      doc.text("für das Kita-Jahr", 75, 37);
+
+      doc.text(new Date().getFullYear() + "/" + yearPlus, 120, 37);
+
+      doc.setFontSize("9");
+      doc.text("Hansestadt Lübeck", 15, 50);
+      doc.text("Fachbereich Kultur und Bildung", 15, 55);
+      doc.text("Entgeltermäßigung Kindertagesbetreuung", 15, 60);
+      doc.text("Kronsforder Allee 2-6", 15, 65);
+      doc.text("23539 Lübeck", 15, 70);
+
+      doc.setFontSize("7");
+      doc.text("Antragstellende Person (Elternteil)", 130, 50);
+      doc.setFontSize("9");
+      doc.text(firstname + lastname, 130, 55);
+      doc.setFontSize("7");
+      doc.text("Anschrift", 130, 60);
+      doc.setFontSize("9");
+      doc.text(street + " " + number + ", " + postcode + " " + town, 130, 65);
+      doc.setFontSize("7");
+      doc.text("Telefonnummer", 130, 70);
+      doc.setFontSize("9");
+      doc.text(tel, 130, 75);
+      doc.setFontSize("7");
+      doc.text("E-Mail", 130, 80);
+      doc.setFontSize("9");
+      doc.text(email, 130, 85);
+
+      doc.setFontSize("10");
+      doc.setFont("helvetica", "bold");
+      doc.text(
+        "Hiermit wird die Geschwisterermäßigungfür Kinder in Kindertagesstätten beantragt.", 15, 95);
       
+      doc.setFontSize("7");
+      doc.setFont("helvetica", "normal");
+      doc.text("Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder Entgelten für die Betreuung von Kindern in", 15, 100);
+      doc.text("Kindertageseinrichtungen oder Kindertagespflegestellen“ der Hansestadt Lübeck.", 15, 103);
 
-      var h = document.getElementById("#Ge")
-      var doc = new jspdf()
+      doc.setFontSize("9");
+      doc.text("Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer Familie eine", 15, 115);
+      doc.text("öffentlich geförderte Kindertageseinrichtung, Kindertagespflegestelle oder eine", 15, 120);
+      doc.text("Ganztagsbetreuung an Schulen mit einer Nachmittagsbetreuung an mindestens 3 Tagen pro", 15, 125);
+      doc.text(" Woche für mindestens 70 EUR, wird der Elternbeitrag auf Antrag ermäßigt.", 15, 130);
+      
+          doc.text("Für das älteste Kind ist der Elternbeitrag in voller Höhe zu entrichten.", 25, 135);
+          doc.text("Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,", 25, 140);
+          doc.text("für jedes weitere jüngere Kind um 100%.", 25, 145);
 
-      doc.fromHTML(h,15,15)
+      doc.text("Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind", 15, 155);
+      doc.text("Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden", 15, 160);
+      doc.text("melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.)", 15, 165);
 
-      doc.save(pdfName + ".pdf")
+      doc.save(pdfName + ".pdf");
     },
   },
 };

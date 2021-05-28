@@ -165,7 +165,6 @@ export default {
       for(let i = 0; i < this.child_list.length; i++) {
         this.child_list[i].geCheck = val;
       }
-      
     },
     entCheck: function (val) {
       for(let i = 0; i < this.child_list.length; i++) {
