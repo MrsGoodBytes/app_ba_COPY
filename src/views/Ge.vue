@@ -238,8 +238,30 @@
         </v-row>
       </v-card>
     </div>
-    <v-btn class="my-6" justify="center" @click="download" color="accent">
-      Anträge abschicken
+    <vue-html2pdf
+      :show-layout="false"
+      :float-layout="true"
+      :enable-download="true"
+      :preview-modal="true"
+      :paginate-elements-by-height="1400"
+      filename="hee hee"
+      :pdf-quality="2"
+      :manual-pagination="false"
+      pdf-format="a4"
+      pdf-orientation="landscape"
+      pdf-content-width="800px"
+      @progress="onProgress($event)"
+      @hasStartedGeneration="hasStartedGeneration()"
+      @hasGenerated="hasGenerated($event)"
+      ref="html2Pdf"
+    >
+      <section slot="pdf-content">
+        <!-- PDF Content Here -->
+        <div id="element-to-print" ref="document">Das wollen wir drucken.</div>
+      </section>
+    </vue-html2pdf>
+    <v-btn class="my-6" justify="center" @click="generateReport" color="accent">
+      PDF schreiben
       <v-icon> mdi-email-send </v-icon>
     </v-btn>
     <v-btn class="d-block mx-auto my-6" @click="funcShowNachweise">
@@ -252,10 +274,12 @@
 
 <script>
 import jspdf from "jspdf";
+import html2pdf from "html2pdf.js";
+import VueHtml2pdf from "vue-html2pdf";
 
 export default {
   name: "Ent",
-  components: {},
+  components: { VueHtml2pdf },
   props: {
     child_list: Array,
     person_list: Array,
@@ -461,6 +485,10 @@ export default {
         town: this.$store.state.town,
         email: this.$store.state.email,
         tel: this.$store.state.tel,
+
+        child_firstname: this.$store.state.child_firstname,
+        child_lastname: this.$store.state.child_lastname,
+        date_child: this.$store.state.date_child,
       };
       console.log(jsonObject);
     },
@@ -516,28 +544,94 @@ export default {
       doc.setFontSize("10");
       doc.setFont("helvetica", "bold");
       doc.text(
-        "Hiermit wird die Geschwisterermäßigungfür Kinder in Kindertagesstätten beantragt.", 15, 95);
-      
+        "Hiermit wird die Geschwisterermäßigungfür Kinder in Kindertagesstätten beantragt.",
+        15,
+        95
+      );
+
       doc.setFontSize("7");
       doc.setFont("helvetica", "normal");
-      doc.text("Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder Entgelten für die Betreuung von Kindern in", 15, 100);
-      doc.text("Kindertageseinrichtungen oder Kindertagespflegestellen“ der Hansestadt Lübeck.", 15, 103);
+      doc.text(
+        "Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder Entgelten für die Betreuung von Kindern in",
+        15,
+        100
+      );
+      doc.text(
+        "Kindertageseinrichtungen oder Kindertagespflegestellen“ der Hansestadt Lübeck.",
+        15,
+        103
+      );
 
       doc.setFontSize("9");
-      doc.text("Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer Familie eine", 15, 115);
-      doc.text("öffentlich geförderte Kindertageseinrichtung, Kindertagespflegestelle oder eine", 15, 120);
-      doc.text("Ganztagsbetreuung an Schulen mit einer Nachmittagsbetreuung an mindestens 3 Tagen pro", 15, 125);
-      doc.text(" Woche für mindestens 70 EUR, wird der Elternbeitrag auf Antrag ermäßigt.", 15, 130);
-      
-          doc.text("Für das älteste Kind ist der Elternbeitrag in voller Höhe zu entrichten.", 25, 135);
-          doc.text("Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,", 25, 140);
-          doc.text("für jedes weitere jüngere Kind um 100%.", 25, 145);
+      doc.text(
+        "Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer Familie eine",
+        15,
+        115
+      );
+      doc.text(
+        "öffentlich geförderte Kindertageseinrichtung, Kindertagespflegestelle oder eine",
+        15,
+        120
+      );
+      doc.text(
+        "Ganztagsbetreuung an Schulen mit einer Nachmittagsbetreuung an mindestens 3 Tagen pro",
+        15,
+        125
+      );
+      doc.text(
+        " Woche für mindestens 70 EUR, wird der Elternbeitrag auf Antrag ermäßigt.",
+        15,
+        130
+      );
 
-      doc.text("Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind", 15, 155);
-      doc.text("Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden", 15, 160);
-      doc.text("melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.)", 15, 165);
+      doc.text(
+        "Für das älteste Kind ist der Elternbeitrag in voller Höhe zu entrichten.",
+        25,
+        135
+      );
+      doc.text(
+        "Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,",
+        25,
+        140
+      );
+      doc.text("für jedes weitere jüngere Kind um 100%.", 25, 145);
+
+      doc.text(
+        "Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind",
+        15,
+        155
+      );
+      doc.text(
+        "Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden",
+        15,
+        160
+      );
+      doc.text(
+        "melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.)",
+        15,
+        165
+      );
 
       doc.save(pdfName + ".pdf");
+    },
+
+    funcToPDF() {
+      var element = document.getElementById('Ge');
+html2pdf(element);
+    },
+
+    generateReport() {
+      this.$refs.html2Pdf.generatePdf();
+    },
+
+    exportToPDF() {
+      html2pdf(this.$refs.document, {
+        margin: 1,
+        filename: "document.pdf",
+        image: { type: "jpeg", quality: 0.98 },
+        html2canvas: { dpi: 192, letterRendering: true },
+        jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
+      });
     },
   },
 };

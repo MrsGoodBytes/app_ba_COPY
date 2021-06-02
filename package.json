@@ -10,6 +10,7 @@
   "dependencies": {
     "@tailwindcss/forms": "^0.2.1",
     "core-js": "^3.6.5",
+    "html2pdf.js": "github:eKoopmans/html2pdf.js#bugfix/clone-nodes-BUILD",
     "init": "^0.1.2",
     "jspdf": "^2.3.1",
     "vee-validate": "^3.4.5",
