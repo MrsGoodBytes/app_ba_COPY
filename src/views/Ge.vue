@@ -260,7 +260,7 @@
         <div id="element-to-print" ref="document">Das wollen wir drucken.</div>
       </section>
     </vue-html2pdf>
-    <v-btn class="my-6" justify="center" @click="generateReport" color="accent">
+    <v-btn class="my-6" justify="center" @click="download" color="accent">
       PDF schreiben
       <v-icon> mdi-email-send </v-icon>
     </v-btn>
@@ -506,6 +506,7 @@ export default {
       var town = this.$store.state.town;
       var email = this.$store.state.email;
       var tel = this.$store.state.tel;
+      
 
       doc.setFontSize("15");
       doc.text(
@@ -611,13 +612,36 @@ export default {
         15,
         165
       );
+      for (var i=0; i<this.child_list.length; i++) {
+        doc.text(
+          this.child_list[i].sibling_firstname + " " + this.child_list[i].sibling_lastname, 15, (175+i*10)
+        );
+      }
 
       doc.save(pdfName + ".pdf");
     },
 
     funcToPDF() {
-      var element = document.getElementById('Ge');
-html2pdf(element);
+      var element = document.getElementById('element-to-print');
+    html2pdf(element, {
+        margin: 10,
+        filename: 'myfile.pdf',
+        image: {
+            type: 'jpeg',
+            quality: 0.98
+        },
+        html2canvas: {
+            scale: 2,
+            logging: true,
+            dpi: 192,
+            letterRendering: true
+        },
+        jsPDF: {
+            unit: 'mm',
+            format: 'a4',
+            orientation: 'portrait'
+        }
+    });
     },
 
     generateReport() {
