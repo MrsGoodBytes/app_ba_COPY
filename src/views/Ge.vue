@@ -238,28 +238,6 @@
         </v-row>
       </v-card>
     </div>
-    <vue-html2pdf
-      :show-layout="false"
-      :float-layout="true"
-      :enable-download="true"
-      :preview-modal="true"
-      :paginate-elements-by-height="1400"
-      filename="hee hee"
-      :pdf-quality="2"
-      :manual-pagination="false"
-      pdf-format="a4"
-      pdf-orientation="landscape"
-      pdf-content-width="800px"
-      @progress="onProgress($event)"
-      @hasStartedGeneration="hasStartedGeneration()"
-      @hasGenerated="hasGenerated($event)"
-      ref="html2Pdf"
-    >
-      <section slot="pdf-content">
-        <!-- PDF Content Here -->
-        <div id="element-to-print" ref="document">Das wollen wir drucken.</div>
-      </section>
-    </vue-html2pdf>
     <v-btn class="my-6" justify="center" @click="download" color="accent">
       PDF schreiben
       <v-icon> mdi-email-send </v-icon>
@@ -274,12 +252,9 @@
 
 <script>
 import jspdf from "jspdf";
-import html2pdf from "html2pdf.js";
-import VueHtml2pdf from "vue-html2pdf";
 
 export default {
-  name: "Ent",
-  components: { VueHtml2pdf },
+  name: "Ge",
   props: {
     child_list: Array,
     person_list: Array,
@@ -477,8 +452,13 @@ export default {
   methods: {
     jsonDownload() {
       var jsonObject = {
+        geCheck: this.$store.state.geCheck,
+        entCheck: this.$store.state.entCheck,
+        bifoCheck: this.$store.state.bifoCheck,
+
         firstname: this.$store.state.firstname,
         lastname: this.$store.state.lastname,
+        date: this.$store.state.date,
         street: this.$store.state.street,
         number: this.$store.state.number,
         postcode: this.$store.state.postcode,
@@ -489,6 +469,10 @@ export default {
         child_firstname: this.$store.state.child_firstname,
         child_lastname: this.$store.state.child_lastname,
         date_child: this.$store.state.date_child,
+        date_bb: this.$store.state.date_bb,
+
+        child_list: this.$store.state.child_list,
+        person_list: this.$store.state.person_list,
       };
       console.log(jsonObject);
     },
@@ -506,7 +490,6 @@ export default {
       var town = this.$store.state.town;
       var email = this.$store.state.email;
       var tel = this.$store.state.tel;
-      
 
       doc.setFontSize("15");
       doc.text(
@@ -612,51 +595,19 @@ export default {
         15,
         165
       );
-      for (var i=0; i<this.child_list.length; i++) {
+      for (var i = 0; i < this.child_list.length; i++) {
         doc.text(
-          this.child_list[i].sibling_firstname + " " + this.child_list[i].sibling_lastname, 15, (175+i*10)
+          this.child_list[i].sibling_firstname +
+            " " +
+            this.child_list[i].sibling_lastname,
+          15,
+          175 + i * 10
         );
       }
 
       doc.save(pdfName + ".pdf");
     },
 
-    funcToPDF() {
-      var element = document.getElementById('element-to-print');
-    html2pdf(element, {
-        margin: 10,
-        filename: 'myfile.pdf',
-        image: {
-            type: 'jpeg',
-            quality: 0.98
-        },
-        html2canvas: {
-            scale: 2,
-            logging: true,
-            dpi: 192,
-            letterRendering: true
-        },
-        jsPDF: {
-            unit: 'mm',
-            format: 'a4',
-            orientation: 'portrait'
-        }
-    });
-    },
-
-    generateReport() {
-      this.$refs.html2Pdf.generatePdf();
-    },
-
-    exportToPDF() {
-      html2pdf(this.$refs.document, {
-        margin: 1,
-        filename: "document.pdf",
-        image: { type: "jpeg", quality: 0.98 },
-        html2canvas: { dpi: 192, letterRendering: true },
-        jsPDF: { unit: "in", format: "letter", orientation: "landscape" },
-      });
-    },
   },
 };
 </script>

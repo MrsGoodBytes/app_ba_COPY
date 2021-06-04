@@ -18,6 +18,11 @@ export default new Vuex.Store({
         date_p: "",
         date_child: "11.07.2019",
         date_bb: "",
+        radioGroupAntragsgrundlage: 0,
+        antragsgrundlage: "",
+        privatinsolvenz: false,
+        radioGroupErmaeßigung: 0,
+        radioGroupBetreuungsform: 0,
 
         geCheck: false,
         entCheck: false,
@@ -25,11 +30,6 @@ export default new Vuex.Store({
         vorjahr_checkbox: false,
         eigentum_checkbox: false,
 
-        radioGroupAntragsgrundlage: 0,
-        antragsgrundlage: "",
-        privatinsolvenz: false,
-        radioGroupErmaeßigung: 0,
-        radioGroupBetreuungsform: 0,
 
         nettoeinkommen: "",
         selbstständigkeiteinkommen: "",
