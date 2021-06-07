@@ -252,7 +252,6 @@
 
 <script>
 import jspdf from "jspdf";
-import { saveAs } from 'file-saver';
 
 export default {
   name: "Ge",
@@ -451,35 +450,6 @@ export default {
   },
 
   methods: {
-    jsonDownload() {
-      var jsonObject = {
-        geCheck: this.$store.state.geCheck,
-        entCheck: this.$store.state.entCheck,
-        bifoCheck: this.$store.state.bifoCheck,
-
-        firstname: this.$store.state.firstname,
-        lastname: this.$store.state.lastname,
-        date: this.$store.state.date,
-        street: this.$store.state.street,
-        number: this.$store.state.number,
-        postcode: this.$store.state.postcode,
-        town: this.$store.state.town,
-        email: this.$store.state.email,
-        tel: this.$store.state.tel,
-
-        child_firstname: this.$store.state.child_firstname,
-        child_lastname: this.$store.state.child_lastname,
-        date_child: this.$store.state.date_child,
-        date_bb: this.$store.state.date_bb,
-
-        child_list: this.$store.state.child_list,
-        person_list: this.$store.state.person_list,
-      };
-      var file = new File(["Hello, world!"], "hello world.txt", {type: "text/plain;charset=utf-8"});
-FileSaver.saveAs(file);
-      console.log(jsonObject);
-    },
-
     download() {
       let pdfName = "Antrag_Geschwisterermaeßigung";
 

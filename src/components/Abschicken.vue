@@ -381,7 +381,11 @@
           <v-col cols="4" class="text-left">
             <h6 class="text--disabled">Betreuungseinrichtung</h6>
             <h5 v-if="child_list[index].radioGroupBetreuungsform_sibling == 1">
-              {{ child_list[index].tagespflegename }}, {{ child_list[index].institutionstreet }} {{ child_list[index].institutionnumber }}, {{ child_list[index].institutionpostcode }} {{ child_list[index].institutiontown }}
+              {{ child_list[index].tagespflegename }},
+              {{ child_list[index].institutionstreet }}
+              {{ child_list[index].institutionnumber }},
+              {{ child_list[index].institutionpostcode }}
+              {{ child_list[index].institutiontown }}
             </h5>
             <h5
               v-else-if="
@@ -413,10 +417,12 @@
       justify="center"
       @click="funcDownloadData"
       color="accent"
+      v-model="btn_json"
     >
-      Daten lokal speichern
+      Datei mit meinen Daten erstellen
       <v-icon> mdi-download-circle-outline </v-icon>
     </v-btn>
+    <div id="json"></div>
     <Ge :child_list="this.child_list" :person_list="this.person_list" />
   </div>
 </template>
@@ -531,6 +537,41 @@ export default {
     },
     funcShowNachweise() {
       this.$parent.funcShowNachweise();
+    },
+    funcDownloadData() {
+      var data = {
+        geCheck: this.$store.state.geCheck,
+        entCheck: this.$store.state.entCheck,
+        bifoCheck: this.$store.state.bifoCheck,
+
+        firstname: this.$store.state.firstname,
+        lastname: this.$store.state.lastname,
+        date: this.$store.state.date,
+        street: this.$store.state.street,
+        number: this.$store.state.number,
+        postcode: this.$store.state.postcode,
+        town: this.$store.state.town,
+        email: this.$store.state.email,
+        tel: this.$store.state.tel,
+
+        child_firstname: this.$store.state.child_firstname,
+        child_lastname: this.$store.state.child_lastname,
+        date_child: this.$store.state.date_child,
+        date_bb: this.$store.state.date_bb,
+
+        child_list: this.$store.state.child_list,
+        person_list: this.$store.state.person_list,
+      };
+      var json = JSON.stringify(data);
+      var blob = new Blob([json], { type: "application/json" });
+      var url = URL.createObjectURL(blob);
+
+      var a = document.createElement("a");
+      a.download = "backup.json";
+      a.href = url;
+      a.textContent = "Datei erstellt. Hier klicken zum Download";
+
+      document.getElementById("json").appendChild(a);
     },
   },
 };
