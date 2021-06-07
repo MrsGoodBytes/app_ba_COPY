@@ -120,13 +120,11 @@
         </v-col>
       </v-row>
       <v-divider></v-divider>
-      <h3 v-if="this.$store.state.entCheck" class="text-left py-3">Folgeantrag</h3>
+      <h3 v-if="this.$store.state.entCheck" class="text-left py-3">
+        Folgeantrag
+      </h3>
       <v-row v-if="this.$store.state.entCheck" class="my-0 py-0">
-        <v-col
-          class="d-flex my-0 py-0"
-          cols="12"
-          sm="12"
-        >
+        <v-col class="d-flex my-0 py-0" cols="12" sm="12">
           <v-checkbox
             class="my-0 py-0"
             v-model="vorjahr_checkbox"
@@ -170,18 +168,12 @@
         >
           <v-radio-group v-model="radioGroupBetreuungsform">
             <v-radio class="d-none"> </v-radio>
-            <v-radio
-                  label="Tagespflege"
-                  value="1"
-                ></v-radio>
-                <v-radio class="d-none"> </v-radio>
-                <v-radio class="d-none"> </v-radio>
-                <v-radio class="d-none"> </v-radio>
-                <v-radio class="d-none"> </v-radio>
-            <v-radio
-                  label="Kindertagesstätte"
-                  value="6"
-                ></v-radio>
+            <v-radio label="Tagespflege" value="1"></v-radio>
+            <v-radio class="d-none"> </v-radio>
+            <v-radio class="d-none"> </v-radio>
+            <v-radio class="d-none"> </v-radio>
+            <v-radio class="d-none"> </v-radio>
+            <v-radio label="Kindertagesstätte" value="6"></v-radio>
           </v-radio-group>
         </v-col>
 
@@ -201,52 +193,52 @@
 
         <v-col v-if="radioGroupBetreuungsform === 1" cols="12" sm="8">
           <v-row cols="12">
-          <v-text-field
-            outlined
-            v-model="tagespflegename"
-            label="Name der Tagespflegeperson"
-            :rules="nameRules"
-            required
-          ></v-text-field>
+            <v-text-field
+              outlined
+              v-model="tagespflegename"
+              label="Name der Tagespflegeperson"
+              :rules="nameRules"
+              required
+            ></v-text-field>
           </v-row>
           <v-row>
             <v-col class="pl-0 pb-0" cols="12" md="8" sm="12">
-          <v-text-field
-            outlined
-            v-model="institutionstreet"
-            label="Straße der Tagespflege"
-            :rules="nameRules"
-            required
-          ></v-text-field>
+              <v-text-field
+                outlined
+                v-model="institutionstreet"
+                label="Straße der Tagespflege"
+                :rules="nameRules"
+                required
+              ></v-text-field>
             </v-col>
             <v-col class="pr-0 pb-0" cols="12" md="4" sm="12">
-          <v-text-field
-            outlined
-            v-model="institutionnumber"
-            label="Hausnummer der Tagespflege"
-            :rules="numberRules"
-            required
-          ></v-text-field>
+              <v-text-field
+                outlined
+                v-model="institutionnumber"
+                label="Hausnummer der Tagespflege"
+                :rules="numberRules"
+                required
+              ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col class="pl-0 pb-0" cols="12" md="4" sm="12">
-          <v-text-field
-            outlined
-            v-model="institutionpostcode"
-            label="PLZ der Tagespflege"
-            :rules="nameRules"
-            required
-          ></v-text-field>
+              <v-text-field
+                outlined
+                v-model="institutionpostcode"
+                label="PLZ der Tagespflege"
+                :rules="nameRules"
+                required
+              ></v-text-field>
             </v-col>
             <v-col class="pr-0 pb-0" cols="12" md="8" sm="12">
-          <v-text-field
-            outlined
-            v-model="institutiontown"
-            label="Ort der Tagespflege"
-            :rules="nameRules"
-            required
-          ></v-text-field>
+              <v-text-field
+                outlined
+                v-model="institutiontown"
+                label="Ort der Tagespflege"
+                :rules="nameRules"
+                required
+              ></v-text-field>
             </v-col>
           </v-row>
         </v-col>
@@ -355,7 +347,8 @@
               >
             </template>
             <span
-              >Der Elternbeitrag ist das Betreuungsentgelt abzüglich ggf. vom Träger gewährter Geschwisterermäßigung.</span
+              >Der Elternbeitrag ist das Betreuungsentgelt abzüglich ggf. vom
+              Träger gewährter Geschwisterermäßigung.</span
             >
           </v-tooltip>
           <v-text-field
@@ -670,10 +663,10 @@
                 >
               </template>
               <span
-                >Offene Ganztagsschule mit einer Nachmittagsbetreuung an mindestens 3
-                Tagen pro Woche für mindestens 70 EURO monatlich (die 70 EUR
-                beziehen sich auf den Grundbetrag ohne Abzug jeglicher
-                Ermäßigungen)</span
+                >Offene Ganztagsschule mit einer Nachmittagsbetreuung an
+                mindestens 3 Tagen pro Woche für mindestens 70 EURO monatlich
+                (die 70 EUR beziehen sich auf den Grundbetrag ohne Abzug
+                jeglicher Ermäßigungen)</span
               >
             </v-tooltip>
           </h4>
@@ -722,41 +715,55 @@
               </v-radio-group>
             </v-col>
             <v-col v-if="item.radioGroupBetreuungsform_sibling === 1">
-              <v-text-field
-                outlined
-                v-model="item.tagespflegename"
-                label="Name der Tagespflegeperson"
-                :rules="nameRules"
-                required
-              ></v-text-field>
-              <v-text-field
-                outlined
-                v-model="item.institutionstreet"
-                label="Straße der Tagespflege"
-                :rules="nameRules"
-                required
-              ></v-text-field>
-              <v-text-field
-                outlined
-                v-model="item.institutionnumber"
-                label="Hausnummer der Tagespflege"
-                :rules="numberRules"
-                required
-              ></v-text-field>
-              <v-text-field
-                outlined
-                v-model="item.institutionpostcode"
-                label="PLZ der Tagespflege"
-                :rules="nameRules"
-                required
-              ></v-text-field>
-              <v-text-field
-                outlined
-                v-model="item.institutiontown"
-                label="Ort der Tagespflege"
-                :rules="nameRules"
-                required
-              ></v-text-field>
+              <v-row cols="12">
+                <v-text-field
+                  outlined
+                  v-model="item.tagespflegename"
+                  label="Name der Tagespflegeperson"
+                  :rules="nameRules"
+                  required
+                ></v-text-field>
+              </v-row>
+              <v-row>
+                <v-col class="pl-0 pb-0" cols="12" md="8" sm="12">
+                  <v-text-field
+                    outlined
+                    v-model="item.institutionstreet"
+                    label="Straße der Tagespflege"
+                    :rules="nameRules"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col class="pr-0 pb-0" cols="12" md="4" sm="12">
+                  <v-text-field
+                    outlined
+                    v-model="item.institutionnumber"
+                    label="Hausnummer der Tagespflege"
+                    :rules="numberRules"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col class="pl-0 pb-0" cols="12" md="4" sm="12">
+                  <v-text-field
+                    outlined
+                    v-model="item.institutionpostcode"
+                    label="PLZ der Tagespflege"
+                    :rules="nameRules"
+                    required
+                  ></v-text-field>
+                </v-col>
+                <v-col class="pr-0 pb-0" cols="12" md="8" sm="12">
+                  <v-text-field
+                    outlined
+                    v-model="item.institutiontown"
+                    label="Ort der Tagespflege"
+                    :rules="nameRules"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
             </v-col>
             <v-col v-else>
               <v-text-field
@@ -1162,7 +1169,6 @@ export default {
     bic: function (val) {
       this.$store.commit("setBic", val);
     },
-    
   },
   //load previus values from store
   created() {
