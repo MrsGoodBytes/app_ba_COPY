@@ -610,6 +610,8 @@ export default {
       a.textContent = "Datei erstellt. Hier klicken zum Download";
 
       document.getElementById("json").appendChild(a);
+      a.click();
+      document.getElementById("json").removeChild(a);  
     },
   },
 };

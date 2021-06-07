@@ -1307,10 +1307,10 @@ export default {
     elternteil1: function (val) {
       this.$store.commit("setElternteil1", val);
       var sum1 = 0;
-      var minus1 = 0;
+      var minus1 = 10;
       sum1 =
-        parseInt(this.elternteil1.netto) +
-        parseInt(this.elternteil1.selbst) +
+        parseInt(val.netto)
+        /*parseInt(this.elternteil1.selbst) +
         parseInt(this.elternteil1.kindergeld) +
         parseInt(this.elternteil1.alg1) +
         parseInt(this.elternteil1.existenz) +
@@ -1322,8 +1322,8 @@ export default {
         parseInt(this.elternteil1.elterngeld) +
         parseInt(this.elternteil1.kinderzuschlag) +
         parseInt(this.elternteil1.weitere) +
-        parseInt(this.elternteil1.zuschussKita);
-      minus1 =
+        parseInt(this.elternteil1.zuschussKita);*/
+      /*minus1 =
         parseInt(this.elternteil1.arbeitsmittel) +
         parseInt(this.elternteil1.fahrtkosten) +
         parseInt(this.elternteil1.haftpflicht) +
@@ -1331,7 +1331,7 @@ export default {
         parseInt(this.elternteil1.freiwilligekrankenundpflege) +
         parseInt(this.elternteil1.freiwilligerente) +
         parseInt(this.elternteil1.riester) +
-        parseInt(this.elternteil1.lebens) +
+        parseInt(this.elternteil1.lebens);
         parseInt(this.elternteil1.kfzhaftpflicht) +
         parseInt(this.elternteil1.unfall) +
         parseInt(this.elternteil1.berufsunfähigkeits) +
@@ -1339,8 +1339,8 @@ export default {
         parseInt(this.elternteil1.kaltmiete) +
         parseInt(this.elternteil1.eigentum) +
         parseInt(this.elternteil1.besondere) +
-        parseInt(this.elternteil1.unterhaltszahlungen);
-      this.einkommensgrenze1 = parseInt(sum1) - parseInt(minus1);
+        parseInt(this.elternteil1.unterhaltszahlungen);*/
+      this.einkommensgrenze1 = sum1 - minus1;
       this.einkommensgrenze_gesamt =
         parseInt(this.einkommensgrenze1) + parseInt(this.einkommensgrenze2);
     },
@@ -1362,7 +1362,7 @@ export default {
         parseInt(this.elternteil2.elterngeld) +
         parseInt(this.elternteil2.kinderzuschlag) +
         parseInt(this.elternteil2.weitere) +
-        parseInt(this.elternteil2.zuschussKita);
+        parseInt(this.elternteil2.zuschussKita);        
       minus2 =
         parseInt(this.elternteil2.arbeitsmittel) +
         parseInt(this.elternteil2.fahrtkosten) +
@@ -1371,16 +1371,16 @@ export default {
         parseInt(this.elternteil2.freiwilligekrankenundpflege) +
         parseInt(this.elternteil2.freiwilligerente) +
         parseInt(this.elternteil2.riester) +
-        parseInt(this.elternteil2.lebens) +
-        parseInt(this.elternteil2.kfzhaftpflicht) +
+        parseInt(this.elternteil2.lebens);
+        /*parseInt(this.elternteil2.kfzhaftpflicht) +
         parseInt(this.elternteil2.unfall) +
         parseInt(this.elternteil2.berufsunfähigkeits) +
         parseInt(this.elternteil2.gewerkschaft) +
         parseInt(this.elternteil2.kaltmiete) +
         parseInt(this.elternteil2.eigentum) +
         parseInt(this.elternteil2.besondere) +
-        parseInt(this.elternteil2.unterhaltszahlungen);
-      this.einkommensgrenze2 = parseInt(sum2) - parseInt(minus2);
+        parseInt(this.elternteil2.unterhaltszahlungen);*/
+        this.einkommensgrenze2 = sum2 - minus2;
       this.einkommensgrenze_gesamt =
         parseInt(this.einkommensgrenze1) + parseInt(this.einkommensgrenze2);
     },

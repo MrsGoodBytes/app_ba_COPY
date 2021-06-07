@@ -32,6 +32,7 @@
           <v-file-input
           accept="json/*"
           label="JSON-Datei hochladen"
+          v-model="upload"
           chips
           show-size
           counter
@@ -122,6 +123,9 @@ export default {
   },
   data() {
     return {
+      tmp: null,
+      tmp2: null,
+      upload: null,
       geCheck: false,
       entCheck: false,
       bifoCheck: false,
@@ -172,6 +176,34 @@ export default {
   },
 
   watch: {
+    upload: function (val) {
+      /*const reader = new FileReader();
+      this.tmp = val;
+
+      reader.onload = val => {
+        const result = JSON.parse(val);
+        const formatted = JSON.stringify(result, null, 2);
+        this.tmp2 = formatted;
+        this.upload = result;
+      }
+      reader.readAsText(this.upload);*/
+      let file = val[0];
+      let fileReader = new FileReader();
+      fileReader.readAsText(file);
+      
+      fileReader.onload = function() {
+        //alert(fileReader.result);
+        
+      };
+      fileReader.onerror = function() {
+        alert(fileReader.error);
+      }
+      fileReader.onloadend = function() {
+        var test = fileReader.result; 
+        this.tmp = test;
+      }      
+    },
+
     child_list: function (val) {
       this.$store.commit("setChildList", val);
     },
