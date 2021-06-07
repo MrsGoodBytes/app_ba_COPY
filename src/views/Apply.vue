@@ -24,9 +24,12 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-card>
-        <h4>Du hast eine Datei mit deinen gespeicherten Daten? Dann lade sie hier hoch!</h4>
-        <v-file-input
+      <v-card
+          class="mx-auto pa-5 my-8"
+          outlined
+          >
+          <h4 class="text-left"><v-icon>mdi-file</v-icon> Du hast eine Datei mit deinen gespeicherten Daten? Dann lade sie hier hoch!</h4>
+          <v-file-input
           accept="json/*"
           label="JSON-Datei hochladen"
           chips
@@ -34,7 +37,7 @@
           counter
           multiple
           truncate-length="23"></v-file-input>
-      </v-card>
+        </v-card>
       <Antragswahl msg="Welche Anträge möchtest du stellen?" />
       <v-alert
         v-if="
