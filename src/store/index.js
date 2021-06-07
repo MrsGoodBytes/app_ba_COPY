@@ -5,6 +5,10 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
     state: {
+        geCheck: false,
+        entCheck: false,
+        bifoCheck: false,
+
         firstname: "Isabella",
         lastname: "Gandl",
         street: "Bahnhofstraße",
@@ -24,12 +28,8 @@ export default new Vuex.Store({
         radioGroupErmaeßigung: 0,
         radioGroupBetreuungsform: 0,
 
-        geCheck: false,
-        entCheck: false,
-        bifoCheck: false,
         vorjahr_checkbox: false,
         eigentum_checkbox: false,
-
 
         nettoeinkommen: "",
         selbstständigkeiteinkommen: "",

@@ -11,8 +11,8 @@
               jetzt vollständig digital.
             </h4>
           </v-col>
-          <v-col>
-            <v-card outlined class="mx-16 py-6" color="#E8EAF6">
+          <v-col cols="12" md="7">
+            <v-card outlined class="mx-8 pa-6" color="#E8EAF6">
               <h3 class="">Falls Sie unsicher sind</h3>
               <p>hilft Ihnen unser Test auf Berechtigung weiter:</p>
               <router-link :to="{ name: 'Check' }" href="#" class=""
@@ -212,6 +212,12 @@ export default {
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
         geschwisterkind.radioGroupBetreuungsform_sibling = 0;
+        geschwisterkind.tagespflegename = "";
+        geschwisterkind.institutionstreet = "";
+        geschwisterkind.institutionnumber = "";
+        geschwisterkind.institutionpostcode = "";
+        geschwisterkind.institutiontown = "";
+        geschwisterkind.institutionname = "";
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
@@ -261,6 +267,12 @@ export default {
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
         geschwisterkind.radioGroupBetreuungsform_sibling = 0;
+        geschwisterkind.tagespflegename = "";
+        geschwisterkind.institutionstreet = "";
+        geschwisterkind.institutionnumber = "";
+        geschwisterkind.institutionpostcode = "";
+        geschwisterkind.institutiontown = "";
+        geschwisterkind.institutionname = "";
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;
@@ -282,6 +294,12 @@ export default {
         geschwisterkind.date_sibling = "";
         geschwisterkind.date_bb = "";
         geschwisterkind.radioGroupBetreuungsform_sibling = 0;
+        geschwisterkind.tagespflegename = "";
+        geschwisterkind.institutionstreet = "";
+        geschwisterkind.institutionnumber = "";
+        geschwisterkind.institutionpostcode = "";
+        geschwisterkind.institutiontown = "";
+        geschwisterkind.institutionname = "";
         geschwisterkind.betreuungsentgelt = 0;
         geschwisterkind.vorjahr_checkbox = false;
         geschwisterkind.essensgeld = 0;

@@ -252,6 +252,7 @@
 
 <script>
 import jspdf from "jspdf";
+import { saveAs } from 'file-saver';
 
 export default {
   name: "Ge",
@@ -474,6 +475,8 @@ export default {
         child_list: this.$store.state.child_list,
         person_list: this.$store.state.person_list,
       };
+      var file = new File(["Hello, world!"], "hello world.txt", {type: "text/plain;charset=utf-8"});
+FileSaver.saveAs(file);
       console.log(jsonObject);
     },
 
@@ -607,7 +610,6 @@ export default {
 
       doc.save(pdfName + ".pdf");
     },
-
   },
 };
 </script>
