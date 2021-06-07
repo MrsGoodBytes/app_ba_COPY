@@ -200,6 +200,7 @@
         </v-col>
 
         <v-col v-if="radioGroupBetreuungsform === 1" cols="12" sm="8">
+          <v-row cols="12">
           <v-text-field
             outlined
             v-model="tagespflegename"
@@ -207,6 +208,9 @@
             :rules="nameRules"
             required
           ></v-text-field>
+          </v-row>
+          <v-row>
+            <v-col class="pl-0 pb-0" cols="12" md="8" sm="12">
           <v-text-field
             outlined
             v-model="institutionstreet"
@@ -214,6 +218,8 @@
             :rules="nameRules"
             required
           ></v-text-field>
+            </v-col>
+            <v-col class="pr-0 pb-0" cols="12" md="4" sm="12">
           <v-text-field
             outlined
             v-model="institutionnumber"
@@ -221,6 +227,10 @@
             :rules="numberRules"
             required
           ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row>
+            <v-col class="pl-0 pb-0" cols="12" md="4" sm="12">
           <v-text-field
             outlined
             v-model="institutionpostcode"
@@ -228,6 +238,8 @@
             :rules="nameRules"
             required
           ></v-text-field>
+            </v-col>
+            <v-col class="pr-0 pb-0" cols="12" md="8" sm="12">
           <v-text-field
             outlined
             v-model="institutiontown"
@@ -235,6 +247,8 @@
             :rules="nameRules"
             required
           ></v-text-field>
+            </v-col>
+          </v-row>
         </v-col>
         <v-col v-else-if="radioGroupBetreuungsform != 0">
           <v-text-field
