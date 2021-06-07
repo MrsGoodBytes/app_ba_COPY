@@ -112,8 +112,7 @@
           <v-text-field
             outlined
             v-model="date_child"
-            type="date"
-            label="Geburtsdatum"
+            label="Geburtsdatum TT-MM-JJJJ"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
             required
@@ -261,7 +260,6 @@
           <v-text-field
             outlined
             v-model="date_bb"
-            type="date"
             label="Betreuungsbeginn"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
@@ -432,7 +430,6 @@
           <v-text-field
             outlined
             v-model="gueltig"
-            type="date"
             label="Gültig ab"
             required
           ></v-text-field>
@@ -521,7 +518,6 @@
           <v-text-field
             outlined
             v-model="gueltig"
-            type="date"
             :rules="dateRules"
             label="Gültig ab"
             required
@@ -613,8 +609,7 @@
               <v-text-field
                 outlined
                 v-model="item.date_sibling"
-                type="date"
-                label="Geburtsdatum"
+                label="Geburtsdatum TT-MM-JJJJ"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
                 required
@@ -781,7 +776,6 @@
               <v-text-field
                 outlined
                 v-model="item.date_bb"
-                type="date"
                 label="Betreuungsbeginn"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
@@ -892,7 +886,6 @@
               <v-text-field
                 outlined
                 v-model="item.gueltig"
-                type="date"
                 label="Gültig ab"
               ></v-text-field>
             </v-col>
@@ -925,7 +918,6 @@
               <v-text-field
                 outlined
                 v-model="item.gueltig"
-                type="date"
                 :rules="dateRules"
                 label="Gültig ab"
               ></v-text-field>

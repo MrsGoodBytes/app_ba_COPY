@@ -9,6 +9,7 @@ export default new Vuex.Store({
         entCheck: false,
         bifoCheck: false,
 
+        valid: false,
         firstname: "Isabella",
         lastname: "Gandl",
         street: "Bahnhofstraße",
@@ -282,6 +283,10 @@ export default new Vuex.Store({
         },
         setElternteil2(state, value) {
             state.elternteil2 = value;
+        },
+
+        setVal(state, value) {
+            state.valid = value;
         },
     },
     actions: {},

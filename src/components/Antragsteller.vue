@@ -24,11 +24,10 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4" sm="12" v-if="this.$store.state.entCheck">
-          <v-text-field
+              <v-text-field
             outlined
             v-model="date"
-            type="date"
-            label="Geburtsdatum"
+            label="Geburtsdatum TT-MM-JJJJ"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
             required
@@ -121,9 +120,9 @@
           </v-tooltip>
         </h3>
 
-        <v-card v-for="item in personlist" :key="item.id">
-          <v-row class="mt-1 mb-3 px-3">
-            <v-col class="pb-0">
+        <v-card v-for="item in personlist" :key="item.id" cols="12" class="mt-1 mb-3 px-3">
+          <v-row>
+            <v-col class="pb-0" cols="12" md="4" sm="12">
               <v-text-field
                 outlined
                 v-model="item.firstname_person"
@@ -132,7 +131,7 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col class="pb-0">
+            <v-col class="pb-0" cols="12" md="4" sm="12">
               <v-text-field
                 outlined
                 v-model="item.lastname_person"
@@ -141,29 +140,28 @@
                 required
               ></v-text-field>
             </v-col>
-            <v-col class="pb-0">
+            <v-col class="pb-0" cols="12" md="4" sm="12">
               <v-text-field
                 outlined
                 v-model="item.date_p"
-                type="date"
-                label="Geburtsdatum"
+                label="Geburtsdatum TT-MM-JJJJ"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
                 required
               ></v-text-field>
             </v-col>
-            <v-col class="pb-0">
+          </v-row>
+          <v-row>
+            <v-col class="py-0" cols="12" sm="12">
               <v-text-field
                 outlined
                 v-model="item.verwandtschaft_p"
                 label="Verwandtschaft zum Kind"
-                :rules="dateRules"
                 required
               ></v-text-field>
             </v-col>
-            <v-col>
+            <v-col class="pt-0">
               <v-btn
-                class="mt-3"
                 text
                 outlined
                 color="secondary"
@@ -176,7 +174,7 @@
           </v-row>
         </v-card>
 
-        <v-btn class="mb-4" @click="addPerson">
+        <v-btn class="my-4" @click="addPerson">
           im Haushalt lebende Person hinzufügen
           <v-icon> mdi-plus </v-icon>
         </v-btn>
@@ -221,8 +219,7 @@
       <h4
         v-if="
           (this.$store.state.entCheck || this.$store.state.bifoCheck) &&
-          this.$store.state.radioGroupBetreuungsform == 0 &&
-          this.valid == false
+          this.$store.state.radioGroupAntragsgrundlage == 0
         "
         class="text-left error--text"
       >
@@ -231,10 +228,7 @@
       </h4>
       <v-row v-if="this.$store.state.entCheck || this.$store.state.bifoCheck">
         <v-col class="pb-0">
-          <v-radio-group
-            v-model="radioGroupAntragsgrundlage"
-            :rules="radioRules"
-          >
+          <v-radio-group v-model="radioGroupAntragsgrundlage">
             <v-radio class="d-none"> </v-radio>
             <v-radio
               v-model="antragsgrundlage"
@@ -1422,7 +1416,6 @@
       class="my-6"
       justify="center"
       @click="funcShowKindDaten"
-      :disabled="!valid"
       color="accent"
     >
       weiter
@@ -1660,6 +1653,7 @@ export default {
     },
     radioGroupAntragsgrundlage: function (val) {
       this.$store.commit("setAntragsgrundlage", val);
+      this.valid = true;
     },
     privatinsolvenz: function (val) {
       this.$store.commit("setPrivatinsolvenz", val);
@@ -1717,7 +1711,8 @@ export default {
         parseInt(this.elternteil1.besondere) +
         parseInt(this.elternteil1.unterhaltszahlungen);
       this.einkommensgrenze1 = parseInt(sum1) - parseInt(minus1);
-      this.einkommensgrenze_gesamt = parseInt(this.einkommensgrenze1) - parseInt(this.einkommensgrenze2) ;
+      this.einkommensgrenze_gesamt =
+        parseInt(this.einkommensgrenze1) - parseInt(this.einkommensgrenze2);
     },
     elternteil2: function (val) {
       this.$store.commit("setElternteil2", val);
@@ -1756,7 +1751,11 @@ export default {
         parseInt(this.elternteil2.besondere) +
         parseInt(this.elternteil2.unterhaltszahlungen);
       this.einkommensgrenze2 = parseInt(sum2) - parseInt(minus2);
-      this.einkommensgrenze_gesamt = parseInt(this.einkommensgrenze1) + parseInt(this.einkommensgrenze2) ;
+      this.einkommensgrenze_gesamt =
+        parseInt(this.einkommensgrenze1) + parseInt(this.einkommensgrenze2);
+    },
+    valid: function (val) {
+      this.$store.commit("setVal", val);
     },
   },
 
@@ -1780,10 +1779,17 @@ export default {
     funcShowKindDaten() {
       if (
         this.$refs.form.validate() == true &&
+        (this.$store.state.entCheck || this.$store.state.bifoCheck) &&
         this.radioGroupAntragsgrundlage != 0
       ) {
         this.$parent.funcShowKindDaten();
-      } else {
+      } else if (
+        this.$refs.form.validate() == true &&
+        !this.$store.state.entCheck &&
+        !this.$store.state.bifoCheck
+      ) {
+        this.$parent.funcShowKindDaten();
+      } else if (this.$refs.form.validate() == false) {
         this.valid = false;
       }
     },
