@@ -554,10 +554,45 @@ export default {
         email: this.$store.state.email,
         tel: this.$store.state.tel,
 
+        radioGroupAntragsgrundlage = this.$store.state.radioGroupAntragsgrundlage,
+        privatinsolvenz = this.$store.state.privatinsolvenz,
+        radioGroupErmaeßigung = this.$store.state.radioGroupErmaeßigung,
+
+        nettoeinkommen = this.$store.state.nettoeinkommen,
+        selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen,
+
+        eigentum_checkbox = this.$store.state.eigentum_checkbox,
+        elternteil1 = this.$store.state.elternteil1,
+        elternteil2 = this.$store.state.elternteil2,
+
         child_firstname: this.$store.state.child_firstname,
         child_lastname: this.$store.state.child_lastname,
         date_child: this.$store.state.date_child,
         date_bb: this.$store.state.date_bb,
+
+        institutionname = this.$store.state.institutionname,
+        institutionstreet = this.$store.state.institutionstreet,
+        institutionnumber = this.$store.state.institutionnumber,
+        institutionpostcode = this.$store.state.institutionpostcode,
+        institutiontown = this.$store.state.institutiontown,
+        tagespflegename = this.$store.state.tagespflegename,
+
+        elternbeitrag = this.$store.state.elternbeitrag,
+        betreuungsentgelt = this.$store.state.betreuungsentgelt,
+
+        radioGroupBetreuungsform = this.$store.state.radioGroupBetreuungsform,
+
+        essensgeld = this.$store.state.essensgeld,
+        betreuungsumfang = this.$store.state.betreuungsumfang,
+        vorjahr_checkbox = this.$store.state.vorjahr_checkbox,
+        kostenerstattung = this.$store.state.kostenerstattung,
+        gueltig = this.$store.state.gueltig,
+        bifo_begr = this.$store.state.bifo_begr,
+
+        kontoinhaber = this.$store.state.firstname + " " + this.$store.state.lastname,
+        iban = this.$store.state.iban,
+        bic = this.$store.state.bic,
+        bank = this.$store.state.bank,
 
         child_list: this.$store.state.child_list,
         person_list: this.$store.state.person_list,
