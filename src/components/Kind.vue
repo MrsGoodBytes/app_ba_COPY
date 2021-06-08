@@ -125,26 +125,32 @@
       </h3>
       <v-row v-if="this.$store.state.entCheck" class="my-0 py-0">
         <v-col class="d-flex my-0 py-0" cols="12" sm="12">
-          <v-checkbox
-            class="my-0 py-0"
-            v-model="vorjahr_checkbox"
-            ref="vorjahr_check"
-            :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt:'"
-          ></v-checkbox
-          ><v-tooltip bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon color="accent" v-bind="attrs" v-on="on"
-                >mdi-information</v-icon
-              >
-            </template>
-            <span
-              >Gilt auch, wenn der Antrag für eine andere Einrichtung gestellt
-              wurde.</span
-            >
-          </v-tooltip>
+          <v-checkbox v-model="vorjahr_checkbox" ref="vorjahr_check"
+            ><template v-slot:label>
+              <div>
+                Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung
+                gestellt.
+                <v-tooltip class="mx-auto" bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon
+                      class="my-auto"
+                      color="accent"
+                      v-bind="attrs"
+                      v-on="on"
+                      >mdi-information</v-icon
+                    >
+                  </template>
+                  <span
+                    >Gilt auch, wenn der Antrag für eine andere Einrichtung
+                    gestellt wurde.</span
+                  >
+                </v-tooltip>
+              </div></template
+            ></v-checkbox
+          >
         </v-col>
       </v-row>
-      <v-divider></v-divider>
+      <v-divider v-if="this.$store.state.entCheck"></v-divider>
       <h3 class="text-left py-3">Betreuung</h3>
       <h4
         v-if="
@@ -552,7 +558,7 @@
       </v-row>
       <p v-else></p>
 
-      <v-divider></v-divider>
+      <v-divider v-if="this.$store.state.bifoCheck"></v-divider>
 
       <div id="Geschwisterkind">
         <h3 class="my-3">Geschwisterkind/er</h3>
@@ -632,27 +638,33 @@
               cols="12"
               sm="12"
             >
-              <v-checkbox
-                class="my-0 py-0"
-                v-model="item.vorjahr_checkbox"
-                ref="vorjahr_check"
-                :label="'Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung gestellt.'"
-              ></v-checkbox
-              ><v-tooltip bottom>
-                <template v-slot:activator="{ on, attrs }">
-                  <v-icon color="accent" v-bind="attrs" v-on="on"
-                    >mdi-information</v-icon
-                  >
-                </template>
-                <span
-                  >Gilt auch, wenn der Antrag für eine andere Einrichtung
-                  gestellt wurde.</span
-                >
-              </v-tooltip>
+              <v-checkbox v-model="item.vorjahr_checkbox" ref="vorjahr_check"
+                ><template v-slot:label>
+                  <div>
+                    Für das Kind wurde im VORJAHR ein Antrag auf
+                    Entgelt-Ermäßigung gestellt.
+                    <v-tooltip class="mx-auto" bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon
+                          class="my-auto"
+                          color="accent"
+                          v-bind="attrs"
+                          v-on="on"
+                          >mdi-information</v-icon
+                        >
+                      </template>
+                      <span
+                        >Gilt auch, wenn der Antrag für eine andere Einrichtung
+                        gestellt wurde.</span
+                      >
+                    </v-tooltip>
+                  </div></template
+                ></v-checkbox
+              >
             </v-col>
             <p v-else></p>
           </v-row>
-          <v-divider v-if="stateGeCheck"></v-divider>
+          <v-divider v-if="item.entCheck"></v-divider>
 
           <h4 class="text-left pt-3">
             Betreuung
@@ -855,7 +867,7 @@
             <p v-else></p>
           </v-row>
 
-          <v-divider></v-divider>
+          <v-divider v-if="item.bifoCheck"></v-divider>
 
           <h4 v-if="item.bifoCheck" class="text-left py-3">
             Mittel aus dem Bildungsfond
