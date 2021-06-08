@@ -580,6 +580,10 @@ export default {
 
       doc.save(pdfName + ".pdf");
     },
+
+    funcShowNachweise() {
+        this.$parent.funcShowNachweise();
+    },
   },
 };
 </script>

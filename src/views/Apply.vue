@@ -123,8 +123,6 @@ export default {
   },
   data() {
     return {
-      tmp: null,
-      tmp2: null,
       upload: null,
       geCheck: false,
       entCheck: false,
@@ -192,16 +190,19 @@ export default {
       fileReader.readAsText(file);
       
       fileReader.onload = function() {
-        //alert(fileReader.result);
+        alert(fileReader.result); 
+        var tmp;
+        tmp = "test";
+        console.log(tmp);
         
       };
-      fileReader.onerror = function() {
+      /* fileReader.onerror = function() {
         alert(fileReader.error);
       }
       fileReader.onloadend = function() {
-        var test = fileReader.result; 
-        this.tmp = test;
-      }      
+        //var test = fileReader.result; 
+        this.tmp = "test";
+      }       */
     },
 
     child_list: function (val) {
