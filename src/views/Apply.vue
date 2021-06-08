@@ -42,7 +42,7 @@
           multiple
           truncate-length="23"
         ></v-file-input>
-        <v-btn @click="load_data">data test </v-btn>
+        <v-btn class="mb-3 text-button" @click="load_data" color="primary">Daten übernehmen</v-btn>
       </v-card>
       <Antragswahl msg="Welche Anträge möchtest du stellen?" />
       <v-alert
@@ -432,56 +432,58 @@ export default {
       this.$store.state.entCheck = this.tmp.entCheck;
       this.$store.state.bifoCheck = this.tmp.bifoCheck;
 
-        this.$store.state.firstname = this.tmp.firstname;
-        this.$store.state.lastname = this.tmp.lastname;
-        this.$store.state.street = this.tmp.street;
-        this.$store.state.number = this.tmp.number;
-        this.$store.state.postcode = this.tmp.postcode;
-        this.$store.state.town = this.tmp.town;
-        this.$store.state.email = this.tmp.email;
-        this.$store.state.tel = this.tmp.tel;
+      this.$store.state.firstname = this.tmp.firstname;
+      this.$store.state.lastname = this.tmp.lastname;
+      this.$store.state.street = this.tmp.street;
+      this.$store.state.number = this.tmp.number;
+      this.$store.state.postcode = this.tmp.postcode;
+      this.$store.state.town = this.tmp.town;
+      this.$store.state.email = this.tmp.email;
+      this.$store.state.tel = this.tmp.tel;
 
-        this.$store.state.date = this.tmp.date;
-        this.$store.state.date_child = this.tmp.date_child;
-        this.$store.state.date_bb = this.tmp.date_bb;
-        this.$store.state.radioGroupAntragsgrundlage = this.tmp.radioGroupAntragsgrundlage;
-        this.$store.state.antragsgrundlage = this.tmp.antragsgrundlage;
-        this.$store.state.privatinsolvenz = this.tmp.privatinsolvenz;
-        this.$store.state.radioGroupErmaeßigung = this.tmp.radioGroupErmaeßigung;
-        this.$store.state.radioGroupBetreuungsform = this.tmp.radioGroupBetreuungsform;
+      this.$store.state.date = this.tmp.date;
+      this.$store.state.date_child = this.tmp.date_child;
+      this.$store.state.date_bb = this.tmp.date_bb;
+      this.$store.state.radioGroupAntragsgrundlage =
+        this.tmp.radioGroupAntragsgrundlage;
+      this.$store.state.antragsgrundlage = this.tmp.antragsgrundlage;
+      this.$store.state.privatinsolvenz = this.tmp.privatinsolvenz;
+      this.$store.state.radioGroupErmaeßigung = this.tmp.radioGroupErmaeßigung;
+      this.$store.state.radioGroupBetreuungsform =
+        this.tmp.radioGroupBetreuungsform;
 
-        this.$store.state.vorjahr_checkbox = this.tmp.vorjahr_checkbox;
-        this.$store.state.eigentum_checkbox = this.tmp.eigentum_checkbox;
-        
-        this.$store.state.kontoinhaber = this.tmp.kontoinhaber;
-        this.$store.state.iban = this.tmp.iban;
-        this.$store.state.bic = this.tmp.bic;
-        this.$store.state.bank = this.tmp.bank;
+      this.$store.state.vorjahr_checkbox = this.tmp.vorjahr_checkbox;
+      this.$store.state.eigentum_checkbox = this.tmp.eigentum_checkbox;
 
-        this.$store.state.child_firstname = this.tmp.child_firstname;
-        this.$store.state.child_lastname = this.tmp.child_lastname;
-        this.$store.state.institutionstreet = this.tmp.institutionstreet;
-        this.$store.state.institutionnumber = this.tmp.institutionnumber;
-        this.$store.state.institutionpostcode = this.tmp.institutionpostcode;
-        this.$store.state.institutiontown = this.tmp.institutiontown;
-        this.$store.state.institutionname = this.tmp.institutionname;
-        this.$store.state.tagespflegename = this.tmp.tagespflegename;
-        this.$store.state.betreuungsform = this.tmp.betreuungsform;
+      this.$store.state.kontoinhaber = this.tmp.kontoinhaber;
+      this.$store.state.iban = this.tmp.iban;
+      this.$store.state.bic = this.tmp.bic;
+      this.$store.state.bank = this.tmp.bank;
 
-        this.$store.state.betreuungsumfang = this.tmp.betreuungsumfang;
-        this.$store.state.betreuungsbeginn = this.tmp.betreuungsbeginn;
-        this.$store.state.betreuungsentgelt = this.tmp.betreuungsentgelt;
-        this.$store.state.elternbeitrag = this.tmp.elternbeitrag;
-        this.$store.state.essensgeld = this.tmp.essensgeld;
+      this.$store.state.child_firstname = this.tmp.child_firstname;
+      this.$store.state.child_lastname = this.tmp.child_lastname;
+      this.$store.state.institutionstreet = this.tmp.institutionstreet;
+      this.$store.state.institutionnumber = this.tmp.institutionnumber;
+      this.$store.state.institutionpostcode = this.tmp.institutionpostcode;
+      this.$store.state.institutiontown = this.tmp.institutiontown;
+      this.$store.state.institutionname = this.tmp.institutionname;
+      this.$store.state.tagespflegename = this.tmp.tagespflegename;
+      this.$store.state.betreuungsform = this.tmp.betreuungsform;
 
-        this.$store.state.kostenerstattung = this.tmp.kostenerstattung;
-        this.$store.state.gueltig = this.tmp.gueltig;
-        this.$store.state.bifo_begr = this.tmp.bifo_begr;
+      this.$store.state.betreuungsumfang = this.tmp.betreuungsumfang;
+      this.$store.state.betreuungsbeginn = this.tmp.betreuungsbeginn;
+      this.$store.state.betreuungsentgelt = this.tmp.betreuungsentgelt;
+      this.$store.state.elternbeitrag = this.tmp.elternbeitrag;
+      this.$store.state.essensgeld = this.tmp.essensgeld;
 
-        this.$store.state.elternteil1 = this.tmp.elternteil1;
-        this.$store.state.elternteil2 = this.tmp.elternteil2;
+      this.$store.state.kostenerstattung = this.tmp.kostenerstattung;
+      this.$store.state.gueltig = this.tmp.gueltig;
+      this.$store.state.bifo_begr = this.tmp.bifo_begr;
 
-        this.$store.state.haushaltseinkommen = this.tmp.haushaltseinkommen;
+      this.$store.state.elternteil1 = this.tmp.elternteil1;
+      this.$store.state.elternteil2 = this.tmp.elternteil2;
+
+      this.$store.state.haushaltseinkommen = this.tmp.haushaltseinkommen;
     },
   },
 };

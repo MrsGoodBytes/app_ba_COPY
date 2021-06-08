@@ -10,18 +10,17 @@ export default new Vuex.Store({
         bifoCheck: false,
 
         valid: false,
-        firstname: "Isabella",
-        lastname: "Gandl",
-        street: "Bahnhofstraße",
-        number: "59A",
-        postcode: "23936",
-        town: "Grevesmühlen",
-        email: "isabella.gandl@student.uni-luebeck.de",
-        tel: "03881715975",
+        firstname: "",
+        lastname: "",
+        street: "",
+        number: "",
+        postcode: "",
+        town: "",
+        email: "",
+        tel: "",
 
-        date: "06.10.1990",
-        /*date_p: "", */
-        date_child: "11.07.2019",
+        date: "",
+        date_child: "",
         date_bb: "",
         radioGroupAntragsgrundlage: 0,
         antragsgrundlage: "",
@@ -39,13 +38,13 @@ export default new Vuex.Store({
         bic: "",
         bank: "",
 
-        child_firstname: "Ilaria",
-        child_lastname: "Gandl",
-        institutionstreet: "Carl-Gauß-Straße",
-        institutionnumber: "15",
-        institutionpostcode: "23936",
-        institutiontown: "Grevesmühlen",
-        institutionname: "Kita Weltendecker",
+        child_firstname: "",
+        child_lastname: "",
+        institutionstreet: "",
+        institutionnumber: "",
+        institutionpostcode: "",
+        institutiontown: "",
+        institutionname: "",
         tagespflegename: "",
         betreuungsform: "",
 
@@ -63,6 +62,7 @@ export default new Vuex.Store({
         lastname_sibling: "",
         date_sibling: "", */
         child_list: [],
+        person_list: [],
 
         elternteil1: {
             netto: 0,

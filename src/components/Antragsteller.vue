@@ -1452,13 +1452,13 @@ export default {
         "Privatinsolvenz",
         "kein Bezug von Sozialleistungen",
         "der Bezug von Sozialleistungen",
-      ],
+      ],/* 
       privatinsolvenz: false,
       sozialleistungen: false,
-      ohnesozialleistungen: false,
-
+      ohnesozialleistungen: false, */
+/* 
       nettoeinkommen: "",
-      selbstständigkeiteinkommen: "",
+      selbstständigkeiteinkommen: "", */
 
       menu: false,
       date: null,
