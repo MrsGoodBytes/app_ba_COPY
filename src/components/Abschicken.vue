@@ -424,6 +424,10 @@
     </v-btn>
     <div id="json"></div>
     <Ge :child_list="this.child_list" :person_list="this.person_list" />
+    <v-btn class="d-block mx-auto my-6" @click="funcShowNachweise">
+      <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
+      Nachweise
+    </v-btn>
   </div>
 </template>
 

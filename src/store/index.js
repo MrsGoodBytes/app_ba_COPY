@@ -20,7 +20,7 @@ export default new Vuex.Store({
         tel: "03881715975",
 
         date: "06.10.1990",
-        date_p: "",
+        /*date_p: "", */
         date_child: "11.07.2019",
         date_bb: "",
         radioGroupAntragsgrundlage: 0,
@@ -32,8 +32,8 @@ export default new Vuex.Store({
         vorjahr_checkbox: false,
         eigentum_checkbox: false,
 
-        nettoeinkommen: "",
-        selbstständigkeiteinkommen: "",
+        /*nettoeinkommen: "",
+        selbstständigkeiteinkommen: "", */
         kontoinhaber: "",
         iban: "",
         bic: "",
@@ -59,9 +59,9 @@ export default new Vuex.Store({
         gueltig: "",
         bifo_begr: "",
 
-        firstname_sibling: "",
+        /* firstname_sibling: "",
         lastname_sibling: "",
-        date_sibling: "",
+        date_sibling: "", */
         child_list: [],
 
         elternteil1: {
@@ -135,7 +135,8 @@ export default new Vuex.Store({
         },
 
         haushaltseinkommen: 0,
-        one: true,
+        /* 
+                one: true, */
     },
     mutations: {
         //write value of textfield into variable

@@ -1,6 +1,6 @@
 <template>
   <div id="Ge" class="mx-16">
-    <v-row
+  <!--   <v-row
       ><v-col
         ><v-img
           :src="require('/src/img/hl.jpg')"
@@ -237,14 +237,10 @@
           </v-col>
         </v-row>
       </v-card>
-    </div>
+    </div> -->
     <v-btn class="my-6" justify="center" @click="download" color="accent">
       PDF schreiben
       <v-icon> mdi-email-send </v-icon>
-    </v-btn>
-    <v-btn class="d-block mx-auto my-6" @click="funcShowNachweise">
-      <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
-      Nachweise
     </v-btn>
   </div>
 </template>
@@ -454,6 +450,7 @@ export default {
       let pdfName = "Antrag_Geschwisterermaeßigung";
 
       var doc = new jspdf();
+      
       var yearPlus = new Date().getFullYear() + 1;
       var firstname = this.$store.state.firstname;
       var lastname = this.$store.state.lastname;
@@ -463,6 +460,11 @@ export default {
       var town = this.$store.state.town;
       var email = this.$store.state.email;
       var tel = this.$store.state.tel;
+      
+      var child_name = this.$store.state.child_lastname + ", " + this.$store.state.child_firstname;
+      var child_date = this.$store.state.date_child;
+      var betreuungseinrichtung = this.$store.state.institutionname;
+      var date_bb = this.$store.state.date_bb;
 
       doc.setFontSize("15");
       doc.text(
@@ -568,6 +570,26 @@ export default {
         15,
         165
       );
+      doc.setFontType("bold");
+      doc.text("1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:", 15, 175);
+      doc.setFontType("normal");
+      doc.setFontSize("7");
+      doc.text("Name, Vorname", 130, 50);
+      doc.setFontSize("9");
+      doc.text(child_name, 130, 55);
+      doc.setFontSize("7");
+      doc.text("Geburtsdatum", 130, 60);
+      doc.setFontSize("9");
+      doc.text(child_date, 130, 65);
+      doc.setFontSize("7");
+      doc.text("Kindertagesstätte", 130, 70);
+      doc.setFontSize("9");
+      doc.text(betreuungseinrichtung, 130, 75);
+      doc.setFontSize("7");
+      doc.text("Betreuungsbeginn", 130, 80);
+      doc.setFontSize("9");
+      doc.text(date_bb, 130, 85);
+      
       for (var i = 0; i < this.child_list.length; i++) {
         doc.text(
           this.child_list[i].sibling_firstname +
@@ -579,10 +601,6 @@ export default {
       }
 
       doc.save(pdfName + ".pdf");
-    },
-
-    funcShowNachweise() {
-        this.$parent.funcShowNachweise();
     },
   },
 };

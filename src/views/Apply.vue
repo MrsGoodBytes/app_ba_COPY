@@ -7,7 +7,10 @@
             <h1 class="mb-2">Willkommen</h1>
             <h4>
               Erstellen Sie Anträge auf
-                  <h3>Entgeltermäßigung Geschwisterermäßigung <br>und Mittel aus dem Bildungsfond</h3>
+              <h3>
+                Entgeltermäßigung Geschwisterermäßigung <br />und Mittel aus dem
+                Bildungsfond
+              </h3>
               jetzt vollständig digital.
             </h4>
           </v-col>
@@ -24,12 +27,12 @@
           </v-col>
         </v-row>
       </v-card>
-      <v-card
-          class="mx-auto pa-5 my-8"
-          outlined
-          >
-          <h4 class="text-left"><v-icon>mdi-file</v-icon> Du hast eine Datei mit deinen gespeicherten Daten? Dann lade sie hier hoch!</h4>
-          <v-file-input
+      <v-card class="mx-auto pa-5 my-8" outlined>
+        <h4 class="text-left">
+          <v-icon>mdi-file</v-icon> Du hast eine Datei mit deinen gespeicherten
+          Daten? Dann lade sie hier hoch!
+        </h4>
+        <v-file-input
           accept="json/*"
           label="JSON-Datei hochladen"
           v-model="upload"
@@ -37,8 +40,10 @@
           show-size
           counter
           multiple
-          truncate-length="23"></v-file-input>
-        </v-card>
+          truncate-length="23"
+        ></v-file-input>
+        <v-btn @click="load_data">data test </v-btn>
+      </v-card>
       <Antragswahl msg="Welche Anträge möchtest du stellen?" />
       <v-alert
         v-if="
@@ -98,8 +103,11 @@
         Kind/er
       </v-btn>
 
-      <Abschicken v-if="Abschicken" :child_list="this.child_list" :person_list="this.person_list" />
-      
+      <Abschicken
+        v-if="Abschicken"
+        :child_list="this.child_list"
+        :person_list="this.person_list"
+      />
     </v-container>
   </div>
 </template>
@@ -112,6 +120,8 @@ import Kind from "@/components/Kind.vue";
 import Nachweise from "@/components/Nachweise.vue";
 import Abschicken from "@/components/Abschicken.vue";
 
+var data_upload;
+
 export default {
   name: "Apply",
   components: {
@@ -123,6 +133,7 @@ export default {
   },
   data() {
     return {
+      tmp: null,
       upload: null,
       geCheck: false,
       entCheck: false,
@@ -188,13 +199,11 @@ export default {
       let file = val[0];
       let fileReader = new FileReader();
       fileReader.readAsText(file);
-      
-      fileReader.onload = function() {
-        alert(fileReader.result); 
-        var tmp;
-        tmp = "test";
-        console.log(tmp);
-        
+
+      fileReader.onload = function () {
+        alert(fileReader.result);
+        data_upload = fileReader.result;
+        console.log(data_upload);
       };
       /* fileReader.onerror = function() {
         alert(fileReader.error);
@@ -209,17 +218,17 @@ export default {
       this.$store.commit("setChildList", val);
     },
     geCheck: function (val) {
-      for(let i = 0; i < this.child_list.length; i++) {
+      for (let i = 0; i < this.child_list.length; i++) {
         this.child_list[i].geCheck = val;
       }
     },
     entCheck: function (val) {
-      for(let i = 0; i < this.child_list.length; i++) {
+      for (let i = 0; i < this.child_list.length; i++) {
         this.child_list[i].entCheck = val;
       }
     },
     bifoCheck: function (val) {
-      for(let i = 0; i < this.child_list.length; i++) {
+      for (let i = 0; i < this.child_list.length; i++) {
         this.child_list[i].bifoCheck = val;
       }
     },
@@ -232,7 +241,6 @@ export default {
   },
 
   methods: {
-
     funcShowAntragstellerDaten() {
       this.AntragstellerDaten = true;
       this.KindDaten = false;
@@ -412,6 +420,68 @@ export default {
     },
     setBifoCheck(state) {
       this.bifoCheck = state;
+    },
+    load_data() {
+      this.tmp = data_upload;
+      this.tmp = JSON.parse(this.tmp);
+
+      this.person_list = this.tmp.person_list;
+      this.child_list = this.tmp.child_list;
+
+      this.$store.state.geCheck = this.tmp.geCheck;
+      this.$store.state.entCheck = this.tmp.entCheck;
+      this.$store.state.bifoCheck = this.tmp.bifoCheck;
+
+        this.$store.state.firstname = this.tmp.firstname;
+        this.$store.state.lastname = this.tmp.lastname;
+        this.$store.state.street = this.tmp.street;
+        this.$store.state.number = this.tmp.number;
+        this.$store.state.postcode = this.tmp.postcode;
+        this.$store.state.town = this.tmp.town;
+        this.$store.state.email = this.tmp.email;
+        this.$store.state.tel = this.tmp.tel;
+
+        this.$store.state.date = this.tmp.date;
+        this.$store.state.date_child = this.tmp.date_child;
+        this.$store.state.date_bb = this.tmp.date_bb;
+        this.$store.state.radioGroupAntragsgrundlage = this.tmp.radioGroupAntragsgrundlage;
+        this.$store.state.antragsgrundlage = this.tmp.antragsgrundlage;
+        this.$store.state.privatinsolvenz = this.tmp.privatinsolvenz;
+        this.$store.state.radioGroupErmaeßigung = this.tmp.radioGroupErmaeßigung;
+        this.$store.state.radioGroupBetreuungsform = this.tmp.radioGroupBetreuungsform;
+
+        this.$store.state.vorjahr_checkbox = this.tmp.vorjahr_checkbox;
+        this.$store.state.eigentum_checkbox = this.tmp.eigentum_checkbox;
+        
+        this.$store.state.kontoinhaber = this.tmp.kontoinhaber;
+        this.$store.state.iban = this.tmp.iban;
+        this.$store.state.bic = this.tmp.bic;
+        this.$store.state.bank = this.tmp.bank;
+
+        this.$store.state.child_firstname = this.tmp.child_firstname;
+        this.$store.state.child_lastname = this.tmp.child_lastname;
+        this.$store.state.institutionstreet = this.tmp.institutionstreet;
+        this.$store.state.institutionnumber = this.tmp.institutionnumber;
+        this.$store.state.institutionpostcode = this.tmp.institutionpostcode;
+        this.$store.state.institutiontown = this.tmp.institutiontown;
+        this.$store.state.institutionname = this.tmp.institutionname;
+        this.$store.state.tagespflegename = this.tmp.tagespflegename;
+        this.$store.state.betreuungsform = this.tmp.betreuungsform;
+
+        this.$store.state.betreuungsumfang = this.tmp.betreuungsumfang;
+        this.$store.state.betreuungsbeginn = this.tmp.betreuungsbeginn;
+        this.$store.state.betreuungsentgelt = this.tmp.betreuungsentgelt;
+        this.$store.state.elternbeitrag = this.tmp.elternbeitrag;
+        this.$store.state.essensgeld = this.tmp.essensgeld;
+
+        this.$store.state.kostenerstattung = this.tmp.kostenerstattung;
+        this.$store.state.gueltig = this.tmp.gueltig;
+        this.$store.state.bifo_begr = this.tmp.bifo_begr;
+
+        this.$store.state.elternteil1 = this.tmp.elternteil1;
+        this.$store.state.elternteil2 = this.tmp.elternteil2;
+
+        this.$store.state.haushaltseinkommen = this.tmp.haushaltseinkommen;
     },
   },
 };
