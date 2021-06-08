@@ -32,6 +32,8 @@
           <v-icon>mdi-file</v-icon> Du hast eine Datei mit deinen gespeicherten
           Daten? Dann lade sie hier hoch!
         </h4>
+        <v-row>
+          <v-col cols="12" md="8" sm="12">
         <v-file-input
           accept="json/*"
           label="JSON-Datei hochladen"
@@ -42,7 +44,11 @@
           multiple
           truncate-length="23"
         ></v-file-input>
+          </v-col>
+          <v-col cols="12" md="4" sm="12">
         <v-btn class="mb-3 text-button" @click="load_data" color="primary">Daten übernehmen</v-btn>
+          </v-col>
+        </v-row>
       </v-card>
       <Antragswahl msg="Welche Anträge möchtest du stellen?" />
       <v-alert

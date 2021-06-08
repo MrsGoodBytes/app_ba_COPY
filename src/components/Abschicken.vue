@@ -413,7 +413,7 @@
       </div>
     </div>
     <v-btn
-      class="my-6"
+      class="my-6 text-button"
       justify="center"
       @click="funcDownloadData"
       color="accent"

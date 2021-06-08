@@ -1029,6 +1029,7 @@ export default {
 
       child_firstname: "",
       child_lastname: "",
+      date_child: "",
 
       elternbeitrag: "",
       date_bb: "",
@@ -1115,6 +1116,9 @@ export default {
     },
     child_lastname: function (val) {
       this.$store.commit("setChildLastname", val);
+    },
+    date_child: function (val) {
+      this.$store.commit("setDate_child", val);
     },
 
     date_bb: function (val) {

@@ -238,7 +238,7 @@
         </v-row>
       </v-card>
     </div> -->
-    <v-btn class="my-6" justify="center" @click="download" color="accent">
+    <v-btn class="my-6 py-6 text-button" justify="center" @click="download" color="accent">
       PDF schreiben
       <v-icon> mdi-email-send </v-icon>
     </v-btn>
@@ -570,34 +570,30 @@ export default {
         15,
         165
       );
-      doc.setFontType("bold");
       doc.text("1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:", 15, 175);
-      doc.setFontType("normal");
-      doc.setFontSize("7");
-      doc.text("Name, Vorname", 130, 50);
+      
       doc.setFontSize("9");
-      doc.text(child_name, 130, 55);
-      doc.setFontSize("7");
-      doc.text("Geburtsdatum", 130, 60);
-      doc.setFontSize("9");
-      doc.text(child_date, 130, 65);
-      doc.setFontSize("7");
-      doc.text("Kindertagesstätte", 130, 70);
-      doc.setFontSize("9");
-      doc.text(betreuungseinrichtung, 130, 75);
-      doc.setFontSize("7");
-      doc.text("Betreuungsbeginn", 130, 80);
-      doc.setFontSize("9");
-      doc.text(date_bb, 130, 85);
+      doc.text("Name, Vorname: " + child_name, 15, 185);
+      doc.text("Geburtsdatum: " + child_date, 85, 185);
+      doc.text("Kindertagesstätte: " + betreuungseinrichtung, 15, 195);
+      doc.text("Betreuungsbeginn: " + date_bb, 85, 195);
       
       for (var i = 0; i < this.child_list.length; i++) {
+        doc.text("Geschwisterkind " + (i+1) + ":", 15, 210);
         doc.text(
-          this.child_list[i].sibling_firstname +
+          "Name, Vorname: " + this.child_list[i].sibling_lastname + 
             " " +
-            this.child_list[i].sibling_lastname,
+            this.child_list[i].sibling_firstname,
           15,
-          175 + i * 10
+          220 + i * 10
         );
+        doc.text(
+          "Geburtsdatum: " + this.child_list[i].sibling_date,
+          85,
+          220 + i * 10
+        );
+        doc.text("Kindertagesstätte: " + this.child_list[i].sibling_date, 15, 230 + i * 10);
+        doc.text("Betreuungsbeginn: " + this.child_list[i].betreuungsbeginn, 85, 230 + i * 10);
       }
 
       doc.save(pdfName + ".pdf");
