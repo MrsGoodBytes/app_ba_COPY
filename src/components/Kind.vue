@@ -128,7 +128,7 @@
           <v-checkbox v-model="vorjahr_checkbox" ref="vorjahr_check"
             ><template v-slot:label>
               <div>
-                Für das Kind wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung
+                Für <span class="font-weight-bold">{{child_firstname}}</span> wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung
                 gestellt.
                 <v-tooltip class="mx-auto" bottom>
                   <template v-slot:activator="{ on, attrs }">
@@ -641,7 +641,7 @@
               <v-checkbox v-model="item.vorjahr_checkbox" ref="vorjahr_check"
                 ><template v-slot:label>
                   <div>
-                    Für das Kind wurde im VORJAHR ein Antrag auf
+                    Für <span class="font-weight-bold">{{item.sibling_firstname}}</span> wurde im VORJAHR ein Antrag auf
                     Entgelt-Ermäßigung gestellt.
                     <v-tooltip class="mx-auto" bottom>
                       <template v-slot:activator="{ on, attrs }">

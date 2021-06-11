@@ -29,8 +29,8 @@
       </v-card>
       <v-card class="mx-auto pa-5 my-8" outlined>
         <h4 class="text-left">
-          <v-icon>mdi-file</v-icon> Du hast eine Datei mit deinen gespeicherten
-          Daten? Dann lade sie hier hoch!
+          <v-icon>mdi-file</v-icon> Sie haben eine Datei mit Ihren gespeicherten
+          Daten? Dann können Sie diese hier hochladen und wiederherstellen!
         </h4>
         <v-row>
           <v-col cols="12" md="8" sm="12">
