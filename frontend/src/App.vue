@@ -4,11 +4,24 @@
     <div id="nav">
       <router-link to="/check">Berechtigung prüfen</router-link> |
       <router-link to="/">Anträge stellen</router-link>
+      <file-upload />
     </div>
     <router-view/>
   </div>
 </v-app>
 </template>
+
+<script>
+import FileUpload from './components/FileUpload.vue'
+
+export default {
+  name: 'app',
+  components: {
+    FileUpload
+  },
+}
+</script>
+
   
 <style>
 #app {
