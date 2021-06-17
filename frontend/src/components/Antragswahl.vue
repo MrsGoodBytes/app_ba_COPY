@@ -7,7 +7,7 @@
           ><template v-slot:label>
             <div>
               Geschwisterermäßigung
-              <v-tooltip class="mx-auto" bottom>
+              <v-tooltip class="mx-auto" max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
                     class="my-auto"
@@ -50,7 +50,7 @@
         ><template v-slot:label>
             <div>
               Entgeltermäßigung
-              <v-tooltip class="mx-auto" bottom>
+              <v-tooltip class="mx-auto" max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
                     class="my-auto"
@@ -61,7 +61,8 @@
                   >
                 </template>
                 <span
-                  >Von der Entgeltermäßigung ausgenommen sind Kinder in einer Betreuung im Rahmen der Ganztagsschule.</span
+                  >Von der Entgeltermäßigung ausgenommen sind Kinder in einer Betreuung im Rahmen der Ganztagsschule.<br /><br />
+                  Für Entgeltermäßigung sind Sie berechtigt, sofern Sie Sozialleistungen beziehen oder unterhalb der Einkommengrenze liegen. Wenn Sie sich nicht sicher sind, nutzen Sie unseren Test auf Berechitigung am Anfang dieser Seite.</span
                 >
               </v-tooltip>
             </div></template
@@ -72,7 +73,7 @@
         ><template v-slot:label>
             <div>
               Bildungsfond
-              <v-tooltip class="mx-auto" bottom>
+              <v-tooltip class="mx-auto" max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
                     class="my-auto"
@@ -84,7 +85,8 @@
                 </template>
                 <span
                   >Die Kosten für Mittagessen können bei Berechtigung für Kinder in der Tagespflege übernommen werden. 
-                  Eine Übernahme von Kosten für ein- oder mehrtätige Ausflüge ist nicht möglich, wenn sich das Kind in einem Betreuungsverhältnis in einer Tagespflege befindet.</span
+                  Eine Übernahme von Kosten für ein- oder mehrtätige Ausflüge ist nicht möglich, wenn sich das Kind in einem Betreuungsverhältnis in einer Tagespflege befindet.<br /><br />
+                  Für Mittel aus dem Bildungsfond sind Sie berechtigt, sofern Sie Sozialleistungen beziehen, privatinsolvent gemeldet sind oder wegen geringem Einkommen als bedürftig eingestuft werden. Wenn Sie sich nicht sicher sind, nutzen Sie unseren Test auf Berechitigung am Anfang dieser Seite.</span
                 >
               </v-tooltip>
             </div></template

@@ -4,11 +4,11 @@
       <v-card color="#F5F5F5" class="mb-8">
         <v-row class="py-6"
           ><v-col class="text-left pl-16">
-            <h1 class="mb-2">Willkommen</h1>
+            <h1 class="mb-2">Willkommen liebe Eltern!</h1>
             <h4>
-              Erstellen Sie Anträge auf
+              Stellen Sie Anträge auf
               <h3>
-                Entgeltermäßigung Geschwisterermäßigung <br />und Mittel aus dem
+                Entgeltermäßigung, Geschwisterermäßigung <br />und Mittel aus dem
                 Bildungsfond
               </h3>
               jetzt vollständig digital.
@@ -20,7 +20,7 @@
               <p>hilft Ihnen unser Test auf Berechtigung weiter:</p>
               <router-link :to="{ name: 'Check' }" href="#" class=""
                 ><v-btn color="accent" class="mb-3 text-button"
-                  >Welche Anträge sollte ich stellen?</v-btn
+                  >Förderberechtigung feststellen</v-btn
                 ></router-link
               >
             </v-card>
@@ -29,7 +29,9 @@
       </v-card>
       <v-card class="mx-auto pa-5 my-8" outlined>
         <h4 class="text-left">
-          <v-icon>mdi-file</v-icon> Sie haben eine Datei mit Ihren gespeicherten
+          <v-icon>mdi-file</v-icon> Anträge müssen jedes Jahr erneut gestellt werden. Denken Sie daran, am Ende der Antragstellung Ihre herunterzuladen,
+          uns sie beim nächsten Antrag zu importieren.
+          Sie haben bereits eine Datei mit Ihren gespeicherten
           Daten? Dann können Sie diese hier hochladen und wiederherstellen!
         </h4>
         <v-row>
@@ -50,7 +52,7 @@
           </v-col>
         </v-row>
       </v-card>
-      <Antragswahl msg="Welche Anträge möchtest du stellen?" />
+      <Antragswahl msg="Welche Anträge möchten Sie stellen?" />
       <v-alert
         v-if="
           !(
