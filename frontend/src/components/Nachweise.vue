@@ -10,15 +10,6 @@
       <span class="font-weight-bold">Uploadhinweis:</span> Wählen Sie zum Upload
       relevanten Dateien gleichzeitg aus.</v-alert
     >
-    <!-- <v-card
-          class="mx-auto pt-4 mb-4"
-          outlined
-        ><p><v-icon>mdi-information</v-icon>
-          
-            <span class="font-weight-bold">Uploadhinweis:</span> Wählen Sie zum Upload mehrere Dateien
-      gleichzeitg aus.
-          </p>
-        </v-card> -->
     <h3>Allgemeine Nachweise</h3>
     <v-row justify="space-around">
       <v-col cols="4" class="my-auto">
@@ -1640,24 +1631,28 @@ export default {
   watch: {
     filePriv: function (val) {
       //in b64 umwandeln
+      this.imageToBase64();
       this.$store.commit("setFilePriv", val);
     },
     fileBetr: function (val) {
+      this.$store.commit("setFileBetr", val);
+    },
+  },
+
+  methods: {
+    imageToBase64 () {
       //in b64 umwandeln
       var file = this.fileBetr;
       var reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
-        console.log("file to base64 result:" + reader.result);
-        this.iconBase64 = reader.result;
+        console.log('file to base64 result:' + reader.result)
+        this.iconBase64 = reader.result
       };
       reader.onerror = function (error) {
-        console.log("Error: ", error);
+        console.log('Error: ', error)
       };
-      this.$store.commit("setFileBetr", val);
     },
   },
-
-  methods: {},
 };
 </script>

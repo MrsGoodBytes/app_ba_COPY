@@ -18,6 +18,7 @@ app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
 app.post('/upload', (req, res) => {
     var data = {
         fileBetr: req.body.fileBetr,
+        filePriv: req.body.filePriv,
     }
 
     /* var image = new Image();
