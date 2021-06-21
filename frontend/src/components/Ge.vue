@@ -45,9 +45,13 @@ export default {
   },
   data() {
     return {
-      ge_checkbox: "",
-      ent_checkbox: "",
-      bifo_checkbox: "",
+      ge_checkbox: false,
+      ent_checkbox: false,
+      bifo_checkbox: false,
+      geErfolg: false,
+      entErfolg: false,
+      bifoErfolg: false,
+
       firstname: "",
       lastname: "",
       street: "",
@@ -193,7 +197,7 @@ export default {
     this.ge_checkbox = this.$store.state.geCheck;
     this.ent_checkbox = this.$store.state.entCheck;
     this.bifo_checkbox = this.$store.state.bifoCheck;
-    
+
     this.name = this.$store.state.firstname + " " + this.$store.state.lastname;
     this.date = this.$store.state.date;
     this.adress =
@@ -254,16 +258,22 @@ export default {
   },
 
   methods: {
+
     uploadData() {
-      //var tmp = this.$store.state.fileBetr;
-      alert("Anträge wurden gesendet!");
+      var tmp = this.$store.state.fileBetr;
+      alert(tmp + "Anträge wurden gesendet!");
       axios
         .post("http://localhost:5000/upload", {
           fileBetr: this.$store.state.fileBetr,
+          filePriv: this.$store.state.filePriv,
         })
         .then((response) => {
           alert(response.data);
         });
+    },
+
+    submit() {
+      console.log("Diese Funktion wird aufgerufen.")
     },
 
     download() {
@@ -435,6 +445,7 @@ export default {
       doc.save(pdfName + ".pdf");
 
       this.uploadData();
+      this.submit();
     },
   },
 };

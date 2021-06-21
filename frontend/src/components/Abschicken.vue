@@ -444,7 +444,7 @@
 </template>
 
 <script>
-import Ge from "@/views/Ge.vue";
+import Ge from "@/components/Ge.vue";
 //import axios from "axios";
 
 export default {
@@ -554,6 +554,16 @@ export default {
     },
     funcShowNachweise() {
       this.$parent.funcShowNachweise();
+    },
+
+    setGeCheck(state) {
+      this.$parent.setGeCheck(state);
+    },
+    setEntCheck(state) {
+      this.$parent.setEntCheck = state;
+    },
+    setBifoCheck(state) {
+      this.$parent.setBifoCheck = state;
     },
     //JSON Download
     funcDownloadData() {
