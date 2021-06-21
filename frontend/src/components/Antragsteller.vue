@@ -24,7 +24,7 @@
           ></v-text-field>
         </v-col>
         <v-col cols="12" md="4" sm="12" v-if="this.$store.state.entCheck">
-              <v-text-field
+          <v-text-field
             outlined
             v-model="date"
             label="Geburtsdatum TT-MM-JJJJ"
@@ -115,12 +115,19 @@
               <span class="text-decoration-underline font-weight-bold"
                 >alle</span
               >
-              Personen eintragen, die in Ihrem Haushalt leben.<br /> Einschließlich aller Kinder, unabhängig von Alter oder davon, ob Sie für diese Anträge stellen möchten oder nicht.</span
+              Personen eintragen, die in Ihrem Haushalt leben.<br />
+              Einschließlich aller Kinder, unabhängig von Alter oder davon, ob
+              Sie für diese Anträge stellen möchten oder nicht.</span
             >
           </v-tooltip>
         </h3>
 
-        <v-card v-for="item in personlist" :key="item.id" cols="12" class="mt-1 mb-3 px-3">
+        <v-card
+          v-for="item in personlist"
+          :key="item.id"
+          cols="12"
+          class="mt-1 mb-3 px-3"
+        >
           <v-row>
             <v-col class="pb-0" cols="12" md="4" sm="12">
               <v-text-field
@@ -152,7 +159,18 @@
             </v-col>
           </v-row>
           <v-row>
-            <v-col class="py-0" cols="12" sm="12">
+            <v-col class="d-flex py-0" cols="12" sm="12" md="12">
+              <v-tooltip bottom>
+                <template v-slot:activator="{ on, attrs }">
+                  <v-icon color="accent" v-bind="attrs" v-on="on"
+                    >mdi-information</v-icon
+                  >
+                </template>
+                <span
+                  >Bitte den Namen des Kindes mit nennen. Bsp: "Vater von
+                  Name-des-Kindes"</span
+                >
+              </v-tooltip>
               <v-text-field
                 outlined
                 v-model="item.verwandtschaft_p"
@@ -192,28 +210,29 @@
               >mdi-information</v-icon
             >
           </template>
-          <div class="pl-3" >
-          <p class="text-left">
-            Wenn Sie
-            <span class="font-weight-bold">Privatinsolvenz</span> angemeldet
-            haben, muss hierfür der amtsgerichtliche Bescheid vorliegen.
-          </p>
-          <p></p>
-          <p class="text-left">
-            im Fall von <span class="font-weight-bold">Einkommen</span> wird anhand
-            der Einkommensgrenze entschieden, ob sie förderungsfähig sind.
-          </p>
-          <p class="text-left"
-            >Zu <span class="font-weight-bold">Sozialleistungen</span> zählen
-            <list class="text-left">
-              <li>Leistungen vom Jobcenter (Arbeitslosengeld II)</li>
-              <li>Wohngeld nach dem Wohngeldgesetz</li>
-              <li>Kinderzuschlag der Familienkassen</li>
-              <li>Hilfe zum Lebensunterhalt</li>
-              <li>Grundsicherung im Alter und bei Erwerbsminderung</li>
-              <li>Leistungen nach dem Asylbewerberleistungsgesetz</li>
-            </list>
-          </p>
+          <div class="pl-3">
+            <p class="text-left">
+              Wenn Sie
+              <span class="font-weight-bold">Privatinsolvenz</span> angemeldet
+              haben, muss hierfür der amtsgerichtliche Bescheid vorliegen.
+            </p>
+            <p></p>
+            <p class="text-left">
+              im Fall von <span class="font-weight-bold">Einkommen</span> wird
+              anhand der Einkommensgrenze entschieden, ob sie förderungsfähig
+              sind.
+            </p>
+            <p class="text-left">
+              Zu <span class="font-weight-bold">Sozialleistungen</span> zählen
+              <list class="text-left">
+                <li>Leistungen vom Jobcenter (Arbeitslosengeld II)</li>
+                <li>Wohngeld nach dem Wohngeldgesetz</li>
+                <li>Kinderzuschlag der Familienkassen</li>
+                <li>Hilfe zum Lebensunterhalt</li>
+                <li>Grundsicherung im Alter und bei Erwerbsminderung</li>
+                <li>Leistungen nach dem Asylbewerberleistungsgesetz</li>
+              </list>
+            </p>
           </div>
         </v-tooltip>
       </h3>
@@ -797,8 +816,8 @@
                     >
                   </template>
                   <span
-                    >Für eine erfolgreiche Antragstellung sind Kosten über 5,20€ bitte
-                    nachweisen. (z.B. Kosten für Berufsbekleidung)</span
+                    >Für eine erfolgreiche Antragstellung sind Kosten über 5,20€
+                    bitte nachweisen. (z.B. Kosten für Berufsbekleidung)</span
                   >
                 </v-tooltip>
               </h4>
@@ -1453,11 +1472,11 @@ export default {
         "Privatinsolvenz",
         "geringes Einkommen",
         "der Bezug von Sozialleistungen",
-      ],/* 
+      ] /* 
       privatinsolvenz: false,
       sozialleistungen: false,
-      ohnesozialleistungen: false, */
-/* 
+      ohnesozialleistungen: false, */,
+      /* 
       nettoeinkommen: "",
       selbstständigkeiteinkommen: "", */
 
@@ -1602,12 +1621,14 @@ export default {
     this.email = this.$store.state.email;
     this.tel = this.$store.state.tel;
 
-    this.radioGroupAntragsgrundlage = this.$store.state.radioGroupAntragsgrundlage;
+    this.radioGroupAntragsgrundlage =
+      this.$store.state.radioGroupAntragsgrundlage;
     this.privatinsolvenz = this.$store.state.privatinsolvenz;
     this.radioGroupErmaeßigung = this.$store.state.radioGroupErmaeßigung;
 
     this.nettoeinkommen = this.$store.state.nettoeinkommen;
-    this.selbstständigkeiteinkommen = this.$store.state.selbstständigkeiteinkommen;
+    this.selbstständigkeiteinkommen =
+      this.$store.state.selbstständigkeiteinkommen;
 
     this.eigentum_checkbox = this.$store.state.eigentum_checkbox;
     this.elternteil1 = this.$store.state.elternteil1;
@@ -1674,7 +1695,7 @@ export default {
     eigentum_checkbox: function (val) {
       this.$store.commit("setEigentumCheck", val);
     },
-   
+
     valid: function (val) {
       this.$store.commit("setVal", val);
     },

@@ -2,7 +2,7 @@
   <div class="check">
     <p class="text-right">
       <router-link to="/"
-        ><v-btn fab class="mr-3"><v-icon>mdi-close</v-icon></v-btn></router-link
+        ><v-btn text outlined color="secondary" fab class="mr-3"><v-icon>mdi-close</v-icon></v-btn></router-link
       >
     </p>
     <h1 class="px-12">
@@ -1169,7 +1169,7 @@
           ></v-checkbox>
         </v-row>
         <p class="caption pt-0">
-          Es ist möglich die Antragswahl jederzeit zu ändern.
+          Es ist möglich die Auswahl auch später zu ändern.
         </p>
       </v-container>
     </v-row>
@@ -1438,7 +1438,15 @@ export default {
     },
 
     fourAdd() {
-      if (this.einkommensgrenze_gesamt < 3000) {
+      if (this.einkommensgrenze_gesamt < 2000) {
+        this.$store.state.entCheck = true;
+        this.$store.state.bifoCheck = true;
+        this.entErfolg = true;
+        this.bifoErfolg = true;
+        this.ent_checkbox = true;
+        this.bifo_checkbox = true;
+        this.e1 = 5;
+      } else if (this.einkommensgrenze_gesamt < 3000) {
         this.$store.state.entCheck = true;
         this.entErfolg = true;
         this.ent_checkbox = true;

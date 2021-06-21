@@ -412,27 +412,28 @@
         <v-divider class="my-8"></v-divider>
       </div>
     </div>
-    <v-btn
-      class="my-6 text-button"
-      justify="center"
-      @click="funcDownloadData"
-      color="accent"
-      v-model="btn_json"
-    >
-      meine Daten herunterladen
-      <v-icon> mdi-download-circle-outline </v-icon>
-    </v-btn>
-    <v-tooltip class="mx-auto" max-width="600" bottom>
-            <template v-slot:activator="{ on, attrs }">
-              <v-icon color="accent" v-bind="attrs" v-on="on"
-                >mdi-information</v-icon
-              >
-            </template>
-            <span><v-icon>mdi-file</v-icon> Anträge müssen jedes Jahr erneut gestellt werden.
-          Laden Sie hier Ihre Daten herunter, um Sie beim nächsten Mal zu Beginn der Antragstellung zu importieren.
-          Die heute von Ihnen eingegebenen Daten können so beim nächsten Mal wiederhergestellt werden. So sparen Sie sich die erneute Eingabe und beschleunigen Ihre Antragstellung.</span>
-          </v-tooltip>
-    
+    <v-card class="mx-auto pa-5 my-8" outlined>
+      <h4 class="text-left">
+        <v-icon>mdi-file</v-icon> Anträge müssen jedes Jahr erneut gestellt
+        werden. Denken Sie daran, am Ende der Antragstellung Ihre Daten
+        herunterzuladen, um sie beim nächsten Antrag zu importieren. Sie haben
+        bereits eine Datei mit Ihren gespeicherten Daten? Dann können Sie diese
+        hier hochladen und wiederherstellen!
+      </h4>
+      <v-row justify="space-around">
+        <v-btn
+          class="my-6 text-button"
+          justify="center"
+          @click="funcDownloadData"
+          color="primary"
+          v-model="btn_json"
+        >
+          meine Daten herunterladen
+          <v-icon> mdi-download-circle-outline </v-icon>
+        </v-btn>
+      </v-row>
+    </v-card>
+
     <div id="json"></div>
     <Ge :child_list="this.child_list" :person_list="this.person_list" />
     <v-btn class="d-block mx-auto my-6" @click="funcShowNachweise">
@@ -574,12 +575,14 @@ export default {
         email: this.$store.state.email,
         tel: this.$store.state.tel,
 
-        radioGroupAntragsgrundlage: this.$store.state.radioGroupAntragsgrundlage,
+        radioGroupAntragsgrundlage:
+          this.$store.state.radioGroupAntragsgrundlage,
         privatinsolvenz: this.$store.state.privatinsolvenz,
         radioGroupErmaeßigung: this.$store.state.radioGroupErmaeßigung,
 
         nettoeinkommen: this.$store.state.nettoeinkommen,
-        selbstständigkeiteinkommen: this.$store.state.selbstständigkeiteinkommen,
+        selbstständigkeiteinkommen:
+          this.$store.state.selbstständigkeiteinkommen,
 
         eigentum_checkbox: this.$store.state.eigentum_checkbox,
         elternteil1: this.$store.state.elternteil1,
@@ -609,7 +612,8 @@ export default {
         gueltig: this.$store.state.gueltig,
         bifo_begr: this.$store.state.bifo_begr,
 
-        kontoinhaber: this.$store.state.firstname + " " + this.$store.state.lastname,
+        kontoinhaber:
+          this.$store.state.firstname + " " + this.$store.state.lastname,
         iban: this.$store.state.iban,
         bic: this.$store.state.bic,
         bank: this.$store.state.bank,
@@ -622,7 +626,7 @@ export default {
       var url = URL.createObjectURL(blob);
 
       var a = document.createElement("a");
-      a.download = "backup.json";
+      a.download = "Daten_ErmaessigungsantraegeKinder" + new Date().getFullYear() + ".json";
       a.href = url;
       a.textContent = "Datei erstellt. Hier klicken zum Download";
 

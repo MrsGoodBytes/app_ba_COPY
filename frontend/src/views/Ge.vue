@@ -1,7 +1,32 @@
 <template>
   <div id="Ge" class="mx-16">
-    <v-btn class="my-6 py-6 text-button" justify="center" @click="download" color="accent">
-      PDF schreiben
+    <h3>Folgende Anträge werden abgeschickt:</h3>
+    <v-row justify="space-around">
+      <v-checkbox v-model="ge_checkbox" ref="ge_check"
+        ><template v-slot:label>
+          <div>Antrag auf Geschwisterermäßigung</div>
+        </template>
+      </v-checkbox>
+
+      <v-checkbox v-model="ent_checkbox" ref="ge_check"
+        ><template v-slot:label>
+          <div>Antrag auf Entgeltermäßigung</div>
+        </template>
+      </v-checkbox>
+
+      <v-checkbox v-model="bifo_checkbox" ref="ge_check"
+        ><template v-slot:label>
+          <div>Antrag auf Mittel aus dem Bildungsfond</div>
+        </template>
+      </v-checkbox>
+    </v-row>
+    <v-btn
+      class="my-6 py-6 text-button"
+      justify="center"
+      @click="download"
+      color="primary"
+    >
+      Anträge abschicken
       <v-icon> mdi-email-send </v-icon>
     </v-btn>
   </div>
@@ -10,7 +35,7 @@
 
 <script>
 import jspdf from "jspdf";
-import axios from "axios"
+import axios from "axios";
 
 export default {
   name: "Ge",
@@ -20,6 +45,9 @@ export default {
   },
   data() {
     return {
+      ge_checkbox: "",
+      ent_checkbox: "",
+      bifo_checkbox: "",
       firstname: "",
       lastname: "",
       street: "",
@@ -146,9 +174,26 @@ export default {
     };
   },
 
-  watch: {},
+  watch: {
+    ge_checkbox: function (val) {
+      this.$store.commit("setGeCheck", val);
+      this.$parent.setGeCheck(val);
+    },
+    ent_checkbox: function (val) {
+      this.$store.commit("setEntCheck", val);
+      this.$parent.setEntCheck(val);
+    },
+    bifo_checkbox: function (val) {
+      this.$store.commit("setBifoCheck", val);
+      this.$parent.setBifoCheck(val);
+    },
+  },
 
   created() {
+    this.ge_checkbox = this.$store.state.geCheck;
+    this.ent_checkbox = this.$store.state.entCheck;
+    this.bifo_checkbox = this.$store.state.bifoCheck;
+    
     this.name = this.$store.state.firstname + " " + this.$store.state.lastname;
     this.date = this.$store.state.date;
     this.adress =
@@ -210,21 +255,22 @@ export default {
 
   methods: {
     uploadData() {
-      var tmp = this.$store.state.fileBetr
+      var tmp = this.$store.state.fileBetr;
       alert(tmp);
-      axios.post("http://localhost:5000/upload", {        
-        fileBetr: this.$store.state.fileBetr,
-      })
-      .then((response) => {
-        alert(response.data);
-      })
+      axios
+        .post("http://localhost:5000/upload", {
+          fileBetr: this.$store.state.fileBetr,
+        })
+        .then((response) => {
+          alert(response.data);
+        });
     },
-    
+
     download() {
       let pdfName = "Antrag_Geschwisterermaeßigung";
 
       var doc = new jspdf();
-      
+
       var yearPlus = new Date().getFullYear() + 1;
       var firstname = this.$store.state.firstname;
       var lastname = this.$store.state.lastname;
@@ -234,8 +280,11 @@ export default {
       var town = this.$store.state.town;
       var email = this.$store.state.email;
       var tel = this.$store.state.tel;
-      
-      var child_name = this.$store.state.child_lastname + ", " + this.$store.state.child_firstname;
+
+      var child_name =
+        this.$store.state.child_lastname +
+        ", " +
+        this.$store.state.child_firstname;
       var child_date = this.$store.state.date_child;
       var betreuungseinrichtung = this.$store.state.institutionname;
       var date_bb = this.$store.state.date_bb;
@@ -344,18 +393,23 @@ export default {
         15,
         165
       );
-      doc.text("1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:", 15, 175);
-      
+      doc.text(
+        "1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:",
+        15,
+        175
+      );
+
       doc.setFontSize("9");
       doc.text("Name, Vorname: " + child_name, 15, 185);
       doc.text("Geburtsdatum: " + child_date, 85, 185);
       doc.text("Kindertagesstätte: " + betreuungseinrichtung, 15, 195);
       doc.text("Betreuungsbeginn: " + date_bb, 85, 195);
-      
+
       for (var i = 0; i < this.child_list.length; i++) {
-        doc.text("Geschwisterkind " + (i+1) + ":", 15, 210);
+        doc.text("Geschwisterkind " + (i + 1) + ":", 15, 210);
         doc.text(
-          "Name, Vorname: " + this.child_list[i].sibling_lastname + 
+          "Name, Vorname: " +
+            this.child_list[i].sibling_lastname +
             " " +
             this.child_list[i].sibling_firstname,
           15,
@@ -366,13 +420,21 @@ export default {
           85,
           220 + i * 10
         );
-        doc.text("Kindertagesstätte: " + this.child_list[i].sibling_date, 15, 230 + i * 10);
-        doc.text("Betreuungsbeginn: " + this.child_list[i].betreuungsbeginn, 85, 230 + i * 10);
+        doc.text(
+          "Kindertagesstätte: " + this.child_list[i].sibling_date,
+          15,
+          230 + i * 10
+        );
+        doc.text(
+          "Betreuungsbeginn: " + this.child_list[i].betreuungsbeginn,
+          85,
+          230 + i * 10
+        );
       }
 
       doc.save(pdfName + ".pdf");
 
-      this.uploadData()
+      this.uploadData();
     },
   },
 };

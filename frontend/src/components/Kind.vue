@@ -365,7 +365,6 @@
             prefix="€"
             :rules="moneyRules"
             label="Elternbeitrag"
-            required
           ></v-text-field>
         </v-col>
         <p v-else></p>
@@ -867,7 +866,6 @@
                 prefix="€"
                 :rules="moneyRules"
                 label="Elternbeitrag"
-                required
               ></v-text-field>
             </v-col>
             <p v-else></p>

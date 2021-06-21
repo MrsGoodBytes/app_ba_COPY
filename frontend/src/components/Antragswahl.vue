@@ -99,7 +99,7 @@
           ></v-checkbox>
       </v-row>
       <p class="caption pt-0">
-        Es ist möglich die Antragswahl jederzeit zu ändern.
+        Es ist möglich die Auswahl jederzeit zu ändern.
       </p>
     </v-container>
   </div>
