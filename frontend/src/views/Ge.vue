@@ -255,8 +255,8 @@ export default {
 
   methods: {
     uploadData() {
-      var tmp = this.$store.state.fileBetr;
-      alert(tmp);
+      //var tmp = this.$store.state.fileBetr;
+      alert("Anträge wurden gesendet!");
       axios
         .post("http://localhost:5000/upload", {
           fileBetr: this.$store.state.fileBetr,
