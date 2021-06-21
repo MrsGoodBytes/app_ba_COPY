@@ -115,7 +115,7 @@
               <span class="text-decoration-underline font-weight-bold"
                 >alle</span
               >
-              Personen eintragen, die in Ihrem Haushalt leben.</span
+              Personen eintragen, die in Ihrem Haushalt leben.<br /> Einschließlich aller Kinder, unabhängig von Alter oder davon, ob Sie für diese Anträge stellen möchten oder nicht.</span
             >
           </v-tooltip>
         </h3>
@@ -192,7 +192,18 @@
               >mdi-information</v-icon
             >
           </template>
-          <span class="text-left"
+          <div class="pl-3" >
+          <p class="text-left">
+            Wenn Sie
+            <span class="font-weight-bold">Privatinsolvenz</span> angemeldet
+            haben, muss hierfür der amtsgerichtliche Bescheid vorliegen.
+          </p>
+          <p></p>
+          <p class="text-left">
+            im Fall von <span class="font-weight-bold">Einkommen</span> wird anhand
+            der Einkommensgrenze entschieden, ob sie förderungsfähig sind.
+          </p>
+          <p class="text-left"
             >Zu <span class="font-weight-bold">Sozialleistungen</span> zählen
             <list class="text-left">
               <li>Leistungen vom Jobcenter (Arbeitslosengeld II)</li>
@@ -202,18 +213,8 @@
               <li>Grundsicherung im Alter und bei Erwerbsminderung</li>
               <li>Leistungen nach dem Asylbewerberleistungsgesetz</li>
             </list>
-          </span>
-          <p></p>
-          <p class="text-left">
-            Wenn Sie
-            <span class="font-weight-bold">Privatinsolvenz</span> angemeldet
-            haben, muss hierfür der amtsgerichtliche Bescheid vorliegen.
           </p>
-          <p></p>
-          <p class="text-left">
-            Fall von <span class="font-weight-bold">Einkommen</span> wird anhand
-            der Einkommensgrenze entschieden, ob sie förderungsfähig sind.
-          </p>
+          </div>
         </v-tooltip>
       </h3>
       <h4
@@ -796,8 +797,8 @@
                     >
                   </template>
                   <span
-                    >z.B. Kosten für Berufsbekleidung. Kosten über 5,20€ bitte
-                    nachweisen.</span
+                    >Für eine erfolgreiche Antragstellung sind Kosten über 5,20€ bitte
+                    nachweisen. (z.B. Kosten für Berufsbekleidung)</span
                   >
                 </v-tooltip>
               </h4>
@@ -1450,7 +1451,7 @@ export default {
       radioGroupAntragsgrundlage: 0,
       radioListAntragsgrundlage: [
         "Privatinsolvenz",
-        "kein Bezug von Sozialleistungen",
+        "geringes Einkommen",
         "der Bezug von Sozialleistungen",
       ],/* 
       privatinsolvenz: false,

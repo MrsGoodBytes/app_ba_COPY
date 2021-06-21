@@ -1,243 +1,5 @@
 <template>
   <div id="Ge" class="mx-16">
-  <!--   <v-row
-      ><v-col
-        ><v-img
-          :src="require('/src/img/hl.jpg')"
-          class="float-left"
-          max-width="300"
-        /> </v-col
-      ><v-col
-        ><v-img
-          :src="require('/src/img/adler.jpg')"
-          class="float-right"
-          max-width="100"
-      /></v-col>
-    </v-row>
-
-    <h2 class="font-weight-light pb-3">
-      Antrag auf Geschwisterermäßigung in Kindertagesstättenfür<br />
-      das Kita-Jahr {{ new Date().getFullYear() }} /
-      {{ new Date().getFullYear() + 1 }}
-    </h2>
-
-    <v-row>
-      <v-col class="text-left">
-        <p>
-          Hansestadt Lübeck<br />
-          Fachbereich Kultur und Bildung<br />
-          Entgeltermäßigung Kindertagesbetreuung<br />
-          Kronsforder Allee 2-6<br />
-          23539 Lübeck
-        </p>
-      </v-col>
-      <v-col cols="12" md="4" class="text-left float-right">
-        <h6 class="text--disabled">Antragstellende Person (Elternteil)</h6>
-        <h5>{{ this.name }}</h5>
-
-        <h6 class="text--disabled">Anschrift</h6>
-        <h5>{{ this.adress }}</h5>
-
-        <h6 class="text--disabled">Telefonnummer</h6>
-        <h5>{{ this.tel }}</h5>
-
-        <h6 class="text--disabled">E-Mail</h6>
-        <h5>{{ this.email }}</h5>
-      </v-col>
-    </v-row>
-    <h4 class="text-left">
-      Hiermit wird die Geschwisterermäßigungfür Kinder in Kindertagesstätten
-      beantragt.
-    </h4>
-    <h6 class="text-left">
-      Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder
-      Entgelten für die Betreuung von Kindern in Kindertageseinrichtungen oder
-      Kindertagespflegestellen“ der Hansestadt Lübeck.
-    </h6>
-    <p class="text-left">
-      Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer
-      Familie eine öffentlich geförderte Kindertageseinrichtung,
-      Kindertagespflegestelle oder eine Ganztagsbetreuung an Schulen mit einer
-      Nachmittagsbetreuung an mindestens 3 Tagen pro Woche für mindestens 70
-      EUR, wird der Elternbeitrag auf Antrag ermäßigt.<br />
-      <list
-        ><li>
-          Für das älteste Kind ist der Elternbeitrag in voller Höhe zu
-          entrichten.
-        </li>
-        <li>
-          Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,
-        </li>
-        <li>für jedes weitere jüngere Kind um 100%.</li> </list
-      ><br />
-      Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind
-      Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden
-      melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.
-    </p>
-
-    <h4 class="text-left">
-      1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:
-    </h4>
-    <v-card class="pa-3" outlined>
-      <v-row>
-        <v-col cols="12" md="7" class="text-left">
-          <h5>Name, Vorname: {{ this.child_name }}</h5>
-        </v-col>
-        <v-col cols="12" md="5" class="text-left">
-          <h5>Geburtdatum: {{ this.child_date }}</h5>
-        </v-col>
-      </v-row>
-
-      <v-row v-if="this.betreuung != 0 && this.betreuung != 1">
-        <v-col cols="12" md="7" class="text-left">
-          <h5>Name der Einrichtung: {{ this.betreuungseinrichtung }}</h5>
-        </v-col>
-        <v-col cols="12" md="5" class="text-left">
-          <h5>Betreuungsbeginn: {{ this.date_bb }}</h5>
-        </v-col>
-      </v-row>
-
-      <v-row v-if="this.betreuung == 1">
-        <v-col cols="12" md="7" class="text-left">
-          <h5>Kindertagespflegeperson: {{ this.tagespflege }}</h5>
-        </v-col>
-        <v-col cols="12" md="5" class="text-left">
-          <h5>Betreuungsbeginn: {{ this.date_bb }}</h5>
-        </v-col>
-        <v-col cols="12">
-          <h5>{{ this.betreuungsumfang }}</h5>
-        </v-col>
-      </v-row>
-
-      <v-row v-if="this.betreuung != 0 && this.betreuung != 1">
-        <v-col cols="12" class="text-left">
-          <h5>
-            <span v-if="this.betreuung == 2">Krippe</span>
-            <span v-if="this.betreuung == 3">Elementar</span>
-            <span v-if="this.betreuung == 4">Hort</span>
-          </h5>
-        </v-col>
-      </v-row>
-
-      <v-row>
-        <v-col cols="12" md="6" class="text-left">
-          <h5>Betreuungsentgelt: {{ this.betreuungsentgelt }} €</h5>
-        </v-col>
-        <v-col cols="12" md="6" class="text-left">
-          <h5>
-            Elternbeitrag:
-            <span v-if="this.elternbeitrag != 0"
-              >{{ this.elternbeitrag }} €</span
-            >
-            <span v-else>0 €</span>
-          </h5>
-        </v-col>
-      </v-row>
-    </v-card>
-
-    <div v-if="this.child_list.length != 0" class="mt-4">
-      <h4 class="text-left">
-        2. Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
-        anerkannten Betreuungsverhältnissen befinden:
-      </h4>
-
-      <v-card
-        v-for="(n, index) in child_list"
-        :key="n"
-        class="text-left pa-3"
-        outlined
-      >
-        <h5>{{ child_list[index].id + 1 }} .Geschwisterkind</h5>
-        <v-row>
-          <v-col cols="12" md="7" class="text-left">
-            <h5>
-              Name, Vorname: {{ child_list[index].sibling_firstname }},
-              {{ child_list[index].sibling_lastname }}
-            </h5>
-          </v-col>
-          <v-col cols="12" md="5" class="text-left">
-            <h5>Geburtsdatum: {{ child_list[index].date_sibling }}</h5>
-          </v-col>
-        </v-row>
-
-        <v-row
-          v-if="
-            child_list[index].radioGroupBetreuungsform_sibling != 0 &&
-            child_list[index].radioGroupBetreuungsform_sibling != 1
-          "
-        >
-          <v-col cols="12" md="7" class="text-left">
-            <h5>
-              Name der Einrichtung:
-              {{ child_list[index].betreuungseinrichtung }}
-            </h5>
-          </v-col>
-          <v-col cols="12" md="5" class="text-left">
-            <h5>Betreuungsbeginn: {{ child_list[index].date_bb }}</h5>
-          </v-col>
-        </v-row>
-
-        <v-row v-if="child_list[index].radioGroupBetreuungsform_sibling == 1">
-          <v-col cols="12" md="7" class="text-left">
-            <h5>
-              Kindertagespflegeperson: {{ child_list[index].tagespflegename }},
-              {{ child_list[index].institutionstreet }}
-              {{ child_list[index].institutionnumber }},
-              {{ child_list[index].institutionpostcode }}
-              {{ child_list[index].institutiontown }}
-            </h5>
-          </v-col>
-          <v-col cols="12" md="5" class="text-left">
-            <h5>Betreuungsbeginn: {{ child_list[index].date_bb }}</h5>
-          </v-col>
-        </v-row>
-
-        <v-row
-          v-if="
-            child_list[index].radioGroupBetreuungsform_sibling != 0 &&
-            child_list[index].radioGroupBetreuungsform_sibling != 1
-          "
-        >
-          <v-col cols="12" class="text-left">
-            <h5>
-              <span
-                v-if="child_list[index].radioGroupBetreuungsform_sibling == 2"
-                >Krippe</span
-              >
-              <span
-                v-if="child_list[index].radioGroupBetreuungsform_sibling == 3"
-                >Elementar</span
-              >
-              <span
-                v-if="child_list[index].radioGroupBetreuungsform_sibling == 4"
-                >Hort</span
-              >
-              <span
-                v-if="child_list[index].radioGroupBetreuungsform_sibling == 5"
-                >Ganztagsschule</span
-              >
-            </h5>
-          </v-col>
-        </v-row>
-
-        <v-row>
-          <v-col cols="12" md="6" class="text-left">
-            <h5>
-              Betreuungsentgelt: {{ child_list[index].betreuungsentgelt }} €
-            </h5>
-          </v-col>
-          <v-col cols="12" md="6" class="text-left">
-            <h5>
-              Elternbeitrag:
-              <span v-if="child_list[index].elternbeitrag != 0"
-                >{{ child_list[index].elternbeitrag }} €</span
-              >
-              <span v-else>0 €</span>
-            </h5>
-          </v-col>
-        </v-row>
-      </v-card>
-    </div> -->
     <v-btn class="my-6 py-6 text-button" justify="center" @click="download" color="accent">
       PDF schreiben
       <v-icon> mdi-email-send </v-icon>
@@ -248,6 +10,7 @@
 
 <script>
 import jspdf from "jspdf";
+import axios from "axios"
 
 export default {
   name: "Ge",
@@ -446,6 +209,17 @@ export default {
   },
 
   methods: {
+    uploadData() {
+      var tmp = this.$store.state.fileBetr
+      alert(tmp);
+      axios.post("http://localhost:5000/upload", {        
+        fileBetr: this.$store.state.fileBetr,
+      })
+      .then((response) => {
+        alert(response.data);
+      })
+    },
+    
     download() {
       let pdfName = "Antrag_Geschwisterermaeßigung";
 
@@ -597,6 +371,8 @@ export default {
       }
 
       doc.save(pdfName + ".pdf");
+
+      this.uploadData()
     },
   },
 };

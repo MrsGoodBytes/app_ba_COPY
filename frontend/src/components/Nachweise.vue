@@ -2,17 +2,15 @@
   <div id="Nachweise">
     <h2 class="py-3">Nachweise</h2>
     <h5 class="pb-3">
-      Auf Grund Ihrer Angaben werden folgende Nachweise benötigt:
+      Aufgrund Ihrer Angaben werden folgende Nachweise benötigt:
     </h5>
-    <v-alert
-        type="warning"
-        class="pa-2"
-        ><v-icon>mdi-information</v-icon>
-          
-            <span class="font-weight-bold">Uploadhinweis:</span> Wählen Sie zum Upload mehrere Dateien
-      gleichzeitg aus.</v-alert
-      >
-        <!-- <v-card
+    <v-alert type="warning" class="pa-2"
+      ><v-icon>mdi-information</v-icon>
+
+      <span class="font-weight-bold">Uploadhinweis:</span> Wählen Sie zum Upload
+      relevanten Dateien gleichzeitg aus.</v-alert
+    >
+    <!-- <v-card
           class="mx-auto pt-4 mb-4"
           outlined
         ><p><v-icon>mdi-information</v-icon>
@@ -42,6 +40,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileBetr"
           accept="image/*"
           label="Betreuungsverträge"
           chips
@@ -71,8 +70,12 @@
               </v-card-title>
 
               <v-card-text>
-                <v-img :src="require('/src/img/Betreuungsvertrag_Tagespflege.jpg')" />
-                <v-img :src="require('/src/img/Betreuungsvertrag_städtische.jpg')" />
+                <v-img
+                  :src="require('/src/img/Betreuungsvertrag_Tagespflege.jpg')"
+                />
+                <v-img
+                  :src="require('/src/img/Betreuungsvertrag_städtische.jpg')"
+                />
               </v-card-text>
 
               <v-divider></v-divider>
@@ -142,6 +145,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="filePriv"
           accept="image/*"
           label="Nachweis Privatinsolvenz"
           chips
@@ -1586,6 +1590,8 @@ export default {
   props: {},
   data() {
     return {
+      filePriv: null,
+      fileBetr: null,
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       numberRules: [
@@ -1626,9 +1632,31 @@ export default {
     };
   },
 
-  created() {},
+  created() {
+    this.fileBetr = this.$store.state.fileBetr;
+    this.filePriv = this.$store.state.filePriv;
+  },
 
-  watch: {},
+  watch: {
+    filePriv: function (val) {
+      //in b64 umwandeln
+      this.$store.commit("setFilePriv", val);
+    },
+    fileBetr: function (val) {
+      //in b64 umwandeln
+      var file = this.fileBetr;
+      var reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => {
+        console.log("file to base64 result:" + reader.result);
+        this.iconBase64 = reader.result;
+      };
+      reader.onerror = function (error) {
+        console.log("Error: ", error);
+      };
+      this.$store.commit("setFileBetr", val);
+    },
+  },
 
   methods: {},
 };

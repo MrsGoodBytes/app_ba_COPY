@@ -18,12 +18,18 @@
                   >
                 </template>
                 <span
-                  >Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende
-                  Kinder einer Familie eine öffentlich geförderte
-                  Kindertageseinrichtung, Kindertagespflegestelle oder eine
-                  Ganztagsbetreuung an Schulen mit einer Nachmittagsbetreuung an
-                  mindestens 3 Tagen pro Woche für mindestens 70 EUR, wird der
-                  Elternbeitrag auf Antrag ermäßigt.
+                  >Der Elternbeitrag wird auf Antrag ermäßigt, wenn:
+                  <ul><li>
+                  mehrere Kinder einer Familie mit Hauptwohnung in einem Haushalt leben
+                  </li>
+                  <li>
+                  UND diese Kinder eine öffentlich geförderte
+                  Kindertageseinrichtung oder Kindertagespflegestelle oder eine
+                  Ganztagsbetreuung an Schulen (mit einer Nachmittagsbetreuung an
+                  mindestens 3 Tagen pro Woche für mindestens 70 EUR) besuchen.
+                  </li>
+                  </ul>
+                  <br />
                   <list
                     ><li>
                       Für das älteste Kind ist der Elternbeitrag in voller Höhe

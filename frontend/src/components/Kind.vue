@@ -6,7 +6,7 @@
       class="pb-3"
       v-if="this.$store.state.geCheck && !this.$store.state.entCheck"
     >
-      Bitte tragen Sie hier das jüngste Kind ein, für das die
+      Bitte tragen Sie zuerst das jüngste Kind ein, für das die
       Geschwisterermäßigung
       <span v-if="this.$store.state.bifoCheck">
         und/oder Hilfe aus dem Bildungsfond</span
@@ -35,7 +35,7 @@
       class="pb-3"
       v-if="this.$store.state.geCheck && this.$store.state.entCheck"
     >
-      Bitte tragen Sie hier das jüngste Kind ein, für das die
+      Bitte tragen Sie zuerst das jüngste Kind ein, für das die
       Geschwisterermäßigung<span v-if="this.$store.state.bifoCheck">
         und/oder Mittel aus dem Bildungsfond</span
       >
@@ -128,8 +128,10 @@
           <v-checkbox v-model="vorjahr_checkbox" ref="vorjahr_check"
             ><template v-slot:label>
               <div>
-                Für <span class="font-weight-bold">{{child_firstname}}</span> wurde im VORJAHR ein Antrag auf Entgelt-Ermäßigung
-                gestellt.
+                Für
+                <span class="font-weight-bold">{{ child_firstname }}</span>
+                wurde im VORJAHR ({{ new Date().getFullYear() - 1 }}) ein Antrag
+                auf Entgelt-Ermäßigung gestellt.
                 <v-tooltip class="mx-auto" bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon
@@ -544,14 +546,14 @@
         <v-col class="text-left" cols="4">
           <h5>
             Um an einer Aktivität des Aktiv-Passes teilnehmen zu können, wird
-            die Kostenerstattung für fol- gende Anschaffung beantragt:
+            die Kostenerstattung für folgende Anschaffung beantragt:
           </h5>
         </v-col>
         <v-col cols="8">
           <h5 class="text-left">
             Ausführliche Begründung zur Notwendigkeit der Anschaffung und
-            weshalb die Anschaffung nicht -endgültig- aus eigenen Mitteln
-            finanziert werden kann:
+            weshalb die Anschaffung nicht oder nicht vollständig aus eigenen
+            Mitteln finanziert werden kann:
           </h5>
           <v-textarea v-model="bifo_begr" outlined></v-textarea>
         </v-col>
@@ -579,8 +581,8 @@
           Entgeltermäßigung<span v-if="this.$store.state.bifoCheck">
             und/oder Mittel aus dem Bildungsfond</span
           >
-          beantragen möchten. Ausgenommen von der Entgeltermäßigung ist eine
-          Betreuung in der betreuten Grundschule.
+          beantragen möchten. Ausgenommen von der Entgeltermäßigung sind Kinder, welche in einer
+          Betreuung in der betreuten Grundschule untergebracht sind.
         </h5>
         <h5 v-else-if="this.$store.state.entCheck && this.$store.state.geCheck">
           Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in
@@ -641,8 +643,12 @@
               <v-checkbox v-model="item.vorjahr_checkbox" ref="vorjahr_check"
                 ><template v-slot:label>
                   <div>
-                    Für <span class="font-weight-bold">{{item.sibling_firstname}}</span> wurde im VORJAHR ein Antrag auf
-                    Entgelt-Ermäßigung gestellt.
+                    Für
+                    <span class="font-weight-bold">{{
+                      item.sibling_firstname
+                    }}</span>
+                    wurde im VORJAHR ({{ new Date().getFullYear() - 1 }}) ein
+                    Antrag auf Entgelt-Ermäßigung gestellt.
                     <v-tooltip class="mx-auto" bottom>
                       <template v-slot:activator="{ on, attrs }">
                         <v-icon
@@ -968,8 +974,8 @@
             <v-col cols="8">
               <h5 class="text-left">
                 Ausführliche Begründung zur Notwendigkeit der Anschaffung und
-                weshalb die Anschaffung nicht - endgültig - aus eigenen Mitteln
-                finanziert werden kann:
+                weshalb die Anschaffung nicht oder nicht vollständig aus eigenen
+                Mitteln finanziert werden kann:
               </h5>
               <v-textarea v-model="item.bifo_begr" outlined></v-textarea>
             </v-col>
@@ -1055,12 +1061,17 @@ export default {
       betreuungsumfang: "",
       radioGroupBetreuungsform: 0,
       radioGroupBetreuungsform_sibling: 0,
-      radioListBetreuungsform: ["Tagespflege", "Krippe", "Elementar", "Hort"],
+      radioListBetreuungsform: [
+        "Tagespflege",
+        "Kita-Krippe (0-3 Jahre)",
+        "Kita-Elementar (ab 3 Jahren)",
+        "Hort",
+      ],
       radioListBetreuungsform_bifo: ["Tagespflege", "Kindertageseinrichtung"],
       radioListBetreuungsform_ganz: [
         "Tagespflege",
-        "Krippe",
-        "Elementar",
+        "Kita-Krippe (0-3 Jahre)",
+        "Kita-Elementar (ab 3 Jahren)",
         "Hort",
         "Ganztags an Schule",
       ],

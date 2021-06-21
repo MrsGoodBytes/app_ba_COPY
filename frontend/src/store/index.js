@@ -137,6 +137,9 @@ export default new Vuex.Store({
         haushaltseinkommen: 0,
         /* 
                 one: true, */
+
+        fileBetr: null,
+        filePriv: null,
     },
     mutations: {
         //write value of textfield into variable
@@ -288,6 +291,13 @@ export default new Vuex.Store({
 
         setVal(state, value) {
             state.valid = value;
+        },
+
+        setFilePriv(state, value) {
+            state.filePriv = value;
+        },
+        setFileBetr(state, value) {
+            state.fileBetr = value;
         },
     },
     actions: {},

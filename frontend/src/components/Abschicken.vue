@@ -419,9 +419,20 @@
       color="accent"
       v-model="btn_json"
     >
-      Datei mit meinen Daten erstellen
+      meine Daten herunterladen
       <v-icon> mdi-download-circle-outline </v-icon>
     </v-btn>
+    <v-tooltip class="mx-auto" max-width="600" bottom>
+            <template v-slot:activator="{ on, attrs }">
+              <v-icon color="accent" v-bind="attrs" v-on="on"
+                >mdi-information</v-icon
+              >
+            </template>
+            <span><v-icon>mdi-file</v-icon> Anträge müssen jedes Jahr erneut gestellt werden.
+          Laden Sie hier Ihre Daten herunter, um Sie beim nächsten Mal zu Beginn der Antragstellung zu importieren.
+          Die heute von Ihnen eingegebenen Daten können so beim nächsten Mal wiederhergestellt werden. So sparen Sie sich die erneute Eingabe und beschleunigen Ihre Antragstellung.</span>
+          </v-tooltip>
+    
     <div id="json"></div>
     <Ge :child_list="this.child_list" :person_list="this.person_list" />
     <v-btn class="d-block mx-auto my-6" @click="funcShowNachweise">
@@ -433,6 +444,7 @@
 
 <script>
 import Ge from "@/views/Ge.vue";
+//import axios from "axios";
 
 export default {
   name: "Abschicken",
@@ -542,6 +554,7 @@ export default {
     funcShowNachweise() {
       this.$parent.funcShowNachweise();
     },
+    //JSON Download
     funcDownloadData() {
       var data = {
         geCheck: this.$store.state.geCheck,
@@ -615,7 +628,7 @@ export default {
 
       document.getElementById("json").appendChild(a);
       a.click();
-      document.getElementById("json").removeChild(a);  
+      document.getElementById("json").removeChild(a);
     },
   },
 };

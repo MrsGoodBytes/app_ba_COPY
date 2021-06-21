@@ -6,8 +6,7 @@
       >
     </p>
     <h1 class="px-12">
-      Bitte beantworten Sie die 4 Fragen um die für Sie relevanten Anträge zu
-      ermitteln:
+      Welche Anträge können Sie stellen? Finden Sie es mit nur 4 Fragen heraus!
     </h1>
 
     <v-stepper v-model="e1">
@@ -42,7 +41,18 @@
       <v-stepper-items>
         <v-stepper-content step="1" class="mb-6 mx-auto" height="200px">
           <h4 class="text-center mb-4">
-            Haben Sie mehr als eines Ihrer Kinder in einer Betreuungseinrichtung
+            Haben Sie mehr als eines Ihrer Kinder in einer Betreuungseinrichtung <v-tooltip max-width="600" bottom>
+        <template v-slot:activator="{ on, attrs }">
+          <v-icon color="accent" v-bind="attrs" v-on="on"
+            >mdi-information</v-icon
+          >
+        </template>
+        <span
+          >Hierzu zählt die Betreuung in einer Tagespflegeeinrichtung, 
+          einer Kita-Krippe, Kita-Elementargruppe, dem Hort 
+          und auch die Betreuung ihrer älteren Kinder an der Ganztagsschule.</span
+        >
+      </v-tooltip>
             angemeldet?
           </h4>
           <v-btn class="mx-3" color="accent" @click="oneAddYes"> Ja </v-btn>
