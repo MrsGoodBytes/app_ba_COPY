@@ -445,7 +445,6 @@
             outlined
             v-model="gueltig"
             label="Gültig ab"
-            required
           ></v-text-field>
         </v-col>
       </v-row>
@@ -534,7 +533,6 @@
             v-model="gueltig"
             :rules="dateRules"
             label="Gültig ab"
-            required
           ></v-text-field>
         </v-col>
       </v-row>

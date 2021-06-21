@@ -194,32 +194,15 @@ export default {
 
   watch: {
     upload: function (val) {
-      /*const reader = new FileReader();
-      this.tmp = val;
-
-      reader.onload = val => {
-        const result = JSON.parse(val);
-        const formatted = JSON.stringify(result, null, 2);
-        this.tmp2 = formatted;
-        this.upload = result;
-      }
-      reader.readAsText(this.upload);*/
       let file = val[0];
       let fileReader = new FileReader();
       fileReader.readAsText(file);
 
       fileReader.onload = function () {
-        alert(fileReader.result);
+        //alert(fileReader.result);
         data_upload = fileReader.result;
         console.log(data_upload);
       };
-      /* fileReader.onerror = function() {
-        alert(fileReader.error);
-      }
-      fileReader.onloadend = function() {
-        //var test = fileReader.result; 
-        this.tmp = "test";
-      }       */
     },
 
     child_list: function (val) {
