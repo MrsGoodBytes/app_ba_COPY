@@ -35,7 +35,7 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 4" step="6"> Frage 5 </v-stepper-step>
+        <v-stepper-step :complete="e1 > 4" step="6"> Geschafft! </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
