@@ -121,7 +121,7 @@
             >
           </v-tooltip>
         </h3>
-
+<!-- EINTRÄGE DER PERSONEN DES HAUSHALTS -->
         <v-card
           v-for="item in personlist"
           :key="item.id"
@@ -236,6 +236,7 @@
           </div>
         </v-tooltip>
       </h3>
+<!-- ANTRAGSGRUNDLAGE -->
       <h4
         v-if="
           (this.$store.state.entCheck || this.$store.state.bifoCheck) &&
@@ -261,7 +262,7 @@
           </v-radio-group>
         </v-col>
       </v-row>
-      <!-- TEXT Antragsgrundlage -->
+  <!-- TEXT Antragsgrundlage -->
       <v-row>
         <v-col
           v-if="
@@ -326,7 +327,7 @@
         <p v-else></p>
       </v-row>
 
-      <!-- Einkommensnachweise ohne Sozialleistungen -->
+  <!-- Einkommensnachweise ohne Sozialleistungen -->
       <div
         id="einkommensnachweis"
         v-if="
@@ -1399,7 +1400,7 @@
           können NICHT als Nachweis berücksichtigt werden.
         </p>
       </v-row>
-
+<!-- HINWEISE -->
       <v-row>
         <v-card
           v-if="this.$store.state.geCheck"
@@ -1702,12 +1703,6 @@ export default {
   },
 
   methods: {
-    /*addSum() {
-      var sum = 0;
-      sum = parseInt(this.elternteil1.netto) + parseInt(this.elternteil1.selbst);
-      sum = sum + parseInt(this.elternteil2.netto) + parseInt(this.elternteil2.selbst);
-      this.einkommensgrenze = sum;
-    },*/
 
     save(date) {
       this.$refs.menu.save(date);
@@ -1720,6 +1715,7 @@ export default {
     },
     funcShowKindDaten() {
       if (
+        // wenn Einträge fehlerhaft zeige Hinweis
         this.$refs.form.validate() == true &&
         (this.$store.state.entCheck || this.$store.state.bifoCheck) &&
         this.radioGroupAntragsgrundlage != 0

@@ -89,7 +89,7 @@
 
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-row class="my-0 py-0"
-        ><!-- v-for="n in childList" :key="n" -->
+        >
         <v-col cols="12" sm="4">
           <v-text-field
             outlined
@@ -558,10 +558,10 @@
       <p v-else></p>
 
       <v-divider v-if="this.$store.state.bifoCheck"></v-divider>
-
+<!-- GESCHWISTERKINDER -->
       <div id="Geschwisterkind">
         <h3 class="my-3">Geschwisterkind/er</h3>
-
+<!-- HEADLINE BASIEREND AUF ZU STELLENDEN ANTRÄGEN -->
         <h5 v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
           Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
           einem Betreuungsverhältnis befinden<span
@@ -591,7 +591,7 @@
           Ausgenommen für die Entgeltermäßigung ist eine Betreuung in der
           betreuten Grundschule.
         </h5>
-
+<!-- GESCHWISTERKINDER EINTRÄGE -->
         <v-card
           v-for="item in childlist"
           :key="item.id"
@@ -1228,6 +1228,7 @@ export default {
 
   methods: {
     funcShowNachweise() {
+      //Wenn Eingaben fehlerhaft zeige Hinweis
       if (this.$refs.form.validate() == true) {
         this.$parent.funcShowNachweise();
       } else {

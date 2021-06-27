@@ -209,6 +209,10 @@ export default {
     child_list: function (val) {
       this.$store.commit("setChildList", val);
     },
+    person_list: function (val) {
+      this.$store.commit("setPersonList", val);
+    },
+    
     geCheck: function (val) {
       for (let i = 0; i < this.child_list.length; i++) {
         this.child_list[i].geCheck = val;
