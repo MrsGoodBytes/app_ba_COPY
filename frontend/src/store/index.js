@@ -172,6 +172,9 @@ export default new Vuex.Store({
         setDate(state, value) {
             state.date = value;
         },
+        setPersonList(state, value) {
+            state.person_list = value;
+        },
         setDate_p(state, value) {
             state.date_p = value;
         },

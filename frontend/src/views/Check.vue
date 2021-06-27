@@ -69,7 +69,7 @@
                   >mdi-information</v-icon
                 >
               </template>
-              <span
+              <div class="pl-3 text-left"
                 >Zu Sozialleistungen zählen
                 <list class="text-left">
                   <li>Leistungen vom Jobcenter (Arbeitslosengeld II)</li>
@@ -79,7 +79,7 @@
                   <li>Grundsicherung im Alter und bei Erwerbsminderung</li>
                   <li>Leistungen nach dem Asylbewerberleistungsgesetz</li>
                 </list>
-              </span>
+              </div>
             </v-tooltip>
           </h4>
           <v-btn class="mx-3" color="accent" @click="twoAddYes"> Ja </v-btn>

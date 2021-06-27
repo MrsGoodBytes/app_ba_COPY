@@ -126,7 +126,7 @@
           v-for="item in personlist"
           :key="item.id"
           cols="12"
-          class="mt-1 mb-3 px-3"
+          class="mt-1 mb-6 px-3"
         >
           <v-row>
             <v-col class="pb-0" cols="12" md="4" sm="12">
@@ -168,7 +168,7 @@
                 </template>
                 <span
                   >Bitte den Namen des Kindes mit nennen. Bsp: "Vater von
-                  Name-des-Kindes"</span
+                  Name-des-Kindes". Bei Geschwistern geben Sie bitte das Verwandtschaftsverhältnis der Kinder untereinander an.</span
                 >
               </v-tooltip>
               <v-text-field

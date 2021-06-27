@@ -193,6 +193,7 @@ export default {
   },
 
   watch: {
+    //JSON UPLOAD
     upload: function (val) {
       let file = val[0];
       let fileReader = new FileReader();
@@ -378,17 +379,17 @@ export default {
       //ans Ende der Liste anfügen indem die richtige ID ermittelt wird
       if (this.person_list.length == 0) {
         neueperson.id = 0;
-        neueperson.firstname = "";
-        neueperson.lastname = "";
-        neueperson.date = "";
-        neueperson.verwandtschaft = "";
+        neueperson.firstname_person = "";
+        neueperson.lastname_person = "";
+        neueperson.date_p = "";
+        neueperson.verwandtschaft_p = "";
       } else {
         // vermeide Duplikate
         neueperson.id = this.person_list[this.person_list.length - 1].id + 1;
-        neueperson.firstname = "";
-        neueperson.lastname = "";
-        neueperson.date = "";
-        neueperson.verwandtschaft = "";
+        neueperson.firstname_person = "";
+        neueperson.lastname_person = "";
+        neueperson.date_p = "";
+        neueperson.verwandtschaft_p = "";
       }
 
       //eintragen der neuen Person in das Array
