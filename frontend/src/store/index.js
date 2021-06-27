@@ -58,9 +58,6 @@ export default new Vuex.Store({
         gueltig: "",
         bifo_begr: "",
 
-        /* firstname_sibling: "",
-        lastname_sibling: "",
-        date_sibling: "", */
         child_list: [],
         person_list: [],
 

@@ -362,9 +362,7 @@ export default {
         geschwisterkind.bifo_begr = "";
         geschwisterkind.kostenerstattung = "";
       }
-
       //eintragen des neuen Geschwisterkinds in das Array
-
       this.child_list.push(geschwisterkind);
     },
     deleteChild(id) {
@@ -395,9 +393,7 @@ export default {
         neueperson.date_p = "";
         neueperson.verwandtschaft_p = "";
       }
-
       //eintragen der neuen Person in das Array
-
       this.person_list.push(neueperson);
     },
     deletePerson(id) {
@@ -417,16 +413,22 @@ export default {
     setBifoCheck(state) {
       this.bifoCheck = state;
     },
-    load_data() {
+//JSON DATEI UPLOAD
+     load_data() {
       this.tmp = data_upload;
+  //Daten der hochgeladenen txt Datei in jsondatei umwandeln
       this.tmp = JSON.parse(this.tmp);
-
+  //übernahme der Daten in den Store
       this.person_list = this.tmp.person_list;
       this.child_list = this.tmp.child_list;
 
       this.$store.state.geCheck = this.tmp.geCheck;
       this.$store.state.entCheck = this.tmp.entCheck;
       this.$store.state.bifoCheck = this.tmp.bifoCheck;
+      
+      this.geCheck = this.tmp.geCheck;
+      this.entCheck = this.tmp.entCheck;
+      this.bifoCheck = this.tmp.bifoCheck;
 
       this.$store.state.firstname = this.tmp.firstname;
       this.$store.state.lastname = this.tmp.lastname;
@@ -480,6 +482,7 @@ export default {
       this.$store.state.elternteil2 = this.tmp.elternteil2;
 
       this.$store.state.haushaltseinkommen = this.tmp.haushaltseinkommen;
+  //DATEN IN DER ANZEIGE AKTUALISIEREN
     },
   },
 };

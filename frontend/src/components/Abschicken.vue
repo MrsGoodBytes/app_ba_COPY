@@ -565,8 +565,10 @@ export default {
     setBifoCheck(state) {
       this.$parent.setBifoCheck = state;
     },
-    //JSON Download
+
+//DOWNLOAD JSON DATEI
     funcDownloadData() {
+    //DATEN FÜR JSON DATEI
       var data = {
         geCheck: this.$store.state.geCheck,
         entCheck: this.$store.state.entCheck,
@@ -631,6 +633,7 @@ export default {
         child_list: this.$store.state.child_list,
         person_list: this.$store.state.person_list,
       };
+//JSON Datei wird erstellt
       var json = JSON.stringify(data);
       var blob = new Blob([json], { type: "application/json" });
       var url = URL.createObjectURL(blob);
@@ -638,8 +641,7 @@ export default {
       var a = document.createElement("a");
       a.download = "Daten_ErmaessigungsantraegeKinder" + new Date().getFullYear() + ".json";
       a.href = url;
-      a.textContent = "Datei erstellt. Hier klicken zum Download";
-
+// und Download automatisch gestartet
       document.getElementById("json").appendChild(a);
       a.click();
       document.getElementById("json").removeChild(a);
