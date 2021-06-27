@@ -458,6 +458,10 @@ export default {
   },
   data() {
     return {
+      child_lastname: "",
+      child_firstname: "",
+      btn_json: "",
+
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       numberRules: [
@@ -506,6 +510,8 @@ export default {
     this.email = this.$store.state.email;
     this.tel = this.$store.state.tel;
 
+    this.child_firstname = this.$store.state.child_firstname;
+    this.child_lastname = this.$store.state.child_lastname;
     this.child_name =
       this.$store.state.child_firstname +
       " " +

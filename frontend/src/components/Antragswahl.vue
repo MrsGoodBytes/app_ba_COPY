@@ -30,7 +30,7 @@
                   </li>
                   </ul>
                   <br />
-                  <list
+                  <ul
                     ><li>
                       Für das älteste Kind ist der Elternbeitrag in voller Höhe
                       zu entrichten.
@@ -39,7 +39,7 @@
                       Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag
                       um 50%,
                     </li>
-                    <li>Für jedes weitere jüngere Kind um 100%.</li> </list
+                    <li>Für jedes weitere jüngere Kind um 100%.</li> </ul
                   ><br />
                   Ermäßigung erfolgt unabhängig vom Einkommen.
                   Anspruchsberechtigt sind Familien, die in Lübeck gemeldet
