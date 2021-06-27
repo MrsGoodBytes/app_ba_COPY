@@ -483,6 +483,7 @@ export default {
 
       this.$store.state.haushaltseinkommen = this.tmp.haushaltseinkommen;
   //DATEN IN DER ANZEIGE AKTUALISIEREN
+      
     },
   },
 };
