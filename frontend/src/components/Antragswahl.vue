@@ -6,7 +6,7 @@
         <v-checkbox v-model="ge_checkbox" ref="ge_check"
           ><template v-slot:label>
             <div>
-              Geschwisterermäßigung
+              {{ geErm }}
               <v-tooltip class="mx-auto" max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
@@ -55,7 +55,7 @@
           ref="ent_check"
         ><template v-slot:label>
             <div>
-              Entgeltermäßigung
+              {{entErm}}
               <v-tooltip class="mx-auto" max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
@@ -78,7 +78,7 @@
           ref="bifo_check"
         ><template v-slot:label>
             <div>
-              Bildungsfond
+              {{ bifoErm }}
               <v-tooltip class="mx-auto" max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon
@@ -110,6 +110,9 @@ export default {
   name: "Antragswahl",
   props: {
     msg: String,
+    geErm: String,
+    entErm: String,
+    bifoErm: String,
   },
   data() {
     return {

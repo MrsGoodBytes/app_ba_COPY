@@ -435,6 +435,26 @@
     </v-card>
 
     <div id="json"></div>
+    <h3>Folgende Anträge werden abgeschickt:</h3>
+    <v-row justify="space-around">
+      <v-checkbox v-model="ge_checkbox" ref="ge_check"
+        ><template v-slot:label>
+          <div>Antrag auf Geschwisterermäßigung</div>
+        </template>
+      </v-checkbox>
+
+      <v-checkbox v-model="ent_checkbox" ref="ent_check"
+        ><template v-slot:label>
+          <div>Antrag auf Entgeltermäßigung</div>
+        </template>
+      </v-checkbox>
+
+      <v-checkbox v-model="bifo_checkbox" ref="bifo_check" @change="this.forceRerender()"
+        ><template v-slot:label>
+          <div>Antrag auf Mittel aus dem Bildungsfond</div>
+        </template>
+      </v-checkbox>
+    </v-row>
     <Ge :child_list="this.child_list" :person_list="this.person_list" />
     <v-btn class="d-block mx-auto my-6" @click="funcShowNachweise">
       <v-icon> mdi-arrow-left-bold-circle-outline </v-icon>
@@ -458,6 +478,13 @@ export default {
   },
   data() {
     return {
+      ge_checkbox: false,
+      ent_checkbox: false,
+      bifo_checkbox: false,
+      geErfolg: false,
+      entErfolg: false,
+      bifoErfolg: false,
+
       child_lastname: "",
       child_firstname: "",
       btn_json: "",
@@ -497,6 +524,10 @@ export default {
   },
 
   created() {
+    this.ge_checkbox = this.$store.state.geCheck;
+    this.ent_checkbox = this.$store.state.entCheck;
+    this.bifo_checkbox = this.$store.state.bifoCheck;
+
     this.name = this.$store.state.firstname + " " + this.$store.state.lastname;
     this.date = this.$store.state.date;
     this.adress =
@@ -549,7 +580,17 @@ export default {
       this.$store.state.bank;
   },
 
-  watch: {},
+  watch: {
+    ge_checkbox: function (val) {
+      this.$store.commit("setGeCheck", val);
+    },
+    ent_checkbox: function (val) {
+      this.$store.commit("setEntCheck", val);
+    },
+    bifo_checkbox: function (val) {
+      this.$store.commit("setBifoCheck", val);
+    },
+  },
 
   methods: {
     funcShowAntragstellerDaten() {
@@ -561,15 +602,8 @@ export default {
     funcShowNachweise() {
       this.$parent.funcShowNachweise();
     },
-
-    setGeCheck(state) {
-      this.$parent.setGeCheck(state);
-    },
-    setEntCheck(state) {
-      this.$parent.setEntCheck = state;
-    },
-    setBifoCheck(state) {
-      this.$parent.setBifoCheck = state;
+    forceRerender(){
+      this.$parent.forceRerender();
     },
 
 //DOWNLOAD JSON DATEI

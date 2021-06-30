@@ -55,7 +55,7 @@
           </v-col>
         </v-row>
       </v-card>
-      <Antragswahl msg="Welche Anträge möchten Sie stellen?" :key="antragswahlKey"/>
+      <Antragswahl msg="Welche Anträge möchten Sie stellen?" geErm="Geschwisterermäßigung" entErm="Entgeltermäßigung" bifoErm="Bildungsfond" :key="antragswahlKey"/>
       <v-alert
         v-if="
           !(

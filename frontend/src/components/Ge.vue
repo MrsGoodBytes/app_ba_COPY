@@ -1,25 +1,5 @@
 <template>
   <div id="Ge" class="mx-16">
-    <h3>Folgende Anträge werden abgeschickt:</h3>
-    <v-row justify="space-around">
-      <v-checkbox v-model="ge_checkbox" ref="ge_check"
-        ><template v-slot:label>
-          <div>Antrag auf Geschwisterermäßigung</div>
-        </template>
-      </v-checkbox>
-
-      <v-checkbox v-model="ent_checkbox" ref="ge_check"
-        ><template v-slot:label>
-          <div>Antrag auf Entgeltermäßigung</div>
-        </template>
-      </v-checkbox>
-
-      <v-checkbox v-model="bifo_checkbox" ref="ge_check"
-        ><template v-slot:label>
-          <div>Antrag auf Mittel aus dem Bildungsfond</div>
-        </template>
-      </v-checkbox>
-    </v-row>
     <v-btn
       class="my-6 py-6 text-button"
       justify="center"
@@ -45,13 +25,6 @@ export default {
   },
   data() {
     return {
-      ge_checkbox: false,
-      ent_checkbox: false,
-      bifo_checkbox: false,
-      geErfolg: false,
-      entErfolg: false,
-      bifoErfolg: false,
-
       firstname: "",
       lastname: "",
       street: "",
@@ -178,26 +151,9 @@ export default {
     };
   },
 
-  watch: {
-    ge_checkbox: function (val) {
-      this.$store.commit("setGeCheck", val);
-      this.$parent.setGeCheck(val);
-    },
-    ent_checkbox: function (val) {
-      this.$store.commit("setEntCheck", val);
-      this.$parent.setEntCheck(val);
-    },
-    bifo_checkbox: function (val) {
-      this.$store.commit("setBifoCheck", val);
-      this.$parent.setBifoCheck(val);
-    },
-  },
+  watch: {},
 
   created() {
-    this.ge_checkbox = this.$store.state.geCheck;
-    this.ent_checkbox = this.$store.state.entCheck;
-    this.bifo_checkbox = this.$store.state.bifoCheck;
-
     this.name = this.$store.state.firstname + " " + this.$store.state.lastname;
     this.date = this.$store.state.date;
     this.adress =
@@ -277,7 +233,7 @@ export default {
           alert(response.data);
         });
     }, */
-
+//PDF ANTRAG SCHREIBEN UND HERUNTERLADEN
     download() {
       let pdfName = "Antrag_Geschwisterermaeßigung";
 
@@ -445,8 +401,8 @@ export default {
       }
 
       doc.save(pdfName + ".pdf");
-
-      this.uploadData();
+//HOCHLADEN DER NACHWEISE INS BACKEND
+      /* this.uploadData(); */
     },
   },
 };
