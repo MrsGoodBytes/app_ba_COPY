@@ -8,8 +8,8 @@
             <h4>
               Stellen Sie Anträge auf
               <h3>
-                Entgeltermäßigung, Geschwisterermäßigung <br />und Mittel aus dem
-                Bildungsfond
+                Entgeltermäßigung, Geschwisterermäßigung <br />und Mittel aus
+                dem Bildungsfond
               </h3>
               jetzt vollständig digital.
             </h4>
@@ -29,30 +29,33 @@
       </v-card>
       <v-card class="mx-auto pa-5 my-8" outlined>
         <h4 class="text-left">
-          <v-icon>mdi-file</v-icon> Anträge müssen jedes Jahr erneut gestellt werden. Denken Sie daran, am Ende der Antragstellung Ihre Daten herunterzuladen,
-          um sie beim nächsten Antrag zu importieren.
-          Sie haben bereits eine Datei mit Ihren gespeicherten
-          Daten? Dann können Sie diese hier hochladen und wiederherstellen!
+          <v-icon>mdi-file</v-icon> Anträge müssen jedes Jahr erneut gestellt
+          werden. Denken Sie daran, am Ende der Antragstellung Ihre Daten
+          herunterzuladen, um sie beim nächsten Antrag zu importieren. Sie haben
+          bereits eine Datei mit Ihren gespeicherten Daten? Dann können Sie
+          diese hier hochladen und wiederherstellen!
         </h4>
         <v-row>
           <v-col cols="12" md="8" sm="12">
-        <v-file-input
-          accept="json/*"
-          label="JSON-Datei hochladen"
-          v-model="upload"
-          chips
-          show-size
-          counter
-          multiple
-          truncate-length="23"
-        ></v-file-input>
+            <v-file-input
+              accept="json/*"
+              label="JSON-Datei hochladen"
+              v-model="upload"
+              chips
+              show-size
+              counter
+              multiple
+              truncate-length="23"
+            ></v-file-input>
           </v-col>
           <v-col cols="12" md="4" sm="12">
-        <v-btn class="mb-3 text-button" @click="load_data" color="primary">Daten übernehmen</v-btn>
+            <v-btn class="mb-3 text-button" @click="load_data" color="primary"
+              >Daten übernehmen</v-btn
+            >
           </v-col>
         </v-row>
       </v-card>
-      <Antragswahl msg="Welche Anträge möchten Sie stellen?" />
+      <Antragswahl msg="Welche Anträge möchten Sie stellen?" :key="antragswahlKey"/>
       <v-alert
         v-if="
           !(
@@ -86,11 +89,15 @@
         </v-tab>
       </v-tabs>
 
-      <Antragsteller v-if="AntragstellerDaten" :personlist="person_list" />
+      <Antragsteller
+        v-if="AntragstellerDaten"
+        :personlist="person_list"
+        :key="antragstellerKey"
+      />
 
-      <Kind v-if="KindDaten" :childlist="child_list" />
+      <Kind v-if="KindDaten" :childlist="child_list" :key="kindKey"/>
 
-      <Nachweise v-if="Nachweise" />
+      <Nachweise v-if="Nachweise" :key="nachweiseKey" />
       <v-btn
         v-if="Nachweise"
         class="mt-6"
@@ -115,6 +122,7 @@
         v-if="Abschicken"
         :child_list="this.child_list"
         :person_list="this.person_list"
+        :key="abschickenKey"
       />
     </v-container>
   </div>
@@ -141,6 +149,11 @@ export default {
   },
   data() {
     return {
+      antragswahlKey: 0,
+      antragstellerKey: 0,
+      kindKey: 0,
+      nachweiseKey: 0,
+      abschickenKey: 0,
       tmp: null,
       upload: null,
       geCheck: false,
@@ -212,7 +225,7 @@ export default {
     person_list: function (val) {
       this.$store.commit("setPersonList", val);
     },
-    
+
     geCheck: function (val) {
       for (let i = 0; i < this.child_list.length; i++) {
         this.child_list[i].geCheck = val;
@@ -413,19 +426,26 @@ export default {
     setBifoCheck(state) {
       this.bifoCheck = state;
     },
-//JSON DATEI UPLOAD
-     load_data() {
+    forceRerender() {
+      this.antragswahlKey += 1;
+      this.antragstellerKey += 1;
+      this.kindKey += 1;
+      this.nachweiseKey += 1;
+      this.abschickenKey += 1;
+    },
+    //JSON DATEI UPLOAD
+    load_data() {
       this.tmp = data_upload;
-  //Daten der hochgeladenen txt Datei in jsondatei umwandeln
+      //Daten der hochgeladenen txt Datei in jsondatei umwandeln
       this.tmp = JSON.parse(this.tmp);
-  //übernahme der Daten in den Store
+      //übernahme der Daten in den Store
       this.person_list = this.tmp.person_list;
       this.child_list = this.tmp.child_list;
 
       this.$store.state.geCheck = this.tmp.geCheck;
       this.$store.state.entCheck = this.tmp.entCheck;
       this.$store.state.bifoCheck = this.tmp.bifoCheck;
-      
+
       this.geCheck = this.tmp.geCheck;
       this.entCheck = this.tmp.entCheck;
       this.bifoCheck = this.tmp.bifoCheck;
@@ -482,8 +502,8 @@ export default {
       this.$store.state.elternteil2 = this.tmp.elternteil2;
 
       this.$store.state.haushaltseinkommen = this.tmp.haushaltseinkommen;
-  //DATEN IN DER ANZEIGE AKTUALISIEREN
-      
+      //DATEN IN DER ANZEIGE AKTUALISIEREN
+      this.forceRerender();
     },
   },
 };
