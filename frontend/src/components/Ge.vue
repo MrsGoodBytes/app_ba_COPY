@@ -214,8 +214,8 @@ export default {
   },
 
   methods: {
-//HOCHLADEN DER NACHWEISE ZUM BACKEND
-  /*   uploadData() {
+    //HOCHLADEN DER NACHWEISE ZUM BACKEND
+    /*   uploadData() {
       var fileBetrStore = this.$store.state.fileBetr;
       var filePrivStore = this.$store.state.filePriv;
       if(fileBetrStore == null){
@@ -233,9 +233,9 @@ export default {
           alert(response.data);
         });
     }, */
-//PDF ANTRAG SCHREIBEN UND HERUNTERLADEN
+    //PDF ANTRAG SCHREIBEN UND HERUNTERLADEN
     download() {
-      let pdfName = "Antrag_Geschwisterermaeßigung";
+      let pdfGe = "Antrag_Geschwisterermaeßigung";
 
       var doc = new jspdf();
 
@@ -259,13 +259,13 @@ export default {
 
       doc.setFontSize("15");
       doc.text(
-        "Antrag auf Geschwisterermäßigung in Kindertagesstätten",
-        40,
+        "Antrag auf Geschwisterermäßigung",
+        65,
         30
       );
       doc.text("für das Kita-Jahr", 75, 37);
 
-      doc.text(new Date().getFullYear() + "/" + yearPlus, 120, 37);
+      doc.text(new Date().getFullYear() + "/" + yearPlus, 115, 37);
 
       doc.setFontSize("9");
       doc.text("Hansestadt Lübeck", 15, 50);
@@ -294,7 +294,7 @@ export default {
       doc.setFontSize("10");
       doc.setFont("helvetica", "bold");
       doc.text(
-        "Hiermit wird die Geschwisterermäßigungfür Kinder in Kindertagesstätten beantragt.",
+        "Hiermit wird die Geschwisterermäßigung beantragt.",
         15,
         95
       );
@@ -399,9 +399,311 @@ export default {
           230 + i * 10
         );
       }
+      //PDF ENTGELTERMAESSIGUNG
+      let pdfEnt = "Antrag_Entgeltermaeßigung";
 
-      doc.save(pdfName + ".pdf");
-//HOCHLADEN DER NACHWEISE INS BACKEND
+      var docEnt = new jspdf();
+
+      docEnt.setFontSize("15");
+      docEnt.text("Antrag auf Entgeltermäßigung", 65, 30);
+      docEnt.text("für das Kita-Jahr", 75, 37);
+
+      docEnt.text(new Date().getFullYear() + "/" + yearPlus, 115, 37);
+
+      docEnt.setFontSize("9");
+      docEnt.text("Hansestadt Lübeck", 15, 50);
+      docEnt.text("Fachbereich Kultur und Bildung", 15, 55);
+      docEnt.text("Entgeltermäßigung Kindertagesbetreuung", 15, 60);
+      docEnt.text("Kronsforder Allee 2-6", 15, 65);
+      docEnt.text("23539 Lübeck", 15, 70);
+
+      docEnt.setFontSize("7");
+      docEnt.text("Antragstellende Person (Elternteil)", 130, 50);
+      docEnt.setFontSize("9");
+      docEnt.text(firstname + lastname, 130, 55);
+      docEnt.setFontSize("7");
+      docEnt.text("Anschrift", 130, 60);
+      docEnt.setFontSize("9");
+      docEnt.text(
+        street + " " + number + ", " + postcode + " " + town,
+        130,
+        65
+      );
+      docEnt.setFontSize("7");
+      docEnt.text("Telefonnummer", 130, 70);
+      docEnt.setFontSize("9");
+      docEnt.text(tel, 130, 75);
+      docEnt.setFontSize("7");
+      docEnt.text("E-Mail", 130, 80);
+      docEnt.setFontSize("9");
+      docEnt.text(email, 130, 85);
+
+      docEnt.setFontSize("10");
+      docEnt.setFont("helvetica", "bold");
+      docEnt.text(
+        "Hiermit wird die Entgeltermäßigung beantragt.",
+        15,
+        95
+      );
+
+      docEnt.setFontSize("7");
+      docEnt.setFont("helvetica", "normal");
+      docEnt.text(
+        "Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder Entgelten für die Betreuung von Kindern in",
+        15,
+        100
+      );
+      docEnt.text(
+        "Kindertageseinrichtungen oder Kindertagespflegestellen“ der Hansestadt Lübeck.",
+        15,
+        103
+      );
+
+      docEnt.setFontSize("9");
+      docEnt.text(
+        "Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer Familie eine",
+        15,
+        115
+      );
+      docEnt.text(
+        "öffentlich geförderte Kindertageseinrichtung, Kindertagespflegestelle oder eine",
+        15,
+        120
+      );
+      docEnt.text(
+        "Ganztagsbetreuung an Schulen mit einer Nachmittagsbetreuung an mindestens 3 Tagen pro",
+        15,
+        125
+      );
+      docEnt.text(
+        " Woche für mindestens 70 EUR, wird der Elternbeitrag auf Antrag ermäßigt.",
+        15,
+        130
+      );
+
+      docEnt.text(
+        "Für das älteste Kind ist der Elternbeitrag in voller Höhe zu entrichten.",
+        25,
+        135
+      );
+      docEnt.text(
+        "Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,",
+        25,
+        140
+      );
+      docEnt.text("für jedes weitere jüngere Kind um 100%.", 25, 145);
+
+      docEnt.text(
+        "Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind",
+        15,
+        155
+      );
+      docEnt.text(
+        "Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden",
+        15,
+        160
+      );
+      docEnt.text(
+        "melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.)",
+        15,
+        165
+      );
+      docEnt.text(
+        "1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:",
+        15,
+        175
+      );
+
+      docEnt.setFontSize("9");
+      docEnt.text("Name, Vorname: " + child_name, 15, 185);
+      docEnt.text("Geburtsdatum: " + child_date, 85, 185);
+      docEnt.text("Kindertagesstätte: " + betreuungseinrichtung, 15, 195);
+      docEnt.text("Betreuungsbeginn: " + date_bb, 85, 195);
+
+      for (var j = 0; j < this.child_list.length; j++) {
+        docEnt.text("Geschwisterkind " + (j + 1) + ":", 15, 210);
+        docEnt.text(
+          "Name, Vorname: " +
+            this.child_list[j].sibling_lastname +
+            " " +
+            this.child_list[j].sibling_firstname,
+          15,
+          220 + j * 10
+        );
+        docEnt.text(
+          "Geburtsdatum: " + this.child_list[j].sibling_date,
+          85,
+          220 + j * 10
+        );
+        docEnt.text(
+          "Kindertagesstätte: " + this.child_list[j].sibling_date,
+          15,
+          230 + j * 10
+        );
+        docEnt.text(
+          "Betreuungsbeginn: " + this.child_list[j].betreuungsbeginn,
+          85,
+          230 + j * 10
+        );
+      }
+
+      let pdfBifo = "Antrag_Bifo";
+
+      var docBifo = new jspdf();
+
+      docBifo.setFontSize("15");
+      docBifo.text("Antrag auf Mittel aus dem Bildungsfond", 65, 30);
+      docBifo.text("für das Kita-Jahr", 75, 37);
+
+      docBifo.text(new Date().getFullYear() + "/" + yearPlus, 115, 37);
+
+      docBifo.setFontSize("9");
+      docBifo.text("Hansestadt Lübeck", 15, 50);
+      docBifo.text("Fachbereich Kultur und Bildung", 15, 55);
+      docBifo.text("Entgeltermäßigung Kindertagesbetreuung", 15, 60);
+      docBifo.text("Kronsforder Allee 2-6", 15, 65);
+      docBifo.text("23539 Lübeck", 15, 70);
+
+      docBifo.setFontSize("7");
+      docBifo.text("Antragstellende Person (Elternteil)", 130, 50);
+      docBifo.setFontSize("9");
+      docBifo.text(firstname + lastname, 130, 55);
+      docBifo.setFontSize("7");
+      docBifo.text("Anschrift", 130, 60);
+      docBifo.setFontSize("9");
+      docBifo.text(
+        street + " " + number + ", " + postcode + " " + town,
+        130,
+        65
+      );
+      docBifo.setFontSize("7");
+      docBifo.text("Telefonnummer", 130, 70);
+      docBifo.setFontSize("9");
+      docBifo.text(tel, 130, 75);
+      docBifo.setFontSize("7");
+      docBifo.text("E-Mail", 130, 80);
+      docBifo.setFontSize("9");
+      docBifo.text(email, 130, 85);
+
+      docBifo.setFontSize("10");
+      docBifo.setFont("helvetica", "bold");
+      docBifo.text(
+        "Hiermit werden Mittel aus dem Bildungsfond beantragt.",
+        15,
+        95
+      );
+
+      docBifo.setFontSize("7");
+      docBifo.setFont("helvetica", "normal");
+      docBifo.text(
+        "Grundlage ist die „Satzung zur sozialen Staffelung von Gebühren oder Entgelten für die Betreuung von Kindern in",
+        15,
+        100
+      );
+      docBifo.text(
+        "Kindertageseinrichtungen oder Kindertagespflegestellen“ der Hansestadt Lübeck.",
+        15,
+        103
+      );
+
+      docBifo.setFontSize("9");
+      docBifo.text(
+        "Besuchen mehrere mit Hauptwohnung in einem Haushalt lebende Kinder einer Familie eine",
+        15,
+        115
+      );
+      docBifo.text(
+        "öffentlich geförderte Kindertageseinrichtung, Kindertagespflegestelle oder eine",
+        15,
+        120
+      );
+      docBifo.text(
+        "Ganztagsbetreuung an Schulen mit einer Nachmittagsbetreuung an mindestens 3 Tagen pro",
+        15,
+        125
+      );
+      docBifo.text(
+        " Woche für mindestens 70 EUR, wird der Elternbeitrag auf Antrag ermäßigt.",
+        15,
+        130
+      );
+
+      docBifo.text(
+        "Für das älteste Kind ist der Elternbeitrag in voller Höhe zu entrichten.",
+        25,
+        135
+      );
+      docBifo.text(
+        "Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%,",
+        25,
+        140
+      );
+      docBifo.text("für jedes weitere jüngere Kind um 100%.", 25, 145);
+
+      docBifo.text(
+        "Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind",
+        15,
+        155
+      );
+      docBifo.text(
+        "Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden",
+        15,
+        160
+      );
+      docBifo.text(
+        "melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.)",
+        15,
+        165
+      );
+      docBifo.text(
+        "1. Für dieses Kind wird eine Geschwisterermäßigung beantragt:",
+        15,
+        175
+      );
+
+      docBifo.setFontSize("9");
+      docBifo.text("Name, Vorname: " + child_name, 15, 185);
+      docBifo.text("Geburtsdatum: " + child_date, 85, 185);
+      docBifo.text("Kindertagesstätte: " + betreuungseinrichtung, 15, 195);
+      docBifo.text("Betreuungsbeginn: " + date_bb, 85, 195);
+
+      for (var k = 0; k < this.child_list.length; k++) {
+        docBifo.text("Geschwisterkind " + (k + 1) + ":", 15, 210);
+        docBifo.text(
+          "Name, Vorname: " +
+            this.child_list[k].sibling_lastname +
+            " " +
+            this.child_list[k].sibling_firstname,
+          15,
+          220 + k * 10
+        );
+        docBifo.text(
+          "Geburtsdatum: " + this.child_list[k].sibling_date,
+          85,
+          220 + k * 10
+        );
+        docBifo.text(
+          "Kindertagesstätte: " + this.child_list[k].sibling_date,
+          15,
+          230 + k * 10
+        );
+        docBifo.text(
+          "Betreuungsbeginn: " + this.child_list[k].betreuungsbeginn,
+          85,
+          230 + k * 10
+        );
+      }
+
+      if (this.$store.state.geCheck) {
+        doc.save(pdfGe + ".pdf");
+      }
+      if (this.$store.state.entCheck) {
+        docEnt.save(pdfEnt + ".pdf");
+      }
+      if (this.$store.state.bifoCheck) {
+        docBifo.save(pdfBifo + ".pdf");
+      }
+      //HOCHLADEN DER NACHWEISE INS BACKEND
       /* this.uploadData(); */
     },
   },

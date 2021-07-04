@@ -29,7 +29,7 @@
       </v-card>
       <v-card class="mx-auto pa-5 my-8" outlined>
         <h4 class="text-left">
-          <v-icon>mdi-file</v-icon> Anträge müssen jedes Jahr erneut gestellt
+          <v-icon>mdi-file-upload</v-icon> Anträge müssen jedes Jahr erneut gestellt
           werden. Denken Sie daran, am Ende der Antragstellung Ihre Daten
           herunterzuladen, um sie beim nächsten Antrag zu importieren. Sie haben
           bereits eine Datei mit Ihren gespeicherten Daten? Dann können Sie

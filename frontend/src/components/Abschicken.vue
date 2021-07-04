@@ -10,9 +10,9 @@
           ><v-icon color="accent">mdi-pencil</v-icon></v-btn
         >
       </h4>
-      <h4 v-if="this.$store.state.valid == false">
+      <!-- <h4 v-if="this.$store.state.valid == false">
         Bitte diesen Bereich Prüfen. Es fehlen Angaben.
-      </h4>
+      </h4> -->
     </v-row>
     <v-row>
       <v-col cols="3" class="text-left">
@@ -414,11 +414,10 @@
     </div>
     <v-card class="mx-auto pa-5 my-8" outlined>
       <h4 class="text-left">
-        <v-icon>mdi-file</v-icon> Anträge müssen jedes Jahr erneut gestellt
-        werden. Denken Sie daran, am Ende der Antragstellung Ihre Daten
-        herunterzuladen, um sie beim nächsten Antrag zu importieren. Sie haben
-        bereits eine Datei mit Ihren gespeicherten Daten? Dann können Sie diese
-        hier hochladen und wiederherstellen!
+        <v-icon>mdi-file-download</v-icon> Anträge müssen jedes Jahr erneut gestellt
+        werden. Laden Sie jetzt Ihre Daten herunter, um diese beim nächsten Mal 
+        zu Beginn der Antragstellung wiederherstellen zu können! So sparen Sie sich 
+        Zeit und sind beim nächsten Mal noch schneller!
       </h4>
       <v-row justify="space-around">
         <v-btn
