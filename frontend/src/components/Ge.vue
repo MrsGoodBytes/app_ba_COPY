@@ -233,6 +233,7 @@ export default {
           alert(response.data);
         });
     }, */
+
     //PDF ANTRAG SCHREIBEN UND HERUNTERLADEN
     download() {
       let pdfGe = "Antrag_Geschwisterermaeßigung";
@@ -693,6 +694,8 @@ export default {
           230 + k * 10
         );
       }
+
+      alert("Ihre Anträge wurden an die zuständigen Stellen gesendet! Der Download der Anträge in PDF-Form startet, sobald Sie auf OK geklickt haben. Die Anschrift der jeweiligen Stelle finden Sie als Empfänger in den PDF-Anträgen. Vielen Dank, dass Sie diesen Service genutzt haben!")
 
       if (this.$store.state.geCheck) {
         doc.save(pdfGe + ".pdf");
