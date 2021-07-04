@@ -136,7 +136,9 @@ export default new Vuex.Store({
                 one: true, */
 
         fileBetr: null,
+        fileBetrBase: null,
         filePriv: null,
+        filePrivBase: null,
     },
     mutations: {
         //write value of textfield into variable
@@ -296,8 +298,14 @@ export default new Vuex.Store({
         setFilePriv(state, value) {
             state.filePriv = value;
         },
+        setFilePrivBase(state, value) {
+            state.filePrivBase = value;
+        },
         setFileBetr(state, value) {
             state.fileBetr = value;
+        },
+        setFileBetrBase(state, value) {
+            state.fileBetrBase = value;
         },
     },
     actions: {},

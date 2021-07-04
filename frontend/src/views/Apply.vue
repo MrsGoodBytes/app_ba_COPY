@@ -38,7 +38,7 @@
         <v-row>
           <v-col cols="12" md="8" sm="12">
             <v-file-input
-              accept="json/*"
+              accept=".json"
               label="JSON-Datei hochladen"
               v-model="upload"
               chips

@@ -1631,8 +1631,9 @@ export default {
   watch: {
     filePriv: function (val) {
       //in b64 umwandeln
-      this.imageToBase64();
       this.$store.commit("setFilePriv", val);
+      this.imageToBase64(this.filePriv);
+      this.$store.commit("setFilePrivBase", val);
     },
     fileBetr: function (val) {
       this.$store.commit("setFileBetr", val);
@@ -1640,9 +1641,9 @@ export default {
   },
 
   methods: {
-    imageToBase64 () {
+    imageToBase64(baseFile) {
       //in b64 umwandeln
-      var file = this.fileBetr;
+      var file = baseFile;
       var reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {
