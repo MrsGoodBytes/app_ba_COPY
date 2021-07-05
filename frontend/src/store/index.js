@@ -295,17 +295,108 @@ export default new Vuex.Store({
             state.valid = value;
         },
 
-        setFilePriv(state, value) {
-            state.filePriv = value;
-        },
-        setFilePrivBase(state, value) {
-            state.filePrivBase = value;
-        },
+        //NACHWEISE
         setFileBetr(state, value) {
             state.fileBetr = value;
         },
-        setFileBetrBase(state, value) {
-            state.fileBetrBase = value;
+        setFilePriv(state, value) {
+            state.filePriv = value;
+        },
+        setFileSozial(state, value) {
+            state.fileSozial = value;
+        },
+        setFileEink(state, value) {
+            state.fileEink = value;
+        },
+        setFileSelbst(state, value) {
+            state.fileSelbst = value;
+        },
+        setFileKG(state, value) {
+            state.fileKG = value;
+        },
+        setFileExist(state, value) {
+            state.fileExist = value;
+        },
+        setFileKrank(state, value) {
+            state.fileKrank = value;
+        },
+        setFileRente(state, value) {
+            state.fileRente = value;
+        },
+        setFileUnterhalt(state, value) {
+            state.fileUnterhalt = value;
+        },
+        setFileEinkNach(state, value) {
+            state.fileEinkNach = value;
+        },
+        setFileAusb(state, value) {
+            state.fileAusb = value;
+        },
+        setFileEG(state, value) {
+            state.fileEG = value;
+        },
+        setFileKZ(state, value) {
+            state.fileKZ = value;
+        },
+        setFileWeitere(state, value) {
+            state.fileWeitere = value;
+        },
+        setFileBG(state, value) {
+            state.fileBG = value;
+        },
+        setFileWeitereE(state, value) {
+            state.fileWeitereE = value;
+        },
+        setFileAM(state, value) {
+            state.fileAM = value;
+        },
+        setFileFK(state, value) {
+            state.fileFK = value;
+        },
+        setFileHV(state, value) {
+            state.fileHV = value;
+        },
+        setFileHausV(state, value) {
+            state.fileHausV = value;
+        },
+        setFileKPV(state, value) {
+            state.fileKPV = value;
+        },
+        setFileRV(state, value) {
+            state.fileRV = value;
+        },
+        setFileRiester(state, value) {
+            state.fileRiester = value;
+        },
+        setFileRSV(state, value) {
+            state.fileRSV = value;
+        },
+        setFileKFZH(state, value) {
+            state.fileKFZH = value;
+        },
+        setFileUV(state, value) {
+            state.fileUV = value;
+        },
+        setFileBV(state, value) {
+            state.fileBV = value;
+        },
+        setFileBVB(state, value) {
+            state.fileBVB = value;
+        },
+        setFileMiete(state, value) {
+            state.fileMiete = value;
+        },
+        setFileWE(state, value) {
+            state.fileFileWE = value;
+        },
+        setFileBesBel(state, value) {
+            state.fileBesBel = value;
+        },
+        setFileBelUnter(state, value) {
+            state.fileBelUnter = value;
+        },
+        setFileErg(state, value) {
+            state.fileErg = value;
         },
     },
     actions: {},

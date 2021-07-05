@@ -176,6 +176,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileSozial"
           accept="image/*"
           label="Nachweis Sozialleistungen"
           chips
@@ -212,6 +213,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileEink"
           accept="image/*"
           label="Einkommensnachweise"
           chips
@@ -280,6 +282,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileSelbst"
           accept="image/*"
           label="Einkommensnachweise Selbstständigkeit"
           chips
@@ -319,6 +322,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileKG"
           accept="image/*"
           label="Kindergeldnachweise"
           chips
@@ -390,6 +394,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileExist"
           accept="image/*"
           label="Nachweis Bescheid ALG1 / Existenzgründerzuschuss"
           chips
@@ -458,6 +463,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileKrank"
           accept="image/*"
           label="Nachweise Krankengeld"
           chips
@@ -494,6 +500,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileRente"
           accept="image/*"
           label="Rentennachweise"
           chips
@@ -533,6 +540,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileUnterhalt"
           accept="image/*"
           label="Unterhaltsnachweise"
           chips
@@ -569,6 +577,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileEinkNach"
           accept="image/*"
           label="Einkommensnachweise"
           chips
@@ -605,6 +614,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileAusb"
           accept="image/*"
           label="Nachweis Ausbildungsförderung"
           chips
@@ -673,6 +683,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileEG"
           accept="image/*"
           label="Nachweise Elterngeld"
           chips
@@ -741,6 +752,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileKZ"
           accept="image/*"
           label="Nachweise Kinderzuschlag"
           chips
@@ -777,6 +789,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileWeitere"
           accept="image/*"
           label="Nachweise weiterer Einnahmen"
           chips
@@ -813,6 +826,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileBG"
           accept="image/*"
           label="Nachweise Zuschuss Betreuungskosten"
           chips
@@ -849,6 +863,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileWeiterE"
           accept="image/*"
           label="Nachweise weiterer Einkommen"
           chips
@@ -905,6 +920,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileAM"
           accept="image/*"
           label="Nachweise über Arbeitsmittel"
           chips
@@ -941,6 +957,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileFK"
           accept="image/*"
           label="Nachweise Fahrtkosten"
           chips
@@ -1016,6 +1033,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileHV"
           accept="image/*"
           label="Nachweise Haftpflichtverischerung"
           chips
@@ -1052,6 +1070,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileHausV"
           accept="image/*"
           label="Nachweise Hausratsversicherung"
           chips
@@ -1088,6 +1107,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileKPV"
           accept="image/*"
           label="Nachweise freiwillige Kranken- und Pflegevers."
           chips
@@ -1124,6 +1144,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileRV"
           accept="image/*"
           label="Nachweise freiwillige Rentenverischerung"
           chips
@@ -1160,6 +1181,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileRiester"
           accept="image/*"
           label="Nachweise Einnahmen Riester"
           chips
@@ -1196,6 +1218,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileRSV"
           accept="image/*"
           label="Nachweise Risikolebens-/Sterbegeldversicherung"
           chips
@@ -1232,6 +1255,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileKFZH"
           accept="image/*"
           label="Nachweise KFZ-Haftpflicht"
           chips
@@ -1268,6 +1292,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileUV"
           accept="image/*"
           label="Nachweise Unfallversicherung"
           chips
@@ -1304,6 +1329,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileBV"
           accept="image/*"
           label="Nachweise Berufsunfähigkeitsversicherung"
           chips
@@ -1340,6 +1366,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileBVB"
           accept="image/*"
           label="Nachweise Berufsverbandsbeiträge"
           chips
@@ -1419,6 +1446,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileMiete"
           accept="image/*"
           label="Nachweise Kaltmiete/Betriebskosten"
           chips
@@ -1454,6 +1482,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileWE"
           accept="image/*"
           label="Nachweise Belastungen Wohneigentum"
           chips
@@ -1490,6 +1519,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileBesBel"
           accept="image/*"
           label="Nachweise besonderer Belastungen"
           chips
@@ -1526,6 +1556,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileBelUnter"
           accept="image/*"
           label="Nachweise Belastungen Unterhaltszahlungen"
           chips
@@ -1562,6 +1593,7 @@
       </v-col>
       <v-col cols="8"
         ><v-file-input
+          v-model="fileErg"
           accept="image/*"
           label="Nachweise der Ergänzungen"
           chips
@@ -1583,6 +1615,26 @@ export default {
     return {
       filePriv: null,
       fileBetr: null,
+      fileSozial: null,
+      fileEink: null,
+      fileSelbst: null,
+      fileKG: null,
+      fileExist: null,
+      fileKrank: null,
+      fileRente: null,
+      fileUnterhalt: null,
+      fileEinkNach: null,
+      fileAusb: null,
+      fileEG: null,
+      fileKZ: null,
+      fileWeitere: null,
+      fileBG: null,
+      fileWeitereE: null,
+      fileAM: null,
+      fileFK: null,
+      fileHV: null,
+      fileHausV: null,
+      fileKPV: null,
       //RULES
       nameRules: [(value) => !!value || "Pflichtfeld. Bitte ausfüllen!"],
       numberRules: [
@@ -1631,9 +1683,8 @@ export default {
   watch: {
     filePriv: function (val) {
       //in b64 umwandeln
+      this.imageToBase64();
       this.$store.commit("setFilePriv", val);
-      this.imageToBase64(this.filePriv);
-      this.$store.commit("setFilePrivBase", val);
     },
     fileBetr: function (val) {
       this.$store.commit("setFileBetr", val);
@@ -1641,9 +1692,9 @@ export default {
   },
 
   methods: {
-    imageToBase64(baseFile) {
+    imageToBase64() {
       //in b64 umwandeln
-      var file = baseFile;
+      var file = file;
       var reader = new FileReader();
       reader.readAsDataURL(file);
       reader.onload = () => {

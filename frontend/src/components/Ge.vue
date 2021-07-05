@@ -15,7 +15,7 @@
 
 <script>
 import jspdf from "jspdf";
-/* import axios from "axios"; */
+import axios from "axios";
 
 export default {
   name: "Ge",
@@ -215,7 +215,7 @@ export default {
 
   methods: {
     //HOCHLADEN DER NACHWEISE ZUM BACKEND
-    /*   uploadData() {
+      uploadData() {
       var fileBetrStore = this.$store.state.fileBetr;
       var filePrivStore = this.$store.state.filePriv;
       if(fileBetrStore == null){
@@ -232,7 +232,7 @@ export default {
         .then((response) => {
           alert(response.data);
         });
-    }, */
+    },
 
     //PDF ANTRAG SCHREIBEN UND HERUNTERLADEN
     download() {
@@ -707,7 +707,7 @@ export default {
         docBifo.save(pdfBifo + ".pdf");
       }
       //HOCHLADEN DER NACHWEISE INS BACKEND
-      /* this.uploadData(); */
+      this.uploadData();
     },
   },
 };

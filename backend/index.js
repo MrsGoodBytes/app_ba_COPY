@@ -1,4 +1,4 @@
-/* const express = require('express');
+const express = require('express');
 const cors = require("cors");
 
 const app = express();
@@ -30,7 +30,7 @@ app.use(function(req, res) {
     res.status(404)
 });
 
-function submit() {
+/* function submit() {
 
     ("use strict");
     const nodemailer = require("nodemailer");
