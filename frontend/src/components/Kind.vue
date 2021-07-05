@@ -313,7 +313,7 @@
         <p v-else></p>
 
         <v-col
-          v-if="this.$store.state.entCheck"
+          v-if="this.$store.state.geCheck"
           class="d-flex"
           cols="12"
           md="3"
@@ -342,20 +342,20 @@
         <p v-else></p>
 
         <v-col
-          v-if="this.$store.state.geCheck"
+          v-if="this.$store.state.geCheck || this.$store.state.entCheck"
           class="d-flex"
           cols="12"
           md="3"
           sm="6"
         >
-          <v-tooltip bottom>
+          <v-tooltip max-width="600" bottom>
             <template v-slot:activator="{ on, attrs }">
               <v-icon color="accent" v-bind="attrs" v-on="on"
                 >mdi-information</v-icon
               >
             </template>
             <span
-              >Der Elternbeitrag ist das Betreuungsentgelt abzüglich ggf. vom
+              >Der Elternbeitrag ist das, was Sie tatsächlich an Betreuungskosten (ohne Essensgeld) zahlen. Also Betreuungsentgelt abzüglich ggf. vom
               Träger gewährter Geschwisterermäßigung.</span
             >
           </v-tooltip>
@@ -820,7 +820,7 @@
             </v-col>
             <p v-else></p>
             <v-col
-              v-if="item.geCheck || item.entCheck"
+              v-if="item.geCheck"
               class="d-flex"
               cols="12"
               sm="4"
@@ -846,16 +846,16 @@
               ></v-text-field>
             </v-col>
             <p v-else></p>
-            <v-col v-if="item.entCheck" class="d-flex" cols="12" sm="4">
-              <v-tooltip bottom>
+            <v-col v-if="item.entCheck || item.geCheck" class="d-flex" cols="12" sm="4">
+              <v-tooltip max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon color="accent" v-bind="attrs" v-on="on"
                     >mdi-information</v-icon
                   >
                 </template>
                 <span
-                  >der Elternbeitrag ist das Betreuungsgeld abzüglich der
-                  Ermäßigung</span
+                  >Der Elternbeitrag ist das, was Sie tatsächlich an Betreuungskosten (ohne Essensgeld) zahlen. Also Betreuungsentgelt abzüglich ggf. vom
+              Träger gewährter Geschwisterermäßigung.</span
                 >
               </v-tooltip>
               <v-text-field
