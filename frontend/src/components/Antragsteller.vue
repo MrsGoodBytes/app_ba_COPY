@@ -1412,7 +1412,7 @@
           <p class="text-left">
             Da eine Abrechnung direkt mit dem Träger der Kindertageseinrichtung
             erfolgt, erhalten Sie keine Eingangsbestätigung und auch keinen
-            Bescheid. Von Ihnen wird nur noch den reduzierte Elternbeitrag
+            Bescheid. Von Ihnen wird nur noch der reduzierte Elternbeitrag
             gefordert.
           </p>
         </v-card>
