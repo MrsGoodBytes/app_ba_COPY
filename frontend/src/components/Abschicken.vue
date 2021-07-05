@@ -33,8 +33,8 @@
         <h6 class="text--disabled" v-if="this.$store.state.entCheck">
           Geburtsdatum
         </h6>
-        <h5 v-if="this.$store.state.entCheck">{{ this.date }}</h5>
-        <h5 v-else-if="this.date == 0">
+        <h5 v-if="this.$store.state.entCheck && this.date != 0">{{ this.date }}</h5>
+        <h5 v-else-if="this.$store.state.entCheck && this.date == 0">
           <v-btn @click="funcShowAntragstellerDaten"
             ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
           >
