@@ -2,7 +2,9 @@
   <div class="check">
     <p class="text-right">
       <router-link to="/"
-        ><v-btn text outlined color="secondary" fab class="mr-3"><v-icon>mdi-close</v-icon></v-btn></router-link
+        ><v-btn text outlined color="secondary" fab class="mr-3"
+          ><v-icon>mdi-close</v-icon></v-btn
+        ></router-link
       >
     </p>
     <h1 class="px-12">
@@ -35,24 +37,27 @@
 
         <v-divider></v-divider>
 
-        <v-stepper-step :complete="e1 > 4" step="6"> Geschafft! </v-stepper-step>
+        <v-stepper-step :complete="e1 > 4" step="5">
+          Geschafft!
+        </v-stepper-step>
       </v-stepper-header>
 
       <v-stepper-items>
         <v-stepper-content step="1" class="mb-6 mx-auto" height="200px">
           <h4 class="text-center mb-4">
-            Haben Sie mehr als eines Ihrer Kinder in einer Betreuungseinrichtung <v-tooltip max-width="600" bottom>
-        <template v-slot:activator="{ on, attrs }">
-          <v-icon color="accent" v-bind="attrs" v-on="on"
-            >mdi-information</v-icon
-          >
-        </template>
-        <span
-          >Hierzu zählt die Betreuung in einer Tagespflegeeinrichtung, 
-          einer Kita-Krippe, Kita-Elementargruppe, dem Hort 
-          und auch die Betreuung ihrer älteren Kinder an der Ganztagsschule.</span
-        >
-      </v-tooltip>
+            Haben Sie mehr als eines Ihrer Kinder in einer Betreuungseinrichtung
+            <v-tooltip max-width="600" bottom>
+              <template v-slot:activator="{ on, attrs }">
+                <v-icon color="accent" v-bind="attrs" v-on="on"
+                  >mdi-information</v-icon
+                >
+              </template>
+              <span
+                >Hierzu zählt die Betreuung in einer Tagespflegeeinrichtung,
+                einer Kita-Krippe, Kita-Elementargruppe, dem Hort und auch die
+                Betreuung ihrer älteren Kinder an der Ganztagsschule.</span
+              >
+            </v-tooltip>
             angemeldet?
           </h4>
           <v-btn class="mx-3" color="accent" @click="oneAddYes"> Ja </v-btn>
@@ -69,8 +74,8 @@
                   >mdi-information</v-icon
                 >
               </template>
-              <div class="pl-3 text-left"
-                >Zu Sozialleistungen zählen
+              <div class="pl-3 text-left">
+                Zu Sozialleistungen zählen
                 <list class="text-left">
                   <li>Leistungen vom Jobcenter (Arbeitslosengeld II)</li>
                   <li>Wohngeld nach dem Wohngeldgesetz</li>
@@ -106,11 +111,11 @@
 
         <v-stepper-content step="4" class="mb-6 mx-auto" height="200px">
           <h5 class="text-center">
-            Sie haben angegeben weder privatinsolvent gemeldet zu sein und auch keine Sozialleistungen zu beziehen. Um zu
-            ermitteln, ob Ihre Einkommen unterhalbt der Einkommensgrenze liegt,
-            beantworten Sie bitte die folgenden Fragen. Diese werden im weiteren
-            Verlauf der Antragstellung übernommen und müssen nicht erneut
-            eingegeben werden.
+            Sie haben angegeben weder privatinsolvent gemeldet zu sein und auch
+            keine Sozialleistungen zu beziehen. Um zu ermitteln, ob Ihre
+            Einkommen unterhalbt der Einkommensgrenze liegt, beantworten Sie
+            bitte die folgenden Fragen. Diese werden im weiteren Verlauf der
+            Antragstellung übernommen und müssen nicht erneut eingegeben werden.
           </h5>
           <v-btn class="my-3" @click="e1 = 3"
             ><v-icon>mdi-arrow-left</v-icon> zurück</v-btn
@@ -140,7 +145,7 @@
               >
                 <v-col cols="4">
                   <h4 class="text-left">
-                    Nettoeinkommen
+                    Nettoeinkommen der letzten 12 Monate
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on, attrs }">
                         <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -607,16 +612,19 @@
                 <v-col cols="4">
                   <h4 class="text-left">
                     Fahrtkosten zur Arbeitsstätte
-                    <v-tooltip bottom>
+                    <v-tooltip max-width="600" bottom>
                       <template v-slot:activator="{ on, attrs }">
                         <v-icon color="accent" v-bind="attrs" v-on="on"
                           >mdi-information</v-icon
                         >
                       </template>
                       <span
-                        >Bei Notwendigkeit der Pkw-Nutzung bitte die km-Zahl
-                        einer einfachen Fahrt zwischen Wohnungs- und
-                        Arbeitsstätte angeben.</span
+                        >Hier z.B. die Kosten für Bus- und Bahntickets angeben
+                        welche nötig sind um zur Arbeit zu gelangen.<br />
+                        Bei Notwendigkeit der Pkw-Nutzung bitte stattdessen
+                        unten die km-Zahl einer einfachen Fahrt (Länge einer
+                        Strecke) zwischen Wohnungs- und Arbeitsstätte
+                        angeben.</span
                       >
                     </v-tooltip>
                   </h4>
@@ -637,15 +645,41 @@
                 </v-col>
               </v-row>
               <v-row
-                v-if="
-                  this.elternteil1.fahrtkosten > 0 ||
-                  this.elternteil2.fahrtkosten > 0
-                "
-                ><v-col
-                  ><h4 class="mx-auto my-3">
-                    Hier ist vorgesehen, dass in Zukunft Felder für Einträge aus
-                    dem entsprechenden Vordruck platziert werden könnten.
+                justify="space-around"
+                no-gutters
+                style="width: 100%"
+                class="d-flex align-center mb-6"
+              >
+                <v-col cols="4">
+                  <h4 class="text-left">
+                    Einfache Fahrt in km (bei PKW-Nutzung)
+                    <v-tooltip max-width="600" bottom>
+                      <template v-slot:activator="{ on, attrs }">
+                        <v-icon color="accent" v-bind="attrs" v-on="on"
+                          >mdi-information</v-icon
+                        >
+                      </template>
+                      <span
+                        >Bei Notwendigkeit der Pkw-Nutzung bitte die km-Zahl
+                        einer einfachen Fahrt zwischen Wohnungs- und
+                        Arbeitsstätte angeben.</span
+                      >
+                    </v-tooltip>
                   </h4>
+                </v-col>
+                <v-col cols="3">
+                  <v-text-field
+                    v-model="elternteil1.kilometer"
+                    label="Elternteil 1"
+                    prefix="km"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="3">
+                  <v-text-field
+                    v-model="elternteil2.kilometer"
+                    label="Elternteil 2"
+                    prefix="km"
+                  ></v-text-field>
                 </v-col>
               </v-row>
             </v-card>
@@ -854,14 +888,14 @@
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
-                    v-model="elternteil1.haftpflicht"
+                    v-model="elternteil1.kfzhaftpflicht"
                     label="Elternteil 1"
                     prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
-                    v-model="elternteil2.haftpflicht"
+                    v-model="elternteil2.kfzhaftpflicht"
                     label="Elternteil 2"
                     prefix="€/mtl."
                   ></v-text-field>
@@ -1137,10 +1171,18 @@
           <h6>
             Verklickt? <v-btn text @click="e1 = 1">Fragen erneut starten</v-btn>
           </h6>
-          <h4 v-if="this.$store.state.geCheck === true || this.$store.state.entCheck === true || this.$store.state.bifoCheck === true">
+          <h4
+            v-if="
+              this.$store.state.geCheck === true ||
+              this.$store.state.entCheck === true ||
+              this.$store.state.bifoCheck === true
+            "
+          >
             Folgende Anträge haben Aussicht auf Erfolg:
           </h4>
-          <h4 v-else>Sie scheinen nicht berechtigt zu sein, einen der Anträge zu stellen.</h4>
+          <h4 v-else>
+            Sie scheinen nicht berechtigt zu sein, einen der Anträge zu stellen.
+          </h4>
         </v-stepper-content>
       </v-stepper-items>
     </v-stepper>
@@ -1217,6 +1259,7 @@ export default {
 
         arbeitsmittel: 0,
         fahrtkosten: 0,
+        kilometer: 0,
         haftpflicht: 0,
         hausrat: 0,
         freiwilligekrankenundpflege: 0,
@@ -1253,6 +1296,7 @@ export default {
 
         arbeitsmittel: 0,
         fahrtkosten: 0,
+        kilometer: 0,
         haftpflicht: 0,
         hausrat: 0,
         freiwilligekrankenundpflege: 0,
@@ -1313,87 +1357,22 @@ export default {
       this.$store.commit("setEigentumCheck", val);
     },
 
-     //EINKOMMEN
+     //EINKOMMEN BERECHNEN GENERELL
     elternteil1: function (val) {
       this.$store.commit("setElternteil1", val);
-      var sum1 = 0;
-      var minus1 = 10;
-      sum1 =
-        parseInt(val.netto)
-        /*parseInt(this.elternteil1.selbst) +
-        parseInt(this.elternteil1.kindergeld) +
-        parseInt(this.elternteil1.alg1) +
-        parseInt(this.elternteil1.existenz) +
-        parseInt(this.elternteil1.krankengeld) +
-        parseInt(this.elternteil1.rente) +
-        parseInt(this.elternteil1.unterhaltseinkunft) +
-        parseInt(this.elternteil1.ausbildungsvergütung) +
-        parseInt(this.elternteil1.bafög) +
-        parseInt(this.elternteil1.elterngeld) +
-        parseInt(this.elternteil1.kinderzuschlag) +
-        parseInt(this.elternteil1.weitere) +
-        parseInt(this.elternteil1.zuschussKita);*/
-      /*minus1 =
-        parseInt(this.elternteil1.arbeitsmittel) +
-        parseInt(this.elternteil1.fahrtkosten) +
-        parseInt(this.elternteil1.haftpflicht) +
-        parseInt(this.elternteil1.hausrat) +
-        parseInt(this.elternteil1.freiwilligekrankenundpflege) +
-        parseInt(this.elternteil1.freiwilligerente) +
-        parseInt(this.elternteil1.riester) +
-        parseInt(this.elternteil1.lebens);
-        parseInt(this.elternteil1.kfzhaftpflicht) +
-        parseInt(this.elternteil1.unfall) +
-        parseInt(this.elternteil1.berufsunfähigkeits) +
-        parseInt(this.elternteil1.gewerkschaft) +
-        parseInt(this.elternteil1.kaltmiete) +
-        parseInt(this.elternteil1.eigentum) +
-        parseInt(this.elternteil1.besondere) +
-        parseInt(this.elternteil1.unterhaltszahlungen);*/
-      this.einkommensgrenze1 = sum1 - minus1;
-      this.einkommensgrenze_gesamt =
-        parseInt(this.einkommensgrenze1) + parseInt(this.einkommensgrenze2);
     },
     elternteil2: function (val) {
       this.$store.commit("setElternteil2", val);
-      var sum2 = 0;
-      var minus2 = 0;
-      sum2 =
-        parseInt(this.elternteil2.netto) +
-        parseInt(this.elternteil2.selbst) +
-        parseInt(this.elternteil2.kindergeld) +
-        parseInt(this.elternteil2.alg1) +
-        parseInt(this.elternteil2.existenz) +
-        parseInt(this.elternteil2.krankengeld) +
-        parseInt(this.elternteil2.rente) +
-        parseInt(this.elternteil2.unterhaltseinkunft) +
-        parseInt(this.elternteil2.ausbildungsvergütung) +
-        parseInt(this.elternteil2.bafög) +
-        parseInt(this.elternteil2.elterngeld) +
-        parseInt(this.elternteil2.kinderzuschlag) +
-        parseInt(this.elternteil2.weitere) +
-        parseInt(this.elternteil2.zuschussKita);        
-      minus2 =
-        parseInt(this.elternteil2.arbeitsmittel) +
-        parseInt(this.elternteil2.fahrtkosten) +
-        parseInt(this.elternteil2.haftpflicht) +
-        parseInt(this.elternteil2.hausrat) +
-        parseInt(this.elternteil2.freiwilligekrankenundpflege) +
-        parseInt(this.elternteil2.freiwilligerente) +
-        parseInt(this.elternteil2.riester) +
-        parseInt(this.elternteil2.lebens);
-        /*parseInt(this.elternteil2.kfzhaftpflicht) +
-        parseInt(this.elternteil2.unfall) +
-        parseInt(this.elternteil2.berufsunfähigkeits) +
-        parseInt(this.elternteil2.gewerkschaft) +
-        parseInt(this.elternteil2.kaltmiete) +
-        parseInt(this.elternteil2.eigentum) +
-        parseInt(this.elternteil2.besondere) +
-        parseInt(this.elternteil2.unterhaltszahlungen);*/
-        this.einkommensgrenze2 = sum2 - minus2;
-      this.einkommensgrenze_gesamt =
-        parseInt(this.einkommensgrenze1) + parseInt(this.einkommensgrenze2);
     },
+    einkommensgrenze1: function(val){
+      this.$store.commit("setEinkommensgrenze1", val);
+    },
+    einkommensgrenze2: function(val){
+      this.$store.commit("setEinkommensgrenze2", val);
+    },
+    einkommensgrenzeGesamt: function(val){
+      this.$store.commit("setEinkommensgrenzeGesamt", val);
+    }
   },
 
   methods: {
@@ -1438,6 +1417,84 @@ export default {
     },
 
     fourAdd() {
+      //EINKOMMEN BERECHNEN FÜR ANZEIGE DER BERECHTIGUNG
+      var sum1 = 0;
+      var minus1 = 0;
+      sum1 =
+        parseInt(this.elternteil1.netto)
+        parseInt(this.elternteil1.selbst)*12 +
+        parseInt(this.elternteil1.kindergeld)*12 +
+        parseInt(this.elternteil1.alg1)*12 +
+        parseInt(this.elternteil1.existenz)*12 +
+        parseInt(this.elternteil1.krankengeld)*12 +
+        parseInt(this.elternteil1.rente)*12 +
+        parseInt(this.elternteil1.unterhaltseinkunft)*12 +
+        parseInt(this.elternteil1.ausbildungsvergütung)*12 +
+        parseInt(this.elternteil1.bafög)*12 +
+        parseInt(this.elternteil1.elterngeld)*12 +
+        parseInt(this.elternteil1.kinderzuschlag)*12 +
+        parseInt(this.elternteil1.weitere)*12 +
+        parseInt(this.elternteil1.zuschussKita)*12;
+      minus1 =
+        parseInt(this.elternteil1.arbeitsmittel)*12 +
+        parseInt(this.elternteil1.fahrtkosten)*12 +
+        parseInt(this.elternteil1.kilometer)*0,4*230 +
+        parseInt(this.elternteil1.haftpflicht)*12 +
+        parseInt(this.elternteil1.hausrat)*12 +
+        parseInt(this.elternteil1.freiwilligekrankenundpflege)*12 +
+        parseInt(this.elternteil1.freiwilligerente)*12 +
+        parseInt(this.elternteil1.riester)*12 +
+        parseInt(this.elternteil1.lebens)*12 +
+        parseInt(this.elternteil1.kfzhaftpflicht)*12 +
+        parseInt(this.elternteil1.unfall)*12 +
+        parseInt(this.elternteil1.berufsunfähigkeits)*12 +
+        parseInt(this.elternteil1.gewerkschaft)*12 +
+        parseInt(this.elternteil1.kaltmiete)*12 +
+        parseInt(this.elternteil1.eigentum)*12 +
+        parseInt(this.elternteil1.besondere)*12 +
+        parseInt(this.elternteil1.unterhaltszahlungen)*12;
+      this.einkommensgrenze1 = parseInt(sum1) - parseInt(minus1);
+
+      var sum2 = 0;
+      var minus2 = 0;
+      sum2 =
+        parseInt(this.elternteil2.netto)
+        parseInt(this.elternteil2.selbst)*12 +
+        parseInt(this.elternteil2.kindergeld)*12 +
+        parseInt(this.elternteil2.alg1)*12 +
+        parseInt(this.elternteil2.existenz)*12 +
+        parseInt(this.elternteil2.krankengeld)*12 +
+        parseInt(this.elternteil2.rente)*12 +
+        parseInt(this.elternteil2.unterhaltseinkunft)*12 +
+        parseInt(this.elternteil2.ausbildungsvergütung)*12 +
+        parseInt(this.elternteil2.bafög)*12 +
+        parseInt(this.elternteil2.elterngeld)*12 +
+        parseInt(this.elternteil2.kinderzuschlag)*12 +
+        parseInt(this.elternteil2.weitere)*12 +
+        parseInt(this.elternteil2.zuschussKita)*12;        
+      minus2 =
+        parseInt(this.elternteil2.arbeitsmittel)*12 +
+        parseInt(this.elternteil2.fahrtkosten)*12 +
+        parseInt(this.elternteil2.kilometer)*0,4*230 +
+        parseInt(this.elternteil2.haftpflicht)*12 +
+        parseInt(this.elternteil2.hausrat)*12 +
+        parseInt(this.elternteil2.freiwilligekrankenundpflege)*12 +
+        parseInt(this.elternteil2.freiwilligerente)*12 +
+        parseInt(this.elternteil2.riester)*12 +
+        parseInt(this.elternteil2.lebens)*12 +
+        parseInt(this.elternteil2.kfzhaftpflicht)*12 +
+        parseInt(this.elternteil2.unfall)*12 +
+        parseInt(this.elternteil2.berufsunfähigkeits)*12 +
+        parseInt(this.elternteil2.gewerkschaft)*12 +
+        parseInt(this.elternteil2.kaltmiete)*12 +
+        parseInt(this.elternteil2.eigentum)*12 +
+        parseInt(this.elternteil2.besondere)*12 +
+        parseInt(this.elternteil2.unterhaltszahlungen)*12;
+        this.einkommensgrenze2 = parseInt(sum2) - parseInt(minus2);
+
+      this.einkommensgrenze_gesamt =
+        parseInt(this.einkommensgrenze1) + parseInt(this.einkommensgrenze2);
+
       if (this.einkommensgrenze_gesamt < 2000) {
         this.$store.state.entCheck = true;
         this.$store.state.bifoCheck = true;
@@ -1451,9 +1508,10 @@ export default {
         this.entErfolg = true;
         this.ent_checkbox = true;
         this.e1 = 5;
-      } else {this.e1 = 5}
+      } else {
+        this.e1 = 5;
+      }
     },
-    
   },
 };
 </script>

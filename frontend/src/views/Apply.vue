@@ -502,7 +502,7 @@ export default {
       this.$store.state.elternteil2 = this.tmp.elternteil2;
 
       this.$store.state.haushaltseinkommen = this.tmp.haushaltseinkommen;
-      //DATEN IN DER ANZEIGE AKTUALISIEREN
+      //DATEN IN DER ANZEIGE AKTUALISIEREN (KOMPONENTE NEULADEN)
       this.forceRerender();
     },
   },

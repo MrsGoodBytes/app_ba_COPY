@@ -79,6 +79,7 @@ export default new Vuex.Store({
 
             arbeitsmittel: 0,
             fahrtkosten: 0,
+            kilometer: 0,
             haftpflicht: 0,
             hausrat: 0,
             freiwilligekrankenundpflege: 0,
@@ -114,6 +115,7 @@ export default new Vuex.Store({
 
             arbeitsmittel: 0,
             fahrtkosten: 0,
+            kilometer: 0,
             haftpflicht: 0,
             hausrat: 0,
             freiwilligekrankenundpflege: 0,
@@ -130,6 +132,10 @@ export default new Vuex.Store({
             unterhaltszahlungen: 0,
             sonstiges: "",
         },
+
+        einkommensgrenze1: "",
+        einkommensgrenze2: "",
+        einkommensgrenzeGesamt: "",
 
         haushaltseinkommen: 0,
         /* 
@@ -293,6 +299,15 @@ export default new Vuex.Store({
 
         setVal(state, value) {
             state.valid = value;
+        },
+        setEinkommensgrenze1(state, value) {
+            state.einkommensgrenze1 = value;
+        },
+        setEinkommensgrenze2(state, value) {
+            state.einkommensgrenze2 = value;
+        },
+        setEinkommensgrenzeGesamt(state, value) {
+            state.einkommensgrenzeGesamt = value;
         },
 
         //NACHWEISE
