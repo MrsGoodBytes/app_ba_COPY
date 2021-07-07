@@ -47,6 +47,7 @@ export default new Vuex.Store({
         institutionname: "",
         tagespflegename: "",
         betreuungsform: "",
+        betreuungsformNamed: "",
 
         betreuungsumfang: "",
         betreuungsbeginn: "",
@@ -275,6 +276,9 @@ export default new Vuex.Store({
         },
         setBetreuungsform(state, value) {
             state.radioGroupBetreuungsform = value;
+        },
+        setForm(state, value) {
+            state.betreuungsformNamed = value;
         },
         setDate_bb(state, value) {
             state.date_bb = value;

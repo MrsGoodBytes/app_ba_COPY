@@ -28,18 +28,19 @@
         </v-row>
       </v-card>
       <v-card class="mx-auto pa-5 my-8" outlined>
-        <h4 class="text-left">
-          <v-icon>mdi-file-upload</v-icon> Anträge müssen jedes Jahr erneut gestellt
-          werden. Denken Sie daran, am Ende der Antragstellung Ihre Daten
-          herunterzuladen, um sie beim nächsten Antrag zu importieren. Sie haben
+          <h3 class="pb-3">Antrag automatisch vorausfüllen</h3>
+        <p class="text-left">
+          <v-icon>mdi-file-upload</v-icon> Einige Anträge müssen jedes Jahr erneut gestellt
+          werden. Denken Sie daran, <span class="font-weight-bold">Ihre Daten am Ende der Antragstellung
+          herunterzuladen</span>, um sie beim nächsten Antrag zu importieren. Sie haben
           bereits eine Datei mit Ihren gespeicherten Daten? Dann können Sie
           diese hier hochladen und wiederherstellen!
-        </h4>
+        </p>
         <v-row>
           <v-col cols="12" md="8" sm="12">
             <v-file-input
               accept=".json"
-              label="JSON-Datei hochladen"
+              label="Datei mit gespeicherten Daten hochladen"
               v-model="upload"
               chips
               show-size

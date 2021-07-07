@@ -27,7 +27,7 @@
           <v-text-field
             outlined
             v-model="date"
-            label="Geburtsdatum TT-MM-JJJJ"
+            label="Geburtsdatum TT.MM.JJJJ"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
             required
@@ -151,7 +151,7 @@
               <v-text-field
                 outlined
                 v-model="item.date_p"
-                label="Geburtsdatum TT-MM-JJJJ"
+                label="Geburtsdatum TT.MM.JJJJ"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
                 required
@@ -359,7 +359,7 @@
           >
             <v-col cols="4">
               <h4 class="text-left">
-                Nettoeinkommen
+                Jahres-Nettoeinkommen der letzten 12 Monate
                 <v-tooltip bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -407,7 +407,7 @@
             <v-col cols="3">
               <v-text-field
                 v-model="elternteil1.selbst"
-                label="Selbstständikteit Elternteil 1"
+                label="Selbstständigkeit Elternteil 1"
                 prefix="€/mtl."
                 :rules="moneyNotReqRules"
               ></v-text-field>
@@ -415,7 +415,7 @@
             <v-col cols="3">
               <v-text-field
                 v-model="elternteil2.selbst"
-                label="Selbstständikteit Elternteil 2"
+                label="Selbstständigkeit Elternteil 2"
                 prefix="€/mtl."
                 :rules="moneyNotReqRules"
               ></v-text-field>

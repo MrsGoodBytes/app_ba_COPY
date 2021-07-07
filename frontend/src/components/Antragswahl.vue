@@ -41,7 +41,7 @@
                     </li>
                     <li>Für jedes weitere jüngere Kind um 100%.</li> </ul
                   ><br />
-                  Ermäßigung erfolgt unabhängig vom Einkommen.
+                  Ermäßigung erfolgt unabhängig vom Einkommen und muss nur erneut gestellt werden, sollten Sie diese für weitere Kinder in Anspruch nehmen wollen.
                   Anspruchsberechtigt sind Familien, die in Lübeck gemeldet
                   sind. Familien aus anderen Gemeinden melden sich bitte bei der
                   für sie zuständigen Gemeindeverwaltung.</span

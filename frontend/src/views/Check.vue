@@ -145,7 +145,7 @@
               >
                 <v-col cols="4">
                   <h4 class="text-left">
-                    Nettoeinkommen der letzten 12 Monate
+                    Jahres-Nettoeinkommen der letzten 12 Monate
                     <v-tooltip bottom>
                       <template v-slot:activator="{ on, attrs }">
                         <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -193,14 +193,14 @@
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil1.selbst"
-                    label="Selbstständikteit Elternteil 1"
+                    label="Selbstständigkeit Elternteil 1"
                     prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
                 <v-col cols="3">
                   <v-text-field
                     v-model="elternteil2.selbst"
-                    label="Selbstständikteit Elternteil 2"
+                    label="Selbstständigkeit Elternteil 2"
                     prefix="€/mtl."
                   ></v-text-field>
                 </v-col>
@@ -1221,6 +1221,67 @@
         >Gewählte Anträge stellen</v-btn
       ></router-link
     >
+    <!-- <v-card
+      v-if="this.e1 == 5"
+      class="mx-auto pa-5 my-8"
+      max-width="400"
+      outlined
+      ><p class="text-left"><v-icon>mdi-information</v-icon></p>
+      <h4 class="text-left">Warum sind Sie für diese Anträge berechtigt?</h4>
+      <p v-if="this.geErfolg">
+        Geschwisterermäßigung: Die Geschwisterermäßigung ist eine Ermäßigung des
+        Elternbeitrags, welcher an den Träger der Kita entrichtet wird. Der
+        Elternbeitrag wird auf Antrag ermäßigt, wenn mehrere Kinder einer
+        Familie mit Hauptwohnung in einem Haushalt leben UND diese Kinder eine
+        öffentlich geförderte Kindertageseinrichtung oder
+        Kindertagespflegestelle oder eine Ganztagsbetreuung an Schulen (mit
+        einer Nachmittagsbetreuung an mindestens 3 Tagen pro Woche für
+        mindestens 70 EUR) besuchen.
+        <br />
+        Für das älteste Kind ist der Elternbeitrag in voller Höhe zu entrichten.
+        Für das nächstjüngere Kind ermäßigt sich der Elternbeitrag um 50%, Für
+        jedes weitere jüngere Kind um 100%.
+        <br />
+        Ermäßigung erfolgt unabhängig vom Einkommen. Anspruchsberechtigt sind
+        Familien, die in Lübeck gemeldet sind. Familien aus anderen Gemeinden
+        melden sich bitte bei der für sie zuständigen Gemeindeverwaltung.
+      </p>
+      <p
+        v-if="
+          this.entErfolg &&
+          this.einkommensgrenze_gesamt < 30000 &&
+          this.einkommensgrenze_gesamt > 20000
+        "
+        class="text-left"
+      >
+        Entgeltermäßigung: Sie sind wahrscheinlich für die Entgeltermäßigung
+        berechtigt, weil Ihr Einkommen laut den von Ihnen gemachten Angaben
+        unterhalb der Einkommensgrenze liegt. Sie können somit eine Ermäßigung
+        der Kitakosten beantragen.
+      </p>
+      <p
+        v-if="
+          this.bifoErfolg &&
+          this.einkommensgrenze_gesamt < 20000 &&
+          this.einkommensgrenze_gesamt > 0
+        "
+        class="text-left"
+      >
+        Entgeltermäßigung: Sie sind wahrscheinlich für die Entgeltermäßigung
+        berechtigt, weil Ihr Einkommen laut den von Ihnen gemachten Angaben
+        unterhalb der Einkommensgrenze liegt. Sie können somit eine Ermäßigung
+        der Kitakosten beantragen.<br />
+        Bildungsfond: Sie sind wahrscheinlich für den Bezug von Mitteln aus dem
+        Bildungsfond berechtigt, weil Ihr Einkommen laut den von Ihnen gemachten
+        Angaben unterhalb der Einkommensgrenze liegt. Sie können somit eine
+        Ermäßigung der Kitakosten beantragen.
+      </p>
+      <p v-if="this.entErfolg && this.bifoErfolg">
+        Entgeltermäßigung und Bildungsfond: Sie sind für den Bezug dieser
+        Leistungen berechtigt, da Sie angegeben haben, Sozialleistungen zu
+        beziehen oder amtsgerichtlich als privatinsolvent gemeldet zu sein.
+      </p>
+    </v-card> -->
   </div>
 </template>
 
@@ -1357,22 +1418,22 @@ export default {
       this.$store.commit("setEigentumCheck", val);
     },
 
-     //EINKOMMEN BERECHNEN GENERELL
+    //EINKOMMEN BERECHNEN GENERELL
     elternteil1: function (val) {
       this.$store.commit("setElternteil1", val);
     },
     elternteil2: function (val) {
       this.$store.commit("setElternteil2", val);
     },
-    einkommensgrenze1: function(val){
+    einkommensgrenze1: function (val) {
       this.$store.commit("setEinkommensgrenze1", val);
     },
-    einkommensgrenze2: function(val){
+    einkommensgrenze2: function (val) {
       this.$store.commit("setEinkommensgrenze2", val);
     },
-    einkommensgrenzeGesamt: function(val){
+    einkommensgrenzeGesamt: function (val) {
       this.$store.commit("setEinkommensgrenzeGesamt", val);
-    }
+    },
   },
 
   methods: {
@@ -1420,82 +1481,82 @@ export default {
       //EINKOMMEN BERECHNEN FÜR ANZEIGE DER BERECHTIGUNG
       var sum1 = 0;
       var minus1 = 0;
-      sum1 =
-        parseInt(this.elternteil1.netto)
-        parseInt(this.elternteil1.selbst)*12 +
-        parseInt(this.elternteil1.kindergeld)*12 +
-        parseInt(this.elternteil1.alg1)*12 +
-        parseInt(this.elternteil1.existenz)*12 +
-        parseInt(this.elternteil1.krankengeld)*12 +
-        parseInt(this.elternteil1.rente)*12 +
-        parseInt(this.elternteil1.unterhaltseinkunft)*12 +
-        parseInt(this.elternteil1.ausbildungsvergütung)*12 +
-        parseInt(this.elternteil1.bafög)*12 +
-        parseInt(this.elternteil1.elterngeld)*12 +
-        parseInt(this.elternteil1.kinderzuschlag)*12 +
-        parseInt(this.elternteil1.weitere)*12 +
-        parseInt(this.elternteil1.zuschussKita)*12;
-      minus1 =
-        parseInt(this.elternteil1.arbeitsmittel)*12 +
-        parseInt(this.elternteil1.fahrtkosten)*12 +
-        parseInt(this.elternteil1.kilometer)*0,4*230 +
-        parseInt(this.elternteil1.haftpflicht)*12 +
-        parseInt(this.elternteil1.hausrat)*12 +
-        parseInt(this.elternteil1.freiwilligekrankenundpflege)*12 +
-        parseInt(this.elternteil1.freiwilligerente)*12 +
-        parseInt(this.elternteil1.riester)*12 +
-        parseInt(this.elternteil1.lebens)*12 +
-        parseInt(this.elternteil1.kfzhaftpflicht)*12 +
-        parseInt(this.elternteil1.unfall)*12 +
-        parseInt(this.elternteil1.berufsunfähigkeits)*12 +
-        parseInt(this.elternteil1.gewerkschaft)*12 +
-        parseInt(this.elternteil1.kaltmiete)*12 +
-        parseInt(this.elternteil1.eigentum)*12 +
-        parseInt(this.elternteil1.besondere)*12 +
-        parseInt(this.elternteil1.unterhaltszahlungen)*12;
+      sum1 = parseInt(this.elternteil1.netto);
+      parseInt(this.elternteil1.selbst) * 12 +
+        parseInt(this.elternteil1.kindergeld) * 12 +
+        parseInt(this.elternteil1.alg1) * 12 +
+        parseInt(this.elternteil1.existenz) * 12 +
+        parseInt(this.elternteil1.krankengeld) * 12 +
+        parseInt(this.elternteil1.rente) * 12 +
+        parseInt(this.elternteil1.unterhaltseinkunft) * 12 +
+        parseInt(this.elternteil1.ausbildungsvergütung) * 12 +
+        parseInt(this.elternteil1.bafög) * 12 +
+        parseInt(this.elternteil1.elterngeld) * 12 +
+        parseInt(this.elternteil1.kinderzuschlag) * 12 +
+        parseInt(this.elternteil1.weitere) * 12 +
+        parseInt(this.elternteil1.zuschussKita) * 12;
+      (minus1 =
+        parseInt(this.elternteil1.arbeitsmittel) * 12 +
+        parseInt(this.elternteil1.fahrtkosten) * 12 +
+        parseInt(this.elternteil1.kilometer) * 0),
+        4 * 230 +
+          parseInt(this.elternteil1.haftpflicht) * 12 +
+          parseInt(this.elternteil1.hausrat) * 12 +
+          parseInt(this.elternteil1.freiwilligekrankenundpflege) * 12 +
+          parseInt(this.elternteil1.freiwilligerente) * 12 +
+          parseInt(this.elternteil1.riester) * 12 +
+          parseInt(this.elternteil1.lebens) * 12 +
+          parseInt(this.elternteil1.kfzhaftpflicht) * 12 +
+          parseInt(this.elternteil1.unfall) * 12 +
+          parseInt(this.elternteil1.berufsunfähigkeits) * 12 +
+          parseInt(this.elternteil1.gewerkschaft) * 12 +
+          parseInt(this.elternteil1.kaltmiete) * 12 +
+          parseInt(this.elternteil1.eigentum) * 12 +
+          parseInt(this.elternteil1.besondere) * 12 +
+          parseInt(this.elternteil1.unterhaltszahlungen) * 12;
       this.einkommensgrenze1 = parseInt(sum1) - parseInt(minus1);
 
       var sum2 = 0;
       var minus2 = 0;
-      sum2 =
-        parseInt(this.elternteil2.netto)
-        parseInt(this.elternteil2.selbst)*12 +
-        parseInt(this.elternteil2.kindergeld)*12 +
-        parseInt(this.elternteil2.alg1)*12 +
-        parseInt(this.elternteil2.existenz)*12 +
-        parseInt(this.elternteil2.krankengeld)*12 +
-        parseInt(this.elternteil2.rente)*12 +
-        parseInt(this.elternteil2.unterhaltseinkunft)*12 +
-        parseInt(this.elternteil2.ausbildungsvergütung)*12 +
-        parseInt(this.elternteil2.bafög)*12 +
-        parseInt(this.elternteil2.elterngeld)*12 +
-        parseInt(this.elternteil2.kinderzuschlag)*12 +
-        parseInt(this.elternteil2.weitere)*12 +
-        parseInt(this.elternteil2.zuschussKita)*12;        
-      minus2 =
-        parseInt(this.elternteil2.arbeitsmittel)*12 +
-        parseInt(this.elternteil2.fahrtkosten)*12 +
-        parseInt(this.elternteil2.kilometer)*0,4*230 +
-        parseInt(this.elternteil2.haftpflicht)*12 +
-        parseInt(this.elternteil2.hausrat)*12 +
-        parseInt(this.elternteil2.freiwilligekrankenundpflege)*12 +
-        parseInt(this.elternteil2.freiwilligerente)*12 +
-        parseInt(this.elternteil2.riester)*12 +
-        parseInt(this.elternteil2.lebens)*12 +
-        parseInt(this.elternteil2.kfzhaftpflicht)*12 +
-        parseInt(this.elternteil2.unfall)*12 +
-        parseInt(this.elternteil2.berufsunfähigkeits)*12 +
-        parseInt(this.elternteil2.gewerkschaft)*12 +
-        parseInt(this.elternteil2.kaltmiete)*12 +
-        parseInt(this.elternteil2.eigentum)*12 +
-        parseInt(this.elternteil2.besondere)*12 +
-        parseInt(this.elternteil2.unterhaltszahlungen)*12;
-        this.einkommensgrenze2 = parseInt(sum2) - parseInt(minus2);
+      sum2 = parseInt(this.elternteil2.netto);
+      parseInt(this.elternteil2.selbst) * 12 +
+        parseInt(this.elternteil2.kindergeld) * 12 +
+        parseInt(this.elternteil2.alg1) * 12 +
+        parseInt(this.elternteil2.existenz) * 12 +
+        parseInt(this.elternteil2.krankengeld) * 12 +
+        parseInt(this.elternteil2.rente) * 12 +
+        parseInt(this.elternteil2.unterhaltseinkunft) * 12 +
+        parseInt(this.elternteil2.ausbildungsvergütung) * 12 +
+        parseInt(this.elternteil2.bafög) * 12 +
+        parseInt(this.elternteil2.elterngeld) * 12 +
+        parseInt(this.elternteil2.kinderzuschlag) * 12 +
+        parseInt(this.elternteil2.weitere) * 12 +
+        parseInt(this.elternteil2.zuschussKita) * 12;
+      (minus2 =
+        parseInt(this.elternteil2.arbeitsmittel) * 12 +
+        parseInt(this.elternteil2.fahrtkosten) * 12 +
+        parseInt(this.elternteil2.kilometer) * 0),
+        4 * 230 +
+          parseInt(this.elternteil2.haftpflicht) * 12 +
+          parseInt(this.elternteil2.hausrat) * 12 +
+          parseInt(this.elternteil2.freiwilligekrankenundpflege) * 12 +
+          parseInt(this.elternteil2.freiwilligerente) * 12 +
+          parseInt(this.elternteil2.riester) * 12 +
+          parseInt(this.elternteil2.lebens) * 12 +
+          parseInt(this.elternteil2.kfzhaftpflicht) * 12 +
+          parseInt(this.elternteil2.unfall) * 12 +
+          parseInt(this.elternteil2.berufsunfähigkeits) * 12 +
+          parseInt(this.elternteil2.gewerkschaft) * 12 +
+          parseInt(this.elternteil2.kaltmiete) * 12 +
+          parseInt(this.elternteil2.eigentum) * 12 +
+          parseInt(this.elternteil2.besondere) * 12 +
+          parseInt(this.elternteil2.unterhaltszahlungen) * 12;
+      this.einkommensgrenze2 = parseInt(sum2) - parseInt(minus2);
 
       this.einkommensgrenze_gesamt =
         parseInt(this.einkommensgrenze1) + parseInt(this.einkommensgrenze2);
 
-      if (this.einkommensgrenze_gesamt < 2000) {
+      if (this.einkommensgrenze_gesamt < 20000) {
         this.$store.state.entCheck = true;
         this.$store.state.bifoCheck = true;
         this.entErfolg = true;
@@ -1503,7 +1564,7 @@ export default {
         this.ent_checkbox = true;
         this.bifo_checkbox = true;
         this.e1 = 5;
-      } else if (this.einkommensgrenze_gesamt < 3000) {
+      } else if (this.einkommensgrenze_gesamt < 30000) {
         this.$store.state.entCheck = true;
         this.entErfolg = true;
         this.ent_checkbox = true;

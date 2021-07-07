@@ -88,8 +88,7 @@
     </h5>
 
     <v-form ref="form" v-model="valid" lazy-validation>
-      <v-row class="my-0 py-0"
-        >
+      <v-row class="my-0 py-0">
         <v-col cols="12" sm="4">
           <v-text-field
             outlined
@@ -112,7 +111,7 @@
           <v-text-field
             outlined
             v-model="date_child"
-            label="Geburtsdatum TT-MM-JJJJ"
+            label="Geburtsdatum TT.MM.JJJJ"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
             required
@@ -274,7 +273,7 @@
           <v-text-field
             outlined
             v-model="date_bb"
-            label="Betreuungsbeginn"
+            label="Betreuungsbeginn TT.MM.JJJJ"
             prepend-icon="mdi-calendar"
             :rules="dateRules"
             required
@@ -326,8 +325,8 @@
               >
             </template>
             <span
-              >Das Betreuungsentgelt ist die zu entrichtende Summe OHNE Abzüge
-              und Ermäßigungen.</span
+              >Das Betreuungsentgelt ist die an den Träger der Einrichtung zu
+              entrichtende Summe OHNE Essensgeld, Abzüge und Ermäßigungen.</span
             >
           </v-tooltip>
           <v-text-field
@@ -355,9 +354,15 @@
               >
             </template>
             <span
-              >Der Elternbeitrag ist das, was Sie tatsächlich an Betreuungskosten (ohne Essensgeld) zahlen. Also Betreuungsentgelt abzüglich ggf. vom
-              Träger gewährter Geschwisterermäßigung.</span
-            >
+              >Der Elternbeitrag entspricht für das älteste Kind dem
+              Betreuungsentgelt. Für das zweitälteste Kind enspricht der
+              Elternbeitrag der Hälfte des Betreuungsentgeltes. Für jedes
+              weitere jüngere Kind wird der Elternbeitrag voll übernommen und
+              enspricht so 0€. <br />
+              Der Elternbeitrag ist das, was Sie tatsächlich an Betreuungskosten
+              (ohne Essensgeld) zahlen. Also das Betreuungsentgelt abzüglich
+              ggf. vom Träger gewährter Geschwisterermäßigung.
+            </span>
           </v-tooltip>
           <v-text-field
             outlined
@@ -444,7 +449,7 @@
           <v-text-field
             outlined
             v-model="gueltig"
-            label="Gültig ab"
+            label="Gültig ab TT.MM.JJJJ"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -516,7 +521,7 @@
           <v-checkbox
             v-model="kostenerstattung"
             ref="vorjahr_check"
-            :label="'Wir beantragen eine anteiligeKostenerstattung für ein- und mehrtägig  Ausflüge durch Mittel aus dem Bildungsfond.'"
+            :label="'Wir beantragen eine anteilige Kostenerstattung für ein- und mehrtägige Ausflüge durch Mittel aus dem Bildungsfond.'"
           ></v-checkbox>
         </v-col>
         <v-col class="d-flex align-center" cols="12" sm="4">
@@ -532,7 +537,7 @@
             outlined
             v-model="gueltig"
             :rules="dateRules"
-            label="Gültig ab"
+            label="Gültig ab TT.MM.JJJJ"
           ></v-text-field>
         </v-col>
       </v-row>
@@ -558,10 +563,10 @@
       <p v-else></p>
 
       <v-divider v-if="this.$store.state.bifoCheck"></v-divider>
-<!-- GESCHWISTERKINDER -->
+      <!-- GESCHWISTERKINDER -->
       <div id="Geschwisterkind">
         <h3 class="my-3">Geschwisterkind/er</h3>
-<!-- HEADLINE BASIEREND AUF ZU STELLENDEN ANTRÄGEN -->
+        <!-- HEADLINE BASIEREND AUF ZU STELLENDEN ANTRÄGEN -->
         <h5 v-if="this.$store.state.geCheck && !this.$store.state.entCheck">
           Bitte tragen Sie hier Ihre älteren Kinder ein, die sich ebenfalls in
           einem Betreuungsverhältnis befinden<span
@@ -578,8 +583,9 @@
           Entgeltermäßigung<span v-if="this.$store.state.bifoCheck">
             und/oder Mittel aus dem Bildungsfond</span
           >
-          beantragen möchten. Ausgenommen von der Entgeltermäßigung sind Kinder, welche in einer
-          Betreuung in der betreuten Grundschule untergebracht sind.
+          beantragen möchten. Ausgenommen von der Entgeltermäßigung sind Kinder,
+          welche in einer Betreuung in der betreuten Grundschule untergebracht
+          sind.
         </h5>
         <h5 v-else-if="this.$store.state.entCheck && this.$store.state.geCheck">
           Bitte tragen Sie hier alle Ihre Kinder ein, die sich ebenfalls in
@@ -591,7 +597,7 @@
           Ausgenommen für die Entgeltermäßigung ist eine Betreuung in der
           betreuten Grundschule.
         </h5>
-<!-- GESCHWISTERKINDER EINTRÄGE -->
+        <!-- GESCHWISTERKINDER EINTRÄGE -->
         <v-card
           v-for="item in childlist"
           :key="item.id"
@@ -621,7 +627,7 @@
               <v-text-field
                 outlined
                 v-model="item.date_sibling"
-                label="Geburtsdatum TT-MM-JJJJ"
+                label="Geburtsdatum TT.MM.JJJJ"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
                 required
@@ -812,19 +818,14 @@
               <v-text-field
                 outlined
                 v-model="item.date_bb"
-                label="Betreuungsbeginn"
+                label="Betreuungsbeginn TT.MM.JJJJ"
                 prepend-icon="mdi-calendar"
                 :rules="dateRules"
                 required
               ></v-text-field>
             </v-col>
             <p v-else></p>
-            <v-col
-              v-if="item.geCheck"
-              class="d-flex"
-              cols="12"
-              sm="4"
-            >
+            <v-col v-if="item.geCheck" class="d-flex" cols="12" sm="4">
               <v-tooltip bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -832,8 +833,9 @@
                   >
                 </template>
                 <span
-                  >Das Betreuungsentgelt ist die zu entrichtende Summe OHNE
-                  Abzüge und Ermäßigungen.</span
+                  >Das Betreuungsentgelt ist die an den Träger der Einrichtung
+                  zu entrichtende Summe OHNE Essensgeld, Abzüge und
+                  Ermäßigungen.</span
                 >
               </v-tooltip>
               <v-text-field
@@ -846,7 +848,12 @@
               ></v-text-field>
             </v-col>
             <p v-else></p>
-            <v-col v-if="item.entCheck || item.geCheck" class="d-flex" cols="12" sm="4">
+            <v-col
+              v-if="item.entCheck || item.geCheck"
+              class="d-flex"
+              cols="12"
+              sm="4"
+            >
               <v-tooltip max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon color="accent" v-bind="attrs" v-on="on"
@@ -854,8 +861,15 @@
                   >
                 </template>
                 <span
-                  >Der Elternbeitrag ist das, was Sie tatsächlich an Betreuungskosten (ohne Essensgeld) zahlen. Also Betreuungsentgelt abzüglich ggf. vom
-              Träger gewährter Geschwisterermäßigung.</span
+                  >Der Elternbeitrag entspricht für das älteste Kind dem
+                  Betreuungsentgelt. Für das zweitälteste Kind enspricht der
+                  Elternbeitrag der Hälfte des Betreuungsentgeltes. Für jedes
+                  weitere jüngere Kind wird der Elternbeitrag voll übernommen
+                  und enspricht so 0€. <br />
+                  Der Elternbeitrag ist das, was Sie tatsächlich an
+                  Betreuungskosten (ohne Essensgeld) zahlen. Also das
+                  Betreuungsentgelt abzüglich ggf. vom Träger gewährter
+                  Geschwisterermäßigung.</span
                 >
               </v-tooltip>
               <v-text-field
@@ -921,7 +935,7 @@
               <v-text-field
                 outlined
                 v-model="item.gueltig"
-                label="Gültig ab"
+                label="Gültig ab TT.MM.JJJJ"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -938,7 +952,7 @@
               <v-checkbox
                 v-model="item.kostenerstattung"
                 ref="vorjahr_check"
-                :label="'Wir beantragen eine anteilige Kostenerstattung für ein- und mehrtägig Ausflüge durch Mittel aus dem Bildungsfond.'"
+                :label="'Wir beantragen eine anteilige Kostenerstattung für ein- und mehrtägige Ausflüge durch Mittel aus dem Bildungsfond.'"
               ></v-checkbox>
             </v-col>
             <v-col class="d-flex align-center" cols="12" sm="4">
@@ -953,8 +967,7 @@
               <v-text-field
                 outlined
                 v-model="item.gueltig"
-                :rules="dateRules"
-                label="Gültig ab"
+                label="Gültig ab TT.MM.JJJJ"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -1179,6 +1192,15 @@ export default {
 
     radioGroupBetreuungsform: function (val) {
       this.$store.commit("setBetreuungsform", val);
+      if (this.$store.state.radioGroupBetreuungsform == 1) {
+        this.$store.commit("setForm", "Tagespflege");
+      } else if (this.$store.state.radioGroupBetreuungsform == 2) {
+        this.$store.commit("setForm", "Krippe");
+      } else if (this.$store.state.radioGroupBetreuungsform == 3) {
+        this.$store.commit("setForm", "Elementar (3-6 Jahre)");
+      } else if (this.commit.state.radioGroupBetreuungsform == 4) {
+        this.$store.commit("setForm", "Hort");
+      }
     },
     bank: function (val) {
       this.$store.commit("setBank", val);

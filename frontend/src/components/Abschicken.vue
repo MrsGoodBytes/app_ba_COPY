@@ -182,7 +182,7 @@
         <h5 v-else>{{ this.betreuungseinrichtung }}</h5>
       </v-col>
 
-      <v-col cols="4" class="text-left">
+      <v-col v-if="this.$store.state.entCheck" cols="4" class="text-left">
         <h6 class="text--disabled">Ermäßigungsantrag im Vorjahr gestellt:</h6>
         <h5 v-if="this.vorjahr == true">ja</h5>
         <h5 v-else>nein</h5>
@@ -400,7 +400,7 @@
             <h5 v-else>{{ child_list[index].institutionname }}</h5>
           </v-col>
 
-          <v-col cols="4" class="text-left">
+          <v-col v-if="child_list[index].entCheck" cols="4" class="text-left">
             <h6 class="text--disabled">
               Ermäßigungsantrag im Vorjahr gestellt:
             </h6>
@@ -408,17 +408,100 @@
             <h5 v-else>nein</h5>
           </v-col>
         </v-row>
+        <v-row>
+      <v-col
+        v-if="
+          child_list[index].geCheck ||
+          child_list[index].radioGroupBetreuungsform == 1
+        "
+        cols="12"
+        sm="3"
+        class="text-left"
+      >
+        <h6 class="text--disabled">Betreuungsbeginn</h6>
+        <h5 v-if="child_list[index].date_bb != 0">{{ child_list[index].date_bb }}</h5>
+        <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Betreuungsbeginn fehlt
+        </h5>
+      </v-col>
+
+      <v-col
+        v-if="
+          (child_list[index].geCheck &&
+            child_list[index].radioGroupBetreuungsform == 1) ||
+          (child_list[index].entCheck &&
+            child_list[index].radioGroupBetreuungsform == 1)
+        "
+        cols="12"
+        sm="3"
+        class="text-left"
+      >
+        <h6 class="text--disabled">Betreuungsumfang</h6>
+        <h5 v-if="child_list[index].betreuungsumfang != 0">
+          {{ child_list[index].betreuungsumfang }} Stunden
+        </h5>
+        <h5 v-else>
+          <v-btn @click="funcShowKindDaten"
+            ><v-icon color="secondary">mdi-pencil</v-icon></v-btn
+          >
+          Betreuungsumfang fehlt
+        </h5>
+      </v-col>
+
+      <v-col
+        v-if="child_list[index].geCheck || child_list[index].entCheck"
+        cols="12"
+        sm="3"
+        class="text-left"
+      >
+        <h6 class="text--disabled">Betreuungsentgelt</h6>
+        <h5 v-if="child_list[index].betreuungsentgelt != 0">
+          {{ child_list[index].betreuungsentgelt }} €
+        </h5>
+        <h5 v-else>0 €</h5>
+      </v-col>
+
+      <v-col
+        cols="12"
+        sm="3"
+        v-if="child_list[index].geCheck"
+        class="text-left"
+      >
+        <h6 class="text--disabled">Elternbeitrag</h6>
+        <h5 v-if="child_list[index].elternbeitrag != 0">{{ child_list[index].elternbeitrag }} €</h5>
+        <h5 v-else>0 €</h5>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col
+        v-if="
+          child_list[index].bifoCheck &&
+          child_list[index].radioGroupBetreuungsform == 1
+        "
+        cols="3"
+        class="text-left"
+      >
+        <h6 class="text--disabled">Essensgeld</h6>
+        <h5 v-if="child_list[index].essensgeld != 0">{{ child_list[index].essensgeld }} €</h5>
+        <h5 v-else>0 €</h5>
+      </v-col>
+    </v-row>
 
         <v-divider class="my-8"></v-divider>
       </div>
     </div>
-    <v-card class="mx-auto pa-5 my-8" outlined>
-      <h4 class="text-left">
-        <v-icon>mdi-file-download</v-icon> Anträge müssen jedes Jahr erneut gestellt
-        werden. Laden Sie jetzt Ihre Daten herunter, um diese beim nächsten Mal 
+    <v-card class="mx-auto pa-5 my-8" max-width="600" outlined>
+      <h3 class="pb-3">Antrag beim nächsten Mal automatisch vorausfüllen</h3>
+      <p class="text-left">
+        <v-icon>mdi-file-download</v-icon> Einige Anträge müssen jedes Jahr erneut gestellt
+        werden. <span class="font-weight-bold">Laden Sie jetzt Ihre Daten herunter</span>, um diese bei Ihrem nächsten Antrag  
         zu Beginn der Antragstellung wiederherstellen zu können! So sparen Sie sich 
         Zeit und sind beim nächsten Mal noch schneller!
-      </h4>
+      </p>
       <v-row justify="space-around">
         <v-btn
           class="my-6 text-button"
@@ -436,13 +519,13 @@
     <div id="json"></div>
     <h3>Folgende Anträge werden abgeschickt:</h3>
     <v-row justify="space-around">
-      <v-checkbox v-model="ge_checkbox" ref="ge_check"
+      <v-checkbox v-model="ge_checkbox" ref="ge_check" @change="this.forceRerender()"
         ><template v-slot:label>
           <div>Antrag auf Geschwisterermäßigung</div>
         </template>
       </v-checkbox>
 
-      <v-checkbox v-model="ent_checkbox" ref="ent_check"
+      <v-checkbox v-model="ent_checkbox" ref="ent_check" @change="this.forceRerender()"
         ><template v-slot:label>
           <div>Antrag auf Entgeltermäßigung</div>
         </template>

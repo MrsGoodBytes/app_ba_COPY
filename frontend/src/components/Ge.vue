@@ -257,6 +257,9 @@ export default {
       var child_date = this.$store.state.date_child;
       var betreuungseinrichtung = this.$store.state.institutionname;
       var date_bb = this.$store.state.date_bb;
+      var betreuungsform = this.$store.state.betreuungsformNamed;
+      var betreuungsentgelt = this.$store.state.betreuungsentgelt;
+      var elternbeitrag = this.$store.state.elternbeitrag;
 
       doc.setFontSize("15");
       doc.text(
@@ -369,35 +372,40 @@ export default {
       );
 
       doc.setFontSize("9");
-      doc.text("Name, Vorname: " + child_name, 15, 185);
-      doc.text("Geburtsdatum: " + child_date, 85, 185);
-      doc.text("Kindertagesstätte: " + betreuungseinrichtung, 15, 195);
-      doc.text("Betreuungsbeginn: " + date_bb, 85, 195);
+      var a = 0;
+      doc.text("Name, Vorname: " + child_name, 15, a+185);
+      doc.text("Geburtsdatum: " + child_date, 85, a+185);
+      doc.text("Kindertagesstätte: " + betreuungseinrichtung, 15, a+190);
+      doc.text("Betreuungsbeginn: " + date_bb, 85, a+190);
+      doc.text("Betreuungsform: " + betreuungsform, 15, a+195);
+      doc.text("Betreuungsentgelt: " + betreuungsentgelt, 15, a+200);
+      doc.text("Elternbeitrag: " + elternbeitrag, 85, a+200);
 
+      var b = 10;
       for (var i = 0; i < this.child_list.length; i++) {
-        doc.text("Geschwisterkind " + (i + 1) + ":", 15, 210);
+        doc.text("Geschwisterkind " + (i + 1) + ":", 15, b+205);
         doc.text(
           "Name, Vorname: " +
             this.child_list[i].sibling_lastname +
             " " +
             this.child_list[i].sibling_firstname,
           15,
-          220 + i * 10
+          b+ 210 + i * 10
         );
         doc.text(
-          "Geburtsdatum: " + this.child_list[i].sibling_date,
+          "Geburtsdatum: " + this.child_list[i].date_sibling,
           85,
-          220 + i * 10
+          b + 210 + i * 10
         );
         doc.text(
-          "Kindertagesstätte: " + this.child_list[i].sibling_date,
+          "Kindertagesstätte: " + this.child_list[i].institutionname + this.child_list[i].tagespflegename, 
           15,
-          230 + i * 10
+          b+ 215 + i * 10
         );
         doc.text(
-          "Betreuungsbeginn: " + this.child_list[i].betreuungsbeginn,
+          "Betreuungsbeginn: " + this.child_list[i].date_bb,
           85,
-          230 + i * 10
+          b + 215 + i * 10
         );
       }
       //PDF ENTGELTERMAESSIGUNG
@@ -532,17 +540,17 @@ export default {
           220 + j * 10
         );
         docEnt.text(
-          "Geburtsdatum: " + this.child_list[j].sibling_date,
+          "Geburtsdatum: " + this.child_list[j].date_sibling,
           85,
           220 + j * 10
         );
         docEnt.text(
-          "Kindertagesstätte: " + this.child_list[j].sibling_date,
+          "Kindertagesstätte: " + this.child_list[j].date_sibling,
           15,
           230 + j * 10
         );
         docEnt.text(
-          "Betreuungsbeginn: " + this.child_list[j].betreuungsbeginn,
+          "Betreuungsbeginn: " + this.child_list[j].date_bb,
           85,
           230 + j * 10
         );
@@ -679,17 +687,17 @@ export default {
           220 + k * 10
         );
         docBifo.text(
-          "Geburtsdatum: " + this.child_list[k].sibling_date,
+          "Geburtsdatum: " + this.child_list[k].date_sibling,
           85,
           220 + k * 10
         );
         docBifo.text(
-          "Kindertagesstätte: " + this.child_list[k].sibling_date,
+          "Kindertagesstätte: " + this.child_list[k].date_sibling,
           15,
           230 + k * 10
         );
         docBifo.text(
-          "Betreuungsbeginn: " + this.child_list[k].betreuungsbeginn,
+          "Betreuungsbeginn: " + this.child_list[k].date_bb,
           85,
           230 + k * 10
         );
