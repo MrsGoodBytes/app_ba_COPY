@@ -40,7 +40,7 @@
           <v-col cols="12" md="8" sm="12">
             <v-file-input
               accept=".json"
-              label="Datei mit gespeicherten Daten hochladen"
+              label="Hier Datei mit Ihren Daten auswählen"
               v-model="upload"
               chips
               show-size
@@ -50,8 +50,10 @@
             ></v-file-input>
           </v-col>
           <v-col cols="12" md="4" sm="12">
-            <v-btn class="mb-3 text-button" @click="load_data" color="primary"
-              >Daten übernehmen</v-btn
+            <v-btn v-if="this.upload != null" class="mb-3 text-button" @click="load_data" color="primary"
+              >Ausgewählte Daten übernehmen</v-btn
+            ><v-btn v-if="this.upload == null" class="mb-3 text-button" disabled
+              >Ausgewählte Daten übernehmen</v-btn
             >
           </v-col>
         </v-row>
