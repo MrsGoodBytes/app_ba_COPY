@@ -368,7 +368,7 @@
             outlined
             v-model="elternbeitrag"
             prefix="€"
-            :rules="moneyRules"
+            :rules="moneyNotReqRules"
             label="Elternbeitrag"
           ></v-text-field>
         </v-col>
@@ -876,7 +876,7 @@
                 outlined
                 v-model="item.elternbeitrag"
                 prefix="€"
-                :rules="moneyRules"
+                :rules="moneyNotReqRules"
                 label="Elternbeitrag"
               ></v-text-field>
             </v-col>
@@ -1096,7 +1096,7 @@ export default {
           "Wollen Sie dieses Feld wirklich leer lassen?",
       ],
       moneyNotReqRules: [
-        (value) => /^\d+$/.test(value) || "Wert muss eine Zahl sein.",
+        (value) => !!value || "Wert muss eine Zahl sein.",
       ],
       telRules: [
         (value) => !!value || "Pflichtfeld. Bitte ausfüllen!",

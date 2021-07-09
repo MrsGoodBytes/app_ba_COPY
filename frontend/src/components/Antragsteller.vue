@@ -1436,6 +1436,7 @@
     <v-btn
       class="my-6"
       justify="center"
+      :disabled="!valid"
       @click="funcShowKindDaten"
       color="accent"
     >
