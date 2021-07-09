@@ -1613,6 +1613,7 @@ export default {
   },
 
   created() {
+    this.valid = this.$store.state.valid;
     this.firstname = this.$store.state.firstname;
     this.lastname = this.$store.state.lastname;
     this.date = this.$store.state.date;
@@ -1635,6 +1636,7 @@ export default {
     this.eigentum_checkbox = this.$store.state.eigentum_checkbox;
     this.elternteil1 = this.$store.state.elternteil1;
     this.elternteil2 = this.$store.state.elternteil2;
+    
   },
 
   watch: {

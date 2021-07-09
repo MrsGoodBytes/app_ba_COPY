@@ -333,7 +333,7 @@
             outlined
             v-model="betreuungsentgelt"
             prefix="€"
-            :rules="moneyRules"
+            :rules="moneyNotReqRules"
             label="Betreuungsentgelt"
             required
           ></v-text-field>
@@ -842,7 +842,7 @@
                 outlined
                 v-model="item.betreuungsentgelt"
                 prefix="€"
-                :rules="moneyRules"
+                :rules="moneyNotReqRules"
                 label="Betreuungsentgelt"
                 required
               ></v-text-field>
