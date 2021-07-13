@@ -703,7 +703,7 @@ export default {
         );
       }
 
-      alert("Ihre Anträge wurden an die zuständigen Stellen gesendet! Der Download der Anträge in PDF-Form startet, sobald Sie auf OK geklickt haben. Die Anschrift der jeweiligen Stelle finden Sie als Empfänger in den PDF-Anträgen. Sie erhalten eine Bestätigungs-E-Mail an die von Ihnen angegebene E-Mail-Adresse. Bitte danken Sie daran, Ihre eigegebenen Daten herunterzuladen und zu speichern, um Sie bei Ihrem nächsten Antrag wiederherstellen zu können! Vielen Dank, dass Sie diesen Service genutzt haben!")
+      alert("Ihre Anträge wurden an die zuständigen Stellen gesendet! Sie erhalten eine Bestätigungs-E-Mail an die von Ihnen angegebene E-Mail-Adresse. Bitte danken Sie daran, Ihre eingegebenen Daten herunterzuladen und zu speichern, um Sie bei Ihrem nächsten Antrag wiederherstellen zu können! Sie haben die Möglichkeit die Anträge als PDF zu speichern, sobald Sie auf OK geklickt haben. Vielen Dank, dass Sie diesen Service genutzt haben!")
 
       if (this.$store.state.geCheck) {
         doc.save(pdfGe + ".pdf");

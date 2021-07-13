@@ -797,7 +797,7 @@
 
               <h5
                 class="text-left mt-0 pt-0"
-                v-if="item.radioGroupBetreuungsform_sibling === 5"
+                v-if="(item.radioGroupBetreuungsform_sibling === 5) && item.entCheck"
               >
                 <v-icon>mdi-alert</v-icon>Für Kinder in der Grundschulbetreuung
                 wird kein Antrag auf Ermäßigung gestellt.
