@@ -160,15 +160,14 @@
           </v-row>
           <v-row>
             <v-col class="d-flex py-0" cols="12" sm="12" md="12">
-              <v-tooltip bottom>
+              <v-tooltip max-width="600" bottom>
                 <template v-slot:activator="{ on, attrs }">
                   <v-icon color="accent" v-bind="attrs" v-on="on"
                     >mdi-information</v-icon
                   >
                 </template>
                 <span
-                  >Bitte den Namen des Kindes mit nennen. Bsp: "Vater von
-                  Name-des-Kindes". Bei Geschwistern geben Sie bitte das Verwandtschaftsverhältnis der Kinder untereinander an.</span
+                  >Bitte geben Sie das Verwandtschaftsverhältnis an, in welchem die hier genannte Person zu dem Kind/den Kindern steht, für die Anträge gestellt werden. (z.B. (genannte Person) "ist Vater von" (Kind/er für das/die Anträge gestellt werden))</span
                 >
               </v-tooltip>
               <v-text-field
