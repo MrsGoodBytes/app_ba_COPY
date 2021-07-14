@@ -121,7 +121,7 @@
             >
           </v-tooltip>
         </h3>
-<!-- EINTRÄGE DER PERSONEN DES HAUSHALTS -->
+        <!-- EINTRÄGE DER PERSONEN DES HAUSHALTS -->
         <v-card
           v-for="item in personlist"
           :key="item.id"
@@ -167,7 +167,11 @@
                   >
                 </template>
                 <span
-                  >Bitte geben Sie das Verwandtschaftsverhältnis an, in welchem die hier genannte Person zu dem Kind/den Kindern steht, für die Anträge gestellt werden. (z.B. (genannte Person) "ist Vater von" (Kind/er für das/die Anträge gestellt werden))</span
+                  >Bitte geben Sie das Verwandtschaftsverhältnis an, in welchem
+                  die hier genannte Person zu dem Kind/den Kindern steht, für
+                  die Anträge gestellt werden. (z.B. (genannte Person) "ist
+                  Vater von" (Kind/er für das/die Anträge gestellt
+                  werden))</span
                 >
               </v-tooltip>
               <v-text-field
@@ -235,7 +239,7 @@
           </div>
         </v-tooltip>
       </h3>
-<!-- ANTRAGSGRUNDLAGE -->
+      <!-- ANTRAGSGRUNDLAGE -->
       <h4
         v-if="
           (this.$store.state.entCheck || this.$store.state.bifoCheck) &&
@@ -261,7 +265,7 @@
           </v-radio-group>
         </v-col>
       </v-row>
-  <!-- TEXT Antragsgrundlage -->
+      <!-- TEXT Antragsgrundlage -->
       <v-row>
         <v-col
           v-if="
@@ -326,7 +330,7 @@
         <p v-else></p>
       </v-row>
 
-  <!-- Einkommensnachweise ohne Sozialleistungen -->
+      <!-- Einkommensnachweise ohne Sozialleistungen -->
       <div
         id="einkommensnachweis"
         v-if="
@@ -850,7 +854,47 @@
             <v-col cols="4">
               <h4 class="text-left">
                 Fahrtkosten zur Arbeitsstätte
-                <v-tooltip bottom>
+                <v-tooltip max-width="600" bottom>
+                  <template v-slot:activator="{ on, attrs }">
+                    <v-icon color="accent" v-bind="attrs" v-on="on"
+                      >mdi-information</v-icon
+                    >
+                  </template>
+                  <span
+                    >Hier z.B. die Kosten für Bus- und Bahntickets angeben
+                    welche nötig sind um zur Arbeit zu gelangen.<br />
+                    Bei Notwendigkeit der Pkw-Nutzung bitte stattdessen unten
+                    die km-Zahl einer einfachen Fahrt (Länge einer Strecke)
+                    zwischen Wohnungs- und Arbeitsstätte angeben.</span
+                  >
+                </v-tooltip>
+              </h4>
+            </v-col>
+            <v-col cols="3">
+              <v-text-field
+                v-model="elternteil1.fahrtkosten"
+                label="Elternteil 1"
+                prefix="€/mtl."
+              ></v-text-field>
+            </v-col>
+            <v-col cols="3">
+              <v-text-field
+                v-model="elternteil2.fahrtkosten"
+                label="Elternteil 2"
+                prefix="€/mtl."
+              ></v-text-field>
+            </v-col>
+          </v-row>
+          <v-row
+            justify="space-around"
+            no-gutters
+            style="width: 100%"
+            class="d-flex align-center mb-6"
+          >
+            <v-col cols="4">
+              <h4 class="text-left">
+                Einfache Fahrt in km (bei PKW-Nutzung)
+                <v-tooltip max-width="600" bottom>
                   <template v-slot:activator="{ on, attrs }">
                     <v-icon color="accent" v-bind="attrs" v-on="on"
                       >mdi-information</v-icon
@@ -866,31 +910,17 @@
             </v-col>
             <v-col cols="3">
               <v-text-field
-                v-model="elternteil1.fahrtkosten"
+                v-model="elternteil1.kilometer"
                 label="Elternteil 1"
                 prefix="km"
-                :rules="moneyNotReqRules"
               ></v-text-field>
             </v-col>
             <v-col cols="3">
               <v-text-field
-                v-model="elternteil2.fahrtkosten"
+                v-model="elternteil2.kilometer"
                 label="Elternteil 2"
                 prefix="km"
-                :rules="moneyNotReqRules"
               ></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row
-            v-if="
-              this.elternteil1.fahrtkosten > 0 ||
-              this.elternteil2.fahrtkosten > 0
-            "
-            ><v-col
-              ><h4 class="mx-auto my-3">
-                Hier ist vorgesehen, dass in Zukunft Felder für Einträge aus dem
-                entsprechenden Vordruck platziert werden könnten.
-              </h4>
             </v-col>
           </v-row>
         </v-card>
@@ -1399,7 +1429,7 @@
           können NICHT als Nachweis berücksichtigt werden.
         </p>
       </v-row>
-<!-- HINWEISE -->
+      <!-- HINWEISE -->
       <v-row>
         <v-card
           v-if="this.$store.state.geCheck"
@@ -1509,6 +1539,7 @@ export default {
 
         arbeitsmittel: 0,
         fahrtkosten: 0,
+        kilometer: 0,
         haftpflicht: 0,
         hausrat: 0,
         freiwilligekrankenundpflege: 0,
@@ -1545,6 +1576,7 @@ export default {
 
         arbeitsmittel: 0,
         fahrtkosten: 0,
+        kilometer: 0,
         haftpflicht: 0,
         hausrat: 0,
         freiwilligekrankenundpflege: 0,
@@ -1635,7 +1667,6 @@ export default {
     this.eigentum_checkbox = this.$store.state.eigentum_checkbox;
     this.elternteil1 = this.$store.state.elternteil1;
     this.elternteil2 = this.$store.state.elternteil2;
-    
   },
 
   watch: {
@@ -1705,7 +1736,6 @@ export default {
   },
 
   methods: {
-
     save(date) {
       this.$refs.menu.save(date);
     },
